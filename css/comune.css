@@ -1,0 +1,232 @@
+/* =========================================================
+   Birolini, stile del sito nuovo: la base comune a tutte le pagine
+   (ricavata dal MIX, con i valori che valgono davvero dopo il giro Fable).
+   Regole complete in lavoro/DESIGN-NUOVO.md.
+   ========================================================= */
+
+:root {
+  /* colori (contrasti in DESIGN-NUOVO.md) */
+  --notte: #0c1628;          /* sfondo di tutto il sito */
+  --notte-alta: #14213a;     /* superfici appena sopra lo sfondo: contatto, cartigli, riquadri vuoti */
+  --bianco: #f4f6f9;         /* testo principale: 16,7:1 sulla notte */
+  --nebbia: #a7b2c4;         /* testo secondario: 8,5:1 sulla notte, 7,5:1 sulla notte alta */
+  --azzurro: #1db3e8;        /* il filo di luce del logo: stato attivo, focus, linee. 7,5:1 sulla notte */
+  --linea: rgba(244, 246, 249, .18);    /* righe sottili, solo decorative */
+  --bordo: rgba(244, 246, 249, .35);    /* bordi dei comandi (3:1 sulla notte) */
+  --velo-notte: 12, 22, 40;             /* la notte in rgb, per i veli sopra le immagini */
+
+  /* caratteri */
+  --font: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* misure */
+  --margine: clamp(16px, 4.2vw, 64px);
+  --testata: 76px;
+  --spazio-1: 8px; --spazio-2: 12px; --spazio-3: 16px; --spazio-4: 24px; --spazio-5: 32px;
+  --spazio-6: 48px; --spazio-7: 72px; --spazio-8: 112px; --sezione: clamp(88px, 14vh, 160px);
+  --angolo: 2px;             /* pulsanti, filtri, campi */
+  --foglio: 28px;            /* angolo del «foglio» che sale */
+
+  /* movimento */
+  --curva: cubic-bezier(.22, .61, .2, 1);
+  --veloce: .35s; --medio: .45s; --lento: .7s;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--notte); color: var(--bianco);
+  font-family: var(--font); font-size: 1.0625rem; line-height: 1.6; font-weight: 400; font-stretch: 100%;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+img, video, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, h4, p, ul, ol, figure, dl, dd { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--azzurro); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--azzurro); color: var(--notte); }
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.salta { position: fixed; left: 12px; top: -60px; z-index: 100; background: var(--bianco); color: var(--notte); padding: 10px 16px; border-radius: var(--angolo); font-weight: 600; text-decoration: none; }
+.salta:focus { top: 12px; }
+
+/* ---------- Tipografia: tre gradini di titoli sottili e larghi, poi il testo, poi la voce «da tavola» ---------- */
+.t1 { font-size: clamp(3.2rem, 8vw, 8.5rem); line-height: .95; font-weight: 300; font-stretch: 125%; letter-spacing: -.035em; }
+.t2 { font-size: clamp(2.8rem, 5.6vw, 6.2rem); line-height: .98; font-weight: 300; font-stretch: 125%; letter-spacing: -.035em; text-wrap: balance; }
+.t3 { font-size: clamp(2.2rem, 4.4vw, 4.4rem); line-height: 1; font-weight: 300; font-stretch: 125%; letter-spacing: -.035em; text-wrap: balance; }
+.t4 { font-size: 1.5rem; line-height: 1.2; font-weight: 400; font-stretch: 115%; letter-spacing: -.01em; }
+.grande { font-size: clamp(1.2rem, 1.6vw, 1.5rem); line-height: 1.38; font-stretch: 104%; max-width: 34ch; text-wrap: pretty; }
+.testo p + p { margin-top: 1em; }
+.testo { max-width: 64ch; }
+.secondario { color: var(--nebbia); }
+.mono { font-family: var(--mono); font-size: .75rem; line-height: 1.35; letter-spacing: .06em; text-transform: uppercase; font-style: normal; font-weight: 500; }
+
+/* ---------- Pulsanti e collegamenti ---------- */
+.bottone {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 50px; padding: 0 26px; border: 0; border-radius: var(--angolo);
+  background: transparent; color: var(--bianco); box-shadow: inset 0 0 0 1px var(--bianco);
+  font: 600 1rem/1.1 var(--font); font-stretch: 106%; text-decoration: none; cursor: pointer;
+  transition: color var(--veloce) var(--curva), box-shadow var(--veloce) var(--curva), transform .2s var(--curva);
+}
+.bottone::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--azzurro); transform: scaleY(0); transform-origin: 50% 100%; transition: transform var(--medio) var(--curva); }
+.bottone:hover { color: var(--notte); box-shadow: inset 0 0 0 1px var(--azzurro); }
+.bottone:hover::after { transform: scaleY(1); }
+.bottone:active { transform: scale(.97); }
+.bottone:focus-visible { outline-offset: 4px; }
+.bottone--pieno { color: var(--notte); box-shadow: inset 0 0 0 1px var(--bianco); }
+.bottone--pieno::after { background: var(--bianco); transform: scaleY(1); }
+.bottone--pieno:hover::after { background: var(--azzurro); }
+.bottone small { font: 500 .6875rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; opacity: .8; }
+
+.collegamento {
+  display: inline-flex; align-items: center; gap: 12px; min-height: 44px;
+  color: var(--bianco); text-decoration: none; font-weight: 500;
+  background: linear-gradient(var(--azzurro), var(--azzurro)) left calc(100% - 9px) / 100% 1px no-repeat;
+  transition: background-size var(--veloce) var(--curva), color var(--veloce);
+}
+.collegamento:hover { background-size: 100% 2px; color: #fff; }
+.freccia { display: inline-block; color: var(--azzurro); transition: transform .4s var(--curva); }
+a:hover > .freccia { transform: translateX(6px); }
+.azioni { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
+
+/* ---------- Etichetta «da ciak»: dice sempre se è render o foto, in basso a sinistra sull'immagine ---------- */
+.ciak {
+  position: absolute; z-index: 3; left: var(--margine); bottom: 20px; max-width: min(720px, calc(100% - 2 * var(--margine)));
+  font-family: var(--mono); font-size: .75rem; line-height: 1.35; letter-spacing: .08em; text-transform: uppercase; font-weight: 500;
+  color: var(--bianco); text-shadow: 0 1px 2px rgba(0, 0, 0, .7), 0 0 18px rgba(0, 0, 0, .55); pointer-events: none;
+}
+.ciak::before { content: ""; display: inline-block; vertical-align: middle; width: 6px; height: 6px; margin: -2px 10px 0 0; border-radius: 50%; background: var(--azzurro); }
+.ciak a { pointer-events: auto; display: inline-block; padding: 15px 0; margin: -15px 0; text-decoration: underline; text-decoration-color: rgba(29, 179, 232, .8); text-underline-offset: 3px; }
+.ciak a:hover { color: var(--azzurro); }
+.ciak--dentro { left: clamp(14px, 1.6vw, 22px); bottom: clamp(12px, 1.4vw, 18px); }
+
+/* ---------- Contatore grande a contorno («07 / 42», il segno ricorrente come il 1979) ---------- */
+.contatore { font-family: var(--font); font-weight: 300; font-stretch: 125%; font-variant-numeric: tabular-nums; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--azzurro); letter-spacing: -.02em; }
+.contatore i { font-style: normal; margin: 0 .12em; -webkit-text-stroke: 1px rgba(244, 246, 249, .45); }
+.numero-contorno { font-weight: 200; font-stretch: 125%; color: transparent; -webkit-text-stroke: 1.5px var(--azzurro); line-height: .8; }
+
+/* ---------- Cartiglio a fascia: i dati del progetto come nel riquadro di una tavola tecnica ---------- */
+.cartiglio { display: flex; flex-wrap: wrap; align-items: stretch; min-height: 64px; background: rgba(var(--velo-notte), .9); border-top: 1px solid rgba(244, 246, 249, .28); border-bottom: 1px solid var(--linea); }
+.cartiglio_nome { display: flex; align-items: center; padding: 10px 22px 10px 0; font-size: 1.15rem; font-weight: 500; font-stretch: 108%; line-height: 1.15; }
+.cartiglio dl { display: flex; flex: 1; flex-wrap: wrap; }
+.cartiglio_riga { display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 10px 18px; border-left: 1px solid rgba(244, 246, 249, .2); }
+.cartiglio_riga:last-child { flex: 1; }
+.cartiglio dt { font-family: var(--mono); font-size: .6875rem; line-height: 1.35; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; color: var(--nebbia); }
+.cartiglio dd { font-size: .875rem; font-weight: 500; line-height: 1.3; }
+
+/* ---------- Testata: trasparente sulle immagini, con il fondo notte più in basso; si nasconde scendendo ---------- */
+.testata {
+  position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--testata);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 var(--margine);
+  pointer-events: none; transition: transform .5s var(--curva);
+}
+.testata::before { content: ""; position: absolute; inset: 0 0 -40px 0; z-index: -1; background: linear-gradient(180deg, rgba(var(--velo-notte), .55), rgba(var(--velo-notte), 0)); }
+.testata::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(var(--velo-notte), .94); border-bottom: 1px solid var(--linea); opacity: 0; transition: opacity .4s; }
+.testata--piena::after { opacity: 1; }
+.testata--nascosta { transform: translateY(-100%); }
+body.menu-aperto .testata { transform: none; }
+.testata a, .testata button { pointer-events: auto; }
+.testata_logo { display: inline-flex; align-items: center; min-height: 44px; }
+.testata_logo svg { width: 150px; height: auto; overflow: visible; }
+.testata_logo svg path { fill: var(--bianco); }
+.testata_logo .logo_simbolo path, .testata_logo .logo_azzurro { fill: var(--azzurro); }
+.testata_voci { display: flex; align-items: center; gap: clamp(8px, 2vw, 28px); }
+.testata_link {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px;
+  color: var(--bianco); text-decoration: none; font-size: .9375rem; font-weight: 500;
+  background: linear-gradient(var(--azzurro), var(--azzurro)) left calc(100% - 10px) / 0 1px no-repeat;
+  transition: background-size var(--veloce) var(--curva);
+}
+.testata_link:hover, .testata_link[aria-current="page"] { background-size: 100% 1px; }
+.testata_menu { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; min-width: 44px; padding: 0 2px 0 8px; background: none; border: 0; color: var(--bianco); cursor: pointer; font: 500 .9375rem/1 var(--font); }
+.testata_menu-righe { position: relative; width: 28px; height: 10px; }
+.testata_menu-righe::before, .testata_menu-righe::after { content: ""; position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor; transition: transform .4s var(--curva); }
+.testata_menu-righe::before { top: 0; }
+.testata_menu-righe::after { bottom: 0; left: 8px; }
+.testata_menu[aria-expanded="true"] .testata_menu-righe::before { transform: translateY(4.25px) rotate(45deg); }
+.testata_menu[aria-expanded="true"] .testata_menu-righe::after { left: 0; transform: translateY(-4.25px) rotate(-45deg); }
+
+.menu { position: fixed; inset: 0; z-index: 40; background: var(--notte); display: flex; flex-direction: column; justify-content: center; padding: calc(var(--testata) + 24px) var(--margine) 40px; overflow-y: auto; }
+.menu[hidden] { display: none; }
+.menu_voci { display: flex; flex-direction: column; }
+.menu_voci a { display: block; padding: 6px 0; font-size: clamp(2rem, 5.4vw, 4.25rem); line-height: 1.05; font-weight: 500; font-stretch: 112%; letter-spacing: -.02em; text-decoration: none; color: var(--bianco); transition: color .3s; }
+.menu_voci a:hover, .menu_voci a[aria-current="page"] { color: var(--azzurro); }
+.menu_recapiti { display: flex; flex-wrap: wrap; gap: 8px 32px; margin-top: 40px; color: var(--nebbia); }
+.menu_recapiti a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; }
+.menu_recapiti a:hover { color: var(--bianco); }
+body.menu-aperto { overflow: hidden; }
+
+/* ---------- Passaggi «a foglio»: ogni sezione sale sopra la precedente, con l'angolo che si raddrizza ---------- */
+.foglio { position: relative; border-radius: var(--foglio) var(--foglio) 0 0; margin-top: calc(-1 * var(--foglio)); overflow: clip; background: var(--notte); box-shadow: 0 -40px 80px -30px rgba(0, 0, 0, .7); }
+.foglio--alto { background: var(--notte-alta); }
+
+/* ---------- Video e immagini piene ---------- */
+.media-pieno { position: absolute; inset: 0; overflow: hidden; background: var(--notte); }
+.media-pieno video, .media-pieno img { width: 100%; height: 100%; object-fit: cover; }
+.velo { position: absolute; inset: 0; pointer-events: none; }
+
+/* ---------- Contatto: finale e recapiti grandi. Il modulo è «in arrivo»: per ora si scrive con l'email ---------- */
+.contatto { position: relative; z-index: 9; background: var(--notte-alta); }
+.contatto_griglia { display: grid; grid-template-columns: 1.1fr 1fr; gap: 6vw; align-items: end; padding: var(--sezione) var(--margine) 12vh; }
+.contatto_titolo { max-width: 16ch; }
+.contatto_frase { margin-top: 22px; color: var(--nebbia); max-width: 44ch; }
+.contatto_recapiti { display: flex; flex-direction: column; }
+.contatto_recapiti a {
+  display: inline-flex; align-items: center; min-height: 60px; width: max-content; max-width: 100%;
+  font-size: clamp(2rem, 4.4vw, 4.2rem); font-weight: 300; font-stretch: 125%; letter-spacing: -.03em; text-decoration: none; line-height: 1.05;
+  background: linear-gradient(var(--azzurro), var(--azzurro)) left calc(100% - 4px) / 0 1px no-repeat; transition: background-size var(--medio) var(--curva);
+}
+.contatto_recapiti a:hover { background-size: 100% 1px; }
+.contatto_indirizzo { margin-top: 18px; color: var(--nebbia); }
+.contatto .azioni { margin-top: 30px; }
+.modulo-arrivo { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--linea); color: var(--nebbia); font-size: .9375rem; max-width: 46ch; }
+
+/* ---------- Piè di pagina: dati su due righe, poi il logo gigante a contorno tagliato dal bordo ---------- */
+.piede { position: relative; z-index: 10; padding: 64px var(--margine) 0; overflow: hidden; border-top: 1px solid var(--linea); background: var(--notte); font-size: .9375rem; color: var(--nebbia); }
+.piede_dati { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 40px; }
+.piede_dati strong { color: var(--bianco); font-weight: 500; }
+.piede_dati p a { display: inline-block; min-height: 44px; line-height: 44px; text-decoration: none; }
+.piede_recapiti { display: flex; gap: 0 28px; }
+.piede_recapiti a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.piede_voci { display: flex; flex-wrap: wrap; gap: 0 28px; margin-top: 22px; }
+.piede_voci a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; color: var(--bianco); text-decoration: none; }
+.piede_voci--piccole { margin-top: 0; }
+.piede_voci--piccole a { color: var(--nebbia); font-size: .875rem; }
+.piede a:hover { color: var(--azzurro); }
+.piede_fondo { margin-top: 26px; font-family: var(--mono); font-size: .75rem; line-height: 1.75; letter-spacing: .02em; font-weight: 500; }
+.piede_logo { margin: 48px 0 -6.5%; }
+.piede_logo svg { display: block; width: 100%; height: auto; overflow: visible; }
+.piede_logo path { fill: none; stroke: rgba(244, 246, 249, .28); stroke-width: .12; }
+
+/* =========================================================
+   Telefono e tablet
+   ========================================================= */
+@media (max-width: 1000px) {
+  .contatto_griglia { grid-template-columns: 1fr; align-items: start; }
+}
+@media (max-width: 760px) {
+  :root { --testata: 64px; --foglio: 20px; }
+  body { font-size: 1rem; }
+  .testata_logo svg { width: 124px; }
+  .testata_link { display: none; }
+  .t1 { font-size: clamp(2.6rem, 12vw, 3.6rem); }
+  .t2 { font-size: clamp(2.2rem, 10vw, 3rem); }
+  .t3 { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .ciak { font-size: .6875rem; bottom: 16px; }
+  .cartiglio { display: block; padding: 0; }
+  .cartiglio_nome { padding: 12px 0 8px; }
+  .cartiglio dl { display: grid; grid-template-columns: 1fr 1fr; }
+  .cartiglio_riga { padding: 9px 12px 9px 0; border-left: 0; border-top: 1px solid var(--linea); }
+  .cartiglio_riga:last-child { grid-column: 1 / -1; }
+  .contatto_recapiti a { font-size: 2rem; }
+  .piede_dati { display: block; }
+  .piede_recapiti { flex-wrap: wrap; }
+  .piede_logo { margin-bottom: -7%; }
+}
+
+/* Riduci movimento: tutto fermo e leggibile */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

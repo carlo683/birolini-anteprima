@@ -1,0 +1,223 @@
+/* =========================================================
+   Sito nuovo: i pezzi che le pagine pilota non avevano
+   (apertura in cornice, racconto breve, diario, viaggio di un'area, CER, news, pagine di testo,
+   contatti, 404, 1979 e linea del tempo della pagina Chi siamo).
+   Stesse regole di lavoro/DESIGN-NUOVO.md. Generato da lavoro/strumenti/genera-nuovo.mjs.
+   ========================================================= */
+
+.visore_freccia[hidden] { display: none; }
+
+/* ---------- Apertura: copertina piena con un lento avvicinamento (dentro un involucro) ---------- */
+.spinta { position: absolute; inset: 0; overflow: hidden; }
+.spinta img { width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 55%; }
+
+/* ---------- Apertura «in cornice»: la copertina nella sua misura vera, il titolo accanto ---------- */
+.apertura-pagina--cornice {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 72px); align-items: end;
+  padding: calc(var(--testata) + 40px) var(--margine) 64px;
+}
+.apertura-pagina--cornice .apertura-pagina_testo { position: relative; left: auto; right: auto; bottom: auto; grid-column: 1; grid-row: 1; padding-bottom: 6px; }
+.apertura-pagina--cornice .apertura-pagina_titolo { font-size: clamp(2.6rem, 4.6vw, 5.4rem); max-width: 12ch; text-wrap: balance; }
+.apertura-pagina--cornice .apertura-pagina_frase { max-width: 34ch; }
+.cornice { grid-column: 2; grid-row: 1; align-self: center; width: 100%; display: flex; flex-direction: column; align-items: flex-end; }
+.cornice .ciak { align-self: flex-end; }
+.cornice_quadro {
+  position: relative; overflow: hidden; margin: 0; background: var(--notte-alta);
+  width: min(100%, var(--massimo), calc((100vh - var(--testata) - 170px) * var(--r)));
+  width: min(100%, var(--massimo), calc((100svh - var(--testata) - 170px) * var(--r)));
+  aspect-ratio: var(--rapporto);
+}
+.cornice_quadro::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px var(--linea); pointer-events: none; }
+.cornice .ciak { position: static; margin-top: 14px; max-width: 100%; text-shadow: none; }
+
+/* ---------- Racconto breve: poche righe, dette in grande ---------- */
+.racconto--breve .racconto_titolo { position: static; }
+.racconto--breve .racconto_parte p.grande { max-width: 40ch; }
+
+/* ---------- Galleria con poche immagini: niente vuoti, la prima larga ---------- */
+.galleria--poche .galleria_testa { margin-bottom: var(--spazio-6); }
+
+/* ---------- Diario di cantiere ---------- */
+.diario { padding: var(--sezione) var(--margine) var(--spazio-8); }
+.diario_testa { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 96px); margin-bottom: var(--spazio-7); }
+.diario_data { color: var(--azzurro); margin-bottom: 10px; }
+
+/* ---------- Il viaggio di un'area: quattro tappe vere ---------- */
+.viaggio { padding: var(--sezione) var(--margine); }
+.viaggio_testa { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: var(--spazio-6); }
+.viaggio_testa p { max-width: 46ch; }
+.viaggio_tappa { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 96px); align-items: center; padding: var(--spazio-6) 0; border-top: 1px solid var(--linea); }
+.viaggio_tappa:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.viaggio_tappa:nth-child(even) .viaggio_figura { order: -1; justify-self: start; }
+.viaggio_n { font-size: clamp(2.2rem, 3.6vw, 3.6rem); margin-bottom: 18px; }
+.viaggio_testo h3 { margin-bottom: 14px; }
+.viaggio_figura { margin: 0; width: 100%; max-width: var(--massimo); justify-self: end; }
+.viaggio_figura img { width: 100%; height: auto; }
+.viaggio_dida { margin-top: 12px; color: var(--nebbia); }
+.viaggio_dida::before { content: ""; display: inline-block; vertical-align: middle; width: 6px; height: 6px; margin: -2px 9px 0 0; border-radius: 50%; background: var(--azzurro); }
+.viaggio_fine { margin-top: var(--spazio-5); }
+.viaggio--corto .viaggio_lista { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 32px); }
+.viaggio--corto .viaggio_tappa, .viaggio--corto .viaggio_tappa:nth-child(even) { display: flex; flex-direction: column-reverse; justify-content: flex-end; align-items: stretch; gap: 18px; padding: var(--spazio-4) 0 0; }
+.viaggio--corto .viaggio_tappa:nth-child(even) .viaggio_figura { order: 0; }
+.viaggio--corto .viaggio_figura img { aspect-ratio: 16 / 10; object-fit: cover; }
+.viaggio--corto .viaggio_n { font-size: 2rem; margin-bottom: 10px; }
+
+/* ---------- La CER Imotorre (pagina Energia) ---------- */
+.cer { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(24px, 5vw, 96px); align-items: center; padding: var(--sezione) var(--margine); }
+.cer_figura { margin: 0; max-width: var(--massimo); width: 100%; }
+.cer_figura img { width: 100%; height: auto; }
+.cer_dida { margin-top: 12px; color: var(--nebbia); }
+.cer_dida::before { content: ""; display: inline-block; vertical-align: middle; width: 6px; height: 6px; margin: -2px 9px 0 0; border-radius: 50%; background: var(--azzurro); }
+.cer_testo .grande { margin-top: 22px; }
+.cer_testo .secondario { margin-top: 14px; max-width: 46ch; }
+.cer_news { margin: 26px 0 18px; border-top: 1px solid var(--linea); }
+.cer_news a { display: flex; flex-direction: column; gap: 4px; padding: 12px 0; min-height: 44px; border-bottom: 1px solid var(--linea); text-decoration: none; font-weight: 500; }
+.cer_news a:hover { color: var(--azzurro); }
+.cer_news .mono { color: var(--nebbia); }
+
+/* ---------- News: titoli lunghi nella finestra ---------- */
+.indice--news .voce_nome { font-size: clamp(1.1rem, 1.5vw, 1.5rem); line-height: 1.2; }
+.indice--news .voce a { gap: 16px; }
+
+/* ---------- Articolo ---------- */
+.articolo_testa { padding: calc(var(--testata) + 56px) var(--margine) var(--spazio-6); }
+.articolo_titolo { max-width: 22ch; }
+.articolo_data { margin-top: 22px; color: var(--nebbia); }
+.articolo_copertina { margin: 0 var(--margine); max-width: min(var(--massimo), calc(100% - 2 * var(--margine))); }
+.articolo_copertina img { width: 100%; height: auto; }
+.articolo { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 96px); padding: var(--spazio-7) var(--margine) var(--sezione); }
+.articolo_lato { align-self: start; position: sticky; top: calc(var(--testata) + 24px); }
+.articolo_progetto { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; max-width: 420px; text-decoration: none; }
+.articolo_progetto-img { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--notte-alta); }
+.articolo_progetto-img img { width: 100%; height: 100%; object-fit: cover; }
+.articolo_progetto:hover .t4 { color: var(--azzurro); }
+.articolo_testo { max-width: 64ch; }
+.articolo_testo p + p, .articolo_testo p + ul, .articolo_testo ul + p, .articolo_testo figure + p, .articolo_testo p + figure, .articolo_testo ul + figure, .articolo_testo figure + figure { margin-top: 1.1em; }
+.articolo_testo p:first-child { font-size: clamp(1.2rem, 1.6vw, 1.5rem); line-height: 1.38; font-stretch: 104%; }
+.articolo_testo ul { list-style: disc; padding-left: 1.2em; }
+.articolo_testo li + li { margin-top: .5em; }
+.articolo_testo strong { font-weight: 600; }
+.articolo_testo a { display: inline-block; padding: 10px 0; margin: -10px 0; color: var(--bianco); text-decoration: underline; text-decoration-color: var(--azzurro); text-underline-offset: 3px; }
+.articolo_testo a:hover { color: var(--azzurro); }
+.articolo_figura { margin: 2em 0; max-width: var(--massimo); }
+.articolo_figura img { width: 100%; height: auto; }
+
+/* ---------- Pagine di solo testo (privacy, cookie, note legali) ---------- */
+.pagina-testo { padding: calc(var(--testata) + 56px) var(--margine) var(--sezione); min-height: 70vh; }
+.pagina-testo_corpo { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 96px); margin-top: var(--spazio-7); padding-top: var(--spazio-5); border-top: 1px solid var(--linea); }
+.pagina-testo .testo p + p { margin-top: 1em; }
+.pagina-testo .testo a { display: inline-block; padding: 10px 0; margin: -10px 0; text-decoration: underline; text-decoration-color: var(--azzurro); text-underline-offset: 3px; color: var(--bianco); }
+
+/* ---------- Contatti ---------- */
+.contatti-pagina { padding-top: calc(var(--testata) + 56px); }
+.contatti-pagina_testa { padding: 0 var(--margine); }
+.contatti-pagina_testa .grande { margin-top: 22px; max-width: 30ch; }
+.contatti-pagina .contatto_griglia { padding-top: var(--spazio-7); }
+.contatti-pagina_dati { display: flex; flex-wrap: wrap; gap: 0; margin-top: 26px; border-top: 1px solid rgba(244, 246, 249, .28); }
+.contatti-pagina_dati div { padding: 10px 22px 0 0; margin-right: 22px; border-right: 1px solid rgba(244, 246, 249, .2); }
+.contatti-pagina_dati div:last-child { border-right: 0; }
+.contatti-pagina_dati dt { color: var(--nebbia); }
+.contatti-pagina_dati dd a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.contatti-pagina_dati dd a:hover { color: var(--azzurro); }
+
+/* ---------- 404 ---------- */
+.non-trovata { padding: var(--spazio-7) var(--margine) var(--sezione); }
+.non-trovata_lista { border-top: 1px solid var(--linea); }
+.non-trovata_lista a { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 64px; padding: 14px 0; border-bottom: 1px solid var(--linea); font-size: clamp(1.4rem, 2.4vw, 2.4rem); font-weight: 300; font-stretch: 120%; letter-spacing: -.02em; text-decoration: none; }
+.non-trovata_lista a:hover { color: var(--azzurro); }
+
+/* ---------- Chi siamo: le società ---------- */
+.societa { padding: var(--sezione) var(--margine); }
+.societa_frase { margin-top: 22px; }
+.societa_griglia { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px clamp(24px, 3vw, 48px); margin-top: var(--spazio-7); }
+.societa_gruppo { color: var(--azzurro); padding-bottom: 10px; border-bottom: 1px solid rgba(244, 246, 249, .45); }
+.societa_griglia li { padding: 10px 0; border-bottom: 1px solid var(--linea); }
+
+/* ---------- Chi siamo: 1979 come finestra sulla foto vera (dal MIX) ---------- */
+.storia { position: relative; background: var(--notte); }
+.storia_scena { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; background: var(--notte); }
+.storia_svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.storia_svg text { font-family: var(--font); font-size: 340px; font-weight: 700; font-stretch: 125%; letter-spacing: -18px; }
+.storia_tratto text { fill: none; stroke: var(--azzurro); stroke-width: 2; }
+.storia_cifre text { fill: #fff; }
+.storia_video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.storia_velo { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(12, 22, 40, .85) 0%, rgba(12, 22, 40, .45) 34%, rgba(12, 22, 40, 0) 55%); }
+.storia_testo { position: absolute; z-index: 2; left: var(--margine); top: 50%; transform: translateY(-50%); width: min(33vw, 470px); }
+.storia_grande { margin-top: 22px; }
+.storia_testo .secondario { margin-top: 12px; max-width: 44ch; }
+.storia_testo .collegamento { margin-top: 14px; }
+.moto:not(.pronto) .storia_testo { visibility: hidden; }
+
+/* ---------- Chi siamo: la linea del tempo (dal MIX) ---------- */
+.storia--tempo { z-index: 2; }
+.tempo { position: relative; }
+.tempo_fissa { position: relative; padding: var(--sezione) 0 10vh; }
+.tempo_testa { position: relative; z-index: 1; padding: 0 var(--margine); margin-bottom: clamp(24px, 5vh, 52px); }
+.tempo_anno-corrente { display: none; }
+.tempo_binario { position: relative; z-index: 1; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--margine); scrollbar-width: none; }
+.tempo_binario::-webkit-scrollbar { display: none; }
+.tempo_lista { position: relative; display: flex; gap: clamp(18px, 2vw, 32px); width: max-content; padding: 0 var(--margine) 8px; }
+.tempo_lista::before { content: ""; position: absolute; left: 0; right: 0; top: 2.9rem; height: 1px; background: rgba(244, 246, 249, .3); }
+.tappa { position: relative; flex: 0 0 auto; width: clamp(340px, 32vw, 540px); padding-top: 4.4rem; scroll-snap-align: start; }
+.tappa::before { content: ""; position: absolute; left: 0; top: calc(2.9rem - 5px); width: 11px; height: 11px; border-radius: 50%; background: var(--notte); border: 1.5px solid var(--azzurro); }
+.tappa > a { display: block; text-decoration: none; }
+.tappa_anno { position: absolute; left: 0; top: .9rem; font-family: var(--mono); font-size: .75rem; line-height: 1.35; letter-spacing: .06em; font-weight: 500; color: var(--azzurro); font-variant-numeric: tabular-nums; }
+.tappa_media { position: relative; display: block; height: 46vh; height: 46svh; overflow: hidden; background: var(--notte-alta); }
+.tappa_media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tappa_bn { filter: grayscale(1) brightness(.72); }
+.tappa_tipo { position: absolute; z-index: 3; left: 0; bottom: 0; padding: 4px 8px; background: rgba(12, 22, 40, .85); color: var(--bianco); }
+.tappa_nome { display: block; margin-top: 14px; font-size: 1.1rem; font-weight: 500; font-stretch: 104%; line-height: 1.2; }
+.tappa_dati { display: block; margin-top: 4px; font-family: var(--mono); font-size: .75rem; line-height: 1.35; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; color: var(--nebbia); }
+.tappa > a:hover .tappa_nome { color: var(--azzurro); }
+.tappa--inizio, .tappa--fine { width: clamp(220px, 20vw, 300px); }
+.tappa_frase { font-size: clamp(1.6rem, 2.2vw, 2.3rem); line-height: 1.2; font-weight: 300; font-stretch: 120%; letter-spacing: -.02em; }
+.tappa--fine::before { background: var(--notte); }
+.tappa > a.tappa_tutti { display: flex; align-items: center; gap: 18px; height: 46vh; height: 46svh; color: var(--bianco); font-size: clamp(1.8rem, 3vw, 3.2rem); font-weight: 300; font-stretch: 125%; letter-spacing: -.03em; line-height: 1.05; }
+.tappa > a.tappa_tutti:hover { color: var(--azzurro); }
+.tempo_avanzamento { display: none; }
+.moto .tempo_fissa { height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: calc(var(--testata) + 10px) 0 clamp(24px, 5vh, 56px); overflow: hidden; }
+.moto .tempo_binario { overflow: visible; scroll-snap-type: none; }
+.moto .tempo_lista { will-change: transform; }
+.moto .tempo_avanzamento { display: block; position: absolute; left: var(--margine); right: var(--margine); bottom: 26px; height: 1px; background: var(--linea); }
+.moto .tempo_avanzamento i { position: absolute; inset: 0; background: var(--azzurro); transform: scaleX(0); transform-origin: 0 50%; }
+@media (min-width: 761px) {
+  .moto .tappa_col { opacity: 0; }
+  .moto .tempo_anno-corrente {
+    display: block; position: absolute; z-index: 0; left: 0; top: 50%; transform: translateY(-50%); margin: 0;
+    font-size: 34vw; line-height: .8; font-weight: 200; font-stretch: 125%; letter-spacing: -.04em; font-variant-numeric: tabular-nums;
+    color: transparent; -webkit-text-stroke: 1px rgba(29, 179, 232, .32); pointer-events: none; white-space: nowrap;
+  }
+}
+
+/* =========================================================
+   Tablet e telefono
+   ========================================================= */
+@media (max-width: 1000px) {
+  .apertura-pagina--cornice { height: auto; min-height: 0; grid-template-columns: 1fr; align-items: start; gap: 28px; }
+  .apertura-pagina--cornice .cornice { grid-column: 1; grid-row: 1; align-items: flex-start; }
+  .cornice .ciak { align-self: flex-start; }
+  .apertura-pagina--cornice .apertura-pagina_testo { grid-row: 2; }
+  .cornice_quadro { width: min(100%, var(--massimo)); }
+  .diario_testa, .viaggio_tappa, .viaggio_tappa:nth-child(even), .cer, .articolo, .pagina-testo_corpo { grid-template-columns: 1fr; }
+  .viaggio_tappa:nth-child(even) .viaggio_figura { order: 0; }
+  .viaggio--corto .viaggio_lista { grid-template-columns: 1fr 1fr; }
+  .articolo_lato { position: static; order: 2; }
+}
+@media (max-width: 760px) {
+  .apertura-pagina--cornice { padding: calc(var(--testata) + 20px) 16px 48px; }
+  .apertura-pagina--cornice .apertura-pagina_titolo { font-size: clamp(2.2rem, 10vw, 3rem); }
+  .viaggio--corto .viaggio_lista { grid-template-columns: 1fr; }
+  .storia_velo { background: linear-gradient(0deg, rgba(12, 22, 40, .92) 0%, rgba(12, 22, 40, .6) 38%, rgba(12, 22, 40, 0) 60%); }
+  .storia_testo { top: auto; bottom: 64px; transform: none; left: 16px; right: 16px; width: auto; }
+  .storia_testo .secondario { display: none; }
+  .moto .tempo_fissa { height: auto; display: block; padding: 10vh 0 8vh; overflow: visible; }
+  .moto .tempo_binario { overflow-x: auto; scroll-snap-type: x mandatory; }
+  .tempo_binario { scroll-padding-inline: 0; }
+  .moto .tempo_lista { will-change: auto; }
+  .moto .tempo_anno-corrente, .moto .tempo_avanzamento { display: none; }
+  .tappa { width: 78vw; scroll-snap-align: center; }
+  .tappa--inizio, .tappa--fine { width: 70vw; }
+  .tappa_media, .tappa > a.tappa_tutti { height: 34vh; height: 34svh; }
+  .tappa > a.tappa_tutti { font-size: 1.8rem; }
+  .contatti-pagina_dati div { margin-right: 14px; padding-right: 14px; }
+}

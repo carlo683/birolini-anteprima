@@ -1,0 +1,215 @@
+/* =========================================================
+   Componenti delle pagine interne: apertura di pagina, racconto a capitoli, galleria a tavole,
+   visore a tutto schermo, mappa sulla notte, pila delle residenze.
+   ========================================================= */
+
+/* ---------- Apertura di pagina: clip a tutto schermo, titolo in basso a sinistra ---------- */
+.apertura-pagina { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; background: var(--notte); }
+.apertura-pagina_media video, .apertura-pagina_media img { transform-origin: 50% 60%; }
+.apertura-pagina_velo { background:
+  linear-gradient(180deg, rgba(var(--velo-notte), .45) 0%, rgba(var(--velo-notte), 0) 22%),
+  linear-gradient(0deg, rgba(var(--velo-notte), .94) 0%, rgba(var(--velo-notte), .72) 30%, rgba(var(--velo-notte), .15) 58%, rgba(var(--velo-notte), 0) 70%); }
+.apertura-pagina_testo { position: absolute; z-index: 2; left: var(--margine); right: var(--margine); bottom: 76px; }
+.apertura-pagina_titolo { max-width: 14ch; }
+.apertura-pagina_frase { margin-top: clamp(16px, 2vw, 26px); max-width: 40ch; }
+.apertura-pagina .azioni { margin-top: 26px; }
+.briciole { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: var(--nebbia); }
+.briciole a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; text-decoration: none; color: var(--bianco); }
+.briciole a:hover { color: var(--azzurro); }
+.moto:not(.pronto) .apertura-pagina_testo { visibility: hidden; }
+
+/* il cartiglio subito sotto l'apertura, largo come la pagina */
+.cartiglio--pagina { position: relative; z-index: 2; padding: 0 var(--margine); background: var(--notte); }
+
+/* ---------- Il progetto: capitoli con il titolo a sinistra (fermo) e il testo a destra ---------- */
+.racconto { padding: var(--sezione) var(--margine); }
+.racconto_capitolo { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 96px); }
+.racconto_capitolo + .racconto_capitolo { margin-top: var(--spazio-8); }
+.racconto_titolo { align-self: start; position: sticky; top: calc(var(--testata) + 24px); max-width: 12ch; }
+.racconto_parti { max-width: 64ch; }
+.racconto_parte + .racconto_parte { margin-top: var(--spazio-5); padding-top: var(--spazio-5); border-top: 1px solid var(--linea); }
+.racconto_parte h3 { margin-bottom: 12px; }
+.racconto_parte p { color: var(--bianco); }
+.racconto_parte p.grande { max-width: 46ch; }
+
+/* ---------- Galleria a «tavole»: grandi, divise per tipo, con l'etichetta e il numero ---------- */
+.galleria { padding: var(--sezione) var(--margine) var(--spazio-8); }
+.galleria_testa { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; margin-bottom: var(--spazio-7); }
+.galleria_testa p { max-width: 46ch; }
+.galleria_gruppo + .galleria_gruppo { margin-top: var(--spazio-8); }
+.galleria_titolo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; padding-bottom: 18px; margin-bottom: var(--spazio-5); border-bottom: 1px solid rgba(244, 246, 249, .45); }
+.tavole { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
+.tavole + .tavole { margin-top: clamp(40px, 7vw, 120px); }
+.tavola-foto { position: relative; margin: 0; }
+.tavola-foto_bottone { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: left; }
+.tavola-foto_quadro { position: relative; display: block; overflow: hidden; aspect-ratio: var(--rapporto); background: var(--notte-alta); }
+.tavola-foto_quadro img { width: 100%; height: 100%; object-fit: cover; }
+.moto .tavola-foto_quadro img { transform: scale(1.06); will-change: transform; }
+.tavola-foto_dida { display: flex; justify-content: space-between; gap: 16px; padding-top: 12px; color: var(--nebbia); }
+.tavola-foto_tipo::before { content: ""; display: inline-block; vertical-align: middle; width: 6px; height: 6px; margin: -2px 9px 0 0; border-radius: 50%; background: var(--azzurro); }
+.tavola-foto_bottone:focus-visible { outline-offset: 6px; }
+.tavola-foto_bottone:hover .tavola-foto_quadro::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px var(--azzurro); }
+/* a tutta larghezza (solo immagini da 1600 px in su), al bordo della pagina */
+.tavole--piena .tavola-foto { grid-column: 1 / -1; margin: 0 calc(-1 * var(--margine)); }
+.tavole--piena .tavola-foto_dida { padding-inline: var(--margine); }
+.tavole--piena .tavola-foto_quadro { aspect-ratio: auto; height: min(92vh, calc(100vw * 10 / 16)); }
+/* a coppia sfalsata: 7 + 5 colonne, la seconda più in basso */
+.tavole--coppia .tavola-foto:first-child { grid-column: 1 / span 7; }
+.tavole--coppia .tavola-foto:last-child { grid-column: 9 / span 4; margin-top: clamp(60px, 14vw, 240px); }
+.tavole--coppia.coppia--inversa .tavola-foto:first-child { grid-column: 1 / span 5; margin-top: clamp(60px, 14vw, 240px); }
+.tavole--coppia.coppia--inversa .tavola-foto:last-child { grid-column: 6 / span 7; margin-top: 0; }
+.tavole--coppia.coppia--grandi .tavola-foto:first-child { grid-column: 1 / span 6; }
+.tavole--coppia.coppia--grandi .tavola-foto:last-child { grid-column: 7 / span 6; margin-top: clamp(40px, 8vw, 140px); }
+/* larga: 10 colonne, a sinistra o a destra; mai più grande della sua misura vera */
+.tavole--larga .tavola-foto { grid-column: 1 / span 10; max-width: var(--massimo); }
+.tavole--larga.larga--destra .tavola-foto { grid-column: 3 / span 10; justify-self: end; width: 100%; }
+
+/* ---------- Visore a tutto schermo ---------- */
+.visore { position: fixed; inset: 0; z-index: 95; background: rgba(var(--velo-notte), .98); }
+.visore[hidden] { display: none; }
+.visore_scena { position: absolute; inset: clamp(64px, 9vh, 96px) clamp(16px, 7vw, 120px) clamp(64px, 9vh, 96px); }
+.visore_img { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.visore_conta { position: absolute; z-index: 2; left: var(--margine); top: 16px; font-size: clamp(2rem, 3.4vw, 3.4rem); }
+.visore_ciak { left: var(--margine); bottom: 22px; }
+.visore_chiudi { position: absolute; z-index: 3; right: var(--margine); top: 16px; display: inline-flex; align-items: center; gap: 12px; min-height: 48px; min-width: 48px; padding: 0 4px; border: 0; background: none; color: var(--bianco); cursor: pointer; font: 500 .9375rem/1 var(--font); }
+.visore_chiudi .testata_menu-righe::before { transform: translateY(4.25px) rotate(45deg); }
+.visore_chiudi .testata_menu-righe::after { left: 0; transform: translateY(-4.25px) rotate(-45deg); }
+.visore_freccia { position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); width: 56px; height: 56px; display: grid; place-items: center; border: 1px solid var(--bordo); border-radius: var(--angolo); background: rgba(var(--velo-notte), .6); color: var(--bianco); cursor: pointer; transition: border-color .3s, color .3s; }
+.visore_freccia:hover { border-color: var(--azzurro); color: var(--azzurro); }
+.visore_freccia svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.visore_freccia--prima { left: clamp(8px, 2vw, 32px); }
+.visore_freccia--dopo { right: clamp(8px, 2vw, 32px); }
+.visore_volo { position: fixed; z-index: 96; overflow: hidden; pointer-events: none; }
+.visore_volo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Mappa sulla notte (Leaflet, mattonelle di OpenStreetMap tinte di blu) ---------- */
+.mappa-notte { position: relative; overflow: hidden; background: #0a1322; isolation: isolate; }
+.mappa-notte .leaflet-container, .mappa-notte.leaflet-container { background: #0a1322; font-family: var(--font); }
+/* le mattonelle chiare diventano notte: si tiene solo la loro luminosità (rovesciata), il colore lo dà il fondo */
+.mappa-notte .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(1.15) contrast(1.25); mix-blend-mode: luminosity; opacity: .78; }
+.mappa-notte::after { content: ""; position: absolute; inset: 0; z-index: 401; pointer-events: none; box-shadow: inset 0 0 120px 30px rgba(var(--velo-notte), .85); }
+.mappa-notte .leaflet-control-container { position: relative; z-index: 402; }
+.mappa-notte .leaflet-bar { border: 1px solid var(--bordo); border-radius: var(--angolo); box-shadow: none; overflow: hidden; }
+.mappa-notte .leaflet-bar a { width: 44px; height: 44px; line-height: 44px; background: var(--notte); color: var(--bianco); border-color: var(--linea); font: 300 1.4rem/44px var(--font); }
+.mappa-notte .leaflet-bar a:hover { background: var(--notte-alta); color: var(--azzurro); }
+.mappa-notte .leaflet-control-attribution { background: rgba(var(--velo-notte), .8); color: var(--nebbia); font: 400 .6875rem/1 var(--mono); padding: 0 8px; }
+.mappa-notte .leaflet-control-attribution a { color: var(--bianco); display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; justify-content: center; }
+.punto { position: relative; display: block; width: 44px; height: 44px; cursor: pointer; }
+.punto::before { content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; border: 1.5px solid var(--bianco); background: var(--notte); transition: transform .3s var(--curva), background-color .3s; }
+.punto--corso::before { background: var(--azzurro); border-color: var(--azzurro); }
+.punto--spento::before { opacity: .55; }
+.punto--scelto::before, .punto:hover::before { transform: scale(1.6); }
+.punto--evidenza::before { width: 16px; height: 16px; margin: -8px 0 0 -8px; background: var(--azzurro); border-color: var(--bianco); box-shadow: 0 0 0 6px rgba(29, 179, 232, .25); }
+.punto--nascosto { display: none; }
+.mappa-notte .leaflet-marker-icon:focus-visible { outline: 2px solid var(--azzurro); outline-offset: -8px; border-radius: 50%; }
+.mappa-notte .leaflet-popup-content-wrapper { background: var(--notte); color: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--angolo); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, .6); }
+.mappa-notte .leaflet-popup-tip { background: var(--notte); border: 1px solid var(--bordo); }
+.mappa-notte .leaflet-popup-content { margin: 14px 16px; font-size: .9375rem; line-height: 1.4; }
+.mappa-notte .leaflet-popup-content p { margin: 0; }
+.mappa-notte .leaflet-popup-content .mono { color: var(--nebbia); margin-top: 4px; }
+.mappa-notte .leaflet-popup-content a { display: inline-flex; align-items: center; min-height: 44px; color: var(--bianco); }
+.mappa-notte a.leaflet-popup-close-button { width: 44px; height: 44px; font: 300 1.4rem/44px var(--font); color: var(--nebbia); }
+.legenda { display: inline-flex; align-items: center; gap: 8px; margin-left: 14px; white-space: nowrap; }
+.legenda_punto { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--bianco); background: var(--notte); }
+.legenda_punto--corso { background: var(--azzurro); border-color: var(--azzurro); }
+
+/* «Dove» nella scheda progetto */
+.dove { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(24px, 4vw, 72px); align-items: center; padding: var(--sezione) var(--margine); }
+.dove_testo p { margin: 16px 0 12px; max-width: 40ch; }
+.dove_mappa { aspect-ratio: 16 / 10; border: 1px solid var(--linea); }
+
+/* archivio: la sezione della mappa con la scheda del punto scelto */
+.mappa-sezione { padding: var(--sezione) var(--margine) var(--spazio-7); }
+.mappa-sezione_testa { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: var(--spazio-5); }
+.filtri--mappa { margin-bottom: var(--spazio-3); }
+.mappa-sezione_corpo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: clamp(16px, 2vw, 32px); }
+.mappa-sezione_mappa { height: min(78vh, 760px); min-height: 460px; border: 1px solid var(--linea); }
+.mappa-scheda { align-self: start; position: sticky; top: calc(var(--testata) + 24px); }
+.mappa-scheda_media { aspect-ratio: 16 / 10; overflow: hidden; background: var(--notte-alta); }
+.mappa-scheda_media img { width: 100%; height: 100%; object-fit: cover; }
+.mappa-scheda_nome { margin-top: 14px; }
+.mappa-scheda_dati { margin-top: 6px; color: var(--nebbia); }
+.mappa-scheda_link { margin-top: 8px; }
+.mappa-scheda:not(.piena) .mappa-scheda_media, .mappa-scheda:not(.piena) .mappa-scheda_link { display: none; }
+.mappa-scheda.piena .mappa-scheda_vuota { display: none; }
+.mappa-sezione_lontani { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: var(--spazio-4); }
+.mappa-sezione_lontani .mono { margin-right: 8px; }
+
+/* ---------- Sito della residenza ---------- */
+.minisito { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px clamp(24px, 5vw, 96px); align-items: end; padding: var(--sezione) var(--margine); }
+.minisito .grande { max-width: 34ch; }
+.minisito .bottone { grid-column: 2; justify-self: start; }
+
+/* ---------- Residenze in primo piano: una pila di fogli a tutto schermo ---------- */
+.residenze { padding-top: var(--sezione); }
+.residenze_testa { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; padding: 0 var(--margine) var(--spazio-6); }
+.residenze_testa p { max-width: 44ch; }
+.residenza { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; background: var(--notte); border-radius: var(--foglio) var(--foglio) 0 0; box-shadow: 0 -40px 80px -30px rgba(0, 0, 0, .7); }
+.residenza + .residenza { margin-top: 0; }
+.residenza_velo { background:
+  linear-gradient(90deg, rgba(var(--velo-notte), .82) 0%, rgba(var(--velo-notte), .45) 40%, rgba(var(--velo-notte), 0) 66%),
+  linear-gradient(0deg, rgba(var(--velo-notte), .8) 0%, rgba(var(--velo-notte), 0) 44%); }
+.residenza_ombra { position: absolute; inset: 0; z-index: 4; background: var(--notte); opacity: 0; pointer-events: none; }
+.residenza_testo { position: absolute; z-index: 2; left: var(--margine); bottom: 84px; width: min(60vw, 860px); }
+.residenza_testo .grande { margin-top: 18px; }
+.residenza_dati { display: flex; gap: 0; margin-top: 18px; border-top: 1px solid rgba(244, 246, 249, .28); width: max-content; max-width: 100%; }
+.residenza_dati div { padding: 10px 22px 0 0; margin-right: 22px; border-right: 1px solid rgba(244, 246, 249, .2); }
+.residenza_dati div:last-child { border-right: 0; }
+.residenza_dati dt { color: var(--nebbia); }
+.residenza_dati dd { font-weight: 500; }
+.residenza .azioni { margin-top: 26px; }
+/* immagine verticale (copertina 3:4): a destra, intera in altezza, il testo a sinistra */
+.residenza--verticale .residenza_media { left: auto; width: min(46vw, calc(100svh * .75)); }
+.residenza--verticale .residenza_velo { background: linear-gradient(90deg, var(--notte) 0%, var(--notte) 40%, rgba(var(--velo-notte), 0) 60%); }
+.residenza--verticale .residenza_testo { width: min(48vw, 760px); }
+
+/* =========================================================
+   Telefono
+   ========================================================= */
+@media (max-width: 1000px) {
+  .racconto_capitolo, .dove, .minisito { grid-template-columns: 1fr; }
+  .racconto_titolo { position: static; max-width: none; }
+  .minisito .bottone { grid-column: 1; }
+  .mappa-sezione_corpo { grid-template-columns: 1fr; }
+  .mappa-scheda { position: static; display: grid; grid-template-columns: 120px 1fr; gap: 0 14px; align-items: start; }
+  .mappa-scheda_media { grid-row: span 3; }
+  .mappa-scheda_nome { margin-top: 0; }
+  .mappa-scheda_vuota { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .apertura-pagina_testo { bottom: 60px; }
+  .apertura-pagina_velo { background:
+    linear-gradient(180deg, rgba(var(--velo-notte), .5) 0%, rgba(var(--velo-notte), 0) 20%),
+    linear-gradient(0deg, rgba(var(--velo-notte), .96) 0%, rgba(var(--velo-notte), .82) 40%, rgba(var(--velo-notte), .2) 66%, rgba(var(--velo-notte), 0) 78%); }
+  .apertura-pagina .azioni { gap: 6px 22px; }
+  .cartiglio--pagina { padding: 0 16px; }
+  .tavole { display: block; }
+  .tavole + .tavole { margin-top: 36px; }
+  .tavole .tavola-foto + .tavola-foto { margin-top: 36px; }
+  .tavole--coppia .tavola-foto:last-child, .tavole--coppia.coppia--inversa .tavola-foto:first-child, .tavole--coppia.coppia--grandi .tavola-foto:last-child { margin-top: 36px; }
+  .tavole--coppia.coppia--inversa .tavola-foto:first-child { margin-top: 0; }
+  .tavole--piena .tavola-foto_quadro { height: auto; aspect-ratio: 4 / 3; }
+  .tavole--larga .tavola-foto, .tavole--coppia .tavola-foto { margin-inline: 0; }
+  .visore_scena { inset: 72px 0 72px; }
+  .visore_freccia { top: auto; bottom: 10px; transform: none; width: 52px; height: 52px; }
+  .visore_freccia--prima { left: auto; right: 74px; }
+  .visore_freccia--dopo { right: 14px; }
+  .visore_ciak { bottom: 28px; max-width: calc(100% - 160px); }
+  .dove_mappa { aspect-ratio: 4 / 5; }
+  .mappa-sezione_mappa { height: 70vh; height: 70svh; min-height: 380px; }
+  .residenza_velo { background:
+    linear-gradient(0deg, rgba(var(--velo-notte), .96) 0%, rgba(var(--velo-notte), .82) 42%, rgba(var(--velo-notte), .1) 70%, rgba(var(--velo-notte), 0) 82%),
+    linear-gradient(180deg, rgba(var(--velo-notte), .5) 0%, rgba(var(--velo-notte), 0) 22%); }
+  .residenza_testo { left: 16px; right: 16px; width: auto; bottom: 56px; }
+  .residenza--verticale .residenza_media { width: auto; left: 0; }
+  .residenza--verticale .residenza_velo { background: linear-gradient(0deg, rgba(var(--velo-notte), .97) 0%, rgba(var(--velo-notte), .85) 42%, rgba(var(--velo-notte), 0) 72%); }
+  .residenza--verticale .residenza_testo { width: auto; }
+  .residenza_dati { width: auto; }
+  .legenda { margin-left: 0; margin-right: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .residenza { position: relative; }
+}
+.fermo .residenza { position: relative; }
+.visore_img { opacity: 0; }
+.visore_ciak:empty { visibility: hidden; }

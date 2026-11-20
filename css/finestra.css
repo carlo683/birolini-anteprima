@@ -1,0 +1,132 @@
+/* =========================================================
+   «La finestra sui progetti»: una sola immagine grande alla volta (a sinistra, ferma)
+   e i nomi grandi (a destra), raggruppati. Dal MIX, sezione 4, con i valori finali.
+   Varianti: .indice (a tutta pagina, con filtri e ricerca) e .indice--piccolo (pochi nomi, senza barra).
+   ========================================================= */
+.indice { --cima: var(--testata); --barra: 68px; --fpw: calc((100vw - 2 * var(--margine) - clamp(24px, 3vw, 56px)) * .64); position: relative; padding: 0 var(--margine) 8vh; }
+html.testata-su .indice { --cima: 0px; }
+.indice--piccolo { --barra: 0px; padding-top: var(--sezione); }
+.indice_testa { position: relative; padding: calc(var(--testata) + 56px) 0 32px; }
+.indice_titolo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .25em; }
+.indice_titolo .numero-contorno { font-size: 1.55em; }
+.indice_frase { margin-top: 16px; color: var(--nebbia); max-width: 46ch; }
+
+/* la barra dei settori: resta in alto mentre si scorre l'elenco */
+.indice_barra {
+  position: sticky; top: var(--cima); z-index: 6;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px;
+  margin: 0 calc(-1 * var(--margine)); padding: 12px var(--margine);
+  background: rgba(var(--velo-notte), .95); border-bottom: 1px solid var(--linea); transition: top .5s var(--curva);
+}
+.indice_barra-destra { display: flex; align-items: center; gap: 10px; }
+.filtri { display: flex; flex-wrap: wrap; gap: 8px; }
+.filtro {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; white-space: nowrap;
+  border: 1px solid var(--bordo); border-radius: var(--angolo); background: transparent; color: var(--bianco);
+  font: 500 .9375rem/1 var(--font); cursor: pointer; text-decoration: none;
+  transition: border-color .3s, background-color .3s, color .3s;
+}
+.filtro span { font-size: .75em; margin-left: 5px; color: var(--nebbia); transition: color .3s; }
+.filtro:hover { border-color: var(--bianco); }
+.filtro[aria-pressed="true"] { background: var(--azzurro); border-color: var(--azzurro); color: var(--notte); }
+.filtro[aria-pressed="true"] span { color: var(--notte); }
+.filtro.in-vista:not([aria-pressed="true"]) { border-color: var(--azzurro); color: var(--azzurro); }
+.cerca_campo {
+  min-height: 44px; width: 220px; padding: 0 16px; background: var(--notte-alta); color: var(--bianco);
+  border: 1px solid var(--bordo); border-radius: var(--angolo); font: 400 .9375rem/1 var(--font);
+}
+.cerca_campo::placeholder { color: var(--nebbia); }
+.cerca_campo:focus { outline: none; border-color: var(--azzurro); box-shadow: 0 0 0 1px var(--azzurro); }
+.cerca_lente { display: none; }
+
+.indice_corpo { display: grid; grid-template-columns: minmax(0, 64fr) minmax(0, 36fr); gap: clamp(24px, 3vw, 56px); align-items: start; padding-top: 24px; }
+
+/* la finestra: orizzontale 16:10, ferma e centrata in verticale mentre i nomi scorrono */
+.fp {
+  position: sticky; margin: 0; cursor: pointer; aspect-ratio: 16 / 10;
+  max-height: calc(100vh - var(--cima) - var(--barra) - 44px);
+  top: calc(var(--cima) + var(--barra) + max(20px, (100vh - var(--cima) - var(--barra) - var(--fpw) / 1.6) / 2));
+  transition: top .5s var(--curva);
+}
+.fp_media { position: absolute; inset: 0; overflow: hidden; background: var(--notte-alta); }
+.fp_strato { position: absolute; inset: 0; overflow: hidden; }
+.fp_strato img { width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%; }
+.fp_strato.piccola { background: var(--notte-alta); }
+.fp_strato.piccola img { object-fit: contain; padding: 5%; }
+.fp_video { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--lento) var(--curva); }
+.fp_video.in-onda { opacity: 1; }
+.fp_velo { position: absolute; inset: 0; z-index: 4; pointer-events: none; background: linear-gradient(0deg, rgba(var(--velo-notte), .9) 0%, rgba(var(--velo-notte), .4) 28%, rgba(var(--velo-notte), 0) 52%); }
+.fp_conta { position: absolute; z-index: 6; top: clamp(12px, 1.6vw, 22px); right: clamp(14px, 1.8vw, 24px); font-size: clamp(2.4rem, 4.4vw, 4.4rem); overflow: hidden; display: flex; }
+.fp_n { display: inline-block; }
+.fp_dati { position: absolute; z-index: 5; left: clamp(18px, 2vw, 28px); right: clamp(18px, 2vw, 28px); bottom: clamp(16px, 2vw, 26px); display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.fp_nome { display: inline-flex; align-items: flex-end; min-height: 44px; font-size: clamp(1.6rem, 2.6vw, 2.6rem); line-height: 1.05; font-weight: 500; font-stretch: 108%; letter-spacing: -.02em; text-decoration: none; color: var(--bianco); transition: color .3s; }
+.fp_nome:hover { color: var(--azzurro); }
+.fp_meta, .fp_tipo { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+.fp_meta { font-weight: 400; }
+.fp_tipo { line-height: 1.35; font-weight: 500; }
+.fp_tipo { color: var(--nebbia); }
+.fp_tipo:empty { display: none; }
+.fp_pieno { position: fixed; z-index: 90; overflow: hidden; background: var(--notte); pointer-events: none; }
+.fp_pieno img { width: 100%; height: 100%; object-fit: cover; }
+
+/* i nomi, raggruppati: la «ruota» (l'attivo largo e pieno, i vicini sfumano) */
+.gruppo + .gruppo { margin-top: 34px; }
+.gruppo_titolo { padding: 10px 0; border-bottom: 1px solid rgba(244, 246, 249, .45); font-family: var(--mono); font-size: .75rem; line-height: 1.35; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; color: var(--azzurro); background: var(--notte); }
+.gruppo_titolo span { margin-left: 6px; font-weight: 400; color: var(--nebbia); }
+@media (min-width: 761px) { .gruppo_titolo { position: sticky; top: calc(var(--cima) + var(--barra)); z-index: 2; transition: top .5s var(--curva); } }
+.voce { border-bottom: 1px solid var(--linea); }
+.voce a {
+  position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  min-height: 44px; padding: 8px 0; text-decoration: none; color: var(--bianco);
+  opacity: .35; transition: opacity var(--medio) var(--curva);    /* .35 = 3:1, il minimo per i titoli grandi */
+}
+.voce a.d1 { opacity: .62; }
+.voce a.d2 { opacity: .45; }
+.voce a.attiva, .voce a:hover, .voce a:focus-visible { opacity: 1; }
+.voce a::before { content: ""; position: absolute; left: 0; top: 50%; width: 18px; height: 2px; background: var(--azzurro); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--medio) var(--curva); }
+.voce a.attiva::before { transform: scaleX(1); }
+.voce_nome { font-size: clamp(1.3rem, 1.95vw, 2rem); line-height: 1.1; font-weight: 400; font-stretch: 106%; letter-spacing: -.02em; transition: transform .5s var(--curva), font-stretch .5s var(--curva); }
+.voce a.attiva .voce_nome { transform: translateX(28px); font-stretch: 115%; font-weight: 500; }
+.voce_anno { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; font-family: var(--mono); font-size: .75rem; line-height: 1.35; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: var(--nebbia); font-variant-numeric: tabular-nums; }
+.voce_incorso { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--azzurro); }
+.indice_liste.poche { min-height: calc(var(--fpw) / 1.6); display: flex; flex-direction: column; justify-content: center; }
+.indice_nessuno { padding: 24px 0; color: var(--nebbia); }
+.indice_fine { min-height: 34vh; display: flex; align-items: center; }
+.indice_fine a { display: inline-flex; align-items: center; gap: 18px; min-height: 44px; font-size: clamp(1.4rem, 2.4vw, 2.4rem); font-weight: 300; font-stretch: 120%; letter-spacing: -.02em; text-decoration: none; }
+.indice_liste.poche .indice_fine { min-height: 0; margin-top: 30px; }
+.no-js .indice_corpo { display: block; }
+.no-js .fp { display: none; }
+
+/* variante piccola (per esempio «Altri progetti» in una scheda): la finestra non resta ferma */
+.indice--piccolo .indice_corpo { --fpw: calc((100vw - 2 * var(--margine) - clamp(24px, 3vw, 56px)) * .56); grid-template-columns: minmax(0, 56fr) minmax(0, 44fr); align-items: center; padding-top: 32px; }
+.indice--piccolo .fp { position: relative; top: auto; max-height: none; }
+.indice--piccolo .indice_liste { min-height: 0; }
+
+@media (max-width: 760px) {
+  .indice { --barra: 64px; }
+  .indice_testa { padding-top: calc(var(--testata) + 32px); }
+  .indice_barra { flex-wrap: nowrap; gap: 8px; padding: 10px 16px; }
+  .filtri { flex: 1; min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 78%, transparent); mask-image: linear-gradient(90deg, #000 78%, transparent); padding-right: 24px; }
+  .filtri::-webkit-scrollbar { display: none; }
+  .cerca_lente { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--bordo); border-radius: var(--angolo); background: transparent; color: var(--bianco); cursor: pointer; }
+  .cerca_lente svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+  .cerca { display: none; }
+  .indice_barra.cerca-aperta .cerca { display: block; position: absolute; left: 16px; right: 68px; top: 10px; }
+  .indice_barra.cerca-aperta .cerca_campo { width: 100%; }
+  .indice_barra-destra .filtro--mappa { display: none; }
+  .indice_corpo { display: block; padding-top: 0; }
+  .fp { aspect-ratio: auto; height: 40vh; height: 40svh; max-height: none; top: calc(var(--cima) + var(--barra)); margin: 0 -16px; z-index: 3; }
+  .fp_conta { font-size: 2rem; }
+  .fp_dati { left: 16px; right: 16px; bottom: 12px; }
+  .fp_nome { font-size: 1.45rem; }
+  .indice_liste { padding-top: 14px; }
+  .voce a { opacity: .5; }           /* sul telefono i nomi sono più piccoli: serve 4,5:1 (a .5 è 5,0:1) */
+  .voce a.d1 { opacity: .75; }
+  .voce a.d2 { opacity: .6; }
+  .voce_nome { font-size: 1.3rem; }
+  .voce a.attiva .voce_nome { transform: translateX(26px); font-stretch: 112%; }
+  .indice_fine { min-height: 48vh; min-height: 48svh; align-items: flex-start; padding-top: 40px; }
+  .indice_fine a { font-size: 1.6rem; }
+  .indice--piccolo .fp { position: sticky; height: 34vh; height: 34svh; top: var(--cima); }
+  .indice--piccolo .indice_fine { min-height: 30vh; }
+}
