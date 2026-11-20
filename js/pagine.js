@@ -99,18 +99,19 @@
       var righe = window.SplitText ? SplitText.create(titolo, { type: 'lines', mask: 'lines' }).lines : [titolo];
       var tl = gsap.timeline({ delay: .1, defaults: { ease: 'expo.out' } });
       var cornice = ap.classList.contains('apertura-pagina--cornice');
+      var inColonna = ap.classList.contains('apertura-pagina--progetto') && B.telefono.matches;   // giro 3: titolo sotto l'immagine
       if (cornice) tl.fromTo(media, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'power3.inOut' }, 0);
       else tl.fromTo(media, { scale: 1.14 }, { scale: 1, duration: 2.8, ease: 'power2.out' }, 0);
       tl.fromTo(righe, { yPercent: 105 }, { yPercent: 0, duration: 1.3, stagger: .08 }, .2);
       if (entra.length) tl.fromTo(entra, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: .9, stagger: .1, ease: 'power2.out' }, .75);
       if (ciak) tl.fromTo(ciak, { autoAlpha: 0 }, { autoAlpha: 1, duration: .8 }, 1.2);
       // scorrendo, la clip scende piano e il testo sale: il foglio dopo la copre
-      if (!cornice) gsap.to(media, { yPercent: 14, ease: 'none', scrollTrigger: { trigger: ap, start: 'top top', end: 'bottom top', scrub: true } });
-      gsap.to($('.apertura-pagina_testo', ap), { y: -80, autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: ap, start: '30% top', end: '85% top', scrub: true } });
+      if (!cornice && !inColonna) gsap.to(media, { yPercent: 14, ease: 'none', scrollTrigger: { trigger: ap, start: 'top top', end: 'bottom top', scrub: true } });
+      if (!inColonna) gsap.to($('.apertura-pagina_testo', ap), { y: -80, autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: ap, start: '30% top', end: '85% top', scrub: true } });
     }
 
     // galleria: dentro la cornice l'immagine scorre appena, in senso opposto alla pagina
-    $$('.tavola-foto_quadro img').forEach(function (img) {
+    (B.leggero ? [] : $$('.tavola-foto_quadro img')).forEach(function (img) {
       gsap.fromTo(img, { yPercent: -3 }, { yPercent: 3, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 
@@ -119,7 +120,7 @@
     pila.forEach(function (r, i) {
       var prossimo = pila[i + 1]; if (!prossimo) return;
       gsap.to($('.residenza_ombra', r), { opacity: .7, ease: 'none', scrollTrigger: { trigger: prossimo, start: 'top bottom', end: 'top top', scrub: true } });
-      gsap.fromTo(prossimo, { borderTopLeftRadius: 28, borderTopRightRadius: 28 }, { borderTopLeftRadius: 0, borderTopRightRadius: 0, ease: 'none', scrollTrigger: { trigger: prossimo, start: 'top bottom', end: 'top top', scrub: true } });
+      if (!B.leggero) gsap.fromTo(prossimo, { borderTopLeftRadius: 28, borderTopRightRadius: 28 }, { borderTopLeftRadius: 0, borderTopRightRadius: 0, ease: 'none', scrollTrigger: { trigger: prossimo, start: 'top bottom', end: 'top top', scrub: true } });
     });
   });
 })();

@@ -21,15 +21,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css">
-<link rel="stylesheet" href="../../css/comune.css">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css">
-<link rel="stylesheet" href="../../css/finestra.css">
-<link rel="stylesheet" href="../../css/pagine.css">
-<link rel="stylesheet" href="../../css/nuovo.css">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611201706">
+<link rel="stylesheet" href="../../css/comune.css?v=202611201706">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611201706">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611201706">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611201706">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611201706">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
+/* modalità leggera (telefoni e tablet) e contatore dei fotogrammi (?fps) */
+(function (h) {
+  var q = location.search, m = /[?&]leggero=(\d)/.exec(q);
+  var tocco = window.matchMedia && matchMedia('(hover: none) and (pointer: coarse)').matches;
+  var liv = m ? +m[1] : (tocco ? 1 : 0);
+  h.setAttribute('data-leggero', String(liv));
+  if (liv > 0) h.classList.add('leggero');
+  if (/[?&]fps\b/.test(q)) document.addEventListener('DOMContentLoaded', function () {
+    var l = document.querySelector('link[href*="css/"]'), s = document.createElement('script');
+    s.src = (l ? l.getAttribute('href').split('css/')[0] : '') + 'js/fps.js'; document.body.appendChild(s);
+  });
+})(document.documentElement);
 </script>
 </head>
 <body>
@@ -61,8 +73,8 @@
 
 <!-- ============ APERTURA: la copertina a tutto schermo, con un lento avvicinamento ============ -->
 
-<section class="apertura-pagina" data-apertura aria-labelledby="titolo-progetto">
-  <div class="media-pieno apertura-pagina_media">
+<section class="apertura-pagina apertura-pagina--progetto" data-apertura aria-labelledby="titolo-progetto">
+  <div class="media-pieno apertura-pagina_media" style="--r:1600 / 900">
     <div class="spinta" data-spinta><img src="../../img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/copertina.webp" alt="Campo fotovoltaico a Covo, Covo (BG): fotoinserimento" width="1600" height="900" fetchpriority="high" decoding="async" style="object-position:50% 50%"></div>
   </div>
   <div class="velo apertura-pagina_velo"></div>
@@ -75,30 +87,11 @@
   <p class="ciak" id="ciak-apertura">Covo (BG). Fotoinserimento.</p>
 </section>
 
-<!-- ============ CARTIGLIO: i dati veri ============ -->
-<!-- [DA CONFERMARE con Angelo: le immagini di Covo sembrano fotoinserimenti di un campo non ancora costruito] -->
-<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
-  <p class="cartiglio_nome">Campo fotovoltaico a Covo</p>
-  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Covo (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2025</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Energetico</dd></div><div class="cartiglio_riga"><dt>Potenza</dt><dd>3,6 MWp, area 50.000 mq</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>In corso, in progetto</dd></div></dl>
-</div>
-
-<!-- ============ IL PROGETTO: il testo vero ============ -->
-<section class="racconto foglio racconto--breve" aria-label="Il progetto">
-  <div class="racconto_capitolo">
-    <h2 class="racconto_titolo t3">Il progetto</h2>
-    <div class="racconto_parti">
-      <div class="racconto_parte"><p class="grande">Impianto fotovoltaico da 3,6 MWp, che verrà realizzato su un'area di 50.000 mq. La produzione annua di energia sarà pari a circa 5,0 milioni di kWh.</p></div>
-    </div>
-  </div>
-</section>
-
-
-
 <!-- ============ LE IMMAGINI: tutte quelle vere, grandi, divise per tipo ============ -->
 <section class="galleria foglio" id="galleria" aria-labelledby="galleria-titolo">
   <div class="galleria_testa">
     <h2 class="t2" id="galleria-titolo">Le immagini</h2>
-    <p class="secondario">I fotoinserimenti: 6. Un clic apre l'immagine a tutto schermo.</p>
+    <p class="secondario">I fotoinserimenti: 6. Ogni immagine si apre a tutto schermo.</p>
   </div>
   
   <div class="galleria_gruppo" id="galleria-render">
@@ -151,6 +144,28 @@
       </div>
   </div>
 </section>
+
+<!-- ============ CARTIGLIO: i dati veri ============ -->
+<!-- [DA CONFERMARE con Angelo: le immagini di Covo sembrano fotoinserimenti di un campo non ancora costruito] -->
+<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
+  <p class="cartiglio_nome">Campo fotovoltaico a Covo</p>
+  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Covo (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2025</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Energetico</dd></div><div class="cartiglio_riga"><dt>Potenza</dt><dd>3,6 MWp, area 50.000 mq</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>In corso, in progetto</dd></div></dl>
+</div>
+
+<!-- ============ IL PROGETTO: il testo vero ============ -->
+<section class="racconto foglio racconto--breve" aria-label="Il progetto">
+  <div class="racconto_testo">
+  <div class="racconto_capitolo">
+    <h2 class="racconto_titolo t3">Il progetto</h2>
+    <div class="racconto_parti">
+      <div class="racconto_parte"><p class="grande">Impianto fotovoltaico da 3,6 MWp, che verrà realizzato su un'area di 50.000 mq. La produzione annua di energia sarà pari a circa 5,0 milioni di kWh.</p></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
 <script type="application/json" id="visore-dati">[{"src":"../../img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/foto-01.jpg","w":1080,"h":608,"tipo":"Fotoinserimento","alt":"Campo fotovoltaico a Covo, Covo (BG): fotoinserimento 1 di 6"},{"src":"../../img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/foto-02.jpg","w":1080,"h":608,"tipo":"Fotoinserimento","alt":"Campo fotovoltaico a Covo, Covo (BG): fotoinserimento 2 di 6"},{"src":"../../img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/foto-03.jpg","w":1080,"h":608,"tipo":"Fotoinserimento","alt":"Campo fotovoltaico a Covo, Covo (BG): fotoinserimento 3 di 6"},{"src":"../../img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/foto-04.jpg","w":1080,"h":608,"tipo":"Fotoinserimento","alt":"Campo fotovoltaico a Covo, Covo (BG): fotoinserimento 4 di 6"},{"src":"../../img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/foto-05.jpg","w":1600,"h":900,"tipo":"Fotoinserimento","alt":"Campo fotovoltaico a Covo, Covo (BG): fotoinserimento 5 di 6"},{"src":"../../img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/copertina.webp","w":1600,"h":900,"tipo":"Fotoinserimento","alt":"Campo fotovoltaico a Covo, Covo (BG): fotoinserimento 6 di 6"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
@@ -259,16 +274,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js"></script>
-<script src="../../js/vendor/SplitText.min.js"></script>
-<script src="../../js/vendor/Flip.min.js"></script>
-<script src="../../js/vendor/lenis.min.js"></script>
-<script src="../../js/vendor/leaflet.js"></script>
-<script src="../../js/comune.js"></script>
-<script src="../../js/finestra.js"></script>
-<script src="../../js/mappa-notte.js"></script>
-<script src="../../js/pagine.js"></script>
-<script src="../../js/nuovo.js"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611201706"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611201706"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611201706"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611201706"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611201706"></script>
+<script src="../../js/vendor/leaflet.js?v=202611201706"></script>
+<script src="../../js/comune.js?v=202611201706"></script>
+<script src="../../js/finestra.js?v=202611201706"></script>
+<script src="../../js/mappa-notte.js?v=202611201706"></script>
+<script src="../../js/pagine.js?v=202611201706"></script>
+<script src="../../js/nuovo.js?v=202611201706"></script>
 </body>
 </html>

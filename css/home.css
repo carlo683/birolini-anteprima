@@ -896,6 +896,51 @@ a:hover > .freccia { transform: translateX(6px); }
 
 .modulo_privacy a { display: inline-block; padding: 14px 0; margin: -14px 0; }
 
+/* =========================================================
+   Giro 3 (20/11/2026 sera): chiarezza. «Bello ma un po' caotico, non si capisce dove si va»
+   ========================================================= */
+/* dal disegno all'edificio: il fondo viaggia con il disegno (prima la tavola nuova accendeva un fondo pieno
+   prima che il suo disegno entrasse: per un attimo restava uno schermo vuoto) */
+.tavola_figura { background: transparent; }
+.tavola_disegno { background: var(--carta); }
+/* la linea che accompagna il disegno sale dal basso, come quella del colore */
+.tavola_traccia { left: 0; right: 0; top: 100%; bottom: auto; width: auto; height: 0; border-left: 0; border-top: 1.5px solid var(--filo); }
+@media (max-width: 760px) {
+  /* sul telefono l'immagine è intera, in orizzontale, sotto il titolo (prima se ne vedeva meno di un terzo) */
+  .tavola_figura { aspect-ratio: var(--r, 1.6); }
+  /* in movimento le tre tavole stanno nella stessa cornice 16:10 (con proporzioni diverse sotto la più bassa restava una striscia della tavola prima) */
+  .moto .tavola_figura { inset: auto 0; top: max(28svh, calc(var(--testata) + 150px)); aspect-ratio: 16 / 10; }
+}
+
+/* «dove sono» (giro 3): nella fascia della testata, al centro; resta anche quando la testata si nasconde.
+   Il filo azzurro in cima dice quanto manca alla fine della pagina. */
+.segnaposto {
+  position: fixed; z-index: 55; top: calc((var(--testata) - 32px) / 2); left: 50%; transform: translate(-50%, -8px);
+  display: flex; align-items: center; gap: 10px; height: 32px; padding: 0 14px;
+  background: rgba(12, 22, 40, .84); border: 1px solid rgba(244, 246, 249, .22); border-radius: 16px;
+  font-family: var(--mono); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; color: var(--bianco); white-space: nowrap;
+  pointer-events: none; opacity: 0; transition: opacity .35s, transform .35s;
+}
+.segnaposto.su { opacity: 1; transform: translate(-50%, 0); }
+.segnaposto_n { color: var(--azzurro); font-variant-numeric: tabular-nums; }
+.segnaposto_corto { display: none; }
+.filo-pagina { position: fixed; z-index: 56; left: 0; right: 0; top: 0; height: 2px; pointer-events: none; opacity: 0; transition: opacity .35s; }
+.filo-pagina.su { opacity: 1; }
+.filo-pagina i { display: block; height: 100%; background: var(--azzurro); transform-origin: 0 50%; transform: scaleX(0); }
+.menu-aperto .segnaposto, .menu-aperto .filo-pagina { opacity: 0; }
+/* capitoli (giro 3): un titolo, una frase, un pulsante. Via i collegamenti «nell'indice» e le righe dei progetti */
+.capitolo_tutti, .capitolo_righe { display: none; }
+@media (max-width: 760px) {
+  /* tra il logo e «Menu»: un po' a destra del centro, con le parole corte */
+  .segnaposto { top: calc((var(--testata) - 28px) / 2); left: calc(50% + 24px); height: 28px; gap: 7px; padding: 0 10px; font-size: .625rem; }
+  .segnaposto_nome { display: none; }
+  .segnaposto_corto { display: inline; }
+  /* «Di cosa hai bisogno?»: le quattro scelte più grandi */
+  .intro_scelte a { min-height: 52px; font-size: 1.2rem; }
+  /* linea del tempo: si capisce che si sfoglia di lato */
+  .tempo_testa::after { content: "Sfoglia di lato \2192"; display: block; margin-top: 10px; font-family: var(--mono); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; color: var(--azzurro); }
+}
+
 
 /* =========================================================
    Sito nuovo (genera-nuovo.mjs): correzioni alla home approvata
@@ -918,3 +963,14 @@ a:hover > .freccia { transform: translateX(6px); }
 .bottone--pieno::after { background: var(--bianco); transform: scaleY(1); }
 .bottone--pieno:hover::after { background: var(--azzurro); }
 .modulo-arrivo { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--linea); color: var(--nebbia); font-size: .9375rem; max-width: 46ch; }
+
+
+/* =========================================================
+   Modalità leggera (telefoni e tablet): leggero.mjs
+   ========================================================= */
+/* gli angoli «a foglio» con l'ombra grande costringono il telefono a ridisegnare sezioni intere mentre si scorre */
+.leggero .foglio, .leggero .costruzioni, .leggero .indice, .leggero .storia, .leggero .contatto, .leggero .residenza { border-radius: 0; box-shadow: none; }
+/* 1979: niente video dentro le cifre (su Safari è il pezzo più pesante), resta la foto vera */
+.leggero .storia_video { display: none; }
+/* galleria: niente parallasse, quindi niente livelli in più per ogni foto */
+.leggero .tavola-foto_quadro img { transform: none; will-change: auto; }

@@ -21,15 +21,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css">
-<link rel="stylesheet" href="../../css/comune.css">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css">
-<link rel="stylesheet" href="../../css/finestra.css">
-<link rel="stylesheet" href="../../css/pagine.css">
-<link rel="stylesheet" href="../../css/nuovo.css">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611201706">
+<link rel="stylesheet" href="../../css/comune.css?v=202611201706">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611201706">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611201706">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611201706">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611201706">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
+/* modalità leggera (telefoni e tablet) e contatore dei fotogrammi (?fps) */
+(function (h) {
+  var q = location.search, m = /[?&]leggero=(\d)/.exec(q);
+  var tocco = window.matchMedia && matchMedia('(hover: none) and (pointer: coarse)').matches;
+  var liv = m ? +m[1] : (tocco ? 1 : 0);
+  h.setAttribute('data-leggero', String(liv));
+  if (liv > 0) h.classList.add('leggero');
+  if (/[?&]fps\b/.test(q)) document.addEventListener('DOMContentLoaded', function () {
+    var l = document.querySelector('link[href*="css/"]'), s = document.createElement('script');
+    s.src = (l ? l.getAttribute('href').split('css/')[0] : '') + 'js/fps.js'; document.body.appendChild(s);
+  });
+})(document.documentElement);
 </script>
 </head>
 <body>
@@ -61,8 +73,8 @@
 
 <!-- ============ APERTURA: la clip del progetto ============ -->
 
-<section class="apertura-pagina" data-apertura aria-labelledby="titolo-progetto">
-  <div class="media-pieno apertura-pagina_media">
+<section class="apertura-pagina apertura-pagina--progetto" data-apertura aria-labelledby="titolo-progetto">
+  <div class="media-pieno apertura-pagina_media" style="--r:16 / 9">
     <video data-auto data-ciak="ciak-apertura" muted playsinline loop preload="none" poster="../../media/redona-notte-poster.jpg" data-src="../../media/redona-notte.mp4" data-src-grande="../../media/redona-notte-1920.mp4" aria-hidden="true"></video>
   </div>
   <div class="velo apertura-pagina_velo"></div>
@@ -75,29 +87,11 @@
   <p class="ciak" id="ciak-apertura" data-video="Bergamo (BG). Render animato.">Bergamo (BG). Render.</p>
 </section>
 
-<!-- ============ CARTIGLIO: i dati veri ============ -->
-<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
-  <p class="cartiglio_nome">Redona Centro, lotti B1-B2</p>
-  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Bergamo (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2020</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div><div class="cartiglio_riga"><dt>Dimensione</dt><dd>30 appartamenti</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>Realizzato</dd></div></dl>
-</div>
-
-<!-- ============ IL PROGETTO: il testo vero ============ -->
-<section class="racconto foglio" aria-label="Il progetto">
-  <div class="racconto_capitolo">
-    <h2 class="racconto_titolo t3">Il progetto</h2>
-    <div class="racconto_parti">
-      <div class="racconto_parte"><p>La tua nuova casa prende forma a Redona. Il progetto Redona Centro darà vita a diversi spazi fortemente connotati tra loro: una via pedonalizzata (Via Papa Leone XIII), una nuova piazza (Piazza don Sergio Colombo) che costituirà il nuovo centro di Redona, e un parco pubblico. I tre lotti di costruzioni daranno vita a tutto questo, con appartamenti molto curati sia dal punto di vista architettonico sia da quello impiantistico, armoniosamente inseriti in un contesto urbano.</p><p>Il Lotto B1–B2 è costituito da due edifici per un totale di 30 appartamenti, è stato ultimato e consegnato nella prima metà del 2022.</p><p>Tutti gli appartamenti sono stati venduti.</p></div>
-    </div>
-  </div>
-</section>
-
-
-
 <!-- ============ LE IMMAGINI: tutte quelle vere, grandi, divise per tipo ============ -->
 <section class="galleria foglio" id="galleria" aria-labelledby="galleria-titolo">
   <div class="galleria_testa">
     <h2 class="t2" id="galleria-titolo">Le immagini</h2>
-    <p class="secondario">I render: 13, le foto: 2. Un clic apre l'immagine a tutto schermo.</p>
+    <p class="secondario">I render: 13, le foto: 2. Ogni immagine si apre a tutto schermo.</p>
   </div>
   
   <div class="galleria_gruppo" id="galleria-render">
@@ -220,6 +214,27 @@
       </div>
   </div>
 </section>
+
+<!-- ============ CARTIGLIO: i dati veri ============ -->
+<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
+  <p class="cartiglio_nome">Redona Centro, lotti B1-B2</p>
+  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Bergamo (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2020</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div><div class="cartiglio_riga"><dt>Dimensione</dt><dd>30 appartamenti</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>Realizzato</dd></div></dl>
+</div>
+
+<!-- ============ IL PROGETTO: il testo vero ============ -->
+<section class="racconto foglio" aria-label="Il progetto">
+  <div class="racconto_testo">
+  <div class="racconto_capitolo">
+    <h2 class="racconto_titolo t3">Il progetto</h2>
+    <div class="racconto_parti">
+      <div class="racconto_parte"><p>La tua nuova casa prende forma a Redona. Il progetto Redona Centro darà vita a diversi spazi fortemente connotati tra loro: una via pedonalizzata (Via Papa Leone XIII), una nuova piazza (Piazza don Sergio Colombo) che costituirà il nuovo centro di Redona, e un parco pubblico. I tre lotti di costruzioni daranno vita a tutto questo, con appartamenti molto curati sia dal punto di vista architettonico sia da quello impiantistico, armoniosamente inseriti in un contesto urbano.</p><p>Il Lotto B1–B2 è costituito da due edifici per un totale di 30 appartamenti, è stato ultimato e consegnato nella prima metà del 2022.</p><p>Tutti gli appartamenti sono stati venduti.</p></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
 <script type="application/json" id="visore-dati">[{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-01.jpg","w":1080,"h":810,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 1 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-02.jpg","w":1080,"h":810,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 2 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-03.jpg","w":1600,"h":1200,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 3 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-05.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 4 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-06.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 5 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-07.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 6 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-08.jpg","w":1920,"h":1080,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 7 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-09.jpg","w":1920,"h":1080,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 8 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-10.jpg","w":1716,"h":1080,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 9 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-11.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 10 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-12.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 11 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-13.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 12 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/foto-14.jpg","w":800,"h":600,"tipo":"Render","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): render 13 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/copertina-telefono.jpg","w":900,"h":1200,"tipo":"Foto","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): foto 14 di 15"},{"src":"../../img/progetti/redona-centro-lotti-b1-b2/copertina.jpg","w":1080,"h":810,"tipo":"","alt":"Redona Centro, lotti B1-B2, Bergamo (BG): immagine 15 di 15"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
@@ -335,16 +350,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js"></script>
-<script src="../../js/vendor/SplitText.min.js"></script>
-<script src="../../js/vendor/Flip.min.js"></script>
-<script src="../../js/vendor/lenis.min.js"></script>
-<script src="../../js/vendor/leaflet.js"></script>
-<script src="../../js/comune.js"></script>
-<script src="../../js/finestra.js"></script>
-<script src="../../js/mappa-notte.js"></script>
-<script src="../../js/pagine.js"></script>
-<script src="../../js/nuovo.js"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611201706"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611201706"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611201706"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611201706"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611201706"></script>
+<script src="../../js/vendor/leaflet.js?v=202611201706"></script>
+<script src="../../js/comune.js?v=202611201706"></script>
+<script src="../../js/finestra.js?v=202611201706"></script>
+<script src="../../js/mappa-notte.js?v=202611201706"></script>
+<script src="../../js/pagine.js?v=202611201706"></script>
+<script src="../../js/nuovo.js?v=202611201706"></script>
 </body>
 </html>

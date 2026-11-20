@@ -21,15 +21,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css">
-<link rel="stylesheet" href="../../css/comune.css">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css">
-<link rel="stylesheet" href="../../css/finestra.css">
-<link rel="stylesheet" href="../../css/pagine.css">
-<link rel="stylesheet" href="../../css/nuovo.css">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611201706">
+<link rel="stylesheet" href="../../css/comune.css?v=202611201706">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611201706">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611201706">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611201706">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611201706">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
+/* modalità leggera (telefoni e tablet) e contatore dei fotogrammi (?fps) */
+(function (h) {
+  var q = location.search, m = /[?&]leggero=(\d)/.exec(q);
+  var tocco = window.matchMedia && matchMedia('(hover: none) and (pointer: coarse)').matches;
+  var liv = m ? +m[1] : (tocco ? 1 : 0);
+  h.setAttribute('data-leggero', String(liv));
+  if (liv > 0) h.classList.add('leggero');
+  if (/[?&]fps\b/.test(q)) document.addEventListener('DOMContentLoaded', function () {
+    var l = document.querySelector('link[href*="css/"]'), s = document.createElement('script');
+    s.src = (l ? l.getAttribute('href').split('css/')[0] : '') + 'js/fps.js'; document.body.appendChild(s);
+  });
+})(document.documentElement);
 </script>
 </head>
 <body>
@@ -76,21 +88,11 @@
   </div>
 </section>
 
-<!-- ============ CARTIGLIO: i dati veri ============ -->
-<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
-  <p class="cartiglio_nome">Residenza Pascoli</p>
-  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Torre Boldone (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2010</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div><div class="cartiglio_riga"><dt>Dimensione</dt><dd>12 appartamenti</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>Realizzato</dd></div></dl>
-</div>
-
-<!-- nessun testo nei dati per questo progetto -->
-
-
-
 <!-- ============ LE IMMAGINI: tutte quelle vere, grandi, divise per tipo ============ -->
 <section class="galleria foglio" id="galleria" aria-labelledby="galleria-titolo">
   <div class="galleria_testa">
     <h2 class="t2" id="galleria-titolo">Le immagini</h2>
-    <p class="secondario">I render: 1, le foto: 6. Un clic apre l'immagine a tutto schermo.</p>
+    <p class="secondario">I render: 1, le foto: 6. Ogni immagine si apre a tutto schermo.</p>
   </div>
   
   <div class="galleria_gruppo" id="galleria-render">
@@ -153,6 +155,17 @@
       </div>
   </div>
 </section>
+
+<!-- ============ CARTIGLIO: i dati veri ============ -->
+<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
+  <p class="cartiglio_nome">Residenza Pascoli</p>
+  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Torre Boldone (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2010</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div><div class="cartiglio_riga"><dt>Dimensione</dt><dd>12 appartamenti</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>Realizzato</dd></div></dl>
+</div>
+
+<!-- nessun testo nei dati per questo progetto -->
+
+
+
 <script type="application/json" id="visore-dati">[{"src":"../../img/progetti/torre-boldone-bg-residenza-pascoli/foto-03.jpg","w":800,"h":275,"tipo":"Render","alt":"Residenza Pascoli, Torre Boldone (BG): render 1 di 7"},{"src":"../../img/progetti/torre-boldone-bg-residenza-pascoli/foto-04.jpg","w":800,"h":1200,"tipo":"Foto","alt":"Residenza Pascoli, Torre Boldone (BG): foto 2 di 7"},{"src":"../../img/progetti/torre-boldone-bg-residenza-pascoli/foto-05.jpg","w":800,"h":1200,"tipo":"Foto","alt":"Residenza Pascoli, Torre Boldone (BG): foto 3 di 7"},{"src":"../../img/progetti/torre-boldone-bg-residenza-pascoli/foto-06.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Pascoli, Torre Boldone (BG): foto 4 di 7"},{"src":"../../img/progetti/torre-boldone-bg-residenza-pascoli/foto-07.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Pascoli, Torre Boldone (BG): foto 5 di 7"},{"src":"../../img/progetti/torre-boldone-bg-residenza-pascoli/foto-08.jpg","w":800,"h":426,"tipo":"Foto","alt":"Residenza Pascoli, Torre Boldone (BG): foto 6 di 7"},{"src":"../../img/progetti/torre-boldone-bg-residenza-pascoli/copertina.jpg","w":800,"h":600,"tipo":"","alt":"Residenza Pascoli, Torre Boldone (BG): immagine 7 di 7"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
@@ -268,16 +281,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js"></script>
-<script src="../../js/vendor/SplitText.min.js"></script>
-<script src="../../js/vendor/Flip.min.js"></script>
-<script src="../../js/vendor/lenis.min.js"></script>
-<script src="../../js/vendor/leaflet.js"></script>
-<script src="../../js/comune.js"></script>
-<script src="../../js/finestra.js"></script>
-<script src="../../js/mappa-notte.js"></script>
-<script src="../../js/pagine.js"></script>
-<script src="../../js/nuovo.js"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611201706"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611201706"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611201706"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611201706"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611201706"></script>
+<script src="../../js/vendor/leaflet.js?v=202611201706"></script>
+<script src="../../js/comune.js?v=202611201706"></script>
+<script src="../../js/finestra.js?v=202611201706"></script>
+<script src="../../js/mappa-notte.js?v=202611201706"></script>
+<script src="../../js/pagine.js?v=202611201706"></script>
+<script src="../../js/nuovo.js?v=202611201706"></script>
 </body>
 </html>

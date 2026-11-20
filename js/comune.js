@@ -12,7 +12,7 @@
   var telefono = window.matchMedia('(max-width: 760px)');
   var verticale = window.matchMedia('(max-width: 760px) and (orientation: portrait)').matches;
   var B = window.B = {
-    $: $, $$: $$, telefono: telefono, moto: H.classList.contains('moto'), lenis: null, coda: [],
+    $: $, $$: $$, telefono: telefono, moto: H.classList.contains('moto'), leggero: +(H.getAttribute('data-leggero') || 0), lenis: null, coda: [],
     // il video non ha srcset: la versione da 1920 solo sugli schermi larghi (da 1280 px reali in su)
     schermoGrande: function () { return window.innerWidth * Math.min(window.devicePixelRatio || 1, 2) >= 1280 && !telefono.matches; },
     quando: function (f) { if (B.avviato) f(); else B.coda.push(f); },
@@ -99,12 +99,14 @@
         if (window.Flip) gsap.registerPlugin(Flip);
         if (window.SplitText) gsap.registerPlugin(SplitText);
         ScrollTrigger.config({ ignoreMobileResize: true });
-        B.lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
-        B.lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add(function (t) { B.lenis.raf(t * 1000); });
+        if (!B.leggero) {
+          B.lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
+          B.lenis.on('scroll', ScrollTrigger.update);
+          gsap.ticker.add(function (t) { B.lenis.raf(t * 1000); });
+        } else if (B.leggero > 1) ScrollTrigger.normalizeScroll(true);   // modalità leggera: scorrimento nativo
         gsap.ticker.lagSmoothing(0);
         // passaggi «a foglio»: l'angolo da 28 px a 0 mentre la sezione arriva in cima
-        $$('.foglio').forEach(function (s) {
+        (B.leggero ? [] : $$('.foglio')).forEach(function (s) {
           gsap.fromTo(s, { borderTopLeftRadius: 28, borderTopRightRadius: 28 }, { borderTopLeftRadius: 0, borderTopRightRadius: 0, ease: 'none',
             scrollTrigger: { trigger: s, start: 'top bottom', end: 'top top', scrub: true } });
         });

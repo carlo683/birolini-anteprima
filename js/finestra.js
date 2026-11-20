@@ -91,7 +91,7 @@
       nuovo.classList.toggle('piccola', piccola);
       img.style.objectPosition = pos; img.style.transformOrigin = pos;
       img.alt = a.getAttribute('data-nome') + (a.getAttribute('data-tipo') ? '. ' + a.getAttribute('data-tipo') : '');
-      if (window.gsap) gsap.set(img, { scale: anima && !piccola ? 1.12 : 1, xPercent: 0, yPercent: anima && !piccola ? (direzione === 'alto' ? -3 : 3) : 0 });
+      if (window.gsap) gsap.set(img, { scale: anima && !piccola ? 1.12 : 1, xPercent: 0, yPercent: anima && !piccola ? 3 : 0 });
       tendina = true;
       img.src = url;
       var apri = function () {
@@ -101,10 +101,10 @@
         if (anima) gsap.delayedCall(DURATA * .45, function () { if (mostrata === a) scriviDati(a); }); else scriviDati(a);
         var chiudi = function () { tendina = null; fineUltima = performance.now(); videoGiusto(); prova(); };
         if (!anima) { nuovo.style.clipPath = 'none'; chiudi(); return; }
-        var da = direzione === 'alto' ? 'inset(0% 0% 100% 0%)' : direzione === 'destra' ? 'inset(0% 0% 0% 100%)' : 'inset(100% 0% 0% 0%)';
+        var da = 'inset(100% 0% 0% 0%)';   // un solo movimento in tutto il sito: l'immagine nuova entra dal basso (giro 3)
         tendina = gsap.fromTo(nuovo, { clipPath: da }, { clipPath: 'inset(0% 0% 0% 0%)', duration: DURATA, ease: 'power3.inOut', onComplete: chiudi });
         if (!piccola) gsap.to(img, { scale: 1.02, yPercent: 0, duration: 1, ease: 'power3.out',
-          onComplete: function () { gsap.to(img, { scale: 1.09, duration: 14, ease: 'none' }); } });   // lento avvicinamento
+          onComplete: function () { if (!B.leggero) gsap.to(img, { scale: 1.09, duration: 14, ease: 'none' }); } });   // lento avvicinamento
       };
       if (img.decode) img.decode().then(apri, function () { tendina = null; prova(); }); else apri();
     }
@@ -116,7 +116,7 @@
       vis.forEach(function (v, i) { var l = $('a', v), d = Math.abs(i - k); l.classList.toggle('d1', d === 1); l.classList.toggle('d2', d === 2); });
       if (fpN) {
         var prima = fpN.textContent; fpN.textContent = due(k + 1); fpTot.textContent = due(vis.length);
-        if (animata && !subito && prima !== fpN.textContent) gsap.fromTo(fpN, { yPercent: direzione === 'alto' ? -100 : 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .5, ease: 'power3.out', overwrite: true });
+        if (animata && !subito && prima !== fpN.textContent) gsap.fromTo(fpN, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .5, ease: 'power3.out', overwrite: true });
       }
       if (fpVideo) fpVideo.classList.remove('in-onda');
       chiediImmagine(a, subito);
@@ -168,18 +168,23 @@
       if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0)) return;
       if (!animata || !window.Flip) { if (!voce) window.location.href = href; return; }   // da fermo: il link fa da sé
       if (e) e.preventDefault();
-      var r = fp.getBoundingClientRect(), velo = document.createElement('div');
-      velo.className = 'fp_pieno'; velo.innerHTML = '<img alt="">';
-      var su = fpStrati[sopra].firstElementChild;
-      velo.firstChild.src = su.src; velo.firstChild.style.objectPosition = su.style.objectPosition;
-      gsap.set(velo, { left: r.left, top: r.top, width: r.width, height: r.height });
-      document.body.appendChild(velo);
-      var pieno = document.createElement('div');
-      pieno.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;visibility:hidden;pointer-events:none';
-      document.body.appendChild(pieno);
       var vai = function () { window.location.href = href; };
-      Flip.fit(velo, pieno, { duration: .55, ease: 'power3.inOut', absolute: true, scale: false, onComplete: vai });
-      setTimeout(vai, 1200);
+      setTimeout(vai, 1200);   // in ogni caso la scheda si apre
+      // si allarga l'immagine del progetto TOCCATO (correzione del 20/11 sera: prima era quella nella finestra)
+      var su = fpStrati[sopra].firstElementChild, src = su.src, pos = su.style.objectPosition;
+      if (voce && voce !== mostrata) { src = immagine(voce); pos = voce.getAttribute('data-pos') || '50% 50%'; }
+      var parti = function () {
+        var r = fp.getBoundingClientRect(), velo = document.createElement('div');
+        velo.className = 'fp_pieno'; velo.innerHTML = '<img alt="">';
+        velo.firstChild.src = src; velo.firstChild.style.objectPosition = pos;
+        gsap.set(velo, { left: r.left, top: r.top, width: r.width, height: r.height });
+        document.body.appendChild(velo);
+        var pieno = document.createElement('div');
+        pieno.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;visibility:hidden;pointer-events:none';
+        document.body.appendChild(pieno);
+        Flip.fit(velo, pieno, { duration: .55, ease: 'power3.inOut', absolute: true, scale: false, onComplete: vai });
+      };
+      if (src === su.src) parti(); else prendi(src).then(parti, parti);   // prima si decodifica, così non cresce un riquadro vuoto
     }
     fp.addEventListener('click', function (e) { var x = mostrata || attiva; if (x) entraNelProgetto(x.href, e); });
 
@@ -243,8 +248,7 @@
       if (mostrata) scriviDati(mostrata);   // la dicitura torna «animato» ora che il video può partire
       ScrollTrigger.addEventListener('refresh', misuraCorpo);
       videoGiusto();
-      if (!radice.classList.contains('indice--piccolo')) gsap.fromTo(fp, { clipPath: 'inset(49% 0% 49% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none',
-        scrollTrigger: { trigger: corpo, start: 'top 92%', end: 'top 40%', scrub: true } });
+      // (giro 3) tolta la finestra che nasceva da una riga sottile: un effetto in meno
       gruppi.forEach(function (g) {
         var tasto = $('.filtro[data-filtro="' + g.getAttribute('data-settore') + '"]', radice);
         if (!tasto) return;

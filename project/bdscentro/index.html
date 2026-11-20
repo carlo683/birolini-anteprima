@@ -21,15 +21,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css">
-<link rel="stylesheet" href="../../css/comune.css">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css">
-<link rel="stylesheet" href="../../css/finestra.css">
-<link rel="stylesheet" href="../../css/pagine.css">
-<link rel="stylesheet" href="../../css/nuovo.css">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611201706">
+<link rel="stylesheet" href="../../css/comune.css?v=202611201706">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611201706">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611201706">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611201706">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611201706">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
+/* modalità leggera (telefoni e tablet) e contatore dei fotogrammi (?fps) */
+(function (h) {
+  var q = location.search, m = /[?&]leggero=(\d)/.exec(q);
+  var tocco = window.matchMedia && matchMedia('(hover: none) and (pointer: coarse)').matches;
+  var liv = m ? +m[1] : (tocco ? 1 : 0);
+  h.setAttribute('data-leggero', String(liv));
+  if (liv > 0) h.classList.add('leggero');
+  if (/[?&]fps\b/.test(q)) document.addEventListener('DOMContentLoaded', function () {
+    var l = document.querySelector('link[href*="css/"]'), s = document.createElement('script');
+    s.src = (l ? l.getAttribute('href').split('css/')[0] : '') + 'js/fps.js'; document.body.appendChild(s);
+  });
+})(document.documentElement);
 </script>
 </head>
 <body>
@@ -61,8 +73,8 @@
 
 <!-- ============ APERTURA: la clip del progetto ============ -->
 
-<section class="apertura-pagina" data-apertura aria-labelledby="titolo-progetto">
-  <div class="media-pieno apertura-pagina_media">
+<section class="apertura-pagina apertura-pagina--progetto" data-apertura aria-labelledby="titolo-progetto">
+  <div class="media-pieno apertura-pagina_media" style="--r:16 / 9">
     <video data-auto data-ciak="ciak-apertura" muted playsinline loop preload="none" poster="../../media/casa-brembate-poster.jpg" data-src="../../media/casa-brembate.mp4" data-src-grande="../../media/casa-brembate-1920.mp4" aria-hidden="true"></video>
   </div>
   <div class="velo apertura-pagina_velo"></div>
@@ -75,30 +87,11 @@
   <p class="ciak" id="ciak-apertura" data-video="Brembate di Sopra (BG). Render animato.">Brembate di Sopra (BG). Render.</p>
 </section>
 
-<!-- ============ CARTIGLIO: i dati veri ============ -->
-<!-- [DA CONFERMARE con Carlo] dal testo di oggi sono state tolte le frasi su prezzi e vendita (vedi FRASI_TOLTE in genera-nuovo.mjs) -->
-<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
-  <p class="cartiglio_nome">Residenze a Brembate di Sopra</p>
-  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Brembate di Sopra (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2023</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div><div class="cartiglio_riga"><dt>Dimensione</dt><dd>21 appartamenti</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>Realizzato</dd></div></dl>
-</div>
-
-<!-- ============ IL PROGETTO: il testo vero ============ -->
-<section class="racconto foglio" aria-label="Il progetto">
-  <div class="racconto_capitolo">
-    <h2 class="racconto_titolo t3">Il progetto</h2>
-    <div class="racconto_parti">
-      <div class="racconto_parte"><p>Un modo esclusivo di vivere nel cuore del paese. A pochi passi da tutti i principali servizi. Una posizione privilegiata da abitare in modo funzionale e contemporaneo. Il parco adiacente all'edificio verrà completamente rinnovato, verrà anche ampliato il parcheggio verso la via XXV Aprile, da cui si accederà al piano interrato dedicato a box e cantine.</p><p>Il nuovo edificio sarà composto da 21 appartamenti, disposti su 3 piani fuori terra e di classe energetica A3 e A4.</p></div>
-    </div>
-  </div>
-</section>
-
-
-
 <!-- ============ LE IMMAGINI: tutte quelle vere, grandi, divise per tipo ============ -->
 <section class="galleria foglio" id="galleria" aria-labelledby="galleria-titolo">
   <div class="galleria_testa">
     <h2 class="t2" id="galleria-titolo">Le immagini</h2>
-    <p class="secondario">I render: 5, le foto: 8. Un clic apre l'immagine a tutto schermo.</p>
+    <p class="secondario">I render: 5, le foto: 8. Ogni immagine si apre a tutto schermo.</p>
   </div>
   
   <div class="galleria_gruppo" id="galleria-render">
@@ -205,6 +198,28 @@
       </div>
   </div>
 </section>
+
+<!-- ============ CARTIGLIO: i dati veri ============ -->
+<!-- [DA CONFERMARE con Carlo] dal testo di oggi sono state tolte le frasi su prezzi e vendita (vedi FRASI_TOLTE in genera-nuovo.mjs) -->
+<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
+  <p class="cartiglio_nome">Residenze a Brembate di Sopra</p>
+  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Brembate di Sopra (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2023</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div><div class="cartiglio_riga"><dt>Dimensione</dt><dd>21 appartamenti</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>Realizzato</dd></div></dl>
+</div>
+
+<!-- ============ IL PROGETTO: il testo vero ============ -->
+<section class="racconto foglio" aria-label="Il progetto">
+  <div class="racconto_testo">
+  <div class="racconto_capitolo">
+    <h2 class="racconto_titolo t3">Il progetto</h2>
+    <div class="racconto_parti">
+      <div class="racconto_parte"><p>Un modo esclusivo di vivere nel cuore del paese. A pochi passi da tutti i principali servizi. Una posizione privilegiata da abitare in modo funzionale e contemporaneo. Il parco adiacente all'edificio verrà completamente rinnovato, verrà anche ampliato il parcheggio verso la via XXV Aprile, da cui si accederà al piano interrato dedicato a box e cantine.</p><p>Il nuovo edificio sarà composto da 21 appartamenti, disposti su 3 piani fuori terra e di classe energetica A3 e A4.</p></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
 <script type="application/json" id="visore-dati">[{"src":"../../img/progetti/bdscentro/foto-08.jpg","w":1080,"h":675,"tipo":"Render","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): render 1 di 13"},{"src":"../../img/progetti/bdscentro/foto-09.jpg","w":1080,"h":720,"tipo":"Render","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): render 2 di 13"},{"src":"../../img/progetti/bdscentro/foto-10.jpg","w":1080,"h":762,"tipo":"Render","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): render 3 di 13"},{"src":"../../img/progetti/bdscentro/foto-11.jpg","w":1080,"h":771,"tipo":"Render","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): render 4 di 13"},{"src":"../../img/progetti/bdscentro/foto-12.jpg","w":1080,"h":1350,"tipo":"Render","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): render 5 di 13"},{"src":"../../img/progetti/bdscentro/foto-01.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): foto 6 di 13"},{"src":"../../img/progetti/bdscentro/foto-02.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): foto 7 di 13"},{"src":"../../img/progetti/bdscentro/foto-03.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): foto 8 di 13"},{"src":"../../img/progetti/bdscentro/foto-04.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): foto 9 di 13"},{"src":"../../img/progetti/bdscentro/copertina-telefono.webp","w":1200,"h":1600,"tipo":"Foto","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): foto 10 di 13"},{"src":"../../img/progetti/bdscentro/foto-06.jpg","w":1080,"h":1440,"tipo":"Foto","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): foto 11 di 13"},{"src":"../../img/progetti/bdscentro/foto-07.webp","w":1600,"h":1200,"tipo":"Foto","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): foto 12 di 13"},{"src":"../../img/progetti/bdscentro/copertina.webp","w":1600,"h":1200,"tipo":"","alt":"Residenze a Brembate di Sopra, Brembate di Sopra (BG): immagine 13 di 13"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
@@ -320,16 +335,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js"></script>
-<script src="../../js/vendor/SplitText.min.js"></script>
-<script src="../../js/vendor/Flip.min.js"></script>
-<script src="../../js/vendor/lenis.min.js"></script>
-<script src="../../js/vendor/leaflet.js"></script>
-<script src="../../js/comune.js"></script>
-<script src="../../js/finestra.js"></script>
-<script src="../../js/mappa-notte.js"></script>
-<script src="../../js/pagine.js"></script>
-<script src="../../js/nuovo.js"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611201706"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611201706"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611201706"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611201706"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611201706"></script>
+<script src="../../js/vendor/leaflet.js?v=202611201706"></script>
+<script src="../../js/comune.js?v=202611201706"></script>
+<script src="../../js/finestra.js?v=202611201706"></script>
+<script src="../../js/mappa-notte.js?v=202611201706"></script>
+<script src="../../js/pagine.js?v=202611201706"></script>
+<script src="../../js/nuovo.js?v=202611201706"></script>
 </body>
 </html>

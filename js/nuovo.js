@@ -21,7 +21,7 @@
     if (!B.moto) return;
 
     // copertina dell'apertura: lento avvicinamento (sull'immagine, non sull'involucro che entra)
-    $$('[data-spinta] img').forEach(function (img) { gsap.fromTo(img, { scale: 1 }, { scale: 1.08, duration: 16, ease: 'none', delay: .2 }); });
+    (B.leggero ? [] : $$('[data-spinta] img')).forEach(function (img) { gsap.fromTo(img, { scale: 1 }, { scale: 1.08, duration: 16, ease: 'none', delay: .2 }); });
 
     // 1979: le cifre crescono finché la foto riempie lo schermo
     var scena = $('.storia_scena');
@@ -36,9 +36,9 @@
         .to(pieno, { attr: { 'fill-opacity': 1 }, duration: .35 }, .75)
         .fromTo(['.storia_foto', '.storia_video'], { scale: 1.08, svgOrigin: centro }, { scale: 1, duration: 1.1 }, 0)
         .to({}, { duration: .15 }, 1.1);
-      ScrollTrigger.create({ trigger: scena, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); }, pin: true, scrub: true, animation: tl });
+      ScrollTrigger.create({ trigger: scena, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); }, pin: true, anticipatePin: B.leggero ? 1 : 0, scrub: true, animation: tl });
       var v = $('.storia_video video'), ciak = document.getElementById('ciak-storia');
-      if (v) {
+      if (v && !B.leggero) {
         new IntersectionObserver(function (e) { if (e[0].isIntersecting) B.carica(v); B.gira(v, e[0].isIntersecting); }, { rootMargin: '300px 0px' }).observe(scena);
         v.addEventListener('playing', function () { if (ciak && ciak.dataset.video) ciak.innerHTML = ciak.dataset.video; }, { once: true });
       }
@@ -72,5 +72,27 @@
         });
       });
     }
+  });
+})();
+
+/* =========================================================
+   Giro 3: «Leggi tutto» per i testi lunghi delle schede (giro3.mjs).
+   Senza JavaScript il testo resta tutto aperto.
+   ========================================================= */
+(function () {
+  'use strict';
+  var B = window.B; if (!B) return;
+  B.$$('.racconto[data-lungo]').forEach(function (r) {
+    var testo = B.$('.racconto_testo', r); if (!testo) return;
+    r.classList.add('racconto--chiuso');
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'bottone racconto_apri'; b.textContent = 'Leggi tutto';
+    b.setAttribute('aria-expanded', 'false');
+    testo.parentNode.insertBefore(b, testo.nextSibling);
+    b.addEventListener('click', function () {
+      r.classList.remove('racconto--chiuso'); b.setAttribute('aria-expanded', 'true'); b.hidden = true;
+      var primo = B.$('p', testo); if (primo) { primo.setAttribute('tabindex', '-1'); primo.focus({ preventScroll: true }); }
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    });
   });
 })();

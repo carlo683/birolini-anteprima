@@ -21,15 +21,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css">
-<link rel="stylesheet" href="../../css/comune.css">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css">
-<link rel="stylesheet" href="../../css/finestra.css">
-<link rel="stylesheet" href="../../css/pagine.css">
-<link rel="stylesheet" href="../../css/nuovo.css">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611201706">
+<link rel="stylesheet" href="../../css/comune.css?v=202611201706">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611201706">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611201706">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611201706">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611201706">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
+/* modalità leggera (telefoni e tablet) e contatore dei fotogrammi (?fps) */
+(function (h) {
+  var q = location.search, m = /[?&]leggero=(\d)/.exec(q);
+  var tocco = window.matchMedia && matchMedia('(hover: none) and (pointer: coarse)').matches;
+  var liv = m ? +m[1] : (tocco ? 1 : 0);
+  h.setAttribute('data-leggero', String(liv));
+  if (liv > 0) h.classList.add('leggero');
+  if (/[?&]fps\b/.test(q)) document.addEventListener('DOMContentLoaded', function () {
+    var l = document.querySelector('link[href*="css/"]'), s = document.createElement('script');
+    s.src = (l ? l.getAttribute('href').split('css/')[0] : '') + 'js/fps.js'; document.body.appendChild(s);
+  });
+})(document.documentElement);
 </script>
 </head>
 <body>
@@ -61,8 +73,8 @@
 
 <!-- ============ APERTURA: la clip del progetto ============ -->
 
-<section class="apertura-pagina" data-apertura aria-labelledby="titolo-progetto">
-  <div class="media-pieno apertura-pagina_media">
+<section class="apertura-pagina apertura-pagina--progetto" data-apertura aria-labelledby="titolo-progetto">
+  <div class="media-pieno apertura-pagina_media" style="--r:16 / 9">
     <video data-auto data-ciak="ciak-apertura" muted playsinline loop preload="none" poster="../../media/viaduse-giardino-poster.jpg" data-src="../../media/viaduse-giardino.mp4" data-src-grande="../../media/viaduse-giardino-1920.mp4" aria-hidden="true"></video>
   </div>
   <div class="velo apertura-pagina_velo"></div>
@@ -76,40 +88,11 @@
   <p class="ciak" id="ciak-apertura" data-video="Gorle (BG). Render animato.">Gorle (BG). Render.</p>
 </section>
 
-<!-- ============ CARTIGLIO: i dati veri ============ -->
-<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
-  <p class="cartiglio_nome">Residenza Viaduse</p>
-  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Gorle (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2026</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div><div class="cartiglio_riga"><dt>Dimensione</dt><dd>15 appartamenti</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>In corso</dd></div><div class="cartiglio_riga"><dt>Società di progetto</dt><dd>Viaduse S.r.l.</dd></div></dl>
-</div>
-
-<!-- ============ IL PROGETTO: il testo vero, a capitoli ============ -->
-<section class="racconto foglio" aria-label="Il progetto">
-  <div class="racconto_capitolo">
-    <h2 class="racconto_titolo t3">Un nuovo modo di vivere nel cuore di Gorle.</h2>
-    <div class="racconto_parti">
-      <div class="racconto_parte"><p>Residenza Viaduse nasce in una posizione privilegiata che unisce tranquillità, servizi e connessione con la città. A pochi minuti da Bergamo, immersa in un quartiere residenziale verde e riservato, rappresenta l’equilibrio perfetto tra comfort urbano e benessere quotidiano. Un’architettura moderna e raffinata, caratterizzata da linee pulite, colori naturali e materiali contemporanei come vetro e legno, dialoga con l’ambiente circostante e valorizza la luce naturale in ogni spazio. Giardini privati, terrazzi e logge ampie regalano una continuità tra interno ed esterno, trasformando ogni casa in un luogo da vivere e respirare. Viaduse è più di una residenza: è un progetto che unisce design, tecnologia e armonia con la natura. Un luogo pensato per chi desidera abitare in modo consapevole, efficiente e contemporaneo a due passi dal centro, ma con la quiete di un parco privato.</p></div>
-    </div>
-  </div>
-  <div class="racconto_capitolo">
-    <h2 class="racconto_titolo t3">Gli appartamenti</h2>
-    <div class="racconto_parti">
-      <div class="racconto_parte"><h3 class="t4">Spazio ideale</h3><p>Gli appartamenti nascono per rispondere alle esigenze della vita contemporanea. Ogni spazio è studiato per garantire comfort, luminosità e qualità architettonica, con finiture curate e materiali selezionati. Dalle soluzioni con giardino privato agli attici panoramici con ampie logge vivibili, ogni abitazione è pensata per offrire un equilibrio perfetto tra estetica, efficienza e benessere.</p></div>
-      <div class="racconto_parte"><h3 class="t4">Impianti di ultima generazione e massima efficienza</h3><p>Tutti gli appartamenti sono dotati di impianto di riscaldamento a pavimento autonomo con pompa di calore, impianto di raffrescamento con split idronici e sistema di ventilazione meccanica controllata (VMC) per garantire un ricambio costante e naturale dell’aria. La tecnologia costruttiva garantisce un eccellente isolamento acustico e termico, con classe energetica A e consumi ridotti. Ogni dettaglio è pensato per ottimizzare le spese di gestione.</p></div>
-      <div class="racconto_parte"><h3 class="t4">Sicurezza e comfort domotico</h3><p>Gli edifici sono predisposti per sistemi di automazione domestica e controllo centralizzato oscuranti. Serramenti ad alte prestazioni, portoncini blindati e predisposizione per allarme e videosorveglianza.</p></div>
-      <div class="racconto_parte"><h3 class="t4">Impianto fotovoltaico per l’efficienza energetica</h3><p>Il complesso è dotato di impianto fotovoltaico individuale che contribuisce al contenimento dei costi energetici.</p></div>
-      <div class="racconto_parte"><h3 class="t4">Vendita diretta, nessun intermediario</h3><p>La vendita degli appartamenti avviene direttamente dal costruttore, senza costi aggiuntivi di intermediazione, con assistenza completa in ogni fase tecnica e finanziaria.</p></div>
-      <div class="racconto_parte"><h3 class="t4">Passo dopo passo, sempre con voi</h3><p>Dal primo incontro alla consegna delle chiavi, il nostro team accompagna ogni cliente in un percorso chiaro e trasparente, perché acquistare casa diventi un’esperienza semplice e sicura.</p></div>
-    </div>
-  </div>
-</section>
-
-
-
 <!-- ============ LE IMMAGINI: tutte quelle vere, grandi, divise per tipo ============ -->
 <section class="galleria foglio" id="galleria" aria-labelledby="galleria-titolo">
   <div class="galleria_testa">
     <h2 class="t2" id="galleria-titolo">Le immagini</h2>
-    <p class="secondario">I render: 11, il cantiere: 4. Un clic apre l'immagine a tutto schermo.</p>
+    <p class="secondario">I render: 11, il cantiere: 4. Ogni immagine si apre a tutto schermo.</p>
   </div>
   
   <div class="galleria_gruppo" id="galleria-render">
@@ -232,6 +215,38 @@
       </div>
   </div>
 </section>
+
+<!-- ============ CARTIGLIO: i dati veri ============ -->
+<div class="cartiglio cartiglio--pagina" role="group" aria-label="Dati del progetto">
+  <p class="cartiglio_nome">Residenza Viaduse</p>
+  <dl><div class="cartiglio_riga"><dt>Luogo</dt><dd>Gorle (BG)</dd></div><div class="cartiglio_riga"><dt>Anno</dt><dd>2026</dd></div><div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div><div class="cartiglio_riga"><dt>Dimensione</dt><dd>15 appartamenti</dd></div><div class="cartiglio_riga"><dt>Stato</dt><dd>In corso</dd></div><div class="cartiglio_riga"><dt>Società di progetto</dt><dd>Viaduse S.r.l.</dd></div></dl>
+</div>
+
+<!-- ============ IL PROGETTO: il testo vero, a capitoli ============ -->
+<section class="racconto foglio" data-lungo aria-label="Il progetto">
+  <div class="racconto_testo">
+  <div class="racconto_capitolo">
+    <h2 class="racconto_titolo t3">Un nuovo modo di vivere nel cuore di Gorle.</h2>
+    <div class="racconto_parti">
+      <div class="racconto_parte"><p>Residenza Viaduse nasce in una posizione privilegiata che unisce tranquillità, servizi e connessione con la città. A pochi minuti da Bergamo, immersa in un quartiere residenziale verde e riservato, rappresenta l’equilibrio perfetto tra comfort urbano e benessere quotidiano. Un’architettura moderna e raffinata, caratterizzata da linee pulite, colori naturali e materiali contemporanei come vetro e legno, dialoga con l’ambiente circostante e valorizza la luce naturale in ogni spazio. Giardini privati, terrazzi e logge ampie regalano una continuità tra interno ed esterno, trasformando ogni casa in un luogo da vivere e respirare. Viaduse è più di una residenza: è un progetto che unisce design, tecnologia e armonia con la natura. Un luogo pensato per chi desidera abitare in modo consapevole, efficiente e contemporaneo a due passi dal centro, ma con la quiete di un parco privato.</p></div>
+    </div>
+  </div>
+  <div class="racconto_capitolo">
+    <h2 class="racconto_titolo t3">Gli appartamenti</h2>
+    <div class="racconto_parti">
+      <div class="racconto_parte"><h3 class="t4">Spazio ideale</h3><p>Gli appartamenti nascono per rispondere alle esigenze della vita contemporanea. Ogni spazio è studiato per garantire comfort, luminosità e qualità architettonica, con finiture curate e materiali selezionati. Dalle soluzioni con giardino privato agli attici panoramici con ampie logge vivibili, ogni abitazione è pensata per offrire un equilibrio perfetto tra estetica, efficienza e benessere.</p></div>
+      <div class="racconto_parte"><h3 class="t4">Impianti di ultima generazione e massima efficienza</h3><p>Tutti gli appartamenti sono dotati di impianto di riscaldamento a pavimento autonomo con pompa di calore, impianto di raffrescamento con split idronici e sistema di ventilazione meccanica controllata (VMC) per garantire un ricambio costante e naturale dell’aria. La tecnologia costruttiva garantisce un eccellente isolamento acustico e termico, con classe energetica A e consumi ridotti. Ogni dettaglio è pensato per ottimizzare le spese di gestione.</p></div>
+      <div class="racconto_parte"><h3 class="t4">Sicurezza e comfort domotico</h3><p>Gli edifici sono predisposti per sistemi di automazione domestica e controllo centralizzato oscuranti. Serramenti ad alte prestazioni, portoncini blindati e predisposizione per allarme e videosorveglianza.</p></div>
+      <div class="racconto_parte"><h3 class="t4">Impianto fotovoltaico per l’efficienza energetica</h3><p>Il complesso è dotato di impianto fotovoltaico individuale che contribuisce al contenimento dei costi energetici.</p></div>
+      <div class="racconto_parte"><h3 class="t4">Vendita diretta, nessun intermediario</h3><p>La vendita degli appartamenti avviene direttamente dal costruttore, senza costi aggiuntivi di intermediazione, con assistenza completa in ogni fase tecnica e finanziaria.</p></div>
+      <div class="racconto_parte"><h3 class="t4">Passo dopo passo, sempre con voi</h3><p>Dal primo incontro alla consegna delle chiavi, il nostro team accompagna ogni cliente in un percorso chiaro e trasparente, perché acquistare casa diventi un’esperienza semplice e sicura.</p></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
 <script type="application/json" id="visore-dati">[{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-01.jpg","w":1080,"h":675,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 1 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-02.jpg","w":3000,"h":1875,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 2 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-03.jpg","w":3000,"h":1875,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 3 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-04.jpg","w":1080,"h":675,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 4 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-05.webp","w":1200,"h":750,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 5 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-06.jpg","w":1080,"h":675,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 6 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/minisito-01.webp","w":1080,"h":608,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 7 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/minisito-16.jpg","w":1080,"h":608,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 8 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/minisito-17.jpg","w":1080,"h":608,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 9 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/minisito-18.jpg","w":1080,"h":608,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 10 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/minisito-19.jpg","w":1080,"h":608,"tipo":"Render","alt":"Residenza Viaduse, Gorle (BG): render 11 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-07.webp","w":1600,"h":900,"tipo":"Foto","alt":"Residenza Viaduse, Gorle (BG): foto 12 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-08.webp","w":1600,"h":900,"tipo":"Foto","alt":"Residenza Viaduse, Gorle (BG): foto 13 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/foto-09.webp","w":1600,"h":900,"tipo":"Foto","alt":"Residenza Viaduse, Gorle (BG): foto 14 di 15"},{"src":"../../img/progetti/gorle-bg---residenza-viaduse/copertina.webp","w":1600,"h":900,"tipo":"","alt":"Residenza Viaduse, Gorle (BG): immagine 15 di 15"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
@@ -352,16 +367,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js"></script>
-<script src="../../js/vendor/SplitText.min.js"></script>
-<script src="../../js/vendor/Flip.min.js"></script>
-<script src="../../js/vendor/lenis.min.js"></script>
-<script src="../../js/vendor/leaflet.js"></script>
-<script src="../../js/comune.js"></script>
-<script src="../../js/finestra.js"></script>
-<script src="../../js/mappa-notte.js"></script>
-<script src="../../js/pagine.js"></script>
-<script src="../../js/nuovo.js"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611201706"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611201706"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611201706"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611201706"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611201706"></script>
+<script src="../../js/vendor/leaflet.js?v=202611201706"></script>
+<script src="../../js/comune.js?v=202611201706"></script>
+<script src="../../js/finestra.js?v=202611201706"></script>
+<script src="../../js/mappa-notte.js?v=202611201706"></script>
+<script src="../../js/pagine.js?v=202611201706"></script>
+<script src="../../js/nuovo.js?v=202611201706"></script>
 </body>
 </html>
