@@ -17,16 +17,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0c1628">
 <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611210955">
-<link rel="stylesheet" href="../../css/comune.css?v=202611210955">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611210955">
-<link rel="stylesheet" href="../../css/finestra.css?v=202611210955">
-<link rel="stylesheet" href="../../css/pagine.css?v=202611210955">
-<link rel="stylesheet" href="../../css/nuovo.css?v=202611210955">
+<link rel="preload" href="../../fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/caratteri.css?v=202611211739">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611211739">
+<link rel="stylesheet" href="../../css/comune.css?v=202611211739">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611211739">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611211739">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611211739">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611211739">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
@@ -99,142 +97,142 @@
     <h3 class="galleria_titolo t3">Le foto <span class="mono secondario">20 immagini</span></h3>
     <div class="tavole tavole--piena ">
         <figure class="tavola-foto" style="--rapporto:1600/1067;--massimo:1600px">
-          <button class="tavola-foto_bottone" type="button" data-visore="18" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 19 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/minisito-08.webp" alt="Residenza Antiche Ciodere, Leffe (BG): foto 19 di 20" width="1600" height="1067" loading="lazy" decoding="async"></span>
+          <button class="tavola-foto_bottone" type="button" data-visore="0" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 1 di 20">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/minisito-08.webp" alt="Residenza Antiche Ciodere, Leffe (BG): foto 1 di 20" width="1600" height="1067" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">19 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="mono">01 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--coppia ">
         <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
-          <button class="tavola-foto_bottone" type="button" data-visore="0" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 1 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-01.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 1 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
-          </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">01 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
-        </figure>
-        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="1" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 2 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-02.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 2 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-01.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 2 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">02 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
         <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="2" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 3 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-03.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 3 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-02.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 3 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">03 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia coppia--inversa">
-        <figure class="tavola-foto" style="--rapporto:800/1200;--massimo:800px">
+    <div class="tavole tavole--larga larga--destra">
+        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="3" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 4 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/copertina-telefono.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 4 di 20" width="800" height="1200" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-03.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 4 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">04 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
+      </div>
+    <div class="tavole tavole--coppia coppia--inversa">
+        <figure class="tavola-foto" style="--rapporto:800/1200;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="4" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 5 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-05.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 5 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/copertina-telefono.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 5 di 20" width="800" height="1200" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">05 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga ">
         <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="5" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 6 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-06.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 6 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-05.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 6 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">06 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia ">
-        <figure class="tavola-foto" style="--rapporto:800/1200;--massimo:800px">
+    <div class="tavole tavole--larga ">
+        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="6" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 7 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-07.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 7 di 20" width="800" height="1200" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-06.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 7 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">07 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
+      </div>
+    <div class="tavole tavole--coppia ">
+        <figure class="tavola-foto" style="--rapporto:800/1200;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="7" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 8 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-08.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 8 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-07.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 8 di 20" width="800" height="1200" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">08 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
         <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="8" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 9 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-09.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 9 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-08.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 9 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">09 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia coppia--inversa">
-        <figure class="tavola-foto" style="--rapporto:800/1200;--massimo:800px">
+    <div class="tavole tavole--larga larga--destra">
+        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="9" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 10 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-10.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 10 di 20" width="800" height="1200" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-09.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 10 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">10 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
+      </div>
+    <div class="tavole tavole--coppia coppia--inversa">
+        <figure class="tavola-foto" style="--rapporto:800/1200;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="10" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 11 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-11.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 11 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-10.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 11 di 20" width="800" height="1200" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">11 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga ">
         <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="11" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 12 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-12.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 12 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-11.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 12 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">12 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia ">
+    <div class="tavole tavole--larga ">
         <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="12" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 13 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-13.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 13 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-12.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 13 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">13 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
+      </div>
+    <div class="tavole tavole--coppia ">
         <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="13" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 14 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-14.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 14 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-13.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 14 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">14 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
-        <figure class="tavola-foto" style="--rapporto:800/217;--massimo:800px">
+        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="14" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 15 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-15.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 15 di 20" width="800" height="217" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-14.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 15 di 20" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">15 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia coppia--inversa">
-        <figure class="tavola-foto" style="--rapporto:1200/800;--massimo:1200px">
+    <div class="tavole tavole--larga larga--destra">
+        <figure class="tavola-foto" style="--rapporto:800/217;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="15" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 16 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/minisito-06.webp" alt="Residenza Antiche Ciodere, Leffe (BG): foto 16 di 20" width="1200" height="800" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/foto-15.jpg" alt="Residenza Antiche Ciodere, Leffe (BG): foto 16 di 20" width="800" height="217" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">16 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-        <figure class="tavola-foto" style="--rapporto:1333/2000;--massimo:1333px">
+      </div>
+    <div class="tavole tavole--coppia coppia--inversa">
+        <figure class="tavola-foto" style="--rapporto:1200/800;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="16" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 17 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/minisito-07.webp" alt="Residenza Antiche Ciodere, Leffe (BG): foto 17 di 20" width="1333" height="2000" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/minisito-06.webp" alt="Residenza Antiche Ciodere, Leffe (BG): foto 17 di 20" width="1200" height="800" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">17 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+        </figure>
+        <figure class="tavola-foto" style="--rapporto:1333/2000;--massimo:1333px">
+          <button class="tavola-foto_bottone" type="button" data-visore="17" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 18 di 20">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/minisito-07.webp" alt="Residenza Antiche Ciodere, Leffe (BG): foto 18 di 20" width="1333" height="2000" loading="lazy" decoding="async"></span>
+          </button>
+          <figcaption class="tavola-foto_dida"><span class="mono">18 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--larga ">
         <figure class="tavola-foto" style="--rapporto:800/534;--massimo:800px">
-          <button class="tavola-foto_bottone" type="button" data-visore="17" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 18 di 20">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/minisito-05.webp" alt="Residenza Antiche Ciodere, Leffe (BG): foto 18 di 20" width="800" height="534" loading="lazy" decoding="async"></span>
+          <button class="tavola-foto_bottone" type="button" data-visore="18" aria-label="Apri a tutto schermo: Residenza Antiche Ciodere, Leffe (BG): foto 19 di 20">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/leffe-residenza-antiche-ciodere/minisito-05.webp" alt="Residenza Antiche Ciodere, Leffe (BG): foto 19 di 20" width="800" height="534" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">18 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="mono">19 / 20</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--larga ">
@@ -269,7 +267,7 @@
 
 
 
-<script type="application/json" id="visore-dati">[{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-01.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 1 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-02.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 2 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-03.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 3 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/copertina-telefono.jpg","w":800,"h":1200,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 4 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-05.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 5 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-06.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 6 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-07.jpg","w":800,"h":1200,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 7 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-08.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 8 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-09.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 9 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-10.jpg","w":800,"h":1200,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 10 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-11.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 11 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-12.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 12 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-13.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 13 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-14.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 14 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-15.jpg","w":800,"h":217,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 15 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/minisito-06.webp","w":1200,"h":800,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 16 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/minisito-07.webp","w":1333,"h":2000,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 17 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/minisito-05.webp","w":800,"h":534,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 18 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/minisito-08.webp","w":1600,"h":1067,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 19 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/copertina.jpg","w":1080,"h":720,"tipo":"","alt":"Residenza Antiche Ciodere, Leffe (BG): immagine 20 di 20"}]</script>
+<script type="application/json" id="visore-dati">[{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/minisito-08.webp","w":1600,"h":1067,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 1 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-01.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 2 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-02.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 3 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-03.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 4 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/copertina-telefono.jpg","w":800,"h":1200,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 5 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-05.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 6 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-06.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 7 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-07.jpg","w":800,"h":1200,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 8 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-08.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 9 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-09.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 10 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-10.jpg","w":800,"h":1200,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 11 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-11.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 12 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-12.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 13 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-13.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 14 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-14.jpg","w":800,"h":533,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 15 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/foto-15.jpg","w":800,"h":217,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 16 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/minisito-06.webp","w":1200,"h":800,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 17 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/minisito-07.webp","w":1333,"h":2000,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 18 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/minisito-05.webp","w":800,"h":534,"tipo":"Foto","alt":"Residenza Antiche Ciodere, Leffe (BG): foto 19 di 20"},{"src":"../../img/progetti/leffe-residenza-antiche-ciodere/copertina.jpg","w":1080,"h":720,"tipo":"","alt":"Residenza Antiche Ciodere, Leffe (BG): immagine 20 di 20"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
 <section class="dove foglio" id="dove" aria-labelledby="dove-titolo">
@@ -389,16 +387,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js?v=202611210955"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js?v=202611210955"></script>
-<script src="../../js/vendor/SplitText.min.js?v=202611210955"></script>
-<script src="../../js/vendor/Flip.min.js?v=202611210955"></script>
-<script src="../../js/vendor/lenis.min.js?v=202611210955"></script>
-<script src="../../js/vendor/leaflet.js?v=202611210955"></script>
-<script src="../../js/comune.js?v=202611210955"></script>
-<script src="../../js/finestra.js?v=202611210955"></script>
-<script src="../../js/mappa-notte.js?v=202611210955"></script>
-<script src="../../js/pagine.js?v=202611210955"></script>
-<script src="../../js/nuovo.js?v=202611210955"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611211739"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611211739"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611211739"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611211739"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611211739"></script>
+<script src="../../js/vendor/leaflet.js?v=202611211739"></script>
+<script src="../../js/comune.js?v=202611211739"></script>
+<script src="../../js/finestra.js?v=202611211739"></script>
+<script src="../../js/mappa-notte.js?v=202611211739"></script>
+<script src="../../js/pagine.js?v=202611211739"></script>
+<script src="../../js/nuovo.js?v=202611211739"></script>
 </body>
 </html>

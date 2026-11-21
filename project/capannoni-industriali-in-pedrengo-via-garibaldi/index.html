@@ -17,16 +17,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0c1628">
 <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611210955">
-<link rel="stylesheet" href="../../css/comune.css?v=202611210955">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611210955">
-<link rel="stylesheet" href="../../css/finestra.css?v=202611210955">
-<link rel="stylesheet" href="../../css/pagine.css?v=202611210955">
-<link rel="stylesheet" href="../../css/nuovo.css?v=202611210955">
+<link rel="preload" href="../../fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/caratteri.css?v=202611211739">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611211739">
+<link rel="stylesheet" href="../../css/comune.css?v=202611211739">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611211739">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611211739">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611211739">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611211739">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
@@ -98,46 +96,46 @@
     <h3 class="galleria_titolo t3">Le foto <span class="mono secondario">6 immagini</span></h3>
     <div class="tavole tavole--piena ">
         <figure class="tavola-foto" style="--rapporto:1600/1067;--massimo:1600px">
-          <button class="tavola-foto_bottone" type="button" data-visore="5" aria-label="Apri a tutto schermo: Capannoni in via Garibaldi, Pedrengo (BG): immagine 6 di 6">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/copertina.webp" alt="Capannoni in via Garibaldi, Pedrengo (BG): immagine 6 di 6" width="1600" height="1067" loading="lazy" decoding="async"></span>
+          <button class="tavola-foto_bottone" type="button" data-visore="0" aria-label="Apri a tutto schermo: Capannoni in via Garibaldi, Pedrengo (BG): immagine 1 di 6">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/copertina.webp" alt="Capannoni in via Garibaldi, Pedrengo (BG): immagine 1 di 6" width="1600" height="1067" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">06 / 06</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="mono">01 / 06</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--coppia ">
         <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
-          <button class="tavola-foto_bottone" type="button" data-visore="0" aria-label="Apri a tutto schermo: Capannoni in via Garibaldi, Pedrengo (BG): foto 1 di 6">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-01.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 1 di 6" width="800" height="533" loading="lazy" decoding="async"></span>
-          </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">01 / 06</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
-        </figure>
-        <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="1" aria-label="Apri a tutto schermo: Capannoni in via Garibaldi, Pedrengo (BG): foto 2 di 6">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-02.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 2 di 6" width="800" height="450" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-01.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 2 di 6" width="800" height="533" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">02 / 06</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
-        <figure class="tavola-foto" style="--rapporto:800/508;--massimo:800px">
+        <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="2" aria-label="Apri a tutto schermo: Capannoni in via Garibaldi, Pedrengo (BG): foto 3 di 6">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-03.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 3 di 6" width="800" height="508" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-02.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 3 di 6" width="800" height="450" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">03 / 06</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia coppia--inversa">
-        <figure class="tavola-foto" style="--rapporto:500/316;--massimo:500px">
+    <div class="tavole tavole--larga larga--destra">
+        <figure class="tavola-foto" style="--rapporto:800/508;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="3" aria-label="Apri a tutto schermo: Capannoni in via Garibaldi, Pedrengo (BG): foto 4 di 6">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-04.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 4 di 6" width="500" height="316" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-03.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 4 di 6" width="800" height="508" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">04 / 06</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
+      </div>
+    <div class="tavole tavole--coppia coppia--inversa">
+        <figure class="tavola-foto" style="--rapporto:500/316;--massimo:500px">
           <button class="tavola-foto_bottone" type="button" data-visore="4" aria-label="Apri a tutto schermo: Capannoni in via Garibaldi, Pedrengo (BG): foto 5 di 6">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-05.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 5 di 6" width="800" height="533" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-04.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 5 di 6" width="500" height="316" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">05 / 06</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+        </figure>
+        <figure class="tavola-foto" style="--rapporto:800/533;--massimo:800px">
+          <button class="tavola-foto_bottone" type="button" data-visore="5" aria-label="Apri a tutto schermo: Capannoni in via Garibaldi, Pedrengo (BG): foto 6 di 6">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-05.jpg" alt="Capannoni in via Garibaldi, Pedrengo (BG): foto 6 di 6" width="800" height="533" loading="lazy" decoding="async"></span>
+          </button>
+          <figcaption class="tavola-foto_dida"><span class="mono">06 / 06</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
   </div>
@@ -163,7 +161,7 @@
 
 
 
-<script type="application/json" id="visore-dati">[{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-01.jpg","w":800,"h":533,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 1 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-02.jpg","w":800,"h":450,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 2 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-03.jpg","w":800,"h":508,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 3 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-04.jpg","w":500,"h":316,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 4 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-05.jpg","w":800,"h":533,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 5 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/copertina.webp","w":1600,"h":1067,"tipo":"","alt":"Capannoni in via Garibaldi, Pedrengo (BG): immagine 6 di 6"}]</script>
+<script type="application/json" id="visore-dati">[{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/copertina.webp","w":1600,"h":1067,"tipo":"","alt":"Capannoni in via Garibaldi, Pedrengo (BG): immagine 1 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-01.jpg","w":800,"h":533,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 2 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-02.jpg","w":800,"h":450,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 3 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-03.jpg","w":800,"h":508,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 4 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-04.jpg","w":500,"h":316,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 5 di 6"},{"src":"../../img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/foto-05.jpg","w":800,"h":533,"tipo":"Foto","alt":"Capannoni in via Garibaldi, Pedrengo (BG): foto 6 di 6"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
 <section class="dove foglio" id="dove" aria-labelledby="dove-titolo">
@@ -278,16 +276,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js?v=202611210955"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js?v=202611210955"></script>
-<script src="../../js/vendor/SplitText.min.js?v=202611210955"></script>
-<script src="../../js/vendor/Flip.min.js?v=202611210955"></script>
-<script src="../../js/vendor/lenis.min.js?v=202611210955"></script>
-<script src="../../js/vendor/leaflet.js?v=202611210955"></script>
-<script src="../../js/comune.js?v=202611210955"></script>
-<script src="../../js/finestra.js?v=202611210955"></script>
-<script src="../../js/mappa-notte.js?v=202611210955"></script>
-<script src="../../js/pagine.js?v=202611210955"></script>
-<script src="../../js/nuovo.js?v=202611210955"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611211739"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611211739"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611211739"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611211739"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611211739"></script>
+<script src="../../js/vendor/leaflet.js?v=202611211739"></script>
+<script src="../../js/comune.js?v=202611211739"></script>
+<script src="../../js/finestra.js?v=202611211739"></script>
+<script src="../../js/mappa-notte.js?v=202611211739"></script>
+<script src="../../js/pagine.js?v=202611211739"></script>
+<script src="../../js/nuovo.js?v=202611211739"></script>
 </body>
 </html>

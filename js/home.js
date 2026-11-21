@@ -528,7 +528,7 @@
     var visibili = [[0, .6], [1.45, 4.45],   // giro 3: il video d'apertura si ferma quando nasce la finestra
       [3.35, 6.35], [5.05, 8.05], [6.95, 99]]; // apertura + 4 capitoli
     var videoFilm = [videoApertura].concat(cap.map(function (c) { return c.video; }));
-    var filmInVista = true, attivoOra = -2;
+    var filmInVista = true, attivoOra = -2, introAttiva = null;
     var lineaX = lineeIndice.map(function (l) { return gsap.quickSetter(l, 'scaleX'); });
 
     function aggiornaFilm() {
@@ -558,8 +558,10 @@
         });
         // solo i link del capitolo davanti si possono cliccare
         cap.forEach(function (c, i) { c.el.style.pointerEvents = i === attivo ? 'auto' : 'none'; });
-        intro.style.pointerEvents = attivo === -1 ? 'auto' : 'none';
       }
+      // «Di cosa hai bisogno?» si può toccare solo quando c'è davvero (21/11: prima, invisibile, rubava i tocchi ai pulsanti dell'apertura)
+      var introSu = attivo === -1 && t >= .6;
+      if (introSu !== introAttiva) { introAttiva = introSu; intro.style.pointerEvents = introSu ? 'auto' : 'none'; intro.inert = !introSu; }
     }
 
     // dopo il film la testata si nasconde scendendo e torna salendo
@@ -819,7 +821,8 @@
     gsap.from('.indice_42', { xPercent: -8, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.indice_titolo', start: 'top 86%', once: true } });
 
     /* ---- Video dei capitoli preparati in anticipo, uno alla volta, mentre gira l'apertura ---- */
-    var daPreparare = cap.map(function (c) { return c.video; });
+    // 21/11: solo il primo capitolo (prima si scaricavano tutti e quattro, circa 15 MB, anche senza scorrere); gli altri li prepara il film poco prima che servano
+    var daPreparare = (navigator.connection && navigator.connection.saveData) ? [] : [cap[0].video];
     var preparaVideo = function () {
       var v = daPreparare.shift(); if (!v) return;
       carica(v);

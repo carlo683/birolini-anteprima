@@ -938,7 +938,8 @@ a:hover > .freccia { transform: translateX(6px); }
   /* «Di cosa hai bisogno?»: le quattro scelte più grandi */
   .intro_scelte a { min-height: 52px; font-size: 1.2rem; }
   /* linea del tempo: si capisce che si sfoglia di lato */
-  .tempo_testa::after { content: "Sfoglia di lato \2192"; display: block; margin-top: 10px; font-family: var(--mono); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; color: var(--azzurro); }
+  /* 21/11: un suggerimento, non un pulsante: grigio come le diciture (prima azzurro, sembrava un link) */
+  .tempo_testa::after { content: "Sfoglia col dito \2190 \2192"; display: block; margin-top: 10px; font-family: var(--mono); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; color: var(--nebbia); }
 }
 
 

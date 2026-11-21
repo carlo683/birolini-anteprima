@@ -17,16 +17,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0c1628">
 <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611210955">
-<link rel="stylesheet" href="../../css/comune.css?v=202611210955">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611210955">
-<link rel="stylesheet" href="../../css/finestra.css?v=202611210955">
-<link rel="stylesheet" href="../../css/pagine.css?v=202611210955">
-<link rel="stylesheet" href="../../css/nuovo.css?v=202611210955">
+<link rel="preload" href="../../fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/caratteri.css?v=202611211739">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611211739">
+<link rel="stylesheet" href="../../css/comune.css?v=202611211739">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611211739">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611211739">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611211739">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611211739">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
@@ -124,84 +122,84 @@
     <h3 class="galleria_titolo t3">Le foto <span class="mono secondario">11 immagini</span></h3>
     <div class="tavole tavole--piena ">
         <figure class="tavola-foto" style="--rapporto:1600/1067;--massimo:1600px">
-          <button class="tavola-foto_bottone" type="button" data-visore="13" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): immagine 14 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/copertina.webp" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): immagine 14 di 14" width="1600" height="1067" loading="lazy" decoding="async"></span>
+          <button class="tavola-foto_bottone" type="button" data-visore="3" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): immagine 4 di 14">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/copertina.webp" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): immagine 4 di 14" width="1600" height="1067" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">14 / 14</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="mono">04 / 14</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--coppia ">
         <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
-          <button class="tavola-foto_bottone" type="button" data-visore="3" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 4 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-01.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 4 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
-          </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">04 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
-        </figure>
-        <figure class="tavola-foto" style="--rapporto:1200/1800;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="4" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 5 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/copertina-telefono.webp" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 5 di 14" width="1200" height="1800" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-01.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 5 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">05 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
-        <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
+        <figure class="tavola-foto" style="--rapporto:1200/1800;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="5" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 6 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-03.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 6 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/copertina-telefono.webp" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 6 di 14" width="1200" height="1800" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">06 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia coppia--inversa">
+    <div class="tavole tavole--larga larga--destra">
         <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="6" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 7 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-04.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 7 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-03.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 7 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">07 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
+      </div>
+    <div class="tavole tavole--coppia coppia--inversa">
         <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="7" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 8 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-05.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 8 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-04.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 8 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">08 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga ">
-        <figure class="tavola-foto" style="--rapporto:1080/1620;--massimo:1080px">
+        <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="8" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 9 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-06.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 9 di 14" width="1080" height="1620" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-05.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 9 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">09 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia ">
-        <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
+    <div class="tavole tavole--larga ">
+        <figure class="tavola-foto" style="--rapporto:1080/1620;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="9" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 10 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-07.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 10 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-06.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 10 di 14" width="1080" height="1620" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">10 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-        <figure class="tavola-foto" style="--rapporto:1080/1620;--massimo:1080px">
+      </div>
+    <div class="tavole tavole--coppia ">
+        <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="10" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 11 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-08.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 11 di 14" width="1080" height="1620" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-07.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 11 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">11 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
-        <figure class="tavola-foto" style="--rapporto:1200/800;--massimo:1200px">
+        <figure class="tavola-foto" style="--rapporto:1080/1620;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="11" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 12 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-10.webp" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 12 di 14" width="1200" height="800" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-08.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 12 di 14" width="1080" height="1620" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">12 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--larga larga--destra">
-        <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
+        <figure class="tavola-foto" style="--rapporto:1200/800;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="12" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 13 di 14">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-11.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 13 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-10.webp" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 13 di 14" width="1200" height="800" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">13 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+        </figure>
+      </div>
+    <div class="tavole tavole--larga larga--destra">
+        <figure class="tavola-foto" style="--rapporto:1080/720;--massimo:1080px">
+          <button class="tavola-foto_bottone" type="button" data-visore="13" aria-label="Apri a tutto schermo: Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 14 di 14">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-11.jpg" alt="Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 14 di 14" width="1080" height="720" loading="lazy" decoding="async"></span>
+          </button>
+          <figcaption class="tavola-foto_dida"><span class="mono">14 / 14</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
   </div>
@@ -228,7 +226,7 @@
 
 
 
-<script type="application/json" id="visore-dati">[{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-13.jpg","w":1920,"h":1080,"tipo":"Render","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): render 1 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-14.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): render 2 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-15.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): render 3 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-01.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 4 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/copertina-telefono.webp","w":1200,"h":1800,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 5 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-03.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 6 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-04.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 7 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-05.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 8 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-06.jpg","w":1080,"h":1620,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 9 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-07.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 10 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-08.jpg","w":1080,"h":1620,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 11 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-10.webp","w":1200,"h":800,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 12 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-11.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 13 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/copertina.webp","w":1600,"h":1067,"tipo":"","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): immagine 14 di 14"}]</script>
+<script type="application/json" id="visore-dati">[{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-13.jpg","w":1920,"h":1080,"tipo":"Render","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): render 1 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-14.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): render 2 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-15.jpg","w":1080,"h":608,"tipo":"Render","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): render 3 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/copertina.webp","w":1600,"h":1067,"tipo":"","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): immagine 4 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-01.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 5 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/copertina-telefono.webp","w":1200,"h":1800,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 6 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-03.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 7 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-04.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 8 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-05.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 9 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-06.jpg","w":1080,"h":1620,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 10 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-07.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 11 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-08.jpg","w":1080,"h":1620,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 12 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-10.webp","w":1200,"h":800,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 13 di 14"},{"src":"../../img/progetti/redona-centro-lotti-a1-a2-a3/foto-11.jpg","w":1080,"h":720,"tipo":"Foto","alt":"Redona Centro, lotti A1-A2-A3, Bergamo (BG): foto 14 di 14"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
 <section class="dove foglio" id="dove" aria-labelledby="dove-titolo">
@@ -343,16 +341,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js?v=202611210955"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js?v=202611210955"></script>
-<script src="../../js/vendor/SplitText.min.js?v=202611210955"></script>
-<script src="../../js/vendor/Flip.min.js?v=202611210955"></script>
-<script src="../../js/vendor/lenis.min.js?v=202611210955"></script>
-<script src="../../js/vendor/leaflet.js?v=202611210955"></script>
-<script src="../../js/comune.js?v=202611210955"></script>
-<script src="../../js/finestra.js?v=202611210955"></script>
-<script src="../../js/mappa-notte.js?v=202611210955"></script>
-<script src="../../js/pagine.js?v=202611210955"></script>
-<script src="../../js/nuovo.js?v=202611210955"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611211739"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611211739"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611211739"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611211739"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611211739"></script>
+<script src="../../js/vendor/leaflet.js?v=202611211739"></script>
+<script src="../../js/comune.js?v=202611211739"></script>
+<script src="../../js/finestra.js?v=202611211739"></script>
+<script src="../../js/mappa-notte.js?v=202611211739"></script>
+<script src="../../js/pagine.js?v=202611211739"></script>
+<script src="../../js/nuovo.js?v=202611211739"></script>
 </body>
 </html>

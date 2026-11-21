@@ -65,7 +65,7 @@
 .tavole--larga.larga--destra .tavola-foto { grid-column: 3 / span 10; justify-self: end; width: 100%; }
 
 /* ---------- Visore a tutto schermo ---------- */
-.visore { position: fixed; inset: 0; z-index: 95; background: rgba(var(--velo-notte), .98); }
+.visore { position: fixed; inset: 0; z-index: 95; background: rgba(var(--velo-notte), .98); touch-action: none; overscroll-behavior: contain; }
 .visore[hidden] { display: none; }
 .visore_scena { position: absolute; inset: clamp(64px, 9vh, 96px) clamp(16px, 7vw, 120px) clamp(64px, 9vh, 96px); }
 .visore_img { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
@@ -211,5 +211,9 @@
   .residenza { position: relative; }
 }
 .fermo .residenza { position: relative; }
+/* 21/11: ogni foglio resta fermo e intero per un tratto prima che arrivi il successivo, così i suoi pulsanti si possono toccare con calma */
+@media (prefers-reduced-motion: no-preference) {
+  .moto .residenza:not(:last-of-type) { margin-bottom: 40vh; margin-bottom: 40svh; }
+}
 .visore_img { opacity: 0; }
 .visore_ciak:empty { visibility: hidden; }

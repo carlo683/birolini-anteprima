@@ -46,12 +46,32 @@
       return L.divIcon({ className: '', html: '<span class="' + c + '"></span>', iconSize: [44, 44], iconAnchor: [22, 22], popupAnchor: [0, -12] });
     }
     dati.forEach(function (p) {
-      var m = L.marker([p.mla, p.mln], { icon: icona(p, false), title: p.n, alt: p.n + ', ' + p.l, keyboard: true, zIndexOffset: p.s === evidenza ? 1000 : 0 });
+      var m = L.marker([p.mla, p.mln], { icon: icona(p, false), title: p.n, alt: p.n + ', ' + p.l, keyboard: !evidenza || p.s === evidenza, zIndexOffset: p.s === evidenza ? 1000 : 0 });
       m.bindPopup('<p><strong>' + esc(p.n) + '</strong></p><p class="mono">' + esc([p.l, p.a, p.st && p.st.toLowerCase()].filter(Boolean).join(', ')) + '</p>' +
         (p.s === evidenza ? '' : '<p><a href="' + esc(p.u) + '">Apri la scheda</a></p>'), { maxWidth: 280, autoPanPadding: [40, 40] });
-      m.on('click', function () { scegli(p.s); });
+      // 21/11: se il punto toccato ne ha altri attaccati (si coprono), la mappa prima si avvicina a quel gruppo; il fumetto si apre quando il punto è libero
+      m.off('click', m._openPopup, m);
+      m.on('click', function () {
+        var vicini = attaccati(m);
+        if (vicini.length > 1 && mappa.getZoom() < 15) {
+          m.closePopup();
+          mappa.fitBounds(L.latLngBounds(vicini.map(function (x) { return x.getLatLng(); })), { padding: [70, 70], maxZoom: Math.min(15, mappa.getZoom() + 3), animate: !fermo });
+          return;
+        }
+        scegli(p.s); m.openPopup();
+      });
       m.addTo(mappa); punti[p.s] = { m: m, p: p };
     });
+
+    // i punti visibili a meno di 34 px da questo (compreso lui)
+    function attaccati(m) {
+      var a = mappa.latLngToContainerPoint(m.getLatLng()), out = [];
+      Object.keys(punti).forEach(function (s) {
+        var x = punti[s].m; if (!mappa.hasLayer(x)) return;
+        if (mappa.latLngToContainerPoint(x.getLatLng()).distanceTo(a) < 34) out.push(x);
+      });
+      return out;
+    }
 
     // la scheda accanto alla mappa (archivio): l'immagine cambia solo quando quella nuova è pronta
     var scheda = $('.mappa-scheda', sezione);

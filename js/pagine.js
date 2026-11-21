@@ -68,7 +68,9 @@
     prima.addEventListener('click', function () { mostra(ora - 1, -1); });
     dopo.addEventListener('click', function () { mostra(ora + 1, 1); });
     chiudi.addEventListener('click', chiudiVisore);
-    visore.addEventListener('keydown', function (e) {
+    // tasti ascoltati su tutta la pagina mentre il visore è aperto (21/11: dopo un clic sull'immagine il fuoco usciva e Esc non andava più)
+    document.addEventListener('keydown', function (e) {
+      if (visore.hidden) return;
       if (e.key === 'Escape') chiudiVisore();
       else if (e.key === 'ArrowRight') mostra(ora + 1, 1);
       else if (e.key === 'ArrowLeft') mostra(ora - 1, -1);
@@ -78,14 +80,20 @@
       }
     });
     // col dito: un trascinamento orizzontale cambia immagine
-    var x0 = null, y0 = null;
-    visore.addEventListener('pointerdown', function (e) { x0 = e.clientX; y0 = e.clientY; });
+    // (21/11: sul telefono il browser si prendeva il gesto; ora il visore ha touch-action: none nel css)
+    var x0 = null, y0 = null, trascinato = false;
+    visore.addEventListener('pointerdown', function (e) { x0 = e.clientX; y0 = e.clientY; trascinato = false; });
+    visore.addEventListener('pointercancel', function () { x0 = null; });
     visore.addEventListener('pointerup', function (e) {
       if (x0 === null) return; var dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
+      if (Math.abs(dx) > 10 || Math.abs(dy) > 10) trascinato = true;
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) mostra(ora + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
     });
-    // un clic sul fondo (fuori dall'immagine e dai comandi) chiude
-    $('.visore_scena', visore).addEventListener('click', function (e) { if (e.target === e.currentTarget) chiudiVisore(); });
+    // un clic sulla parte scura (fuori dall'immagine e dai comandi) chiude
+    visore.addEventListener('click', function (e) {
+      if (trascinato) { trascinato = false; return; }
+      if (!e.target.closest('img, button, a')) chiudiVisore();
+    });
   })();
 
   /* ---------- Con il movimento acceso ---------- */

@@ -17,16 +17,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0c1628">
 <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611210955">
-<link rel="stylesheet" href="../../css/comune.css?v=202611210955">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611210955">
-<link rel="stylesheet" href="../../css/finestra.css?v=202611210955">
-<link rel="stylesheet" href="../../css/pagine.css?v=202611210955">
-<link rel="stylesheet" href="../../css/nuovo.css?v=202611210955">
+<link rel="preload" href="../../fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/caratteri.css?v=202611211739">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611211739">
+<link rel="stylesheet" href="../../css/comune.css?v=202611211739">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611211739">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611211739">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611211739">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611211739">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
@@ -99,158 +97,158 @@
     <h3 class="galleria_titolo t3">Le foto <span class="mono secondario">21 immagini</span></h3>
     <div class="tavole tavole--piena ">
         <figure class="tavola-foto" style="--rapporto:1600/1200;--massimo:1600px">
-          <button class="tavola-foto_bottone" type="button" data-visore="11" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 12 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-12.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 12 di 21" width="1600" height="1200" loading="lazy" decoding="async"></span>
+          <button class="tavola-foto_bottone" type="button" data-visore="0" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 1 di 21">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-12.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 1 di 21" width="1600" height="1200" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">12 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="mono">01 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--coppia ">
         <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
-          <button class="tavola-foto_bottone" type="button" data-visore="0" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 1 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-01.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 1 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
-          </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">01 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
-        </figure>
-        <figure class="tavola-foto" style="--rapporto:1080/1440;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="1" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 2 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-02.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 2 di 21" width="1080" height="1440" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-01.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 2 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">02 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
-        <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
+        <figure class="tavola-foto" style="--rapporto:1080/1440;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="2" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 3 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-03.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 3 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-02.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 3 di 21" width="1080" height="1440" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">03 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
+    <div class="tavole tavole--larga larga--destra">
+        <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
+          <button class="tavola-foto_bottone" type="button" data-visore="3" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 4 di 21">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-03.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 4 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
+          </button>
+          <figcaption class="tavola-foto_dida"><span class="mono">04 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+        </figure>
+      </div>
     <div class="tavole tavole--piena ">
         <figure class="tavola-foto" style="--rapporto:1600/1200;--massimo:1600px">
-          <button class="tavola-foto_bottone" type="button" data-visore="20" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): immagine 21 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/copertina.webp" alt="Cortile Breda, Cologno al Serio (BG): immagine 21 di 21" width="1600" height="1200" loading="lazy" decoding="async"></span>
+          <button class="tavola-foto_bottone" type="button" data-visore="4" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): immagine 5 di 21">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/copertina.webp" alt="Cortile Breda, Cologno al Serio (BG): immagine 5 di 21" width="1600" height="1200" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">21 / 21</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="mono">05 / 21</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--coppia coppia--inversa">
         <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
-          <button class="tavola-foto_bottone" type="button" data-visore="3" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 4 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-04.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 4 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
+          <button class="tavola-foto_bottone" type="button" data-visore="5" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 6 di 21">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-04.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 6 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">04 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="mono">06 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
         <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
-          <button class="tavola-foto_bottone" type="button" data-visore="4" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 5 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-05.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 5 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
+          <button class="tavola-foto_bottone" type="button" data-visore="6" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 7 di 21">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-05.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 7 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">05 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="mono">07 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--larga ">
         <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
-          <button class="tavola-foto_bottone" type="button" data-visore="5" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 6 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-06.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 6 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
-          </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">06 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
-        </figure>
-      </div>
-    <div class="tavole tavole--coppia ">
-        <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
-          <button class="tavola-foto_bottone" type="button" data-visore="6" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 7 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-07.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 7 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
-          </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">07 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
-        </figure>
-        <figure class="tavola-foto" style="--rapporto:1080/1440;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="7" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 8 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-08.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 8 di 21" width="1080" height="1440" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-06.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 8 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">08 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--larga larga--destra">
-        <figure class="tavola-foto" style="--rapporto:1080/608;--massimo:1080px">
+    <div class="tavole tavole--coppia ">
+        <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="8" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 9 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-09.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 9 di 21" width="1080" height="608" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-07.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 9 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">09 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--coppia coppia--inversa">
-        <figure class="tavola-foto" style="--rapporto:1080/608;--massimo:1080px">
+        <figure class="tavola-foto" style="--rapporto:1080/1440;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="9" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 10 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-10.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 10 di 21" width="1080" height="608" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-08.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 10 di 21" width="1080" height="1440" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">10 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
+      </div>
+    <div class="tavole tavole--larga larga--destra">
         <figure class="tavola-foto" style="--rapporto:1080/608;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="10" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 11 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-11.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 11 di 21" width="1080" height="608" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-09.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 11 di 21" width="1080" height="608" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">11 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--larga ">
-        <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
+    <div class="tavole tavole--coppia coppia--inversa">
+        <figure class="tavola-foto" style="--rapporto:1080/608;--massimo:1080px">
+          <button class="tavola-foto_bottone" type="button" data-visore="11" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 12 di 21">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-10.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 12 di 21" width="1080" height="608" loading="lazy" decoding="async"></span>
+          </button>
+          <figcaption class="tavola-foto_dida"><span class="mono">12 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+        </figure>
+        <figure class="tavola-foto" style="--rapporto:1080/608;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="12" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 13 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-13.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 13 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-11.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 13 di 21" width="1080" height="608" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">13 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia ">
-        <figure class="tavola-foto" style="--rapporto:1200/1600;--massimo:1200px">
+    <div class="tavole tavole--larga ">
+        <figure class="tavola-foto" style="--rapporto:1080/810;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="13" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 14 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-02.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 14 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/foto-13.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 14 di 21" width="1080" height="810" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">14 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
+      </div>
+    <div class="tavole tavole--coppia ">
         <figure class="tavola-foto" style="--rapporto:1200/1600;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="14" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 15 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-17.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 15 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-02.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 15 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">15 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
         <figure class="tavola-foto" style="--rapporto:1200/1600;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="15" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 16 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-18.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 16 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-17.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 16 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">16 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--coppia coppia--inversa">
+    <div class="tavole tavole--larga larga--destra">
         <figure class="tavola-foto" style="--rapporto:1200/1600;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="16" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 17 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-22.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 17 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-18.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 17 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">17 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
+      </div>
+    <div class="tavole tavole--coppia coppia--inversa">
         <figure class="tavola-foto" style="--rapporto:1200/1600;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="17" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 18 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-23.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 18 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-22.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 18 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">18 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga ">
         <figure class="tavola-foto" style="--rapporto:1200/1600;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="18" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 19 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-25.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 19 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-23.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 19 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">19 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
     <div class="tavole tavole--larga ">
-        <figure class="tavola-foto" style="--rapporto:1280/960;--massimo:1280px">
+        <figure class="tavola-foto" style="--rapporto:1200/1600;--massimo:1200px">
           <button class="tavola-foto_bottone" type="button" data-visore="19" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 20 di 21">
-            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-27.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 20 di 21" width="1280" height="960" loading="lazy" decoding="async"></span>
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-25.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 20 di 21" width="1200" height="1600" loading="lazy" decoding="async"></span>
           </button>
           <figcaption class="tavola-foto_dida"><span class="mono">20 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+        </figure>
+      </div>
+    <div class="tavole tavole--larga ">
+        <figure class="tavola-foto" style="--rapporto:1280/960;--massimo:1280px">
+          <button class="tavola-foto_bottone" type="button" data-visore="20" aria-label="Apri a tutto schermo: Cortile Breda, Cologno al Serio (BG): foto 21 di 21">
+            <span class="tavola-foto_quadro"><img src="../../img/progetti/cologno-al-serio---residenziale/minisito-27.jpg" alt="Cortile Breda, Cologno al Serio (BG): foto 21 di 21" width="1280" height="960" loading="lazy" decoding="async"></span>
+          </button>
+          <figcaption class="tavola-foto_dida"><span class="mono">21 / 21</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
   </div>
@@ -276,7 +274,7 @@
 
 
 
-<script type="application/json" id="visore-dati">[{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-01.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 1 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-02.jpg","w":1080,"h":1440,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 2 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-03.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 3 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-04.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 4 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-05.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 5 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-06.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 6 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-07.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 7 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-08.jpg","w":1080,"h":1440,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 8 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-09.jpg","w":1080,"h":608,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 9 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-10.jpg","w":1080,"h":608,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 10 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-11.jpg","w":1080,"h":608,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 11 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-12.jpg","w":1600,"h":1200,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 12 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-13.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 13 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-02.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 14 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-17.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 15 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-18.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 16 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-22.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 17 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-23.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 18 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-25.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 19 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-27.jpg","w":1280,"h":960,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 20 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/copertina.webp","w":1600,"h":1200,"tipo":"","alt":"Cortile Breda, Cologno al Serio (BG): immagine 21 di 21"}]</script>
+<script type="application/json" id="visore-dati">[{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-12.jpg","w":1600,"h":1200,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 1 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-01.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 2 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-02.jpg","w":1080,"h":1440,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 3 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-03.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 4 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/copertina.webp","w":1600,"h":1200,"tipo":"","alt":"Cortile Breda, Cologno al Serio (BG): immagine 5 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-04.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 6 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-05.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 7 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-06.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 8 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-07.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 9 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-08.jpg","w":1080,"h":1440,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 10 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-09.jpg","w":1080,"h":608,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 11 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-10.jpg","w":1080,"h":608,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 12 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-11.jpg","w":1080,"h":608,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 13 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/foto-13.jpg","w":1080,"h":810,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 14 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-02.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 15 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-17.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 16 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-18.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 17 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-22.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 18 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-23.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 19 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-25.jpg","w":1200,"h":1600,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 20 di 21"},{"src":"../../img/progetti/cologno-al-serio---residenziale/minisito-27.jpg","w":1280,"h":960,"tipo":"Foto","alt":"Cortile Breda, Cologno al Serio (BG): foto 21 di 21"}]</script>
 
 <!-- ============ DOVE: la mappa sulla notte (posizione indicativa) ============ -->
 <section class="dove foglio" id="dove" aria-labelledby="dove-titolo">
@@ -396,16 +394,16 @@
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js?v=202611210955"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js?v=202611210955"></script>
-<script src="../../js/vendor/SplitText.min.js?v=202611210955"></script>
-<script src="../../js/vendor/Flip.min.js?v=202611210955"></script>
-<script src="../../js/vendor/lenis.min.js?v=202611210955"></script>
-<script src="../../js/vendor/leaflet.js?v=202611210955"></script>
-<script src="../../js/comune.js?v=202611210955"></script>
-<script src="../../js/finestra.js?v=202611210955"></script>
-<script src="../../js/mappa-notte.js?v=202611210955"></script>
-<script src="../../js/pagine.js?v=202611210955"></script>
-<script src="../../js/nuovo.js?v=202611210955"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611211739"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611211739"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611211739"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611211739"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611211739"></script>
+<script src="../../js/vendor/leaflet.js?v=202611211739"></script>
+<script src="../../js/comune.js?v=202611211739"></script>
+<script src="../../js/finestra.js?v=202611211739"></script>
+<script src="../../js/mappa-notte.js?v=202611211739"></script>
+<script src="../../js/pagine.js?v=202611211739"></script>
+<script src="../../js/nuovo.js?v=202611211739"></script>
 </body>
 </html>
