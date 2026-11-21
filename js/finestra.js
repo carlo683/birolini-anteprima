@@ -83,7 +83,7 @@
     }
     function entra(a, url, subito) {
       var vecchio = fpStrati[sopra], nuovo = fpStrati[1 - sopra], img = nuovo.firstElementChild;
-      var anima = animata && !subito;
+      var anima = animata && (!subito || !mostrata);   // la prima foto entra dal basso invece di comparire di colpo (21/11/2026)
       var piccola = a.hasAttribute('data-piccola'), pos = a.getAttribute('data-pos') || '50% 50%';
       if (window.gsap) gsap.killTweensOf([nuovo, img]);
       nuovo.style.clipPath = 'inset(100% 0% 0% 0%)';     // sopra, ma chiuso: si vede ancora tutto il vecchio
@@ -97,6 +97,8 @@
       var apri = function () {
         if (img.getAttribute('src') !== url) return;
         sopra = 1 - sopra; mostrata = a;
+        // lo sfondo con la prima foto scritto nella pagina (solo archivio) non serve più quando lo script ha la sua
+        $$('.fp_prima', fp).forEach(function (x) { setTimeout(function () { x.remove(); }, DURATA * 1000 + 200); });
         // nome e dati cambiano a metà tendina, quando l'immagine nuova copre già quasi metà finestra
         if (anima) gsap.delayedCall(DURATA * .45, function () { if (mostrata === a) scriviDati(a); }); else scriviDati(a);
         var chiudi = function () { tendina = null; fineUltima = performance.now(); videoGiusto(); prova(); };
@@ -190,6 +192,23 @@
     fp.addEventListener('click', function (e) { var x = mostrata || attiva; if (x) entraNelProgetto(x.href, e); });
 
     /* ---- filtri per settore e ricerca ---- */
+    var testoNessuno = nessuno ? nessuno.textContent : '';
+    // nessun risultato: se il testo c'è in altri settori, lo dice e offre di cercare in tutti (21/11/2026, revisione giro 4 n. 12)
+    function avvisaNessuno(visti, q) {
+      if (!nessuno) return;
+      nessuno.hidden = visti > 0;
+      if (visti > 0) return;
+      var altrove = settoreOra !== 'tutti' && q ? voci.filter(function (v) { return v.getAttribute('data-cerca').indexOf(q) !== -1; }).length : 0;
+      if (!altrove) { nessuno.textContent = testoNessuno; return; }
+      var tasto = filtri.filter(function (x) { return x.getAttribute('data-filtro') === settoreOra; })[0];
+      var nome = tasto ? tasto.firstChild.textContent.trim() : '';
+      nessuno.textContent = 'Nessun risultato in «' + nome + '». ';
+      var tutti = document.createElement('button');
+      tutti.type = 'button'; tutti.className = 'collegamento indice_tutti';
+      tutti.textContent = altrove === 1 ? 'Cerca in tutti i progetti: ce n\'è 1' : 'Cerca in tutti i progetti: ce ne sono ' + altrove;
+      tutti.addEventListener('click', function () { var b = filtri.filter(function (x) { return x.getAttribute('data-filtro') === 'tutti'; })[0]; centraTasto(b); cambia('tutti'); if (b) b.focus(); });
+      nessuno.appendChild(tutti);
+    }
     function applica() {
       var q = senzaAccenti((campoCerca && campoCerca.value || '').trim()), visti = 0;
       voci.forEach(function (v) {
@@ -197,7 +216,7 @@
         v.style.display = ok ? '' : 'none'; if (ok) visti++;
       });
       gruppi.forEach(function (g) { g.style.display = $$('.voce', g).some(function (v) { return v.style.display !== 'none'; }) ? '' : 'none'; });
-      if (nessuno) nessuno.hidden = visti > 0;
+      avvisaNessuno(visti, q);
       liste.classList.toggle('poche', visti < 8);
       misuraCorpo();
       var prima = visibili()[0];

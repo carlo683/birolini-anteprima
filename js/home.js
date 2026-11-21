@@ -246,6 +246,23 @@
   fp.addEventListener('click', function (e) { var x = mostrata || attiva; if (x) entraNelProgetto(x.href, e); });   // apre il progetto che si vede
 
   /* filtri per settore e ricerca */
+  var testoNessuno = nessuno ? nessuno.textContent : '';
+  // nessun risultato: se il testo c'è in altri settori, lo dice e offre di cercare in tutti (21/11/2026, revisione giro 4 n. 12)
+  function avvisaNessuno(visti, q) {
+    if (!nessuno) return;
+    nessuno.hidden = visti > 0;
+    if (visti > 0) return;
+    var altrove = settoreOra !== 'tutti' && q ? voci.filter(function (v) { return v.getAttribute('data-cerca').indexOf(q) !== -1; }).length : 0;
+    if (!altrove) { nessuno.textContent = testoNessuno; return; }
+    var tasto = filtri.filter(function (x) { return x.getAttribute('data-filtro') === settoreOra; })[0];
+    var nome = tasto ? tasto.firstChild.textContent.trim() : '';
+    nessuno.textContent = 'Nessun risultato in «' + nome + '». ';
+    var tutti = document.createElement('button');
+    tutti.type = 'button'; tutti.className = 'collegamento indice_tutti';
+    tutti.textContent = altrove === 1 ? 'Cerca in tutti i progetti: ce n\'è 1' : 'Cerca in tutti i progetti: ce ne sono ' + altrove;
+    tutti.addEventListener('click', function () { var b = filtri.filter(function (x) { return x.getAttribute('data-filtro') === 'tutti'; })[0]; centraTasto(b); cambia('tutti'); if (b) b.focus(); });
+    nessuno.appendChild(tutti);
+  }
   function applica() {
     var q = senzaAccenti((campoCerca && campoCerca.value || '').trim()), visti = 0;
     voci.forEach(function (v) {
@@ -253,7 +270,7 @@
       v.style.display = ok ? '' : 'none'; if (ok) visti++;
     });
     gruppi.forEach(function (g) { g.style.display = $$('.voce', g).some(function (v) { return v.style.display !== 'none'; }) ? '' : 'none'; });
-    if (nessuno) nessuno.hidden = visti > 0;
+    avvisaNessuno(visti, q);
     liste.classList.toggle('poche', visti < 8);   // pochi nomi: si centrano accanto alla finestra
     misuraCorpo();
     var prima = visibili()[0];

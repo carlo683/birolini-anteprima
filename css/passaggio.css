@@ -10,3 +10,9 @@
 }
 @keyframes passaggio-esce { to { opacity: 0; } }
 @keyframes passaggio-entra { from { opacity: 0; } }
+
+/* Foto che arrivano mentre si scorre (21/11/2026, Carlo: «a volte le foto vengono fuori»): invece di comparire di colpo
+   sfumano sul riquadro scuro. La classe «caricata» la mette lo script FOTO_JS nella testa, anche quando la foto
+   non arriva (errore), così non resta mai nascosta. Vale solo con .moto, cioè con JS acceso. */
+.moto :is(.tavola-foto_quadro, .articolo_figura, .articolo_progetto-img, .residenza_media, .cer_figura) img { transition: opacity .8s cubic-bezier(.2, 0, 0, 1); }
+.moto :is(.tavola-foto_quadro, .articolo_figura, .articolo_progetto-img, .residenza_media, .cer_figura) img:not(.caricata) { opacity: 0; }

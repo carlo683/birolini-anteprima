@@ -17,15 +17,20 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0c1628">
 <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="../img/ridotte/media--casa-brembate-poster-1320.jpg" media="(max-width: 760px)" fetchpriority="high">
+<link rel="preload" as="image" href="../media/casa-brembate-poster.jpg" media="(min-width: 761px)" fetchpriority="high">
 <link rel="preload" href="../fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/caratteri.css?v=202611212055">
-<link rel="stylesheet" href="../css/passaggio.css?v=202611212055">
+<link rel="stylesheet" href="../css/caratteri.css?v=202611212150">
+<link rel="stylesheet" href="../css/passaggio.css?v=202611212150">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
-<link rel="stylesheet" href="../js/vendor/lenis.css?v=202611212055">
-<link rel="stylesheet" href="../css/comune.css?v=202611212055">
-<link rel="stylesheet" href="../css/finestra.css?v=202611212055">
-<link rel="stylesheet" href="../css/pagine.css?v=202611212055">
-<link rel="stylesheet" href="../css/nuovo.css?v=202611212055">
+<script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
+/* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
+window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
+<link rel="stylesheet" href="../js/vendor/lenis.css?v=202611212150">
+<link rel="stylesheet" href="../css/comune.css?v=202611212150">
+<link rel="stylesheet" href="../css/finestra.css?v=202611212150">
+<link rel="stylesheet" href="../css/pagine.css?v=202611212150">
+<link rel="stylesheet" href="../css/nuovo.css?v=202611212150">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
@@ -73,7 +78,7 @@
 
 <section class="apertura-pagina" data-apertura aria-labelledby="titolo-case">
   <div class="media-pieno apertura-pagina_media" style="--r:16 / 9">
-    <video data-auto data-ciak="ciak-apertura" muted playsinline loop preload="none" poster="../media/casa-brembate-poster.jpg" data-src="../media/casa-brembate.mp4" data-src-grande="../media/casa-brembate-1920.mp4" aria-hidden="true"></video>
+    <video data-auto data-ciak="ciak-apertura" muted playsinline loop preload="none" data-poster="../media/casa-brembate-poster.jpg" data-poster-tel="../img/ridotte/media--casa-brembate-poster-1320.jpg" data-src="../media/casa-brembate.mp4" data-src-grande="../media/casa-brembate-1920.mp4" aria-hidden="true"></video><script>sceltaPoster(document.currentScript.previousElementSibling)</script>
   </div>
   <div class="velo apertura-pagina_velo"></div>
   <div class="apertura-pagina_testo">
@@ -93,7 +98,7 @@
   </div>
   <div class="residenze_pila">
   <article class="residenza" style="--i:0" aria-labelledby="r-gorle-bg---residenza-viaduse">
-    <div class="residenza_media media-pieno"><video data-auto data-ciak="ciak-gorle-bg---residenza-viaduse" muted playsinline loop preload="none" poster="../media/viaduse-giardino-poster.jpg" data-src="../media/viaduse-giardino.mp4" data-src-grande="../media/viaduse-giardino-1920.mp4" aria-hidden="true"></video></div>
+    <div class="residenza_media media-pieno"><video data-auto data-ciak="ciak-gorle-bg---residenza-viaduse" muted playsinline loop preload="none" data-poster="../media/viaduse-giardino-poster.jpg" data-poster-tel="../img/ridotte/media--viaduse-giardino-poster-1320.jpg" data-src="../media/viaduse-giardino.mp4" data-src-grande="../media/viaduse-giardino-1920.mp4" aria-hidden="true"></video><script>sceltaPoster(document.currentScript.previousElementSibling)</script></div>
     <div class="velo residenza_velo"></div>
     <div class="residenza_ombra" aria-hidden="true"></div>
     <div class="residenza_testo">
@@ -129,7 +134,7 @@
     
   </article>
   <article class="residenza" style="--i:2" aria-labelledby="r-cologno-al-serio---residenziale">
-    <div class="residenza_media media-pieno"><video data-auto data-ciak="ciak-cologno-al-serio---residenziale" muted playsinline loop preload="none" poster="../media/finestra-cortile-breda-poster.jpg" data-src="../media/finestra-cortile-breda.mp4" data-src-grande="../media/finestra-cortile-breda-1920.mp4" aria-hidden="true"></video></div>
+    <div class="residenza_media media-pieno"><video data-auto data-ciak="ciak-cologno-al-serio---residenziale" muted playsinline loop preload="none" data-poster="../media/finestra-cortile-breda-poster.jpg" data-poster-tel="../img/ridotte/media--finestra-cortile-breda-poster-1320.jpg" data-src="../media/finestra-cortile-breda.mp4" data-src-grande="../media/finestra-cortile-breda-1920.mp4" aria-hidden="true"></video><script>sceltaPoster(document.currentScript.previousElementSibling)</script></div>
     <div class="velo residenza_velo"></div>
     <div class="residenza_ombra" aria-hidden="true"></div>
     <div class="residenza_testo">
@@ -169,7 +174,7 @@
         <h3 class="gruppo_titolo">In corso <span>2</span></h3>
         <ol class="gruppo_elenco">
           <li class="voce" data-settore="Residenziale" data-slug="gorle-bg---residenza-viaduse" data-cerca="residenza viaduse gorle bg 2026 case">
-            <a href="../project/gorle-bg---residenza-viaduse/index.html" data-img="../media/viaduse-giardino-poster.jpg" data-img-tel="../media/viaduse-giardino-poster.jpg" data-clip="../media/viaduse-giardino.mp4" data-clip-grande="../media/viaduse-giardino-1920.mp4"
+            <a href="../project/gorle-bg---residenza-viaduse/index.html" data-img="../media/viaduse-giardino-poster.jpg" data-img-tel="../img/ridotte/media--viaduse-giardino-poster-1320.jpg" data-clip="../media/viaduse-giardino.mp4" data-clip-grande="../media/viaduse-giardino-1920.mp4"
                data-nome="Residenza Viaduse" data-meta="Gorle (BG), 2026, residenziale, in corso" data-tipo="Render animato">
               <span class="voce_nome">Residenza Viaduse</span>
               <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2026</span>
@@ -188,35 +193,35 @@
         <h3 class="gruppo_titolo">Realizzate <span>12</span></h3>
         <ol class="gruppo_elenco">
           <li class="voce" data-settore="Residenziale" data-slug="cologno-al-serio---residenziale" data-cerca="cortile breda cologno al serio bg 2024 case">
-            <a href="../project/cologno-al-serio---residenziale/index.html" data-img="../media/finestra-cortile-breda-poster.jpg" data-img-tel="../media/finestra-cortile-breda-poster.jpg" data-clip="../media/finestra-cortile-breda.mp4" data-clip-grande="../media/finestra-cortile-breda-1920.mp4"
+            <a href="../project/cologno-al-serio---residenziale/index.html" data-img="../media/finestra-cortile-breda-poster.jpg" data-img-tel="../img/ridotte/media--finestra-cortile-breda-poster-1320.jpg" data-clip="../media/finestra-cortile-breda.mp4" data-clip-grande="../media/finestra-cortile-breda-1920.mp4"
                data-nome="Cortile Breda" data-meta="Cologno al Serio (BG), 2024, residenziale" data-tipo="Foto animata">
               <span class="voce_nome">Cortile Breda</span>
               <span class="voce_anno">2024</span>
             </a>
           </li>
           <li class="voce" data-settore="Residenziale" data-slug="bdscentro" data-cerca="residenze a brembate di sopra brembate di sopra bg 2023 case">
-            <a href="../project/bdscentro/index.html" data-img="../media/casa-brembate-poster.jpg" data-img-tel="../media/casa-brembate-poster.jpg" data-clip="../media/casa-brembate.mp4" data-clip-grande="../media/casa-brembate-1920.mp4"
+            <a href="../project/bdscentro/index.html" data-img="../media/casa-brembate-poster.jpg" data-img-tel="../img/ridotte/media--casa-brembate-poster-1320.jpg" data-clip="../media/casa-brembate.mp4" data-clip-grande="../media/casa-brembate-1920.mp4"
                data-nome="Residenze a Brembate di Sopra" data-meta="Brembate di Sopra (BG), 2023, residenziale" data-tipo="Render animato">
               <span class="voce_nome">Residenze a Brembate di Sopra</span>
               <span class="voce_anno">2023</span>
             </a>
           </li>
           <li class="voce" data-settore="Residenziale" data-slug="leffe-residenza-antiche-ciodere" data-cerca="residenza antiche ciodere leffe bg 2020 case">
-            <a href="../project/leffe-residenza-antiche-ciodere/index.html" data-img="../media/finestra-leffe-poster.jpg" data-img-tel="../media/finestra-leffe-poster.jpg" data-clip="../media/finestra-leffe.mp4" data-clip-grande="../media/finestra-leffe-1920.mp4"
+            <a href="../project/leffe-residenza-antiche-ciodere/index.html" data-img="../media/finestra-leffe-poster.jpg" data-img-tel="../img/ridotte/media--finestra-leffe-poster-1320.jpg" data-clip="../media/finestra-leffe.mp4" data-clip-grande="../media/finestra-leffe-1920.mp4"
                data-nome="Residenza Antiche Ciodere" data-meta="Leffe (BG), 2020, residenziale" data-tipo="Foto animata">
               <span class="voce_nome">Residenza Antiche Ciodere</span>
               <span class="voce_anno">2020</span>
             </a>
           </li>
           <li class="voce" data-settore="Residenziale" data-slug="redona-centro-lotti-b1-b2" data-cerca="redona centro, lotti b1-b2 bergamo bg 2020 case">
-            <a href="../project/redona-centro-lotti-b1-b2/index.html" data-img="../media/redona-notte-poster.jpg" data-img-tel="../media/redona-notte-poster.jpg" data-clip="../media/redona-notte.mp4" data-clip-grande="../media/redona-notte-1920.mp4"
+            <a href="../project/redona-centro-lotti-b1-b2/index.html" data-img="../media/redona-notte-poster.jpg" data-img-tel="../img/ridotte/media--redona-notte-poster-1320.jpg" data-clip="../media/redona-notte.mp4" data-clip-grande="../media/redona-notte-1920.mp4"
                data-nome="Redona Centro, lotti B1-B2" data-meta="Bergamo (BG), 2020, residenziale" data-tipo="Render animato">
               <span class="voce_nome">Redona Centro, lotti B1-B2</span>
               <span class="voce_anno">2020</span>
             </a>
           </li>
           <li class="voce" data-settore="Residenziale" data-slug="redona-centro-lotti-a1-a2-a3" data-cerca="redona centro, lotti a1-a2-a3 bergamo bg 2019 case">
-            <a href="../project/redona-centro-lotti-a1-a2-a3/index.html" data-img="../media/finestra-redona-a1-a3-poster.jpg" data-img-tel="../media/finestra-redona-a1-a3-poster.jpg" data-clip="../media/finestra-redona-a1-a3.mp4" data-clip-grande="../media/finestra-redona-a1-a3-1920.mp4"
+            <a href="../project/redona-centro-lotti-a1-a2-a3/index.html" data-img="../media/finestra-redona-a1-a3-poster.jpg" data-img-tel="../img/ridotte/media--finestra-redona-a1-a3-poster-1320.jpg" data-clip="../media/finestra-redona-a1-a3.mp4" data-clip-grande="../media/finestra-redona-a1-a3-1920.mp4"
                data-nome="Redona Centro, lotti A1-A2-A3" data-meta="Bergamo (BG), 2019, residenziale" data-tipo="Foto animata">
               <span class="voce_nome">Redona Centro, lotti A1-A2-A3</span>
               <span class="voce_anno">2019</span>
@@ -308,14 +313,14 @@
   <p class="piede_fondo">Le immagini sono render e foto dei progetti Birolini. I video sono render e foto animati, con il solo movimento di camera.</p>
   <div class="piede_logo" aria-hidden="true"><svg viewBox="0 0 153.81 29.78" focusable="false"><path d="M14.24,21.64c2.05-.44,4.09-1.04,6.07-1.85l1.59-5.49c-1.42,1.13-3.03,2.18-4.85,3.08l-2.81,4.27Z"/><path d="M8,20.06l-2.53,2.57c2.32-.06,4.78-.27,7.28-.71l2.45-3.73c-2.13.86-4.52,1.51-7.2,1.87Z"/><path d="M18.64,25.55l1.41-4.9c-1.87.69-3.97,1.28-6.31,1.72l-2.47,3.75c2.73-.05,5.17-.26,7.36-.58Z"/><path d="M22.11,18.98c3.51-1.72,6.71-4.2,9.18-7.7l.18-11.28s-1.67,6.7-7.47,12.42l-1.89,6.56Z"/><path d="M31.25,13.85c-1.62,1.57-4.69,4.08-9.43,6.1l-1.54,5.32c5.17-.94,8.7-2.48,10.84-3.68l.12-7.75Z"/><path d="M19.97,26.38l-.98,3.39c4.45-.07,8.71-.58,12.03-1.83l.08-4.88c-3.39,1.74-7.23,2.76-11.13,3.31Z"/><path d="M2.43,25.72c2.71.28,5.22.41,7.55.42l2.31-3.51c-2.24.34-4.69.54-7.34.54l-2.51,2.55Z"/><path d="M7.93,29.23l1.55-2.36c-2.75-.09-5.33-.33-7.59-.61l-1.89,1.93c2.29.37,5.02.75,7.93,1.05Z"/><path d="M18.35,26.59c-2.56.27-5.12.36-7.57.32l-1.61,2.45c2.68.25,5.49.41,8.26.43l.92-3.2Z"/><path d="M69.85,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M78.13,11.4c.28,0,.43.15.46.4l.18,1.35h.15c1.32-1.29,2.98-1.99,4.94-1.99,3.25,0,5.71,1.96,6.57,4.97.06.21,0,.34-.18.4l-1.96.71c-.15.06-.31-.03-.37-.18-.74-1.9-1.87-3.28-4.14-3.28-1.99,0-3.59.98-4.85,2.58v11.35c0,.28-.15.43-.43.43h-1.93c-.21,0-.43-.15-.43-.43v-15.87c0-.28.18-.43.43-.43h1.56Z"/><path d="M101.26,11.16c4.85,0,8.62,3.65,8.62,8.62s-3.77,8.59-8.62,8.59-8.62-3.62-8.62-8.59,3.77-8.62,8.62-8.62ZM95.46,19.78c0,3.44,2.36,5.98,5.8,5.98s5.8-2.55,5.8-5.98-2.36-6.02-5.8-6.02-5.8,2.55-5.8,6.02Z"/><path d="M116.2,6.25c.28,0,.43.18.43.43v21.02c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43V6.67c0-.25.15-.43.43-.43h1.93Z"/><path d="M124.96,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M131.1,11.83c0-.25.15-.43.43-.43h1.57c.28,0,.43.15.46.43l.18,1.32h.15c1.47-1.38,3.07-1.99,5.03-1.99,4.33,0,7.27,2.52,7.27,7.52v9.02c0,.28-.15.43-.43.43h-1.96c-.21,0-.4-.15-.4-.43v-8.9c0-3.22-1.57-5.03-4.54-5.03-2.15,0-3.71.95-4.97,2.58v11.35c0,.28-.15.43-.43.43h-1.93c-.28,0-.43-.12-.43-.43v-15.87Z"/><path d="M153.38,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M59.15,15.14v-.17c1.28-.81,2.22-2.69,2.22-4.22,0-3.2-2.48-5.85-6.61-5.85h-11.82c-.3,0-.51.21-.51.51v8.56h-3.39c-.12,0-.22.1-.22.22v2.14c0,.12.1.22.22.22h3.39v11.06c0,.3.26.55.55.55h12.5c4.35,0,7.55-3.24,7.55-7.17,0-2.43-1.41-5.04-3.88-5.85ZM45.24,7.46h9.56c2.35,0,3.76,1.28,3.76,3.29s-1.66,3.2-3.54,3.2h-9.77v-6.49ZM55.35,25.55h-10.11v-9h10.11c2.99,0,4.86,1.71,4.86,4.44s-2.01,4.57-4.86,4.57Z"/></svg></div>
 </footer>
-<script src="../js/vendor/gsap.min.js?v=202611212055"></script>
-<script src="../js/vendor/ScrollTrigger.min.js?v=202611212055"></script>
-<script src="../js/vendor/SplitText.min.js?v=202611212055"></script>
-<script src="../js/vendor/Flip.min.js?v=202611212055"></script>
-<script src="../js/vendor/lenis.min.js?v=202611212055"></script>
-<script src="../js/comune.js?v=202611212055"></script>
-<script src="../js/finestra.js?v=202611212055"></script>
-<script src="../js/pagine.js?v=202611212055"></script>
-<script src="../js/nuovo.js?v=202611212055"></script>
+<script src="../js/vendor/gsap.min.js?v=202611212150"></script>
+<script src="../js/vendor/ScrollTrigger.min.js?v=202611212150"></script>
+<script src="../js/vendor/SplitText.min.js?v=202611212150"></script>
+<script src="../js/vendor/Flip.min.js?v=202611212150"></script>
+<script src="../js/vendor/lenis.min.js?v=202611212150"></script>
+<script src="../js/comune.js?v=202611212150"></script>
+<script src="../js/finestra.js?v=202611212150"></script>
+<script src="../js/pagine.js?v=202611212150"></script>
+<script src="../js/nuovo.js?v=202611212150"></script>
 </body>
 </html>

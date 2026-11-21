@@ -130,3 +130,11 @@ html.testata-su .indice { --cima: 0px; }
   .indice--piccolo .fp { position: sticky; height: 34vh; height: 34svh; top: var(--cima); }
   .indice--piccolo .indice_fine { min-height: 30vh; }
 }
+
+/* «Cerca in tutti i progetti» dentro il messaggio senza risultati (21/11/2026) */
+.indice_tutti { background: none; border: 0; padding: 10px 0; font: inherit; cursor: pointer; min-height: 44px; text-align: left; }
+
+/* prima foto dell'archivio scritta nella pagina come sfondo (21/11/2026): si vede appena arriva, senza aspettare lo script */
+.fp_prima { position: absolute; inset: 0; z-index: 0; background-size: cover; background-repeat: no-repeat; }
+.fp_prima--tel { display: none; }
+@media (max-width: 760px) { .fp_prima--pc { display: none; } .fp_prima--tel { display: block; } }
