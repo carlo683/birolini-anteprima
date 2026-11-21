@@ -138,3 +138,5 @@ html.testata-su .indice { --cima: 0px; }
 .fp_prima { position: absolute; inset: 0; z-index: 0; background-size: cover; background-repeat: no-repeat; }
 .fp_prima--tel { display: none; }
 @media (max-width: 760px) { .fp_prima--pc { display: none; } .fp_prima--tel { display: block; } }
+/* arrivando con un filtro nell'indirizzo (#settore=...) la prima foto fissa sarebbe quella sbagliata: non si mostra né si scarica */
+.con-filtro .fp_prima { display: none !important; }

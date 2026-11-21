@@ -18,14 +18,18 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/caratteri.css?v=202611212150">
-<link rel="stylesheet" href="css/passaggio.css?v=202611212150">
+<link rel="preload" as="image" href="media/apertura-hero-poster-telefono.jpg" media="(max-width: 760px) and (orientation: portrait)" fetchpriority="high">
+<link rel="preload" as="image" href="media/apertura-hero-poster.jpg" media="not all and (max-width: 760px) and (orientation: portrait)" fetchpriority="high">
+<link rel="stylesheet" href="css/caratteri.css?v=202611212227">
+<link rel="stylesheet" href="css/passaggio.css?v=202611212227">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
 <script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
 /* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
+if (/settore=/.test(location.hash)) document.documentElement.classList.add("con-filtro");   /* archivio già filtrato: niente prima foto fissa (vedi .fp_prima) */
+document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("video[poster]").forEach(function (v) { var u = "url(" + JSON.stringify(v.getAttribute("poster")) + ")"; v.style.backgroundImage = u; v.parentNode.style.backgroundImage = u; v.parentNode.classList.add("sotto-video"); }); });   /* poster anche come sfondo del video: niente vuoto quando parte */
 window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
-<link rel="stylesheet" href="js/vendor/lenis.css?v=202611212150">
-<link rel="stylesheet" href="css/home.css?v=202611212150">
+<link rel="stylesheet" href="js/vendor/lenis.css?v=202611212227">
+<link rel="stylesheet" href="css/home.css?v=202611212227">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) {
@@ -96,10 +100,10 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <div class="quadro" data-quadro>
       <div class="quadro_dentro">
         <video class="quadro_video" data-video="apertura" muted playsinline loop preload="none"
-          poster="media/apertura-hero-poster.jpg"
+          data-poster="media/apertura-hero-poster.jpg"
           data-src="media/apertura-hero-1280.mp4" data-src-grande="media/apertura-hero-1920.mp4"
           data-src-tel="media/apertura-hero-telefono.mp4"
-          data-poster-tel="media/apertura-hero-poster-telefono.jpg"></video>
+          data-poster-tel="media/apertura-hero-poster-telefono.jpg"></video><script>(function (v) { v.poster = window.matchMedia("(max-width: 760px) and (orientation: portrait)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); })(document.currentScript.previousElementSibling)</script>
       </div>
       <div class="velo velo--apertura"></div>
     </div>
@@ -919,11 +923,11 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   </div>
 </footer>
 
-<script src="js/vendor/gsap.min.js?v=202611212150"></script>
-<script src="js/vendor/ScrollTrigger.min.js?v=202611212150"></script>
-<script src="js/vendor/SplitText.min.js?v=202611212150"></script>
-<script src="js/vendor/Flip.min.js?v=202611212150"></script>
-<script src="js/vendor/lenis.min.js?v=202611212150"></script>
+<script src="js/vendor/gsap.min.js?v=202611212227"></script>
+<script src="js/vendor/ScrollTrigger.min.js?v=202611212227"></script>
+<script src="js/vendor/SplitText.min.js?v=202611212227"></script>
+<script src="js/vendor/Flip.min.js?v=202611212227"></script>
+<script src="js/vendor/lenis.min.js?v=202611212227"></script>
 <script>
 /* Riduci movimento (sito nuovo): da fermo si vede il fotogramma, quindi «Render» o «Foto», non «animato» */
 (function () {
@@ -935,6 +939,6 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   document.querySelectorAll('[data-tipo]').forEach(function (a) { a.setAttribute('data-tipo', via(a.getAttribute('data-tipo'))); });
 })();
 </script>
-<script src="js/home.js?v=202611212150"></script>
+<script src="js/home.js?v=202611212227"></script>
 </body>
 </html>

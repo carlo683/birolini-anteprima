@@ -20,18 +20,20 @@
 <link rel="preload" as="image" href="../../img/ridotte/media--finestra-leffe-poster-1320.jpg" media="(max-width: 760px)" fetchpriority="high">
 <link rel="preload" as="image" href="../../media/finestra-leffe-poster.jpg" media="(min-width: 761px)" fetchpriority="high">
 <link rel="preload" href="../../fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../css/caratteri.css?v=202611212150">
-<link rel="stylesheet" href="../../css/passaggio.css?v=202611212150">
+<link rel="stylesheet" href="../../css/caratteri.css?v=202611212227">
+<link rel="stylesheet" href="../../css/passaggio.css?v=202611212227">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
 <script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
 /* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
+if (/settore=/.test(location.hash)) document.documentElement.classList.add("con-filtro");   /* archivio già filtrato: niente prima foto fissa (vedi .fp_prima) */
+document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("video[poster]").forEach(function (v) { var u = "url(" + JSON.stringify(v.getAttribute("poster")) + ")"; v.style.backgroundImage = u; v.parentNode.style.backgroundImage = u; v.parentNode.classList.add("sotto-video"); }); });   /* poster anche come sfondo del video: niente vuoto quando parte */
 window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
-<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611212150">
-<link rel="stylesheet" href="../../css/comune.css?v=202611212150">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611212150">
-<link rel="stylesheet" href="../../css/finestra.css?v=202611212150">
-<link rel="stylesheet" href="../../css/pagine.css?v=202611212150">
-<link rel="stylesheet" href="../../css/nuovo.css?v=202611212150">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611212227">
+<link rel="stylesheet" href="../../css/comune.css?v=202611212227">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611212227">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611212227">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611212227">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611212227">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
@@ -394,16 +396,16 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js?v=202611212150"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js?v=202611212150"></script>
-<script src="../../js/vendor/SplitText.min.js?v=202611212150"></script>
-<script src="../../js/vendor/Flip.min.js?v=202611212150"></script>
-<script src="../../js/vendor/lenis.min.js?v=202611212150"></script>
-<script src="../../js/vendor/leaflet.js?v=202611212150"></script>
-<script src="../../js/comune.js?v=202611212150"></script>
-<script src="../../js/finestra.js?v=202611212150"></script>
-<script src="../../js/mappa-notte.js?v=202611212150"></script>
-<script src="../../js/pagine.js?v=202611212150"></script>
-<script src="../../js/nuovo.js?v=202611212150"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611212227"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611212227"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611212227"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611212227"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611212227"></script>
+<script src="../../js/vendor/leaflet.js?v=202611212227"></script>
+<script src="../../js/comune.js?v=202611212227"></script>
+<script src="../../js/finestra.js?v=202611212227"></script>
+<script src="../../js/mappa-notte.js?v=202611212227"></script>
+<script src="../../js/pagine.js?v=202611212227"></script>
+<script src="../../js/nuovo.js?v=202611212227"></script>
 </body>
 </html>

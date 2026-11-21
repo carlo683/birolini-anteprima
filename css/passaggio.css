@@ -11,6 +11,11 @@
 @keyframes passaggio-esce { to { opacity: 0; } }
 @keyframes passaggio-entra { from { opacity: 0; } }
 
+/* fotogramma anche come sfondo del video (lo mette FOTO_JS): quando il video parte senza il primo fotogramma, sotto resta l'immagine */
+video[poster], .sotto-video { background-size: cover; background-position: 50% 50%; background-repeat: no-repeat; }
+/* il video della home ha il fondo blu notte pieno: mentre aspetta il primo fotogramma copriva l'immagine sotto (21/11/2026) */
+.sotto-video > video { background-color: transparent !important; }
+
 /* Foto che arrivano mentre si scorre (21/11/2026, Carlo: «a volte le foto vengono fuori»): invece di comparire di colpo
    sfumano sul riquadro scuro. La classe «caricata» la mette lo script FOTO_JS nella testa, anche quando la foto
    non arriva (errore), così non resta mai nascosta. Vale solo con .moto, cioè con JS acceso. */

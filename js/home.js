@@ -217,6 +217,8 @@
   new IntersectionObserver(function (v) { fpInVista = v[0].isIntersecting; videoGiusto(); }, { threshold: 0 }).observe(fp);
 
   /* clic su un nome o sulla finestra: la finestra si allarga a tutto schermo, poi si apre la scheda */
+  // tornando indietro, Safari ripresenta la pagina com era (bfcache): via il velo della foto allargata (21/11/2026)
+  window.addEventListener('pageshow', function (e) { if (e.persisted) document.querySelectorAll('.fp_pieno').forEach(function (x) { x.remove(); }); });
   function entraNelProgetto(href, e, voce) {
     if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0)) return;   // nuova scheda: come sempre
     if (!filtriAnimati) { if (!e || e.currentTarget === fp) window.location.href = href; return; }

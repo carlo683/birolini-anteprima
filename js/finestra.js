@@ -165,6 +165,8 @@
     });
     new IntersectionObserver(function (v) { fpInVista = v[0].isIntersecting; videoGiusto(); }, { threshold: 0 }).observe(fp);
 
+    // tornando indietro, Safari ripresenta la pagina com era (bfcache): via il velo della foto allargata (21/11/2026)
+    window.addEventListener('pageshow', function (e) { if (e.persisted) document.querySelectorAll('.fp_pieno').forEach(function (x) { x.remove(); }); });
     /* ---- clic: la finestra si allarga a tutto schermo, poi si apre la scheda ---- */
     function entraNelProgetto(href, e, voce) {
       if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0)) return;
