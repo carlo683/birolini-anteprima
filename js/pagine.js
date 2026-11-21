@@ -106,21 +106,21 @@
       if (entra.length) tl.fromTo(entra, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: .9, stagger: .1, ease: 'power2.out' }, .75);
       if (ciak) tl.fromTo(ciak, { autoAlpha: 0 }, { autoAlpha: 1, duration: .8 }, 1.2);
       // scorrendo, la clip scende piano e il testo sale: il foglio dopo la copre
-      if (!cornice && !inColonna) gsap.to(media, { yPercent: 14, ease: 'none', scrollTrigger: { trigger: ap, start: 'top top', end: 'bottom top', scrub: true } });
-      if (!inColonna) gsap.to($('.apertura-pagina_testo', ap), { y: -80, autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: ap, start: '30% top', end: '85% top', scrub: true } });
+      if (!cornice && !inColonna) gsap.to(media, { yPercent: 14, ease: 'none', scrollTrigger: { trigger: ap, start: 'top top', end: 'bottom top', scrub: B.leggero >= 3 ? .5 : true } });
+      if (!inColonna) gsap.to($('.apertura-pagina_testo', ap), { y: -80, autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: ap, start: '30% top', end: '85% top', scrub: B.leggero >= 3 ? .5 : true } });
     }
 
     // galleria: dentro la cornice l'immagine scorre appena, in senso opposto alla pagina
     (B.leggero ? [] : $$('.tavola-foto_quadro img')).forEach(function (img) {
-      gsap.fromTo(img, { yPercent: -3 }, { yPercent: 3, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.fromTo(img, { yPercent: -3 }, { yPercent: 3, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: B.leggero >= 3 ? .5 : true } });
     });
 
     // residenze in pila: il foglio sotto si scurisce mentre arriva il prossimo
     var pila = $$('.residenza');
     pila.forEach(function (r, i) {
       var prossimo = pila[i + 1]; if (!prossimo) return;
-      gsap.to($('.residenza_ombra', r), { opacity: .7, ease: 'none', scrollTrigger: { trigger: prossimo, start: 'top bottom', end: 'top top', scrub: true } });
-      if (!B.leggero) gsap.fromTo(prossimo, { borderTopLeftRadius: 28, borderTopRightRadius: 28 }, { borderTopLeftRadius: 0, borderTopRightRadius: 0, ease: 'none', scrollTrigger: { trigger: prossimo, start: 'top bottom', end: 'top top', scrub: true } });
+      gsap.to($('.residenza_ombra', r), { opacity: .7, ease: 'none', scrollTrigger: { trigger: prossimo, start: 'top bottom', end: 'top top', scrub: B.leggero >= 3 ? .5 : true } });
+      if (!B.leggero) gsap.fromTo(prossimo, { borderTopLeftRadius: 28, borderTopRightRadius: 28 }, { borderTopLeftRadius: 0, borderTopRightRadius: 0, ease: 'none', scrollTrigger: { trigger: prossimo, start: 'top bottom', end: 'top top', scrub: B.leggero >= 3 ? .5 : true } });
     });
   });
 })();

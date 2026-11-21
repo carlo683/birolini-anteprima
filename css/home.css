@@ -974,3 +974,7 @@ a:hover > .freccia { transform: translateX(6px); }
 .leggero .storia_video { display: none; }
 /* galleria: niente parallasse, quindi niente livelli in più per ogni foto */
 .leggero .tavola-foto_quadro img { transform: none; will-change: auto; }
+/* livello 3 (versione C) */
+.storia_foto-l { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.storia_coperchio { will-change: transform, opacity; }
+[data-leggero="3"] .tappa_media .tavola_colore, [data-leggero="3"] .tappa_media .tavola_colore-dentro, [data-leggero="3"] .tempo_lista { will-change: auto; }

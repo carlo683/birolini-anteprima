@@ -36,7 +36,7 @@
         .to(pieno, { attr: { 'fill-opacity': 1 }, duration: .35 }, .75)
         .fromTo(['.storia_foto', '.storia_video'], { scale: 1.08, svgOrigin: centro }, { scale: 1, duration: 1.1 }, 0)
         .to({}, { duration: .15 }, 1.1);
-      ScrollTrigger.create({ trigger: scena, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); }, pin: true, anticipatePin: B.leggero ? 1 : 0, scrub: true, animation: tl });
+      ScrollTrigger.create({ trigger: scena, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); }, pin: true, anticipatePin: B.leggero ? 1 : 0, scrub: B.leggero >= 3 ? .5 : true, animation: tl });
       var v = $('.storia_video video'), ciak = document.getElementById('ciak-storia');
       if (v && !B.leggero) {
         new IntersectionObserver(function (e) { if (e[0].isIntersecting) B.carica(v); B.gira(v, e[0].isIntersecting); }, { rootMargin: '300px 0px' }).observe(scena);

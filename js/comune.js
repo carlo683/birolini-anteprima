@@ -103,7 +103,7 @@
           B.lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
           B.lenis.on('scroll', ScrollTrigger.update);
           gsap.ticker.add(function (t) { B.lenis.raf(t * 1000); });
-        } else if (B.leggero > 1) ScrollTrigger.normalizeScroll(true);   // modalità leggera: scorrimento nativo
+        } else if (B.leggero === 2) ScrollTrigger.normalizeScroll(true);   // modalità leggera: scorrimento nativo
         gsap.ticker.lagSmoothing(0);
         // passaggi «a foglio»: l'angolo da 28 px a 0 mentre la sezione arriva in cima
         (B.leggero ? [] : $$('.foglio')).forEach(function (s) {

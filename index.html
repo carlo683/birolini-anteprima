@@ -21,8 +21,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- [DA FARE PRIMA DI PUBBLICARE] i caratteri vanno messi in fonts/ (Archivo variabile con l'asse della larghezza, IBM Plex Mono 400 e 500), senza Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,200..800;1,62..125,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="js/vendor/lenis.css?v=202611201954">
-<link rel="stylesheet" href="css/home.css?v=202611201954">
+<link rel="stylesheet" href="js/vendor/lenis.css?v=202611210824">
+<link rel="stylesheet" href="css/home.css?v=202611210824">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) {
@@ -35,7 +35,7 @@
 (function (h) {
   var q = location.search, m = /[?&]leggero=(\d)/.exec(q);
   var tocco = window.matchMedia && matchMedia('(hover: none) and (pointer: coarse)').matches;
-  var liv = m ? +m[1] : (tocco ? 1 : 0);
+  var liv = m ? +m[1] : (tocco ? 1 : 0);   // 3 = versione C (da provare)
   h.setAttribute('data-leggero', String(liv));
   if (liv > 0) h.classList.add('leggero');
   if (/[?&]fps\b/.test(q)) document.addEventListener('DOMContentLoaded', function () {
@@ -256,7 +256,7 @@
     <div class="tavola" data-tavola="0">
       <figure class="tavola_figura" style="--pos:50% 55%;--r:1.6">
         <div class="tavola_disegno"><img src="media/linee/gorle-bg---residenza-viaduse--foto-03.webp" alt="" width="1600" height="1000" decoding="async"></div>
-        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/gorle-bg---residenza-viaduse--foto-03-1080.jpg" srcset="img/grandi/gorle-bg---residenza-viaduse--foto-03-1080.jpg 1080w, img/grandi/gorle-bg---residenza-viaduse--foto-03.jpg 1920w" sizes="100vw" alt="Render della Residenza Viaduse a Gorle" width="1920" height="1200" decoding="async"></div></div>
+        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/gorle-bg---residenza-viaduse--foto-03-1080.jpg" srcset="img/grandi/gorle-bg---residenza-viaduse--foto-03-1080.jpg 1080w, img/grandi/gorle-bg---residenza-viaduse--foto-03.jpg 1920w" sizes="(max-width: 760px) 340px, 100vw" alt="Render della Residenza Viaduse a Gorle" width="1920" height="1200" decoding="async"></div></div>
         <span class="tavola_quota" aria-hidden="true"></span>
       </figure>
       <aside class="cartiglio" aria-label="Dati del progetto">
@@ -274,7 +274,7 @@
     <div class="tavola" data-tavola="1">
       <figure class="tavola_figura" style="--pos:50% 50%;--r:1.7778">
         <div class="tavola_disegno"><img src="media/linee/riadda-logistica--render-edificio-v2.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></div>
-        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/riadda-logistica--render-edificio-1080.jpg" srcset="img/grandi/riadda-logistica--render-edificio-1080.jpg 1080w, img/grandi/riadda-logistica--render-edificio.jpg 1920w" sizes="100vw" alt="Render dell'edificio logistico di Rivolta d'Adda visto dall'alto" width="1920" height="1080" loading="lazy" decoding="async"></div></div>
+        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/riadda-logistica--render-edificio-1080.jpg" srcset="img/grandi/riadda-logistica--render-edificio-1080.jpg 1080w, img/grandi/riadda-logistica--render-edificio.jpg 1920w" sizes="(max-width: 760px) 340px, 100vw" alt="Render dell'edificio logistico di Rivolta d'Adda visto dall'alto" width="1920" height="1080" loading="lazy" decoding="async"></div></div>
         <span class="tavola_quota" aria-hidden="true"></span>
       </figure>
       <aside class="cartiglio" aria-label="Dati del progetto">
@@ -292,7 +292,7 @@
     <div class="tavola" data-tavola="2">
       <figure class="tavola_figura" style="--pos:50% 40%;--r:1.5">
         <div class="tavola_disegno"><img src="media/linee/redona-centro-lotti-a1-a2-a3--foto-01.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async"></div>
-        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/redona-centro-lotti-a1-a2-a3--foto-01-1080.jpg" srcset="img/grandi/redona-centro-lotti-a1-a2-a3--foto-01-1080.jpg 1080w, img/grandi/redona-centro-lotti-a1-a2-a3--foto-01.jpg 1920w" sizes="100vw" alt="La facciata di un edificio di Redona Centro, lotti A1-A2-A3, con i pannelli bianchi sui balconi" width="1920" height="1280" loading="lazy" decoding="async"></div></div>
+        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/redona-centro-lotti-a1-a2-a3--foto-01-1080.jpg" srcset="img/grandi/redona-centro-lotti-a1-a2-a3--foto-01-1080.jpg 1080w, img/grandi/redona-centro-lotti-a1-a2-a3--foto-01.jpg 1920w" sizes="(max-width: 760px) 340px, 100vw" alt="La facciata di un edificio di Redona Centro, lotti A1-A2-A3, con i pannelli bianchi sui balconi" width="1920" height="1280" loading="lazy" decoding="async"></div></div>
         <span class="tavola_quota" aria-hidden="true"></span>
       </figure>
       <aside class="cartiglio" aria-label="Dati del progetto">
@@ -916,11 +916,11 @@
   </div>
 </footer>
 
-<script src="js/vendor/gsap.min.js?v=202611201954"></script>
-<script src="js/vendor/ScrollTrigger.min.js?v=202611201954"></script>
-<script src="js/vendor/SplitText.min.js?v=202611201954"></script>
-<script src="js/vendor/Flip.min.js?v=202611201954"></script>
-<script src="js/vendor/lenis.min.js?v=202611201954"></script>
+<script src="js/vendor/gsap.min.js?v=202611210824"></script>
+<script src="js/vendor/ScrollTrigger.min.js?v=202611210824"></script>
+<script src="js/vendor/SplitText.min.js?v=202611210824"></script>
+<script src="js/vendor/Flip.min.js?v=202611210824"></script>
+<script src="js/vendor/lenis.min.js?v=202611210824"></script>
 <script>
 /* Riduci movimento (sito nuovo): da fermo si vede il fotogramma, quindi «Render» o «Foto», non «animato» */
 (function () {
@@ -932,6 +932,6 @@
   document.querySelectorAll('[data-tipo]').forEach(function (a) { a.setAttribute('data-tipo', via(a.getAttribute('data-tipo'))); });
 })();
 </script>
-<script src="js/home.js?v=202611201954"></script>
+<script src="js/home.js?v=202611210824"></script>
 </body>
 </html>

@@ -323,7 +323,7 @@
     if (LEGGERO) {
       // modalità leggera: scorrimento nativo del telefono, niente Lenis (al suo posto un sostituto per i salti ai capitoli)
       lenis = { scrollTo: function (d) { var y = typeof d === 'number' ? d : d.getBoundingClientRect().top + window.scrollY; window.scrollTo({ top: y, behavior: 'smooth' }); }, stop: function () {}, start: function () {} };
-      if (LEGGERO > 1) ScrollTrigger.normalizeScroll(true);
+      if (LEGGERO === 2) ScrollTrigger.normalizeScroll(true);
     } else {
       lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
       lenis.on('scroll', ScrollTrigger.update);
@@ -395,8 +395,9 @@
       this.p = 0; this.k = 1; this.r = null;
     }
     Inquadratura.prototype.applica = function () {
-      var W = this.q.parentNode.clientWidth || window.innerWidth;
-      var Hh = this.q.parentNode.clientHeight || window.innerHeight;
+      // misure lette una volta sola (si azzerano in misuraFinestre): leggerle a ogni fotogramma rallenta il telefono
+      if (!this.W) { this.W = this.q.parentNode.clientWidth || window.innerWidth; this.Hh = this.q.parentNode.clientHeight || window.innerHeight; }
+      var W = this.W, Hh = this.Hh;
       var r = this.r || { x: 0, y: 0, w: W, h: Hh };
       var p = this.p;
       var sx = 1 + (r.w / W - 1) * p, sy = 1 + (r.h / Hh - 1) * p;
@@ -414,7 +415,7 @@
     var finestraCentro = $('.finestra--centro');
     function misuraFinestre() {
       var r1 = misura(finestra, film);
-      iA.r = r1; iC[0].r = r1;
+      iA.r = r1; iC[0].r = r1; iA.W = 0; iC[0].W = 0;
       iA.applica(); iC[0].applica();
     }
 
@@ -575,7 +576,7 @@
       end: function () { return '+=' + Math.round(tl.duration() * window.innerHeight * .38); },   // giro 3: un quarto più corto
       pin: true,
       anticipatePin: LEGGERO ? 1 : 0,
-      scrub: true,
+      scrub: LEGGERO >= 3 ? .5 : true,
       animation: tl,
       invalidateOnRefresh: true,
       onUpdate: aggiornaFilm,
@@ -678,7 +679,7 @@
     ScrollTrigger.create({
       trigger: scenaC, start: 'top top',
       end: function () { return '+=' + Math.round(tlC.duration() * window.innerHeight * .37); },
-      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: true, animation: tlC, invalidateOnRefresh: true,
+      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlC, invalidateOnRefresh: true,
       onUpdate: function () {
         var n = Math.min(tavole.length, Math.floor((tlC.time() + .05) / PASSO) + 1);
         if (n !== contaOra) { contaOra = n; numeroC.textContent = n; }
@@ -717,7 +718,43 @@
     var cifre = $$('.storia_cifre, .storia_tratto', svgStoria), pieno = $('.storia_pieno', svgStoria);
     var centro = telefono.matches ? '500 560' : '1040 500';
     var tlStoria = gsap.timeline({ defaults: { ease: 'none' } });
-    tlStoria.to('.storia_testo', { autoAlpha: 0, y: -40, duration: .3, ease: 'power2.in' }, .05)
+    var storiaLeggera = function (tlS) {
+      var NS = 'http://www.w3.org/2000/svg', vb = svgStoria.getAttribute('viewBox').split(' ');
+      var vw = +vb[2], vh = +vb[3];
+      var img = document.createElement('img');
+      img.className = 'storia_foto-l'; img.alt = ''; img.decoding = 'async'; img.setAttribute('aria-hidden', 'true');
+      img.src = $('.storia_foto', svgStoria).getAttribute('href');
+      var cop = document.createElementNS(NS, 'svg');
+      cop.setAttribute('class', 'storia_svg storia_coperchio'); cop.setAttribute('viewBox', vb.join(' '));
+      cop.setAttribute('preserveAspectRatio', 'xMidYMid slice'); cop.setAttribute('aria-hidden', 'true'); cop.setAttribute('focusable', 'false');
+      var testo = $('.storia_cifre text', svgStoria);
+      var buco = testo.cloneNode(true); buco.style.fill = '#000';
+      var mask = document.createElementNS(NS, 'mask'); mask.setAttribute('id', 'buco-1979'); mask.setAttribute('maskUnits', 'userSpaceOnUse');
+      mask.setAttribute('x', 0); mask.setAttribute('y', 0); mask.setAttribute('width', vw); mask.setAttribute('height', vh);
+      var bianco = document.createElementNS(NS, 'rect'); bianco.setAttribute('width', vw); bianco.setAttribute('height', vh); bianco.setAttribute('fill', '#fff');
+      mask.appendChild(bianco); mask.appendChild(buco);
+      var defs = document.createElementNS(NS, 'defs'); defs.appendChild(mask); cop.appendChild(defs);
+      var notte = document.createElementNS(NS, 'rect'); notte.setAttribute('width', vw); notte.setAttribute('height', vh); notte.setAttribute('mask', 'url(#buco-1979)'); notte.style.fill = 'var(--notte)';
+      cop.appendChild(notte);
+      var tratto = document.createElementNS(NS, 'g'); tratto.setAttribute('class', 'storia_tratto'); tratto.appendChild(testo.cloneNode(true)); cop.appendChild(tratto);
+      scenaStoria.insertBefore(img, svgStoria); scenaStoria.insertBefore(cop, svgStoria);
+      svgStoria.style.display = 'none';
+      // il centro dell'ingrandimento è il centro delle cifre (in pixel dello schermo)
+      function centra() {
+        var bb = tratto.getBBox(), W = scenaStoria.clientWidth, Hs = scenaStoria.clientHeight;
+        var sc = Math.max(W / vw, Hs / vh), ox = (W - vw * sc) / 2, oy = (Hs - vh * sc) / 2;
+        gsap.set(cop, { transformOrigin: (ox + (bb.x + bb.width / 2) * sc).toFixed(1) + 'px ' + (oy + (bb.y + bb.height / 2) * sc).toFixed(1) + 'px' });
+      }
+      centra(); ScrollTrigger.addEventListener('refreshInit', centra);
+      tlS.to('.storia_testo', { autoAlpha: 0, y: -40, duration: .3, ease: 'power2.in' }, .05)
+        .to('.storia_velo', { opacity: 0, duration: .3 }, .1)
+        .to(cop, { scale: 7, duration: 1, ease: 'power2.in' }, .1)
+        .to(tratto, { opacity: 0, duration: .3 }, .6)
+        .to(cop, { autoAlpha: 0, duration: .35 }, .75)
+        .fromTo(img, { scale: 1.08 }, { scale: 1, duration: 1.1 }, 0)
+        .to({}, { duration: .15 }, 1.1);
+    };
+    if (LEGGERO >= 3) storiaLeggera(tlStoria); else tlStoria.to('.storia_testo', { autoAlpha: 0, y: -40, duration: .3, ease: 'power2.in' }, .05)
       .to('.storia_velo', { opacity: 0, duration: .3 }, .1)
       .to(cifre, { scale: 7, svgOrigin: centro, duration: 1, ease: 'power2.in' }, .1)
       .to('.storia_tratto', { opacity: 0, duration: .3 }, .6)
@@ -726,7 +763,7 @@
       .to({}, { duration: .15 }, 1.1);
     ScrollTrigger.create({
       trigger: scenaStoria, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); },
-      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: true, animation: tlStoria
+      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlStoria
     });
     var videoStoria = $('.storia_video video');
     if (videoStoria && videoStoria.dataset.src && !LEGGERO) {
@@ -812,14 +849,20 @@
     segno.innerHTML = '<span class="segnaposto_n"></span><span class="segnaposto_nome"></span><span class="segnaposto_corto"></span>';
     var filo = document.createElement('div'); filo.className = 'filo-pagina'; filo.setAttribute('aria-hidden', 'true'); filo.innerHTML = '<i></i>';
     document.body.appendChild(segno); document.body.appendChild(filo);
-    var filoX = gsap.quickSetter($('i', filo), 'scaleX'), parteOra = -1;
+    var filoX = gsap.quickSetter($('i', filo), 'scaleX'), parteOra = -1, inizioParti = [], segnoSu = null, filoSu = null;
+    // dove comincia ogni parte: si misura solo quando ScrollTrigger rimisura la pagina, non a ogni fotogramma
+    function misuraParti() {
+      inizioParti = parti.map(function (p) { var el = p.el.parentNode && p.el.parentNode.classList.contains('pin-spacer') ? p.el.parentNode : p.el; return el.getBoundingClientRect().top + window.scrollY; });
+    }
     function aggiornaSegno(prog) {
       filoX(prog);
-      var meta = window.innerHeight * .5, k = 0;
-      for (var j = 0; j < parti.length; j++) { var el = parti[j].el.parentNode && parti[j].el.parentNode.classList.contains('pin-spacer') ? parti[j].el.parentNode : parti[j].el; if (el.getBoundingClientRect().top <= meta) k = j; }
-      var su = window.scrollY > window.innerHeight * .6;   // nella prima schermata no: c'è il nome Birolini
+      var y = window.scrollY, meta = y + window.innerHeight * .5, k = 0;
+      for (var j = 0; j < inizioParti.length; j++) { if (inizioParti[j] <= meta) k = j; }
+      var su = y > window.innerHeight * .6;   // nella prima schermata no: c'è il nome Birolini
       // nei progetti, quando la testata si nasconde, in alto salgono i filtri: lì basta il contatore «09 / 42»
-      segno.classList.toggle('su', su && !(parti[k].el.classList.contains('indice') && H.classList.contains('testata-su'))); filo.classList.toggle('su', su);
+      var s1 = su && !(parti[k].el.classList.contains('indice') && H.classList.contains('testata-su'));
+      if (s1 !== segnoSu) { segnoSu = s1; segno.classList.toggle('su', s1); }
+      if (su !== filoSu) { filoSu = su; filo.classList.toggle('su', su); }
       if (k !== parteOra) {
         parteOra = k;
         $('.segnaposto_n', segno).textContent = (k + 1) + ' / ' + parti.length;
@@ -827,7 +870,7 @@
         $('.segnaposto_corto', segno).textContent = parti[k].corto;
       }
     }
-    ScrollTrigger.create({ start: 0, end: 'max', onUpdate: function (s) { aggiornaSegno(s.progress); }, onRefresh: function (s) { aggiornaSegno(s.progress); } });
+    ScrollTrigger.create({ start: 0, end: 'max', onUpdate: function (s) { aggiornaSegno(s.progress); }, onRefresh: function (s) { misuraParti(); aggiornaSegno(s.progress); } });
 
     /* ---- Misure giuste dopo il caricamento di caratteri e immagini ---- */
     misuraFinestre();
