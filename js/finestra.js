@@ -183,6 +183,7 @@
         pieno.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;visibility:hidden;pointer-events:none';
         document.body.appendChild(pieno);
         Flip.fit(velo, pieno, { duration: .55, ease: 'power3.inOut', absolute: true, scale: false, onComplete: vai });
+        gsap.to(velo.firstChild, { opacity: .45, duration: .55, ease: 'power2.in' });   // finisce scura come l'apertura della scheda, così il passaggio non salta (21/11/2026)
       };
       if (src === su.src) parti(); else prendi(src).then(parti, parti);   // prima si decodifica, così non cresce un riquadro vuoto
     }

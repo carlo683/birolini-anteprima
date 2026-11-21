@@ -1,0 +1,12 @@
+/* Passaggio tra le pagine: generato da lavoro/strumenti/genera-nuovo.mjs (PASSAGGIO_CSS) */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .testata { view-transition-name: testata; }
+  ::view-transition-group(testata) { animation-duration: .45s; }
+  /* uno dopo l'altro, mai sovrapposti (21/11/2026: Carlo vedeva due pagine una sopra l'altra): la vecchia si spegne,
+     poi la nuova si accende; a farla «entrare dal basso» ci pensano già le animazioni della pagina */
+  ::view-transition-old(root) { animation: .2s cubic-bezier(.4, 0, 1, 1) both passaggio-esce; }
+  ::view-transition-new(root) { animation: .38s cubic-bezier(.2, 0, 0, 1) .18s both passaggio-entra; }
+}
+@keyframes passaggio-esce { to { opacity: 0; } }
+@keyframes passaggio-entra { from { opacity: 0; } }
