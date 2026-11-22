@@ -20,16 +20,16 @@
 <link rel="preload" href="fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="media/apertura-hero-poster-telefono.jpg" media="(max-width: 760px) and (orientation: portrait)" fetchpriority="high">
 <link rel="preload" as="image" href="media/apertura-hero-poster.jpg" media="not all and (max-width: 760px) and (orientation: portrait)" fetchpriority="high">
-<link rel="stylesheet" href="css/caratteri.css?v=202611220848">
-<link rel="stylesheet" href="css/passaggio.css?v=202611220848">
+<link rel="stylesheet" href="css/caratteri.css?v=202611221234">
+<link rel="stylesheet" href="css/passaggio.css?v=202611221234">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
 <script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
 /* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
 if (/settore=/.test(location.hash)) document.documentElement.classList.add("con-filtro");   /* archivio già filtrato: niente prima foto fissa (vedi .fp_prima) */
 document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("video[poster]").forEach(function (v) { var u = "url(" + JSON.stringify(v.getAttribute("poster")) + ")"; v.style.backgroundImage = u; v.parentNode.style.backgroundImage = u; v.parentNode.classList.add("sotto-video"); }); });   /* poster anche come sfondo del video: niente vuoto quando parte */
 window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
-<link rel="stylesheet" href="js/vendor/lenis.css?v=202611220848">
-<link rel="stylesheet" href="css/home.css?v=202611220848">
+<link rel="stylesheet" href="js/vendor/lenis.css?v=202611221234">
+<link rel="stylesheet" href="css/home.css?v=202611221234">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) {
@@ -167,7 +167,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <h3 class="capitolo_titolo" id="casa-titolo" data-righe>Case</h3>
       <p class="capitolo_frase" data-entra>Residenze a Bergamo e in provincia, dal 2000 a oggi.</p>
       <a class="bottone" href="case/index.html" data-entra>Vedi le residenze</a>
-      <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Residenziale">Le case nell'indice <span data-conta="Residenziale">14</span></a></p>
+      <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Residenziale">Tutte le <span data-conta="Residenziale">14</span> case</a></p>
     </div>
     <ul class="capitolo_righe" data-entra>
       <li><a href="project/gorle-bg---residenza-viaduse/index.html"><span>Residenza Viaduse, Gorle</span><span class="freccia" aria-hidden="true">→</span></a></li>
@@ -235,7 +235,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <h3 class="capitolo_titolo" id="energia-titolo" data-righe>I nostri campi fotovoltaici</h3>
       <p class="capitolo_frase" data-entra>Li costruiamo dal 2010. Quello di Torre Boldone è alla base della comunità energetica Imotorre.</p>
       <a class="bottone" href="energia/index.html" data-entra>Vedi gli impianti</a>
-      <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Energetico">Gli impianti nell'indice <span data-conta="Energetico">5</span></a></p>
+      <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Energetico">Tutti i <span data-conta="Energetico">5</span> impianti</a></p>
     </div>
     <ul class="capitolo_righe" data-entra>
       <li><a href="project/bergamo-bg---portec-s-r-l/index.html"><span>Campo zona aeroporto, Bergamo</span><span class="freccia" aria-hidden="true">→</span></a></li>
@@ -246,9 +246,9 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
 
   <!-- Indice dei capitoli: i quattro bisogni sullo stesso piano -->
   <nav class="capindice" aria-label="I quattro settori">
-    <a href="#casa" data-capitolo="0"><span class="capindice_linea"><i></i></span>Casa</a>
-    <a href="#spazi" data-capitolo="1"><span class="capindice_linea"><i></i></span>Attività</a>
-    <a href="#area" data-capitolo="2"><span class="capindice_linea"><i></i></span>Area</a>
+    <a href="#casa" data-capitolo="0"><span class="capindice_linea"><i></i></span>Case</a>
+    <a href="#spazi" data-capitolo="1"><span class="capindice_linea"><i></i></span>Commercio</a>
+    <a href="#area" data-capitolo="2"><span class="capindice_linea"><i></i></span>Aree</a>
     <a href="#energia" data-capitolo="3"><span class="capindice_linea"><i></i></span>Energia</a>
   </nav>
 </div>
@@ -309,7 +309,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
           <div class="cartiglio_riga"><dt>Luogo</dt><dd>Bergamo (BG)</dd></div>
           <div class="cartiglio_riga"><dt>Anno</dt><dd>2019</dd></div>
           <div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div>
-          <div class="cartiglio_riga"><dt>Dimensione</dt><dd>30 appartamenti</dd></div>
+          <div class="cartiglio_riga"><dt>Dimensione</dt><dd>A1-A2: 32 appartamenti e 7 negozi</dd></div>
           <div class="cartiglio_riga"><dt>Stato</dt><dd>Realizzato</dd></div>
           <div class="cartiglio_riga"><dt>Immagine</dt><dd>Foto. Il disegno è ricavato dall'immagine.</dd></div>
         </dl>
@@ -379,7 +379,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
           </li>
           <li class="voce" data-settore="Residenziale" data-cerca="redona centro, lotti c1-c2 bergamo bg 2024">
             <a href="project/redona-centro-lotti-c1-c2/index.html" data-img="img/progetti/redona-centro-lotti-c1-c2/copertina.jpg" data-img-tel="img/progetti/redona-centro-lotti-c1-c2/copertina-telefono.jpg" data-pos="50% 22%"
-               data-nome="Redona Centro, lotti C1-C2" data-n="" data-meta="Bergamo (BG), 2024, residenziale, in corso" data-tipo="">
+               data-nome="Redona Centro, lotti C1-C2" data-n="" data-meta="Bergamo (BG), 2024, residenziale, in corso" data-tipo="Foto">
               <span class="voce_nome">Redona Centro, lotti C1-C2<span class="voce_luogo">Bergamo (BG)</span></span>
               <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2024</span>
             </a>
@@ -414,7 +414,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
           </li>
           <li class="voce" data-settore="Residenziale" data-cerca="residenza pascoli torre boldone bg 2010">
             <a href="project/torre-boldone-bg-residenza-pascoli/index.html" data-img="img/progetti/torre-boldone-bg-residenza-pascoli/copertina.jpg" data-img-tel="img/progetti/torre-boldone-bg-residenza-pascoli/copertina-telefono.jpg" data-piccola
-               data-nome="Residenza Pascoli" data-n="" data-meta="Torre Boldone (BG), 2010, residenziale" data-tipo="">
+               data-nome="Residenza Pascoli" data-n="" data-meta="Torre Boldone (BG), 2010, residenziale" data-tipo="Render">
               <span class="voce_nome">Residenza Pascoli<span class="voce_luogo">Torre Boldone (BG)</span></span>
               <span class="voce_anno">2010</span>
             </a>
@@ -503,7 +503,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
           </li>
           <li class="voce" data-settore="Commerciale" data-cerca="parco commerciale biraldi curno bg 2018">
             <a href="project/parco-commerciale-curno-briantea/index.html" data-img="img/progetti/parco-commerciale-curno-briantea/copertina.jpg" data-img-tel="img/progetti/parco-commerciale-curno-briantea/copertina.jpg"
-               data-nome="Parco commerciale Biraldi" data-n="" data-meta="Curno (BG), 2018, commerciale" data-tipo="">
+               data-nome="Parco commerciale Biraldi" data-n="" data-meta="Curno (BG), 2018, commerciale" data-tipo="Render">
               <span class="voce_nome">Parco commerciale Biraldi<span class="voce_luogo">Curno (BG)</span></span>
               <span class="voce_anno">2018</span>
             </a>
@@ -712,7 +712,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <div class="tempo_fissa">
       <div class="tempo_testa">
         <h3 class="tempo_titolo" id="tempo-titolo">Dal 1979 a oggi</h3>
-        <p class="tempo_anno-corrente" aria-hidden="true"><span>1995</span></p>
+        <p class="tempo_anno-corrente" aria-hidden="true"><span>1979</span></p>
       </div>
       <div class="tempo_binario">
         <ol class="tempo_lista">
@@ -835,7 +835,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
             <span class="tappa_media">
               <img class="tappa_bn" src="img/progetti/parco-commerciale-curno-briantea/copertina.jpg" alt="" loading="lazy" decoding="async">
               <img class="tappa_col" src="img/progetti/parco-commerciale-curno-briantea/copertina.jpg" alt="Parco commerciale Biraldi, Curno (BG)" loading="lazy" decoding="async">
-              
+              <span class="tappa_tipo">Render</span>
             </span>
             <span class="tappa_nome">Parco commerciale Biraldi</span>
             <span class="tappa_dati">Curno (BG), commercio</span>
@@ -898,7 +898,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <div class="contatto_scrivi">
       <a class="bottone bottone--pieno" href="mailto:info@birolini.it">Scrivici</a>
       <!-- Il modulo dei contatti non invia ancora niente: finché non c'è un servizio vero (e un'informativa verificata), «Scrivici» apre l'email. [DA COLLEGARE: servizio per ricevere i messaggi] -->
-      <p class="modulo-arrivo">Il modulo per scriverci da questa pagina è in arrivo. Per ora «Scrivici» apre la tua email.</p>
+      
     </div>
   </div>
 </section>
@@ -924,11 +924,11 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   </div>
 </footer>
 
-<script src="js/vendor/gsap.min.js?v=202611220848"></script>
-<script src="js/vendor/ScrollTrigger.min.js?v=202611220848"></script>
-<script src="js/vendor/SplitText.min.js?v=202611220848"></script>
-<script src="js/vendor/Flip.min.js?v=202611220848"></script>
-<script src="js/vendor/lenis.min.js?v=202611220848"></script>
+<script src="js/vendor/gsap.min.js?v=202611221234"></script>
+<script src="js/vendor/ScrollTrigger.min.js?v=202611221234"></script>
+<script src="js/vendor/SplitText.min.js?v=202611221234"></script>
+<script src="js/vendor/Flip.min.js?v=202611221234"></script>
+<script src="js/vendor/lenis.min.js?v=202611221234"></script>
 <script>
 /* Riduci movimento (sito nuovo): da fermo si vede il fotogramma, quindi «Render» o «Foto», non «animato» */
 (function () {
@@ -940,6 +940,6 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   document.querySelectorAll('[data-tipo]').forEach(function (a) { a.setAttribute('data-tipo', via(a.getAttribute('data-tipo'))); });
 })();
 </script>
-<script src="js/home.js?v=202611220848"></script>
+<script src="js/home.js?v=202611221234"></script>
 </body>
 </html>

@@ -1,3 +1,29 @@
+/* Giro 7: «Prima e dopo» nella pagina Aree */
+.pd { padding: var(--sezione, 96px) var(--margine) ; }
+.pd_testa { max-width: 760px; margin-bottom: clamp(28px, 5vw, 56px); }
+.pd_testa .secondario { margin-top: 12px; }
+.pd_coppia { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(240px, 1fr); gap: clamp(20px, 3vw, 48px); align-items: end; }
+.pd_coppia + .pd_coppia { margin-top: clamp(56px, 9vw, 120px); }
+.pd_quadro { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--notte-alta); cursor: ew-resize; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
+.pd_img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; }
+.pd_dopo { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+.pd_linea { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--bianco); box-shadow: 0 0 14px rgba(0, 0, 0, .55); pointer-events: none; }
+.pd_maniglia { position: absolute; top: 50%; left: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; background: rgba(12, 22, 40, .82); border: 2px solid var(--bianco); display: flex; align-items: center; justify-content: center; }
+.pd_maniglia::before { content: "\2039\00a0\203a"; color: var(--bianco); font-size: 1.3rem; line-height: 1; transform: translateY(-1px); }
+.pd_et { position: absolute; top: 14px; padding: 6px 10px; background: rgba(12, 22, 40, .8); color: var(--bianco); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; pointer-events: none; }
+.pd_et--prima { left: 14px; } .pd_et--dopo { right: 14px; }
+.pd_cursore { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
+.pd_quadro:has(.pd_cursore:focus-visible) { outline: 2px solid var(--azzurro); outline-offset: 4px; }
+.pd_n { margin-bottom: 10px; }
+.pd_testo > p:not(.pd_n):not(.pd_fonte) { margin-top: 10px; max-width: 38ch; }
+.pd_fonte { margin-top: 14px; font-size: .75rem; line-height: 1.6; color: var(--nebbia); letter-spacing: .04em; }
+.pd_fonte span { color: var(--bianco); }
+.pd_testo .collegamento { display: inline-block; margin-top: 16px; }
+@media (max-width: 760px) {
+  .pd { padding: 64px 16px; }
+  .pd_coppia { grid-template-columns: 1fr; gap: 18px; }
+  .pd_et { top: 10px; font-size: .6875rem; } .pd_et--prima { left: 10px; } .pd_et--dopo { right: 10px; }
+}
 /* =========================================================
    Sito nuovo: i pezzi che le pagine pilota non avevano
    (apertura in cornice, racconto breve, diario, viaggio di un'area, CER, news, pagine di testo,
@@ -202,6 +228,11 @@
   .viaggio_tappa:nth-child(even) .viaggio_figura { order: 0; }
   .viaggio--corto .viaggio_lista { grid-template-columns: 1fr 1fr; }
   .articolo_lato { position: static; order: 2; }
+}
+/* giro 7: tablet, 1979 di Chi siamo come sul telefono (numero intero al centro, testo in basso sul velo) */
+@media (min-width: 761px) and (max-width: 1100px) and (orientation: portrait) {
+  .storia_velo { background: linear-gradient(0deg, rgba(12, 22, 40, .94) 0%, rgba(12, 22, 40, .65) 40%, rgba(12, 22, 40, 0) 62%); }
+  .storia_testo { top: auto; bottom: 64px; transform: none; left: var(--margine); right: var(--margine); width: auto; max-width: 640px; }
 }
 @media (max-width: 760px) {
   .apertura-pagina--cornice { padding: calc(var(--testata) + 20px) 16px 48px; }

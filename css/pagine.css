@@ -65,7 +65,7 @@
 .tavole--larga.larga--destra .tavola-foto { grid-column: 3 / span 10; justify-self: end; width: 100%; }
 
 /* ---------- Visore a tutto schermo ---------- */
-.visore { position: fixed; inset: 0; z-index: 95; background: rgba(var(--velo-notte), .98); touch-action: none; overscroll-behavior: contain; }
+.visore { position: fixed; inset: 0; z-index: 95; background: rgb(var(--velo-notte)); touch-action: none;   /* giro 6: pieno (a .98 sotto si leggevano i titoli) */ overscroll-behavior: contain; }
 .visore[hidden] { display: none; }
 .visore_scena { position: absolute; inset: clamp(64px, 9vh, 96px) clamp(16px, 7vw, 120px) clamp(64px, 9vh, 96px); }
 .visore_img { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }

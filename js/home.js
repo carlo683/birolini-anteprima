@@ -323,10 +323,16 @@
   var pronto = false;
   function parti() {
     if (pronto) return; pronto = true;
-    try { avvia(); H.classList.add('pronto'); }
+    // 22/11 (revisione giro 6, P0): tutto quello che GSAP crea sta in un «contesto»; se qualcosa va storto si annulla
+    // (stili messi, testi nascosti, scene fissate) e la pagina torna quella ferma, con tutti i testi visibili
+    var ctx = gsap.context(function () {});
+    try { ctx.add(avvia); H.classList.add('pronto'); }
     catch (err) {
     console.error(err);
+    try { ctx.revert(); } catch (e) {}
     try { ScrollTrigger.getAll().forEach(function (t) { t.kill(true); }); } catch (e) {}
+    try { if (lenis && lenis.destroy) lenis.destroy(); } catch (e) {}
+    $$('.apertura, .apertura *, .intro, .intro *, .capitolo, .capitolo *, .capindice, .costruzioni *').forEach(function (el) { el.style.visibility = ''; el.style.opacity = ''; el.style.transform = ''; });
     spegni();
     }
   }
@@ -342,7 +348,7 @@
     /* ---- Scorrimento morbido: Lenis guidato dal ticker di GSAP ---- */
     if (LEGGERO) {
       // modalità leggera: scorrimento nativo del telefono, niente Lenis (al suo posto un sostituto per i salti ai capitoli)
-      lenis = { scrollTo: function (d) { var y = typeof d === 'number' ? d : d.getBoundingClientRect().top + window.scrollY; window.scrollTo({ top: y, behavior: 'smooth' }); }, stop: function () {}, start: function () {} };
+      lenis = { scrollTo: function (d) { var y = typeof d === 'number' ? d : d.getBoundingClientRect().top + window.scrollY; window.scrollTo({ top: y, behavior: Math.abs(y - window.scrollY) > 2.5 * window.innerHeight ? 'auto' : 'smooth' }); }, stop: function () {}, start: function () {} };   // giro 6: i salti lunghi (es. «Tutti i 42 progetti») sono immediati: uno scorrimento morbido attraverso il film poteva fermarsi a metà, su un capitolo
       if (LEGGERO === 2) ScrollTrigger.normalizeScroll(true);
     } else {
       lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
@@ -403,7 +409,7 @@
        ===================================================== */
     var lenisVero = !!(lenis && lenis.raf);
     var zoneScatto = [];
-    function tappeEtichette(st) { var a = st.animation, d = a.duration(); return Object.keys(a.labels).map(function (k) { return st.start + a.labels[k] / d * (st.end - st.start); }).sort(function (x, y) { return x - y; }); }
+    function tappeEtichette(st) { if (st._tappe) return st._tappe(); var a = st.animation, d = a.duration(); return Object.keys(a.labels).map(function (k) { return st.start + a.labels[k] / d * (st.end - st.start); }).sort(function (x, y) { return x - y; }); }
     function zonaScatto(st) { if (lenisVero) zoneScatto.push(st); return st; }
     if (lenisVero) {
       var yRiposo = window.scrollY, attesaScatto = null;
@@ -490,7 +496,7 @@
     var azioni = $('.apertura_azioni');
     gsap.set(nome, { y: 27 });
     gsap.set(righeFrase, { yPercent: 105 });
-    gsap.set(azioni, { autoAlpha: 0 });
+    gsap.set(azioni, { autoAlpha: 0, pointerEvents: 'none' });   // giro 6: toccabili solo quando sono comparsi del tutto
     gsap.set([testoSotto, $('.apertura_scorri span')], { opacity: 0 }); // il film usa il contenitore, l'apertura il contenuto: non si pestano i piedi
     gsap.set(parolaLogo, { opacity: 0 });
     gsap.set(intro, { autoAlpha: 1 });
@@ -576,6 +582,8 @@
     tl.shiftChildren(-ANTICIPO, true, 1.69);
     // 22/11 (Carlo: «se non scorri rimane così… deve aprirsi tutto in maniera automatica»): tappe del film per lo scatto automatico
     tl.addLabel('inizio', 0); tl.addLabel('fine', tl.duration());
+    // giro 6: il capitolo Energia coincide con la fine del film (prima, tra c3 e la fine, un colpo di scorrimento non cambiava niente)
+    tl.addLabel('c3', tl.duration());
     var tratti = [[1.45, 3.35], [3.35, 5.05], [5.05, 6.95], [6.95, 8.9]];
     var visibili = [[0, .6], [1.45, 4.45],   // giro 3: il video d'apertura si ferma quando nasce la finestra
       [3.35, 6.35], [5.05, 8.05], [6.95, 99]]; // apertura + 4 capitoli
@@ -616,15 +624,17 @@
       if (introSu !== introAttiva) { introAttiva = introSu; intro.style.pointerEvents = introSu ? 'auto' : 'none'; intro.inert = !introSu; }
     }
 
+    var stFilm = null;   // 22/11 (revisione giro 6, P0): esiste prima di chi la legge
     // dopo il film la testata si nasconde scendendo e torna salendo
     ScrollTrigger.create({ start: 0, end: 'max', onUpdate: function (s) {
+      if (!stFilm) return;   // se si scorre mentre la home carica, questa regola parte prima che il film sia pronto
       var dopo = s.scroll() > stFilm.end + window.innerHeight * .5;
       var su = dopo && s.direction === 1 && menu.hidden;
       testata.classList.toggle('testata--nascosta', su);
       H.classList.toggle('testata-su', su); // la barra dei settori e la finestra salgono al posto della testata
       testata.classList.toggle('testata--piena', s.scroll() > stFilm.end + window.innerHeight * .9);
     } });
-    var stFilm = ScrollTrigger.create({
+    stFilm = ScrollTrigger.create({
       trigger: film,
       start: 'top top',
       end: function () { return '+=' + Math.round(tl.duration() * window.innerHeight * .38); },   // giro 3: un quarto più corto
@@ -656,12 +666,16 @@
       lenis.scrollTo(y, { duration: 1.8, easing: function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; } });
     }
     $$('[data-capitolo]').forEach(function (a) {
-      a.addEventListener('click', function (e) { e.preventDefault(); vaiA('c' + a.dataset.capitolo); });
+      a.addEventListener('click', function (e) {
+        e.preventDefault(); vaiA('c' + a.dataset.capitolo);
+        // 22/11: con la tastiera (Invio, e.detail 0) il fuoco passa al capitolo, invece di restare su un link che sparisce
+        if (e.detail === 0) fuocoDopo(primoLink(cap[+a.dataset.capitolo].el, 1), posizioneTappa(stFilm, 'c' + a.dataset.capitolo));
+      });
     });
     $$('a[href^="#"]:not([data-capitolo])').forEach(function (a) {
       a.addEventListener('click', function (e) {
         var id = a.getAttribute('href');
-        if (id === '#bisogni') { e.preventDefault(); vaiA('bisogni'); return; }
+        if (id === '#bisogni') { e.preventDefault(); vaiA('bisogni'); if (e.detail === 0) fuocoDopo(primoLink(intro, 1), posizioneTappa(stFilm, 'bisogni')); return; }
         if (id === '#inizio') { e.preventDefault(); lenis.scrollTo(0, { duration: 1.6 }); return; }
         var el = id.length > 1 && document.querySelector(id);
         if (el && id !== '#contenuto') { e.preventDefault(); lenis.scrollTo(el, { duration: 1.6 }); }
@@ -675,7 +689,7 @@
     avvio.fromTo($('.quadro_video', quadroA), { scale: 1.14 }, { scale: 1, duration: 3.2, ease: 'power2.out' }, 0)
       .to(nome, { y: 0, duration: 1.5, stagger: .07 }, .25)
       .to(righeFrase, { yPercent: 0, duration: 1.2, stagger: .09 }, .95)
-      .to(azioni, { autoAlpha: 1, duration: .8, ease: 'power2.out' }, 1.35)
+      .to(azioni, { autoAlpha: 1, duration: .8, ease: 'power2.out', onUpdate: function () { if (this.progress() > .45 && azioni.style.pointerEvents) azioni.style.pointerEvents = ''; } }, 1.35)
       .to([testoSotto, $('.apertura_scorri span')], { opacity: 1, duration: .8, ease: 'power2.out' }, 1.6);
 
     /* =====================================================
@@ -734,9 +748,9 @@
       .to({}, { duration: .35 }, tavole.length * PASSO - .1);
     var contaOra = 1;
     tlC.addLabel('tavole-inizio', 0);
-    tavole.forEach(function (t, i) { tlC.addLabel('tavola-' + i, Math.min(tlC.duration(), i * PASSO + 1.45)); });
+    tavole.forEach(function (t, i) { tlC.addLabel('tavola-' + i, i === tavole.length - 1 ? tlC.duration() : Math.min(tlC.duration(), i * PASSO + 1.45)); });   // giro 6: l'ultima tavola coincide con la fine (niente colpo a vuoto)
     tlC.addLabel('tavole-fine', tlC.duration());
-    zonaScatto(ScrollTrigger.create({
+    var stC = zonaScatto(ScrollTrigger.create({
       trigger: scenaC, start: 'top top',
       end: function () { return '+=' + Math.round(tlC.duration() * window.innerHeight * .37); },
       pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlC, invalidateOnRefresh: true,
@@ -748,6 +762,77 @@
         if (n !== contaOra) { contaOra = n; numeroC.textContent = n; }
       }
     }));
+
+    /* =====================================================
+       22/11: tastiera (revisione giro 4, n. 9). I capitoli del film e le tavole restano nascosti finché non si scorre
+       fino a loro, quindi il tasto Tab li saltava. Se il prossimo link (o il precedente, con Maiusc+Tab) sta in una scena
+       ancora nascosta, la pagina scorre fino alla sua tappa e, quando il link si vede, il fuoco ci va sopra.
+       In tutti gli altri casi il Tab resta quello normale del browser.
+       ===================================================== */
+    var stTempoOra = null;   // giro 7: la linea del tempo fissata (solo schermi larghi), vista anche fuori dal suo blocco
+    var sceneTastiera = [
+      { el: azioni, st: stFilm, tappa: 'inizio' },
+      { el: intro, st: stFilm, tappa: 'bisogni' }
+    ].concat(cap.map(function (c, i) { return { el: c.el, st: stFilm, tappa: 'c' + i }; }))
+      .concat([{ el: indice, st: stFilm, tappa: 'c3' }])
+      .concat(tavole.map(function (t, i) { return { el: t.el, st: stC, tappa: 'tavola-' + i }; }))
+      .concat([{ el: $('.tempo_lista'), pos: function (el) {   // giro 7: la tappa della tessera, con la formula dello scatto
+        var st = stTempoOra, lt = $('.tempo_lista'), t = el.closest('.tappa');
+        if (!st || !t) return null;
+        var d = Math.max(0, lt.scrollWidth - window.innerWidth);
+        if (!d) return st.start;
+        var x = Math.min(d, Math.max(0, t.offsetLeft + t.offsetWidth / 2 - window.innerWidth / 2));
+        return st.start + x / d * (st.end - st.start);
+      } }]);
+    var SEL_FUOCO = 'a[href], button:not([disabled]), input:not([type="hidden"]):not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+    function posizioneTappa(st, tappa) {   // stessa formula di vaiA e delle tappe dello scatto: si arriva proprio sulla tappa
+      var a = st.animation; return st.start + (a.labels[tappa] / a.duration()) * (st.end - st.start);
+    }
+    function nascosto(el) { return getComputedStyle(el).visibility === 'hidden' || !!el.closest('[inert]'); }
+    function inGiro(el) { return el.tabIndex !== -1 && el.getClientRects().length > 0; }   // niente elementi spenti (display: none)
+    function primoLink(dove, verso) { var l = $$(SEL_FUOCO, dove).filter(inGiro); return verso > 0 ? l[0] : l[l.length - 1]; }
+    var fuocoInViaggio = false;
+    function fuocoDopo(el, y) {
+      if (!el) return;
+      fuocoInViaggio = true;
+      var t0 = performance.now();
+      (function guarda() {
+        var arrivato = Math.abs(window.scrollY - y) < 4;
+        if (arrivato && !nascosto(el)) {
+          el.focus({ preventScroll: true });
+          fuocoInViaggio = false; return;
+        }
+        if (performance.now() - t0 > 3000) { fuocoInViaggio = false; return; }   // non arriva: si lascia stare (niente giri infiniti)
+        requestAnimationFrame(guarda);
+      })();
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab' || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (fuocoInViaggio) { e.preventDefault(); return; }   // la pagina sta ancora scorrendo verso il link: un Tab alla volta
+      if (!menu.hidden) return;
+      var ora = document.activeElement;
+      if (!ora || ora === document.body) return;
+      var tutti = $$(SEL_FUOCO).filter(function (x) { return x === ora || inGiro(x); });
+      var k = tutti.indexOf(ora); if (k === -1) return;
+      var verso = e.shiftKey ? -1 : 1;
+      // il prossimo link nel giro del Tab, saltando quelli nascosti fuori dalle scene (come fa il browser)
+      for (var j = k + verso; j >= 0 && j < tutti.length; j += verso) {
+        var dopo = tutti[j];
+        var scena = sceneTastiera.filter(function (s) { return s.el && s.el.contains(dopo); })[0];
+        if (!nascosto(dopo)) {
+          // si vede già: ci pensa il browser. Ma se è in una scena e fuori dallo schermo (tornando indietro con Maiusc+Tab)
+          // il browser scorrerebbe a caso dentro la scena fissata: si va alla sua tappa
+          var rc = dopo.getBoundingClientRect();
+          if (!scena || (rc.bottom > 0 && rc.top < window.innerHeight && rc.right > 0 && rc.left < window.innerWidth)) return;   // giro 7: anche fuori di lato
+        } else if (!scena) continue;   // nascosto e fuori dalle scene: il browser lo salta, lo saltiamo anche noi
+        e.preventDefault();
+        var y = scena.pos ? scena.pos(dopo) : posizioneTappa(scena.st, scena.tappa);
+        if (y == null) return;
+        lenis.scrollTo(y, { duration: Math.min(1.4, Math.max(.5, Math.abs(y - window.scrollY) / 900)) });
+        fuocoDopo(dopo, y);
+        return;
+      }
+    }, true);
 
     /* ---- Indice: la finestra sui progetti cambia con la tendina e il video parte ---- */
     var mm = gsap.matchMedia();
@@ -845,27 +930,46 @@
     var tappe = $$('.tappa', lista);
     mm.add('(min-width: 761px)', function () {
       var barraTempo = gsap.quickSetter($('.tempo_avanzamento i'), 'scaleX');
+      function contaAnno(a) {   // giro 7: l'anno scorre come un contachilometri invece di saltare
+        var da = parseInt(annoEl.textContent, 10), b = parseInt(a, 10);
+        if (annoTw) annoTw.kill();
+        if (isNaN(da) || isNaN(b) || Math.abs(b - da) > 40 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { annoEl.textContent = a; return; }
+        var o = { v: da };
+        annoTw = gsap.to(o, { v: b, duration: Math.min(.8, .15 + Math.abs(b - da) * .06), ease: 'power2.out', onUpdate: function () { annoEl.textContent = Math.round(o.v); } });
+      }
+      var annoMeta = null, annoTw = null;
+
       var distanza = function () { return Math.max(0, lista.scrollWidth - window.innerWidth); };
       var scorriTempo = gsap.to(lista, {
         x: function () { return -distanza(); }, ease: 'none',
         scrollTrigger: {
           trigger: '.tempo_fissa', pin: true, start: 'top top', end: function () { return '+=' + Math.round(distanza() * .25); },
           scrub: true, invalidateOnRefresh: true,
-          snap: { snapTo: function (v) { var d = distanza(); if (!d) return v; var px = v * d, best = 0, bd = 1e9; tappe.forEach(function (t) { var x = Math.min(d, Math.max(0, t.offsetLeft + t.offsetWidth / 2 - window.innerWidth / 2)); if (Math.abs(x - px) < bd) { bd = Math.abs(x - px); best = x; } }); return best / d; }, duration: { min: .25, max: .7 }, delay: .12, ease: 'power2.inOut', inertia: false },
+          // giro 6: sul computer (Lenis) lo snap «al punto più vicino» faceva risalire la pagina di ~48 px a ogni gesto: lì lo scatto lo fa Lenis, con direzione
+          snap: snapNativo({ snapTo: function (v, self) { var d = distanza(); if (!d) return v; var px = v * d, dir = self && self.direction, best = null, bd = 1e9; tappe.forEach(function (t) { var x = Math.min(d, Math.max(0, t.offsetLeft + t.offsetWidth / 2 - window.innerWidth / 2)); if ((dir > 0 && x < px - 2) || (dir < 0 && x > px + 2)) return; if (Math.abs(x - px) < bd) { bd = Math.abs(x - px); best = x; } }); return best == null ? v : best / d; },   /* giro 7: nel verso del gesto */ duration: { min: .25, max: .7 }, delay: .12, ease: 'power2.inOut', inertia: false }),
           onUpdate: function (s) {
             barraTempo(s.progress);
             var x = -gsap.getProperty(lista, 'x') + window.innerWidth * .5, scelta = tappe[0];
             for (var k = 0; k < tappe.length; k++) { if (tappe[k].offsetLeft <= x) scelta = tappe[k]; else break; }
-            var a = scelta.dataset.anno; if (annoEl.textContent !== a) annoEl.textContent = a;
+            var a = scelta.dataset.anno; if (annoMeta !== a) { annoMeta = a; contaAnno(a); }
           }
         }
       });
+      var stTempo = scorriTempo.scrollTrigger;
+      stTempoOra = stTempo;
+      stTempo._tappe = function () {   // una tappa per tessera (al centro dello schermo), più inizio e fine
+        var d = distanza(), out = [stTempo.start, stTempo.end];
+        if (d) tappe.forEach(function (t) { var x = Math.min(d, Math.max(0, t.offsetLeft + t.offsetWidth / 2 - window.innerWidth / 2)); out.push(stTempo.start + x / d * (stTempo.end - stTempo.start)); });
+        return out.sort(function (a, b) { return a - b; });
+      };
+      zonaScatto(stTempo);
       gsap.fromTo('.tempo_anno-corrente', { xPercent: 4 }, { xPercent: -12, ease: 'none',
         scrollTrigger: { trigger: '.tempo_fissa', start: 'top top', end: function () { return '+=' + Math.round(distanza() * .25); }, scrub: true } });
       $$('.tappa_col', lista).forEach(function (img) {
         gsap.to(img, { opacity: 1, ease: 'none',
           scrollTrigger: { trigger: img.parentNode, containerAnimation: scorriTempo, start: 'left 80%', end: 'center 52%', scrub: true } });
       });
+      return function () { stTempoOra = null; var i = zoneScatto.indexOf(stTempo); if (i !== -1) zoneScatto.splice(i, 1); };   // finestra stretta: la scena sparisce
     });
 
     /* ---- Passaggi «a foglio»: la sezione nuova sale sopra la vecchia e il suo angolo si raddrizza ---- */
@@ -881,7 +985,10 @@
       var sezione = $(sel); if (!sezione) return;
       // una linea del tempo vuota con due tappe, solo per avere lo scatto «con direzione» (vedi le tavole)
       var tappe = gsap.timeline({ paused: true }).addLabel('sotto', 0).to({}, { duration: 1 }).addLabel('sopra', 1);
-      zonaScatto(ScrollTrigger.create({ trigger: sezione, start: 'top bottom', end: 'top top', animation: tappe, scrub: true,
+      // giro 6: dopo una scena fissata il passaggio comincia proprio dove la scena finisce (prima si sovrapponevano di 28 px e la pagina si fermava a metà)
+      var primaScena = sel === '.costruzioni' ? stFilm : sel === '.indice' ? stC : null;
+      var dopoTempo = sel === '.contatto';
+      zonaScatto(ScrollTrigger.create({ trigger: sezione, start: primaScena ? function () { return primaScena.end; } : dopoTempo ? function () { return stTempoOra ? stTempoOra.end : 'top bottom'; } : 'top bottom', end: 'top top', animation: tappe, scrub: true,
         snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .5, max: 1.1 }, delay: .06, ease: 'power1.inOut', inertia: false }) }));
     });
 

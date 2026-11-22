@@ -78,10 +78,10 @@ html.testata-su .indice { --cima: 0px; }
 .voce a {
   position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
   min-height: 44px; padding: 8px 0; text-decoration: none; color: var(--bianco);
-  opacity: .35; transition: opacity var(--medio) var(--curva);    /* .35 = 3:1, il minimo per i titoli grandi */
+  opacity: .5; transition: opacity var(--medio) var(--curva);    /* 22/11: .5 = 4,9:1 anche sul computer (prima .35 = 3:1) */
 }
-.voce a.d1 { opacity: .62; }
-.voce a.d2 { opacity: .45; }
+.voce a.d1 { opacity: .75; }
+.voce a.d2 { opacity: .6; }
 .voce a.attiva, .voce a:hover, .voce a:focus-visible { opacity: 1; }
 .voce a::before { content: ""; position: absolute; left: 0; top: 50%; width: 18px; height: 2px; background: var(--azzurro); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--medio) var(--curva); }
 .voce a.attiva::before { transform: scaleX(1); }
@@ -140,3 +140,6 @@ html.testata-su .indice { --cima: 0px; }
 @media (max-width: 760px) { .fp_prima--pc { display: none; } .fp_prima--tel { display: block; } }
 /* arrivando con un filtro nell'indirizzo (#settore=...) la prima foto fissa sarebbe quella sbagliata: non si mostra né si scarica */
 .con-filtro .fp_prima { display: none !important; }
+
+/* Giro 7: gli anni dell'elenco ereditano l'opacità .5 della voce: in bianco arrivano a 4,9:1 (in grigio erano 3:1) */
+.voce a:not(.attiva) .voce_anno { color: var(--bianco); }

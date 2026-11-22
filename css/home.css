@@ -945,14 +945,30 @@ a:hover > .freccia { transform: translateX(6px); }
 /* «Cerca in tutti i progetti» dentro il messaggio senza risultati (21/11/2026) */
 .indice_tutti { background: none; border: 0; padding: 10px 0; font: inherit; cursor: pointer; min-height: 44px; text-align: left; }
 
+/* Giro 7 (22/11/2026): alla fine di una scena fissata il foglio della sezione dopo è già salito di 28 px
+   (margin-top: -28px, l'effetto «foglio»). Le righe in basso dell'ultima tappa (didascalia del capitolo Energia,
+   dati della terza tavola) restavano tagliate: ora stanno sopra quei 28 px. */
+.moto .capitolo .sottotitolo { bottom: 48px; }
+@media (min-width: 761px) { .moto .cartiglio { padding-bottom: 28px; } }
+@media (max-width: 760px) {
+  .moto .capitolo .sottotitolo { bottom: 44px; }
+  .moto .capitolo_testo { bottom: 94px; }
+  .moto .cartiglio { bottom: 44px; }
+}
+
+/* Giro 7: con la tastiera la testata nascosta torna giù quando uno dei suoi link riceve il fuoco */
+.testata.testata--nascosta:focus-within { transform: none; }
+/* Giro 7: gli anni dell'elenco ereditano l'opacità .5 della voce: in bianco arrivano a 4,9:1 (in grigio erano 3:1) */
+.voce a:not(.attiva) .voce_anno { color: var(--bianco); }
+
 
 /* =========================================================
    Sito nuovo (genera-nuovo.mjs): correzioni alla home approvata
    ========================================================= */
-/* decisione 5: nomi attenuati della finestra più leggibili (computer .35, telefono .5) */
-.voce a { opacity: .35; }
-.voce a.d1 { opacity: .62; }
-.voce a.d2 { opacity: .45; }
+/* decisione 5: nomi attenuati della finestra più leggibili; 22/11: .5 (4,9:1) anche sul computer, prima .35 (3:1) */
+.voce a { opacity: .5; }
+.voce a.d1 { opacity: .75; }
+.voce a.d2 { opacity: .6; }
 .voce a.attiva, .voce a:hover, .voce a:focus-visible { opacity: 1; }
 @media (max-width: 760px) {
   .voce a { opacity: .5; }
