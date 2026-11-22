@@ -20,16 +20,16 @@
 <link rel="preload" href="fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="media/apertura-hero-poster-telefono.jpg" media="(max-width: 760px) and (orientation: portrait)" fetchpriority="high">
 <link rel="preload" as="image" href="media/apertura-hero-poster.jpg" media="not all and (max-width: 760px) and (orientation: portrait)" fetchpriority="high">
-<link rel="stylesheet" href="css/caratteri.css?v=202611220738">
-<link rel="stylesheet" href="css/passaggio.css?v=202611220738">
+<link rel="stylesheet" href="css/caratteri.css?v=202611220812">
+<link rel="stylesheet" href="css/passaggio.css?v=202611220812">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
 <script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
 /* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
 if (/settore=/.test(location.hash)) document.documentElement.classList.add("con-filtro");   /* archivio già filtrato: niente prima foto fissa (vedi .fp_prima) */
 document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("video[poster]").forEach(function (v) { var u = "url(" + JSON.stringify(v.getAttribute("poster")) + ")"; v.style.backgroundImage = u; v.parentNode.style.backgroundImage = u; v.parentNode.classList.add("sotto-video"); }); });   /* poster anche come sfondo del video: niente vuoto quando parte */
 window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
-<link rel="stylesheet" href="js/vendor/lenis.css?v=202611220738">
-<link rel="stylesheet" href="css/home.css?v=202611220738">
+<link rel="stylesheet" href="js/vendor/lenis.css?v=202611220812">
+<link rel="stylesheet" href="css/home.css?v=202611220812">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) {
@@ -142,7 +142,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <p class="intro_chi" data-entra>Dal 1979 cerchiamo l'area, otteniamo i permessi e costruiamo. Dal 2010 realizziamo anche impianti fotovoltaici. Soprattutto a Bergamo e in Lombardia.</p>
       <h2 class="intro_titolo" id="bisogni-titolo" data-righe>Di cosa hai bisogno?</h2>
       <ul class="intro_scelte" data-entra>
-        <li><a href="#casa" data-capitolo="0" data-anteprima="media/casa-brembate-poster.jpg">Cerco casa</a></li>
+        <li><a href="#casa" data-capitolo="0" data-anteprima="media/viaduse-giardino-poster.jpg">Cerco casa</a></li>
         <li><a href="#spazi" data-capitolo="1" data-anteprima="media/attivita-calcio-poster.jpg">Cerco uno spazio per la mia attività</a></li>
         <li><a href="#area" data-capitolo="2" data-anteprima="media/area-calcio-drone-poster.jpg">Ho un'area da valorizzare</a></li>
         <li><a href="#energia" data-capitolo="3" data-anteprima="media/energia-torre-boldone-poster.jpg">Mi interessano i campi fotovoltaici</a></li>
@@ -157,7 +157,8 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <div class="quadro" data-quadro>
       <div class="quadro_dentro">
         <!-- POSTO PER CLIP NUOVA: per sostituire questa clip basta cambiare poster e data-src (1280x720, muta, in loop, 5-10 s) -->
-        <video class="quadro_video" muted playsinline loop preload="none" poster="media/casa-brembate-poster.jpg" data-posto-clip="casa-brembate" data-src="media/casa-brembate.mp4" data-src-grande="media/casa-brembate-1920.mp4"></video>
+        <!-- 22/11/2026: Carlo non amava il render serale di Brembate; ora il giardino di Viaduse (Gorle), la residenza citata nella frase -->
+        <video class="quadro_video" muted playsinline loop preload="none" poster="media/viaduse-giardino-poster.jpg" data-posto-clip="viaduse-giardino" data-src="media/viaduse-giardino.mp4" data-src-grande="media/viaduse-giardino-1920.mp4"></video>
       </div>
       <div class="velo"></div>
       <div class="ombra"></div>
@@ -172,7 +173,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <li><a href="project/gorle-bg---residenza-viaduse/index.html"><span>Residenza Viaduse, Gorle</span><span class="freccia" aria-hidden="true">→</span></a></li>
       <li><a href="project/cologno-al-serio---residenziale/index.html"><span>Cortile Breda, Cologno al Serio</span><span class="freccia" aria-hidden="true">→</span></a></li>
     </ul>
-    <p class="sottotitolo"><a href="project/bdscentro/index.html">Residenze a Brembate di Sopra (BG)</a>. Render animato.</p>
+    <p class="sottotitolo"><a href="project/gorle-bg---residenza-viaduse/index.html">Residenza Viaduse, Gorle (BG)</a>. Render animato.</p>
   </article>
 
   <article class="strato capitolo capitolo--chiaro" id="spazi" aria-labelledby="spazi-titolo">
@@ -923,11 +924,11 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   </div>
 </footer>
 
-<script src="js/vendor/gsap.min.js?v=202611220738"></script>
-<script src="js/vendor/ScrollTrigger.min.js?v=202611220738"></script>
-<script src="js/vendor/SplitText.min.js?v=202611220738"></script>
-<script src="js/vendor/Flip.min.js?v=202611220738"></script>
-<script src="js/vendor/lenis.min.js?v=202611220738"></script>
+<script src="js/vendor/gsap.min.js?v=202611220812"></script>
+<script src="js/vendor/ScrollTrigger.min.js?v=202611220812"></script>
+<script src="js/vendor/SplitText.min.js?v=202611220812"></script>
+<script src="js/vendor/Flip.min.js?v=202611220812"></script>
+<script src="js/vendor/lenis.min.js?v=202611220812"></script>
 <script>
 /* Riduci movimento (sito nuovo): da fermo si vede il fotogramma, quindi «Render» o «Foto», non «animato» */
 (function () {
@@ -939,6 +940,6 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   document.querySelectorAll('[data-tipo]').forEach(function (a) { a.setAttribute('data-tipo', via(a.getAttribute('data-tipo'))); });
 })();
 </script>
-<script src="js/home.js?v=202611220738"></script>
+<script src="js/home.js?v=202611220812"></script>
 </body>
 </html>

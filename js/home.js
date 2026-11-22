@@ -396,6 +396,36 @@
     }
 
     /* =====================================================
+       Scatto automatico (22/11, Carlo: «se non scorri rimane così… deve aprirsi tutto in maniera automatica»).
+       Sul telefono (scorrimento nativo) lo fa ScrollTrigger (snap). Sul computer lo scorrimento è di Lenis e lo snap di
+       ScrollTrigger litigava con lui (con la rotella la pagina tornava indietro o restava ferma): lì lo fa Lenis stesso.
+       Quando la pagina si ferma dentro una scena, Lenis la porta alla tappa successiva nella direzione dello scorrimento.
+       ===================================================== */
+    var lenisVero = !!(lenis && lenis.raf);
+    var zoneScatto = [];
+    function tappeEtichette(st) { var a = st.animation, d = a.duration(); return Object.keys(a.labels).map(function (k) { return st.start + a.labels[k] / d * (st.end - st.start); }).sort(function (x, y) { return x - y; }); }
+    function zonaScatto(st) { if (lenisVero) zoneScatto.push(st); return st; }
+    if (lenisVero) {
+      var yRiposo = window.scrollY, attesaScatto = null;
+      var controllaScatto = function () {
+        if (lenis.isScrolling || Math.abs(lenis.velocity || 0) > .3) { attesaScatto = setTimeout(controllaScatto, 80); return; }
+        var y = window.scrollY, dir = y > yRiposo + 2 ? 1 : y < yRiposo - 2 ? -1 : 0, meta = null;
+        if (dir) zoneScatto.some(function (st) {
+          var p = tappeEtichette(st);
+          if (y < p[0] - 2 || y > p[p.length - 1] + 2) return false;
+          if (p.some(function (q) { return Math.abs(q - y) <= 3; })) return true;   // già su una tappa
+          meta = dir > 0 ? p.filter(function (q) { return q > y; })[0] : p.filter(function (q) { return q < y; }).pop();
+          return true;
+        });
+        if (meta == null) { yRiposo = y; return; }
+        lenis.scrollTo(meta, { duration: Math.min(1.4, Math.max(.6, Math.abs(meta - y) / 650)), easing: function (x) { return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; } });
+      };
+      lenis.on('scroll', function () { clearTimeout(attesaScatto); attesaScatto = setTimeout(controllaScatto, 110); });
+    }
+    // lo snap di ScrollTrigger solo dove non c'è Lenis
+    function snapNativo(cfg) { return lenisVero ? null : cfg; }
+
+    /* =====================================================
        Il FILM: apertura -> finestra -> quattro capitoli
        ===================================================== */
     var film = $('.film');
@@ -604,11 +634,12 @@
       animation: tl,
       invalidateOnRefresh: true,
       // 22/11: basta un tocco di scorrimento e il capitolo si completa da solo fino alla tappa successiva (o precedente)
-      snap: { snapTo: 'labelsDirectional', duration: { min: .7, max: 1.6 }, delay: .06, ease: 'power1.inOut', inertia: false },
+      snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .7, max: 1.6 }, delay: .06, ease: 'power1.inOut', inertia: false }),
       onUpdate: aggiornaFilm,
       onRefreshInit: function () { /* torna alla misura vera prima di rimisurare */ },
       onRefresh: function () { misuraFinestre(); aggiornaFilm(); }
     });
+    zonaScatto(stFilm);
     new IntersectionObserver(function (v) { filmInVista = v[0].isIntersecting; aggiornaFilm(); }, { threshold: 0 }).observe(film);
 
     // «Di cosa hai bisogno?»: passando sopra una scelta, nella finestra compare il suo capitolo
@@ -702,17 +733,21 @@
     tlC.to(capoC, { autoAlpha: 0, y: -24, duration: .25, ease: 'power2.in' }, .45)
       .to({}, { duration: .35 }, tavole.length * PASSO - .1);
     var contaOra = 1;
-    ScrollTrigger.create({
+    tlC.addLabel('tavole-inizio', 0);
+    tavole.forEach(function (t, i) { tlC.addLabel('tavola-' + i, Math.min(tlC.duration(), i * PASSO + 1.45)); });
+    tlC.addLabel('tavole-fine', tlC.duration());
+    zonaScatto(ScrollTrigger.create({
       trigger: scenaC, start: 'top top',
       end: function () { return '+=' + Math.round(tlC.duration() * window.innerHeight * .37); },
       pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlC, invalidateOnRefresh: true,
-      // 22/11: ogni tavola, iniziata, si completa da sola (disegno -> colore)
-      snap: { snapTo: [0].concat(tavole.map(function (t, i) { return Math.min(1, (i * PASSO + 1.45) / tlC.duration()); }), [1]), duration: { min: .6, max: 1.4 }, delay: .06, ease: 'power1.inOut', inertia: false },
+      // 22/11: ogni tavola, iniziata, si completa da sola (disegno -> colore). Tappe con direzione: con un elenco di punti
+      // la rotella del computer (Lenis) tornava al punto più vicino, cioè indietro, e la pagina restava bloccata
+      snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .6, max: 1.4 }, delay: .06, ease: 'power1.inOut', inertia: false }),
       onUpdate: function () {
         var n = Math.min(tavole.length, Math.floor((tlC.time() + .05) / PASSO) + 1);
         if (n !== contaOra) { contaOra = n; numeroC.textContent = n; }
       }
-    });
+    }));
 
     /* ---- Indice: la finestra sui progetti cambia con la tendina e il video parte ---- */
     var mm = gsap.matchMedia();
@@ -789,10 +824,11 @@
       .to(pieno, { attr: { 'fill-opacity': 1 }, duration: .35 }, .75)
       .fromTo(['.storia_foto', '.storia_video'], { scale: 1.08, svgOrigin: centro }, { scale: 1, duration: 1.1 }, 0)
       .to({}, { duration: .15 }, 1.1);
-    ScrollTrigger.create({
+    tlStoria.addLabel('storia-chiusa', 0).addLabel('storia-aperta', tlStoria.duration());
+    zonaScatto(ScrollTrigger.create({
       trigger: scenaStoria, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); },
-      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlStoria, snap: { snapTo: [0, 1], duration: { min: .6, max: 1.3 }, delay: .06, ease: 'power1.inOut', inertia: false } // 22/11: il 1979 si apre da solo
-    });
+      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlStoria, snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .6, max: 1.3 }, delay: .06, ease: 'power1.inOut', inertia: false }) // 22/11: il 1979 si apre da solo
+    }));
     var videoStoria = $('.storia_video video');
     if (videoStoria && videoStoria.dataset.src && !LEGGERO) {
       var didascaliaStoria = $('.storia_didascalia');
@@ -836,6 +872,17 @@
     (LEGGERO ? [] : $$('.costruzioni, .indice, .storia, .contatto')).forEach(function (s) {
       gsap.fromTo(s, { borderTopLeftRadius: 28, borderTopRightRadius: 28 }, { borderTopLeftRadius: 0, borderTopRightRadius: 0, ease: 'none',
         scrollTrigger: { trigger: s, start: 'top bottom', end: 'top top', scrub: true } });
+    });
+
+    /* ---- 22/11: anche il passaggio da una sezione all'altra si completa da solo (Carlo: «se non scorri rimane così»):
+       mentre la sezione nuova sale sopra la vecchia, un tocco di scorrimento la porta fino in cima (o la rimanda giù tornando indietro).
+       Separato dagli angoli qui sopra, che sul telefono non ci sono (leggero.mjs). ---- */
+    ['.costruzioni', '.indice', '.storia', '.contatto'].forEach(function (sel) {
+      var sezione = $(sel); if (!sezione) return;
+      // una linea del tempo vuota con due tappe, solo per avere lo scatto «con direzione» (vedi le tavole)
+      var tappe = gsap.timeline({ paused: true }).addLabel('sotto', 0).to({}, { duration: 1 }).addLabel('sopra', 1);
+      zonaScatto(ScrollTrigger.create({ trigger: sezione, start: 'top bottom', end: 'top top', animation: tappe, scrub: true,
+        snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .5, max: 1.1 }, delay: .06, ease: 'power1.inOut', inertia: false }) }));
     });
 
     /* ---- Titoli: entrate diverse (righe che salgono, oppure niente) ---- */

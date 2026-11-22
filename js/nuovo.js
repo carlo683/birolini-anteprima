@@ -36,7 +36,20 @@
         .to(pieno, { attr: { 'fill-opacity': 1 }, duration: .35 }, .75)
         .fromTo(['.storia_foto', '.storia_video'], { scale: 1.08, svgOrigin: centro }, { scale: 1, duration: 1.1 }, 0)
         .to({}, { duration: .15 }, 1.1);
-      ScrollTrigger.create({ trigger: scena, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); }, snap: { snapTo: [0, 1], duration: { min: .6, max: 1.3 }, delay: .06, ease: 'power1.inOut', inertia: false }, pin: true, anticipatePin: B.leggero ? 1 : 0, scrub: B.leggero >= 3 ? .5 : true, animation: tl });
+      tl.addLabel('storia-chiusa', 0).addLabel('storia-aperta', tl.duration());   // 22/11: scatto con direzione (con [0, 1] la rotella tornava indietro)
+      // sul computer (Lenis) lo scatto lo fa Lenis: lo snap di ScrollTrigger litigava con lui (vedi home, movimento.js)
+      var conLenis = !!(B.lenis && B.lenis.raf);
+      var stStoria = ScrollTrigger.create({ trigger: scena, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); }, snap: conLenis ? null : { snapTo: 'labelsDirectional', duration: { min: .6, max: 1.3 }, delay: .06, ease: 'power1.inOut', inertia: false }, pin: true, anticipatePin: B.leggero ? 1 : 0, scrub: B.leggero >= 3 ? .5 : true, animation: tl });
+      if (conLenis) {
+        var yRiposo = window.scrollY, attesa = null;
+        var controlla = function () {
+          if (B.lenis.isScrolling || Math.abs(B.lenis.velocity || 0) > .3) { attesa = setTimeout(controlla, 80); return; }
+          var y = window.scrollY, dir = y > yRiposo + 2 ? 1 : y < yRiposo - 2 ? -1 : 0;
+          if (dir && y > stStoria.start + 3 && y < stStoria.end - 3) B.lenis.scrollTo(dir > 0 ? stStoria.end : stStoria.start, { duration: 1, easing: function (x) { return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; } });
+          else yRiposo = y;
+        };
+        B.lenis.on('scroll', function () { clearTimeout(attesa); attesa = setTimeout(controlla, 110); });
+      }
       var v = $('.storia_video video'), ciak = document.getElementById('ciak-storia');
       if (v && !B.leggero) {
         new IntersectionObserver(function (e) { if (e[0].isIntersecting) B.carica(v); B.gira(v, e[0].isIntersecting); }, { rootMargin: '300px 0px' }).observe(scena);
