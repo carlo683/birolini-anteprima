@@ -1078,8 +1078,13 @@
     misuraFinestre();
     /* 22/11 sera: il ricalcolo di tutte le scene (caratteri pronti, pagina caricata) bloccava la pagina mentre il nome
        saliva: ora aspetta la fine dell'apertura, oppure il primo gesto (rotella, dito, tasto), se arriva prima */
-    var introFinita = false, daRinfrescare = false;
-    function rinfresca() { if (introFinita) ScrollTrigger.refresh(); else daRinfrescare = true; }
+    var introFinita = false, daRinfrescare = false, altezzaAvvio = document.documentElement.scrollHeight;
+    function rinfresca() {
+      /* se l'altezza della pagina non è cambiata le misure sono già giuste: niente ricalcolo (costa ~0,4 s) */
+      if (Math.abs(document.documentElement.scrollHeight - altezzaAvvio) < 2) return;
+      altezzaAvvio = document.documentElement.scrollHeight;
+      if (introFinita) ScrollTrigger.refresh(); else daRinfrescare = true;
+    }
     function fineIntro() {
       if (introFinita) return;
       introFinita = true;
