@@ -544,6 +544,8 @@
     // la tappa «Di cosa hai bisogno?» è più corta di un terzo: tutto quello che viene dopo si anticipa
     var ANTICIPO = .25;
     tl.shiftChildren(-ANTICIPO, true, 1.69);
+    // 22/11 (Carlo: «se non scorri rimane così… deve aprirsi tutto in maniera automatica»): tappe del film per lo scatto automatico
+    tl.addLabel('inizio', 0); tl.addLabel('fine', tl.duration());
     var tratti = [[1.45, 3.35], [3.35, 5.05], [5.05, 6.95], [6.95, 8.9]];
     var visibili = [[0, .6], [1.45, 4.45],   // giro 3: il video d'apertura si ferma quando nasce la finestra
       [3.35, 6.35], [5.05, 8.05], [6.95, 99]]; // apertura + 4 capitoli
@@ -601,6 +603,8 @@
       scrub: LEGGERO >= 3 ? .5 : true,
       animation: tl,
       invalidateOnRefresh: true,
+      // 22/11: basta un tocco di scorrimento e il capitolo si completa da solo fino alla tappa successiva (o precedente)
+      snap: { snapTo: 'labelsDirectional', duration: { min: .7, max: 1.6 }, delay: .06, ease: 'power1.inOut', inertia: false },
       onUpdate: aggiornaFilm,
       onRefreshInit: function () { /* torna alla misura vera prima di rimisurare */ },
       onRefresh: function () { misuraFinestre(); aggiornaFilm(); }
@@ -702,6 +706,8 @@
       trigger: scenaC, start: 'top top',
       end: function () { return '+=' + Math.round(tlC.duration() * window.innerHeight * .37); },
       pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlC, invalidateOnRefresh: true,
+      // 22/11: ogni tavola, iniziata, si completa da sola (disegno -> colore)
+      snap: { snapTo: [0].concat(tavole.map(function (t, i) { return Math.min(1, (i * PASSO + 1.45) / tlC.duration()); }), [1]), duration: { min: .6, max: 1.4 }, delay: .06, ease: 'power1.inOut', inertia: false },
       onUpdate: function () {
         var n = Math.min(tavole.length, Math.floor((tlC.time() + .05) / PASSO) + 1);
         if (n !== contaOra) { contaOra = n; numeroC.textContent = n; }
@@ -785,7 +791,7 @@
       .to({}, { duration: .15 }, 1.1);
     ScrollTrigger.create({
       trigger: scenaStoria, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); },
-      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlStoria
+      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlStoria, snap: { snapTo: [0, 1], duration: { min: .6, max: 1.3 }, delay: .06, ease: 'power1.inOut', inertia: false } // 22/11: il 1979 si apre da solo
     });
     var videoStoria = $('.storia_video video');
     if (videoStoria && videoStoria.dataset.src && !LEGGERO) {
