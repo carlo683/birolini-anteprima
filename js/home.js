@@ -914,7 +914,7 @@
     /* ---- Giro 3: «dove sono». Cinque parti della pagina; il segnaposto sta nella fascia della testata
        (resta anche quando la testata si nasconde) e un filo in cima dice quanto manca ---- */
     var parti = [
-      { el: film, nome: 'Cosa facciamo', corto: 'Bisogni' },
+      { el: film, nome: 'Cosa facciamo', corto: 'Settori' },   // 22/11: sito istituzionale, niente «bisogni»
       { el: $('.costruzioni'), nome: "Dal disegno all'edificio", corto: 'Dal disegno' },
       { el: $('.indice'), nome: 'I progetti', corto: 'Progetti' },
       { el: $('.storia'), nome: 'Chi siamo, dal 1979', corto: 'Chi siamo' },

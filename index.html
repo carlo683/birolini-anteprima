@@ -20,16 +20,16 @@
 <link rel="preload" href="fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="media/apertura-hero-poster-telefono.jpg" media="(max-width: 760px) and (orientation: portrait)" fetchpriority="high">
 <link rel="preload" as="image" href="media/apertura-hero-poster.jpg" media="not all and (max-width: 760px) and (orientation: portrait)" fetchpriority="high">
-<link rel="stylesheet" href="css/caratteri.css?v=202611220829">
-<link rel="stylesheet" href="css/passaggio.css?v=202611220829">
+<link rel="stylesheet" href="css/caratteri.css?v=202611220848">
+<link rel="stylesheet" href="css/passaggio.css?v=202611220848">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
 <script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
 /* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
 if (/settore=/.test(location.hash)) document.documentElement.classList.add("con-filtro");   /* archivio già filtrato: niente prima foto fissa (vedi .fp_prima) */
 document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("video[poster]").forEach(function (v) { var u = "url(" + JSON.stringify(v.getAttribute("poster")) + ")"; v.style.backgroundImage = u; v.parentNode.style.backgroundImage = u; v.parentNode.classList.add("sotto-video"); }); });   /* poster anche come sfondo del video: niente vuoto quando parte */
 window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
-<link rel="stylesheet" href="js/vendor/lenis.css?v=202611220829">
-<link rel="stylesheet" href="css/home.css?v=202611220829">
+<link rel="stylesheet" href="js/vendor/lenis.css?v=202611220848">
+<link rel="stylesheet" href="css/home.css?v=202611220848">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) {
@@ -80,7 +80,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   <nav class="menu_voci" aria-label="Tutte le pagine">
     <a href="work/index.html">Progetti</a>
     <a href="case/index.html">Case</a>
-    <a href="spazi/index.html">Spazi per aziende</a>
+    <a href="spazi/index.html">Commercio e industria</a>
     <a href="aree/index.html">Aree</a>
     <a href="energia/index.html">Energia</a>
     <a href="about/index.html">Chi siamo</a>
@@ -123,7 +123,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
 <!--/GEN:logo-nome-->
       <h1 class="apertura_frase" id="apertura-titolo" data-righe>Trasformiamo aree in case, spazi commerciali, capannoni e campi fotovoltaici.</h1>
       <div class="apertura_azioni">
-        <a class="bottone" href="#bisogni">Di cosa hai bisogno?</a>
+        <a class="bottone" href="#bisogni">Cosa facciamo</a>
         <a class="collegamento" href="#progetti" data-filtro-vai="tutti">Tutti i 42 progetti</a>
       </div>
     </div>
@@ -140,12 +140,12 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   <section class="strato intro" id="bisogni" aria-labelledby="bisogni-titolo">
     <div class="intro_testo">
       <p class="intro_chi" data-entra>Dal 1979 cerchiamo l'area, otteniamo i permessi e costruiamo. Dal 2010 realizziamo anche impianti fotovoltaici. Soprattutto a Bergamo e in Lombardia.</p>
-      <h2 class="intro_titolo" id="bisogni-titolo" data-righe>Di cosa hai bisogno?</h2>
+      <h2 class="intro_titolo" id="bisogni-titolo" data-righe>Cosa facciamo</h2>
       <ul class="intro_scelte" data-entra>
-        <li><a href="#casa" data-capitolo="0" data-anteprima="media/viaduse-giardino-poster.jpg">Cerco casa</a></li>
-        <li><a href="#spazi" data-capitolo="1" data-anteprima="media/attivita-calcio-poster.jpg">Cerco uno spazio per la mia attività</a></li>
-        <li><a href="#area" data-capitolo="2" data-anteprima="media/area-calcio-drone-poster.jpg">Ho un'area da valorizzare</a></li>
-        <li><a href="#energia" data-capitolo="3" data-anteprima="media/energia-torre-boldone-poster.jpg">Mi interessano i campi fotovoltaici</a></li>
+        <li><a href="#casa" data-capitolo="0" data-anteprima="media/viaduse-giardino-poster.jpg">Case</a></li>
+        <li><a href="#spazi" data-capitolo="1" data-anteprima="media/attivita-calcio-poster.jpg">Commercio e industria</a></li>
+        <li><a href="#area" data-capitolo="2" data-anteprima="media/area-calcio-drone-poster.jpg">Sviluppo di aree</a></li>
+        <li><a href="#energia" data-capitolo="3" data-anteprima="media/energia-torre-boldone-poster.jpg">Campi fotovoltaici</a></li>
       </ul>
     </div>
     <p class="intro_didascalia" data-entra>Render. Redona Centro, Bergamo.</p>
@@ -164,9 +164,9 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <div class="ombra"></div>
     </div>
     <div class="capitolo_testo">
-      <h3 class="capitolo_titolo" id="casa-titolo" data-righe>Cerchi casa?</h3>
-      <p class="capitolo_frase" data-entra>Le nostre residenze a Gorle e a Cologno al Serio.</p>
-      <a class="bottone" href="case/index.html" data-entra>Vedi le nostre residenze</a>
+      <h3 class="capitolo_titolo" id="casa-titolo" data-righe>Case</h3>
+      <p class="capitolo_frase" data-entra>Residenze a Bergamo e in provincia, dal 2000 a oggi.</p>
+      <a class="bottone" href="case/index.html" data-entra>Vedi le residenze</a>
       <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Residenziale">Le case nell'indice <span data-conta="Residenziale">14</span></a></p>
     </div>
     <ul class="capitolo_righe" data-entra>
@@ -186,9 +186,9 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <div class="ombra"></div>
     </div>
     <div class="capitolo_testo">
-      <h3 class="capitolo_titolo" id="spazi-titolo" data-righe>Cerchi uno spazio per la tua attività?</h3>
-      <p class="capitolo_frase" data-entra>Uffici e box a Leffe Centro, aree commerciali e logistiche in sviluppo.</p>
-      <a class="bottone" href="spazi/index.html" data-entra>Vedi i progetti per aziende</a>
+      <h3 class="capitolo_titolo" id="spazi-titolo" data-righe>Commercio e industria</h3>
+      <p class="capitolo_frase" data-entra>Parchi commerciali, uffici, capannoni e poli logistici, dal 1980 a oggi.</p>
+      <a class="bottone" href="spazi/index.html" data-entra>Vedi i progetti</a>
       <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Commerciale">Commerciale <span data-conta="Commerciale">11</span></a><a href="#progetti" data-filtro-vai="Industriale">Industria e logistica <span data-conta="Industriale">12</span></a></p>
     </div>
     <ul class="capitolo_righe" data-entra>
@@ -209,9 +209,9 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <div class="ombra"></div>
     </div>
     <div class="capitolo_testo">
-      <h3 class="capitolo_titolo" id="area-titolo" data-righe>Hai un'area da valorizzare?</h3>
-      <p class="capitolo_frase" data-entra>Ci occupiamo noi di tutto il percorso, dal terreno all'edificio finito: cerchiamo e valutiamo l'area, otteniamo i permessi, costruiamo.</p>
-      <a class="bottone" href="aree/index.html#proponi" data-entra>Proponici la tua area</a>
+      <h3 class="capitolo_titolo" id="area-titolo" data-righe>Sviluppo di aree</h3>
+      <p class="capitolo_frase" data-entra>Cerchiamo e valutiamo l'area, otteniamo i permessi e costruiamo: dal terreno all'edificio finito.</p>
+      <a class="bottone" href="aree/index.html" data-entra>Come lavoriamo</a>
       <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="tutti">Tutti i progetti, dal 1980 a oggi <span data-conta="tutti">42</span></a></p>
     </div>
     <ul class="capitolo_righe" data-entra>
@@ -234,7 +234,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <div class="capitolo_testo">
       <h3 class="capitolo_titolo" id="energia-titolo" data-righe>I nostri campi fotovoltaici</h3>
       <p class="capitolo_frase" data-entra>Li costruiamo dal 2010. Quello di Torre Boldone è alla base della comunità energetica Imotorre.</p>
-      <a class="bottone" href="energia/index.html" data-entra>Scopri i nostri impianti</a>
+      <a class="bottone" href="energia/index.html" data-entra>Vedi gli impianti</a>
       <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Energetico">Gli impianti nell'indice <span data-conta="Energetico">5</span></a></p>
     </div>
     <ul class="capitolo_righe" data-entra>
@@ -245,7 +245,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   </article>
 
   <!-- Indice dei capitoli: i quattro bisogni sullo stesso piano -->
-  <nav class="capindice" aria-label="I quattro bisogni">
+  <nav class="capindice" aria-label="I quattro settori">
     <a href="#casa" data-capitolo="0"><span class="capindice_linea"><i></i></span>Casa</a>
     <a href="#spazi" data-capitolo="1"><span class="capindice_linea"><i></i></span>Attività</a>
     <a href="#area" data-capitolo="2"><span class="capindice_linea"><i></i></span>Area</a>
@@ -884,7 +884,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <video class="quadro_video" muted playsinline loop preload="none" poster="media/redona-notte-poster.jpg" data-src="media/redona-notte.mp4" data-src-grande="media/redona-notte-1920.mp4" aria-hidden="true"></video>
     </div>
     <div class="finale_velo" aria-hidden="true"></div>
-    <h2 class="finale_titolo" id="contatto-titolo">Raccontaci di cosa hai bisogno: ti risponde la persona giusta.</h2>
+    <h2 class="finale_titolo" id="contatto-titolo">Contatti</h2>
     <p class="sottotitolo"><a href="project/redona-centro-lotti-b1-b2/index.html">Redona Centro, lotti B1-B2, Bergamo</a>. Render animato.</p>
   </div>
   <div class="contatto_griglia">
@@ -911,7 +911,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <p class="piede_recapiti"><a href="tel:+39035347060">035 347060</a> <a href="mailto:info@birolini.it">info@birolini.it</a></p>
   </div>
   <nav class="piede_voci" aria-label="Il sito">
-    <a href="work/index.html">Progetti</a><a href="case/index.html">Case</a><a href="spazi/index.html">Spazi per aziende</a><a href="aree/index.html">Aree</a><a href="energia/index.html">Energia</a><a href="about/index.html">Chi siamo</a><a href="news/index.html">News</a><a href="contact/index.html">Contatti</a>
+    <a href="work/index.html">Progetti</a><a href="case/index.html">Case</a><a href="spazi/index.html">Commercio e industria</a><a href="aree/index.html">Aree</a><a href="energia/index.html">Energia</a><a href="about/index.html">Chi siamo</a><a href="news/index.html">News</a><a href="contact/index.html">Contatti</a>
   </nav>
   <nav class="piede_voci piede_voci--piccole" aria-label="Note e social">
     <a href="privacy-policy/index.html">Privacy</a><a href="cookie-policy/index.html">Cookie Policy</a><a href="note-legali/index.html">Note legali</a><a href="https://www.linkedin.com/company/birolini-s-p-a/">LinkedIn</a><a href="https://www.instagram.com/birolini.s.p.a/">Instagram</a>
@@ -924,11 +924,11 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   </div>
 </footer>
 
-<script src="js/vendor/gsap.min.js?v=202611220829"></script>
-<script src="js/vendor/ScrollTrigger.min.js?v=202611220829"></script>
-<script src="js/vendor/SplitText.min.js?v=202611220829"></script>
-<script src="js/vendor/Flip.min.js?v=202611220829"></script>
-<script src="js/vendor/lenis.min.js?v=202611220829"></script>
+<script src="js/vendor/gsap.min.js?v=202611220848"></script>
+<script src="js/vendor/ScrollTrigger.min.js?v=202611220848"></script>
+<script src="js/vendor/SplitText.min.js?v=202611220848"></script>
+<script src="js/vendor/Flip.min.js?v=202611220848"></script>
+<script src="js/vendor/lenis.min.js?v=202611220848"></script>
 <script>
 /* Riduci movimento (sito nuovo): da fermo si vede il fotogramma, quindi «Render» o «Foto», non «animato» */
 (function () {
@@ -940,6 +940,6 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   document.querySelectorAll('[data-tipo]').forEach(function (a) { a.setAttribute('data-tipo', via(a.getAttribute('data-tipo'))); });
 })();
 </script>
-<script src="js/home.js?v=202611220829"></script>
+<script src="js/home.js?v=202611220848"></script>
 </body>
 </html>
