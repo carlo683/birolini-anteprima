@@ -342,7 +342,7 @@
 
   function avvia() {
     gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
-    ScrollTrigger.config({ ignoreMobileResize: true });
+    ScrollTrigger.config({ ignoreMobileResize: true, autoRefreshEvents: 'visibilitychange,DOMContentLoaded,resize' });   /* «load» lo gestisce rinfresca(), in fondo */
     gsap.defaults({ ease: 'power2.inOut' });
 
     /* ---- Scorrimento morbido: Lenis guidato dal ticker di GSAP ---- */
@@ -704,8 +704,9 @@
     carica(videoApertura); gira(videoApertura, true);
 
     var avvio = gsap.timeline({ delay: .15, defaults: { ease: 'expo.out' } });
-    avvio.fromTo($('.quadro_video', quadroA), { scale: 1.14 }, { scale: 1, duration: 3.2, ease: 'power2.out' }, 0)
-      .to(nome, { y: 0, duration: 1.5, stagger: .07 }, .25)
+    /* 22/11 sera (Carlo: «il primo render di Redona fa qualche scattino»): tolto lo zoom all'indietro sul video
+       (1.14 → 1): il filmato si avvicina già da solo e i due movimenti opposti davano uno strappo quando lo zoom si fermava */
+    avvio.to(nome, { y: 0, duration: 1.5, stagger: .07 }, .25)
       .to(righeFrase, { yPercent: 0, duration: 1.2, stagger: .09 }, .95)
       .to(azioni, { autoAlpha: 1, duration: .8, ease: 'power2.out', onUpdate: function () { if (this.progress() > .45 && azioni.style.pointerEvents) azioni.style.pointerEvents = ''; } }, 1.35)
       .to([testoSotto, $('.apertura_scorri span')], { opacity: 1, duration: .8, ease: 'power2.out' }, 1.6);
@@ -1075,7 +1076,20 @@
 
     /* ---- Misure giuste dopo il caricamento di caratteri e immagini ---- */
     misuraFinestre();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
-    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+    /* 22/11 sera: il ricalcolo di tutte le scene (caratteri pronti, pagina caricata) bloccava la pagina mentre il nome
+       saliva: ora aspetta la fine dell'apertura, oppure il primo gesto (rotella, dito, tasto), se arriva prima */
+    var introFinita = false, daRinfrescare = false;
+    function rinfresca() { if (introFinita) ScrollTrigger.refresh(); else daRinfrescare = true; }
+    function fineIntro() {
+      if (introFinita) return;
+      introFinita = true;
+      ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { window.removeEventListener(e, fineIntro, true); });
+      if (daRinfrescare) { daRinfrescare = false; ScrollTrigger.refresh(); }
+    }
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { window.addEventListener(e, fineIntro, { capture: true, passive: true }); });
+    avvio.eventCallback('onComplete', fineIntro);
+    setTimeout(fineIntro, 4000);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(rinfresca);
+    window.addEventListener('load', rinfresca);
   }
 })();
