@@ -809,8 +809,8 @@ a:hover > .freccia { transform: translateX(6px); }
 }
 
 /* --- passaggi «a foglio»: la sezione nuova sale sopra la vecchia --- */
-.costruzioni, .indice, .storia, .contatto { position: relative; border-radius: 28px 28px 0 0; margin-top: -28px; overflow: clip; box-shadow: 0 -40px 80px -30px rgba(0, 0, 0, .7); }
-.costruzioni { z-index: 2; } .indice { z-index: 3; } .storia { z-index: 4; } .contatto { z-index: 5; }
+.pd, .indice, .storia, .contatto { position: relative; border-radius: 28px 28px 0 0; margin-top: -28px; overflow: clip; box-shadow: 0 -40px 80px -30px rgba(0, 0, 0, .7); }
+.pd { z-index: 2; } .indice { z-index: 3; }   /* giro 8: il Prima e dopo al posto delle tavole */ .storia { z-index: 4; } .contatto { z-index: 5; }
 
 /* --- finale: una schermata piena, poi il contatto su blu pieno --- */
 .contatto { padding: 0; background: var(--notte-alta); }
@@ -961,6 +961,9 @@ a:hover > .freccia { transform: translateX(6px); }
 /* Giro 7: gli anni dell'elenco ereditano l'opacità .5 della voce: in bianco arrivano a 4,9:1 (in grigio erano 3:1) */
 .voce a:not(.attiva) .voce_anno { color: var(--bianco); }
 
+/* Giro 8 (riordino): nel 1979 della home un pulsante verso la pagina Chi siamo */
+.storia_testo .bottone { margin-top: 24px; }
+
 
 /* =========================================================
    Sito nuovo (genera-nuovo.mjs): correzioni alla home approvata
@@ -983,13 +986,92 @@ a:hover > .freccia { transform: translateX(6px); }
 .bottone--pieno::after { background: var(--bianco); transform: scaleY(1); }
 .bottone--pieno:hover::after { background: var(--azzurro); }
 .modulo-arrivo { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--linea); color: var(--nebbia); font-size: .9375rem; max-width: 46ch; }
+/* Giro 7: «Prima e dopo» nella pagina Aree */
+.pd { padding: var(--sezione, 96px) var(--margine) ; }
+.pd_testa { max-width: 760px; margin-bottom: clamp(28px, 5vw, 56px); }
+.pd_testa .secondario { margin-top: 12px; }
+.pd_coppia { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(240px, 1fr); gap: clamp(20px, 3vw, 48px); align-items: end; }
+.pd_coppia + .pd_coppia { margin-top: clamp(56px, 9vw, 120px); }
+.pd_quadro { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--notte-alta); cursor: ew-resize; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
+.pd_img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; }
+.pd_dopo { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+.pd_linea { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--bianco); box-shadow: 0 0 14px rgba(0, 0, 0, .55); pointer-events: none; }
+.pd_maniglia { position: absolute; top: 50%; left: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; background: rgba(12, 22, 40, .82); border: 2px solid var(--bianco); display: flex; align-items: center; justify-content: center; }
+.pd_maniglia::before { content: "\2039\00a0\203a"; color: var(--bianco); font-size: 1.3rem; line-height: 1; transform: translateY(-1px); }
+.pd_et { position: absolute; top: 14px; padding: 6px 10px; background: rgba(12, 22, 40, .8); color: var(--bianco); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; pointer-events: none; }
+.pd_et--prima { left: 14px; } .pd_et--dopo { right: 14px; }
+.pd_cursore { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
+.pd_quadro:has(.pd_cursore:focus-visible) { outline: 2px solid var(--azzurro); outline-offset: 4px; }
+.pd_n { margin-bottom: 10px; }
+.pd_testo > p:not(.pd_n):not(.pd_fonte) { margin-top: 10px; max-width: 38ch; }
+.pd_fonte { margin-top: 14px; font-size: .75rem; line-height: 1.6; color: var(--nebbia); letter-spacing: .04em; }
+.pd_fonte span { color: var(--bianco); }
+.pd_testo .collegamento { display: inline-block; margin-top: 16px; }
+@media (max-width: 760px) {
+  .pd { padding: 64px 16px; }
+  .pd_coppia { grid-template-columns: 1fr; gap: 18px; }
+  .pd_et { top: 10px; font-size: .6875rem; } .pd_et--prima { left: 10px; } .pd_et--dopo { right: 10px; }
+}
+
+/* didascalie in un solo formato («Luogo · Tipo»): minuscolo normale, mai sotto i 13 px, niente sottolineatura */
+.ciak, .sottotitolo, .tavola-foto_dida, .tavola-foto_tipo, .fp_meta, .fp_tipo, .pd_fonte, .viaggio_dida, .cer_dida, .visore_ciak, .storia_didascalia {
+  text-transform: none; letter-spacing: .01em; font-size: .8125rem;
+}
+.ciak a, .sottotitolo a { text-decoration: none; }
+.ciak a:hover, .ciak a:focus-visible, .sottotitolo a:hover, .sottotitolo a:focus-visible { text-decoration: underline; text-decoration-color: var(--azzurro); text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .ciak, .sottotitolo, .fp_meta, .fp_tipo { font-size: .8125rem; }
+}
+/* il pallino azzurro accanto all'anno vuol dire «in corso»: ora c'è scritto */
+.indice_legenda { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; font-family: var(--mono); font-size: .8125rem; letter-spacing: .01em; color: var(--nebbia); }
+.indice_legenda .voce_incorso { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--azzurro); }
+
+/* il menu in due gruppi, ciascuno con il suo titolino */
+.menu { overflow-y: auto; }
+.menu_voci { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); gap: 0 clamp(40px, 9vw, 160px); align-items: start; }
+.menu_gruppo { display: flex; flex-direction: column; }
+.menu_titolino { margin: 0 0 10px; font-family: var(--mono); font-size: .8125rem; letter-spacing: .04em; color: var(--azzurro); }
+@media (max-width: 760px) {
+  .menu { justify-content: flex-start; }
+  .menu_voci { grid-template-columns: 1fr; gap: 26px; }
+  .menu_voci a { font-size: 1.85rem; padding: 5px 0; }
+  .menu_recapiti { margin-top: 28px; }
+}
+
+/* «Cosa facciamo» accanto alle linguette dei capitoli */
+.moto .capindice { align-items: center; }
+.capindice_titolo { margin: 0 6px 0 0; font-family: var(--mono); font-size: .8125rem; font-weight: 500; letter-spacing: .04em; color: var(--bianco); white-space: nowrap; }
+.capindice a, .capindice_titolo { text-shadow: 0 1px 2px rgba(0, 0, 0, .7), 0 0 14px rgba(0, 0, 0, .55); }   /* leggibili anche sopra un render chiaro */
+.moto .capindice a { text-transform: none; letter-spacing: .01em; font-size: .8125rem; }   /* stessi nomi corti del menu, in minuscolo come il titolo */
+@media (max-width: 760px) {
+  .moto .capindice { flex-wrap: wrap; row-gap: 0; }
+  .capindice_titolo { flex: 0 0 100%; margin: 0 0 -4px; font-size: .75rem; color: var(--nebbia); }
+  .moto .capindice a { font-size: .75rem; line-height: 1.15; }
+}
+
+/* «Prima e dopo» di Rivolta d'Adda, subito dopo il capitolo Aree (lo stile delle pagine non c'è nella home: qui le misure) */
+.pd { --sezione: clamp(88px, 14vh, 160px); position: relative; z-index: 2; background: var(--notte); }
+/* alto almeno uno schermo (più i 28 px del foglio dopo): il passaggio ai progetti comincia proprio dove finisce questo,
+   senza sovrapporsi (sul telefono la sezione era più bassa dello schermo e i due scatti si pestavano i piedi) */
+.pd { min-height: calc(100vh + 28px); min-height: calc(100svh + 28px); display: flex; flex-direction: column; justify-content: center; }
+.pd .t3 { font-size: clamp(2.2rem, 4.4vw, 4.4rem); line-height: 1; font-weight: 300; font-stretch: 125%; letter-spacing: -.035em; text-wrap: balance; }
+.pd .t4 { font-size: 1.5rem; line-height: 1.2; font-weight: 400; font-stretch: 115%; letter-spacing: -.01em; }
+.pd .secondario { color: var(--nebbia); }
+@media (min-width: 761px) { .pd .pd_coppia { grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr); } }   /* nella home una coppia sola: più grande */
+
+/* «I nostri progetti» nella home: sei progetti scelti (niente filtri: --barra 0) e «Tutti i 42 progetti» verso l'archivio.
+   Sotto l'elenco resta spazio, così scorrendo anche l'ultimo nome arriva alla linea prima che salga il 1979 */
+.indice--home { --barra: 0px; }
+/* righe più alte e più spazio sotto: scorrendo (una tacca di rotella o un piccolo colpo di dito) si ferma su ognuno dei sei */
+@media (min-width: 761px) { .indice--home .voce a { padding: 26px 0; } .indice--home .indice_tutti-progetti { min-height: 56vh; } }
+@media (max-width: 760px) { .indice--home .voce a { padding: 16px 0; } .indice--home .indice_tutti-progetti { min-height: 64vh; min-height: 64svh; } }
 
 
 /* =========================================================
    Modalità leggera (telefoni e tablet): leggero.mjs
    ========================================================= */
 /* gli angoli «a foglio» con l'ombra grande costringono il telefono a ridisegnare sezioni intere mentre si scorre */
-.leggero .foglio, .leggero .costruzioni, .leggero .indice, .leggero .storia, .leggero .contatto, .leggero .residenza { border-radius: 0; box-shadow: none; }
+.leggero .foglio, .leggero .pd, .leggero .indice, .leggero .storia, .leggero .contatto, .leggero .residenza { border-radius: 0; box-shadow: none; }
 /* 1979: niente video dentro le cifre (su Safari è il pezzo più pesante), resta la foto vera */
 .leggero .storia_video { display: none; }
 /* galleria: niente parallasse, quindi niente livelli in più per ogni foto */

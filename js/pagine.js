@@ -25,7 +25,7 @@
       var entra = function () {
         if (n !== richiesta) return;
         sopra = 1 - sopra;
-        ciak.textContent = x.tipo ? x.tipo + '. ' + (i + 1) + ' di ' + N : (i + 1) + ' di ' + N;
+        ciak.textContent = x.tipo ? x.tipo + ' · ' + (i + 1) + ' di ' + N : (i + 1) + ' di ' + N;
         ciak.style.visibility = 'visible';
         if (B.moto && aperto && verso) {
           gsap.killTweensOf([nuova, vecchia]);

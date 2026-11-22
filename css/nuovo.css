@@ -274,12 +274,70 @@
   .racconto--chiuso .racconto_testo { max-height: 26rem; }
 }
 
+/* didascalie in un solo formato («Luogo · Tipo»): minuscolo normale, mai sotto i 13 px, niente sottolineatura */
+.ciak, .sottotitolo, .tavola-foto_dida, .tavola-foto_tipo, .fp_meta, .fp_tipo, .pd_fonte, .viaggio_dida, .cer_dida, .visore_ciak, .storia_didascalia {
+  text-transform: none; letter-spacing: .01em; font-size: .8125rem;
+}
+.ciak a, .sottotitolo a { text-decoration: none; }
+.ciak a:hover, .ciak a:focus-visible, .sottotitolo a:hover, .sottotitolo a:focus-visible { text-decoration: underline; text-decoration-color: var(--azzurro); text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .ciak, .sottotitolo, .fp_meta, .fp_tipo { font-size: .8125rem; }
+}
+/* il pallino azzurro accanto all'anno vuol dire «in corso»: ora c'è scritto */
+.indice_legenda { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; font-family: var(--mono); font-size: .8125rem; letter-spacing: .01em; color: var(--nebbia); }
+.indice_legenda .voce_incorso { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--azzurro); }
+
+/* il menu in due gruppi, ciascuno con il suo titolino */
+.menu { overflow-y: auto; }
+.menu_voci { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); gap: 0 clamp(40px, 9vw, 160px); align-items: start; }
+.menu_gruppo { display: flex; flex-direction: column; }
+.menu_titolino { margin: 0 0 10px; font-family: var(--mono); font-size: .8125rem; letter-spacing: .04em; color: var(--azzurro); }
+@media (max-width: 760px) {
+  .menu { justify-content: flex-start; }
+  .menu_voci { grid-template-columns: 1fr; gap: 26px; }
+  .menu_voci a { font-size: 1.85rem; padding: 5px 0; }
+  .menu_recapiti { margin-top: 28px; }
+}
+
+/* «Altri progetti» in fondo alla scheda: tre riquadri */
+.altri { padding: var(--sezione) var(--margine) var(--spazio-6); }
+.altri > h2 { margin-bottom: var(--spazio-6); }
+.altri_griglia { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 32px); }
+.altro a { display: block; text-decoration: none; color: var(--bianco); }
+.altro_media { display: block; overflow: hidden; aspect-ratio: 3 / 2; background: var(--notte-alta); }
+.altro_media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--curva); }
+.altro a:hover img { transform: scale(1.04); }
+.altro_nome { display: block; margin-top: 14px; font-size: clamp(1.15rem, 1.5vw, 1.45rem); line-height: 1.2; font-weight: 400; font-stretch: 108%; letter-spacing: -.01em; transition: color .3s; }
+.altro a:hover .altro_nome { color: var(--azzurro); }
+.altro_dati { display: block; margin-top: 6px; font-family: var(--mono); font-size: .8125rem; letter-spacing: .01em; color: var(--nebbia); }
+.altri .indice_fine { display: flex; align-items: center; margin-top: var(--spazio-6); }
+.altri .indice_fine a { display: inline-flex; align-items: center; gap: 18px; min-height: 44px; font-size: clamp(1.3rem, 2vw, 2rem); font-weight: 300; font-stretch: 120%; letter-spacing: -.02em; text-decoration: none; color: var(--bianco); }
+@media (max-width: 760px) {
+  .altri { padding: 64px 16px 40px; }
+  .altri_griglia { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* «Prima e dopo» nella scheda del progetto (Rivolta d'Adda e Calcio): una coppia sola, subito dopo la copertina */
+.pd--scheda .pd_coppia { align-items: end; }
+
+/* Aree: le quattro tappe in una riga compatta, solo testo (le immagini di Rivolta sono già nel «Prima e dopo» qui sopra) */
+.tappe4 { padding: var(--sezione) var(--margine); }
+.tappe4_testa { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: var(--spazio-6); }
+.tappe4_testa p { max-width: 46ch; }
+.tappe4_lista { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 40px); counter-reset: tappa; }
+.tappe4_lista li { padding-top: 18px; border-top: 1px solid rgba(244, 246, 249, .45); }
+.tappe4_lista h3 { margin-bottom: 10px; }
+.tappe4_lista li:first-child { border-top-color: var(--azzurro); }
+.tappe4_fine { margin-top: var(--spazio-5); }
+@media (max-width: 900px) { .tappe4_lista { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; } }
+@media (max-width: 760px) { .tappe4 { padding: 64px 16px; } .tappe4_lista { grid-template-columns: 1fr; } }
+
 
 /* =========================================================
    Modalità leggera (telefoni e tablet): leggero.mjs
    ========================================================= */
 /* gli angoli «a foglio» con l'ombra grande costringono il telefono a ridisegnare sezioni intere mentre si scorre */
-.leggero .foglio, .leggero .costruzioni, .leggero .indice, .leggero .storia, .leggero .contatto, .leggero .residenza { border-radius: 0; box-shadow: none; }
+.leggero .foglio, .leggero .pd, .leggero .indice, .leggero .storia, .leggero .contatto, .leggero .residenza { border-radius: 0; box-shadow: none; }
 /* 1979: niente video dentro le cifre (su Safari è il pezzo più pesante), resta la foto vera */
 .leggero .storia_video { display: none; }
 /* galleria: niente parallasse, quindi niente livelli in più per ogni foto */

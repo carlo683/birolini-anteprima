@@ -71,6 +71,17 @@
       }
     }
 
+    // giro 8 (riordino, lavoro 10): progetti «in pila» (Case, Commercio e industria, Energia). Il passaggio da un progetto
+    // al successivo, una volta iniziato, si completa da solo (prima ci si poteva fermare a metà, con il titolo tagliato e scurito)
+    var pila = $$('.residenza');
+    pila.forEach(function (r, i) {
+      var prossimo = pila[i + 1]; if (!prossimo) return;
+      var tappeP = gsap.timeline({ paused: true }).addLabel('sotto', 0).to({}, { duration: 1 }).addLabel('sopra', 1);
+      var stP = ScrollTrigger.create({ trigger: prossimo, start: 'top bottom', end: 'top top', animation: tappeP, scrub: true,
+        snap: conLenis ? null : { snapTo: 'labelsDirectional', duration: { min: .5, max: 1.1 }, delay: .06, ease: 'power1.inOut', inertia: false } });
+      zone.push(function () { return [stP.start, stP.end]; });
+    });
+
     // linea del tempo: sul computer resta ferma e scorre di lato, con lo scatto su ogni tessera; sul telefono si sfoglia col dito
     var lista = $('.tempo_lista');
     if (lista) {

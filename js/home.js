@@ -1,5 +1,5 @@
 /* =========================================================
-   MIX (giro 2): apertura e capitoli da A, «dal disegno all'edificio» e linea del tempo da C, indice da B
+   MIX (giro 2): apertura e capitoli da A, linea del tempo da C (ora solo in Chi siamo), indice da B. Giro 8: riordino (RIORDINO.md)
    GSAP + ScrollTrigger + SplitText + Flip + Lenis (tutti locali, in sito/js/vendor). Una sola istanza di Lenis, guidata dal ticker di GSAP.
    Niente fetch, niente moduli: si apre anche con il doppio clic (file://).
    ========================================================= */
@@ -106,8 +106,11 @@
     var vis = visibili(), k = vis.indexOf(a.parentNode);
     vis.forEach(function (v, i) { var l = $('a', v), d = Math.abs(i - k); l.classList.toggle('d1', d === 1); l.classList.toggle('d2', d === 2); });
     // il contatore segue subito la riga; nome e dati cambiano insieme all'immagine
-    var nPrima = fpN.textContent; fpN.textContent = due(k + 1); fpTot.textContent = due(vis.length);
-    if (filtriAnimati && !subito && nPrima !== fpN.textContent) gsap.fromTo(fpN, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .5, ease: 'power3.out', overwrite: true });
+    // giro 8 (riordino): il contatore «01 / 42» sopra l'immagine non c'è più (si leggeva male): resta il codice, se tornasse
+    if (fpN && fpTot) {
+      var nPrima = fpN.textContent; fpN.textContent = due(k + 1); fpTot.textContent = due(vis.length);
+      if (filtriAnimati && !subito && nPrima !== fpN.textContent) gsap.fromTo(fpN, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .5, ease: 'power3.out', overwrite: true });
+    }
     // il video del progetto di prima sfuma: sotto c'è già il suo poster
     fpVideo.classList.remove('in-onda');
     chiediImmagine(a, subito);
@@ -332,7 +335,7 @@
     try { ctx.revert(); } catch (e) {}
     try { ScrollTrigger.getAll().forEach(function (t) { t.kill(true); }); } catch (e) {}
     try { if (lenis && lenis.destroy) lenis.destroy(); } catch (e) {}
-    $$('.apertura, .apertura *, .intro, .intro *, .capitolo, .capitolo *, .capindice, .costruzioni *').forEach(function (el) { el.style.visibility = ''; el.style.opacity = ''; el.style.transform = ''; });
+    $$('.apertura, .apertura *, .capitolo, .capitolo *, .capindice').forEach(function (el) { el.style.visibility = ''; el.style.opacity = ''; el.style.transform = ''; });
     spegni();
     }
   }
@@ -370,13 +373,14 @@
     }
 
     /* ---- Sottotitoli del montaggio d'apertura: dicono cosa si vede e se è render o foto ---- */
+    // giro 8: un solo formato per tutte le didascalie del sito, «Luogo · Tipo»
     var battute = [
-      [0, 'Render animato. Redona Centro, Bergamo.', false],
-      [3.7, 'Render animato. Residenza Viaduse, Gorle (BG).', false],
-      [7.0, "Render animato. Polo logistico a Rivolta d'Adda (CR).", true],
-      [10.6, "Foto dal drone animata. Cantiere dell'hotel a Orio al Serio (BG).", false],
-      [14.0, "Foto dal drone animata. Campo fotovoltaico vicino all'aeroporto di Bergamo.", false],
-      [17.3, 'Render animato. Redona Centro, Bergamo.', false]
+      [0, 'Redona Centro, Bergamo · Render animato', false],
+      [3.7, 'Residenza Viaduse, Gorle (BG) · Render animato', false],
+      [7.0, "Polo logistico a Rivolta d'Adda (CR) · Render animato", true],
+      [10.6, "Cantiere dell'hotel a Orio al Serio (BG) · Foto dal drone animata", false],
+      [14.0, "Campo fotovoltaico vicino all'aeroporto di Bergamo · Foto dal drone animata", false],
+      [17.3, 'Redona Centro, Bergamo · Render animato', false]
     ];
     var testoSotto = $('[data-sottotitoli]');
     var sottotitolo = testoSotto.parentNode;
@@ -430,9 +434,13 @@
     function tappeEtichette(st) { if (st._tappe) return st._tappe(); var a = st.animation, d = a.duration(); return Object.keys(a.labels).map(function (k) { return st.start + a.labels[k] / d * (st.end - st.start); }).sort(function (x, y) { return x - y; }); }
     function zonaScatto(st) { if (lenisVero) zoneScatto.push(st); return st; }
     if (lenisVero) {
-      var yRiposo = window.scrollY, attesaScatto = null;
+      var yRiposo = window.scrollY, attesaScatto = null, ultimoFuoco = -1e9;
+      // giro 8: se la pagina si è mossa perché il fuoco (tasto Tab) è passato a un elemento, lo scatto non interviene:
+      // altrimenti portava oltre e l'elemento con il fuoco finiva fuori dallo schermo (Prima e dopo, sei progetti)
+      document.addEventListener('keydown', function (e) { if (e.key === 'Tab') ultimoFuoco = performance.now(); });
       var controllaScatto = function () {
         if (lenis.isScrolling || Math.abs(lenis.velocity || 0) > .3) { attesaScatto = setTimeout(controllaScatto, 80); return; }
+        if (performance.now() - ultimoFuoco < 1500) { yRiposo = window.scrollY; return; }
         var y = window.scrollY, dir = y > yRiposo + 2 ? 1 : y < yRiposo - 2 ? -1 : 0, meta = null;
         if (dir) zoneScatto.some(function (st) {
           var p = tappeEtichette(st);
@@ -450,61 +458,31 @@
     function snapNativo(cfg) { return lenisVero ? null : cfg; }
 
     /* =====================================================
-       Il FILM: apertura -> finestra -> quattro capitoli
+       Il FILM: apertura -> quattro capitoli (giro 8, riordino: Case, Commercio e industria, Energia, Aree).
+       Via la schermata-elenco «Cosa facciamo» e la finestra in cui l'apertura si stringeva: il primo capitolo
+       sale dal basso come un sipario, come gli altri, e l'apertura si allontana nel buio.
        ===================================================== */
     var film = $('.film');
     var quadroA = $('[data-quadro]', apertura);
+    var dentroA = $('.quadro_dentro', quadroA), ombraA = $('.ombra', quadroA);
     var testoA = $('.apertura_testo');
     var nome = $$('.apertura_nome path');
-    var intro = $('.intro');
     var capitoli = $$('.capitolo');
     var indice = $('.capindice');
     var lineeIndice = $$('.capindice_linea i');
     var vociIndice = $$('.capindice a');
     var parolaLogo = $('.testata_logo .logo_parola');
 
-    // stato di una "inquadratura": p = 0 a tutto schermo, p = 1 nella finestra; k = zoom del contenuto
-    function Inquadratura(quadro) {
-      this.q = quadro; this.d = $('.quadro_dentro', quadro);
-      this.p = 0; this.k = 1; this.r = null;
-    }
-    Inquadratura.prototype.applica = function () {
-      // misure lette una volta sola (si azzerano in misuraFinestre): leggerle a ogni fotogramma rallenta il telefono
-      if (!this.W) { this.W = this.q.parentNode.clientWidth || window.innerWidth; this.Hh = this.q.parentNode.clientHeight || window.innerHeight; }
-      var W = this.W, Hh = this.Hh;
-      var r = this.r || { x: 0, y: 0, w: W, h: Hh };
-      var p = this.p;
-      var sx = 1 + (r.w / W - 1) * p, sy = 1 + (r.h / Hh - 1) * p;
-      this.q.style.transform = 'translate3d(' + (r.x * p).toFixed(2) + 'px,' + (r.y * p).toFixed(2) + 'px,0) scale(' + sx.toFixed(5) + ',' + sy.toFixed(5) + ')';
-      if (this.d) this.d.style.transform = 'scale(' + (this.k / sx).toFixed(5) + ',' + (this.k / sy).toFixed(5) + ')';
-    };
-    function misura(el, dentro) {
-      var a = el.getBoundingClientRect(), b = dentro.getBoundingClientRect();
-      return { x: a.left - b.left, y: a.top - b.top, w: a.width, h: a.height };
-    }
-
-    var iA = new Inquadratura(quadroA);
-    var iC = capitoli.map(function (c) { return new Inquadratura($('[data-quadro]', c)); });
-    var finestra = $('.finestra:not(.finestra--centro)');
-    var finestraCentro = $('.finestra--centro');
-    function misuraFinestre() {
-      var r1 = misura(finestra, film);
-      iA.r = r1; iC[0].r = r1; iA.W = 0; iC[0].W = 0;
-      iA.applica(); iC[0].applica();
-    }
-
     // elementi da rivelare
-    var righeIntroTitolo = righe($('.intro_titolo'), true);
-    var entraIntro = $$('[data-entra]', intro);
     var cap = capitoli.map(function (c) {
+      var q = $('[data-quadro]', c);
       return {
-        el: c,
+        el: c, q: q, d: $('.quadro_dentro', q),
         titolo: righe($('.capitolo_titolo', c), true),
         entra: $$('[data-entra]', c),
         sotto: $('.sottotitolo', c),
         ombra: $('.ombra', c),
         testo: $('.capitolo_testo', c),
-        progetti: $('.capitolo_progetti', c),
         video: $('video', c)
       };
     });
@@ -517,96 +495,62 @@
     gsap.set(azioni, { autoAlpha: 0, pointerEvents: 'none' });   // giro 6: toccabili solo quando sono comparsi del tutto
     gsap.set([testoSotto, $('.apertura_scorri span')], { opacity: 0 }); // il film usa il contenitore, l'apertura il contenuto: non si pestano i piedi
     gsap.set(parolaLogo, { opacity: 0 });
-    gsap.set(intro, { autoAlpha: 1 });
-    gsap.set(righeIntroTitolo, { yPercent: 105 });
-    gsap.set(entraIntro, { opacity: 0, y: 24 });
     cap.forEach(function (c) {
       gsap.set(c.el, { autoAlpha: 0 });
       gsap.set(c.titolo, { yPercent: 105 });
       gsap.set(c.entra.concat([c.sotto]), { autoAlpha: 0, y: 22 });
     });
     gsap.set(indice, { autoAlpha: 0 });
-    iC[0].p = 1; iC[0].k = .9;
 
-    var ripeti = function (o) { return function () { o.applica(); }; };
     var tl = gsap.timeline({ defaults: { ease: 'none' } });
-
-    /* 0 - 1.1: l'apertura si stringe nella finestra cinemascope */
-    tl.to(iA, { p: 1, k: .84, duration: 1.1, ease: 'power2.inOut', onUpdate: ripeti(iA) }, 0)
-      .to($('.velo--apertura'), { opacity: 0, duration: .8, ease: 'power1.inOut' }, .2)
-      .to(testoA, { y: -70, autoAlpha: 0, duration: .5, ease: 'power2.in' }, 0)
-      .to([sottotitolo, $('.apertura_scorri')], { autoAlpha: 0, duration: .25 }, 0)
-      .fromTo(parolaLogo, { opacity: 0 }, { opacity: 1, duration: .3 }, .1)
-      .to(entraIntro[0], { opacity: 1, y: 0, duration: .45, ease: 'power2.out' }, .55)
-      .to(righeIntroTitolo, { yPercent: 0, duration: .5, stagger: .06, ease: 'power3.out' }, .62)
-      .to(entraIntro.slice(1), { opacity: 1, y: 0, duration: .45, stagger: .08, ease: 'power2.out' }, .78);
-
-    /* 1.7 - 3.1: capitolo «casa» nasce nella stessa finestra e si allarga a tutto schermo */
-    tl.addLabel('bisogni', 1.25);
     function entraTesto(c, t) {
       tl.to(c.titolo, { yPercent: 0, duration: .5, stagger: .07, ease: 'power3.out' }, t)
         .to(c.entra.concat([c.sotto]), { autoAlpha: 1, y: 0, duration: .45, stagger: .07, ease: 'power2.out' }, t + .15);
     }
     function esceTesto(c, t) {
-      tl.to([c.testo, c.progetti, c.sotto], { autoAlpha: 0, y: -40, duration: .4, ease: 'power2.in' }, t);
+      tl.to([c.testo, c.sotto], { autoAlpha: 0, y: -40, duration: .4, ease: 'power2.in' }, t);
     }
-    tl.to(cap[0].el, { autoAlpha: 1, duration: .2 }, 1.7)
-      .to(intro, { autoAlpha: 0, y: -30, duration: .4, ease: 'power2.in' }, 1.75)
-      .to(iC[0], { p: 0, k: 1, duration: 1.0, ease: 'power3.inOut', onUpdate: ripeti(iC[0]) }, 1.85)
-      .to(indice, { autoAlpha: 1, duration: .3 }, 2.5);
-    entraTesto(cap[0], 2.55);
-    tl.to(iC[0], { k: 1.05, duration: .75, ease: 'none', onUpdate: ripeti(iC[0]) }, 2.85); // casa: la camera si avvicina
-    tl.addLabel('c0', 3.25);
+    // il capitolo nuovo sale dal basso come un sipario; quello di prima si allontana nel buio
+    function sale(c, t, primaDentro, primaOmbra) {
+      tl.set(c.el, { autoAlpha: 1 }, t)
+        .fromTo(c.q, { yPercent: 100 }, { yPercent: 0, duration: 1, ease: 'power3.inOut' }, t)
+        .fromTo(c.d, { yPercent: -55, scale: 1.12 }, { yPercent: 0, scale: 1, duration: 1, ease: 'power3.inOut' }, t)
+        .to(primaDentro, { scale: 1.1, duration: 1, ease: 'power2.in' }, t)
+        .to(primaOmbra, { opacity: .75, duration: 1, ease: 'power2.in' }, t);
+    }
+    // quando sale ogni capitolo, quando è tutto in vista (tappa dello scatto)
+    var SALE = [.25, 2.05, 3.75, 5.65], TAPPA = [1.7, 3.4, 5.3];
 
-    /* 3.6 - 4.6: «attività» sale come un sipario, «casa» si allontana nel buio */
-    var q1 = cap[1].el.querySelector('[data-quadro]'), d1 = $('.quadro_dentro', q1);
-    tl.set(cap[1].el, { autoAlpha: 1 }, 3.6)
-      .fromTo(q1, { yPercent: 100 }, { yPercent: 0, duration: 1, ease: 'power3.inOut' }, 3.6)
-      .fromTo(d1, { yPercent: -55, scale: 1.12 }, { yPercent: 0, scale: 1, duration: 1, ease: 'power3.inOut' }, 3.6)
-      .to(iC[0], { k: 1.08, duration: 1, ease: 'power2.in', onUpdate: ripeti(iC[0]) }, 3.6)
-      .to(cap[0].ombra, { opacity: .7, duration: 1, ease: 'power2.in' }, 3.6);
-    esceTesto(cap[0], 3.6);
-    entraTesto(cap[1], 4.25);
-    tl.to(d1, { xPercent: -2, scale: 1.05, duration: .7, ease: 'none' }, 4.6); // attività: la camera scorre di lato (giro 3: un po' ingrandita, così a destra non resta una striscia scura)
-    tl.addLabel('c1', 4.95);
+    /* 0 - 1.25: il testo dell'apertura sale e sparisce, il capitolo Case sale dal basso */
+    tl.to(testoA, { y: -70, autoAlpha: 0, duration: .5, ease: 'power2.in' }, 0)
+      .to([sottotitolo, $('.apertura_scorri')], { autoAlpha: 0, duration: .25 }, 0)
+      .fromTo(parolaLogo, { opacity: 0 }, { opacity: 1, duration: .3 }, .1);
+    sale(cap[0], SALE[0], dentroA, ombraA);
+    tl.to(indice, { autoAlpha: 1, duration: .3 }, .9);
+    entraTesto(cap[0], .9);
+    tl.to(cap[0].d, { scale: 1.05, duration: .75, ease: 'none' }, 1.25);   // case: la camera si avvicina
+    tl.addLabel('c0', TAPPA[0]);
 
-    /* 5.3 - 6.5: «area» si apre da una finestra verticale al centro */
-    // giro 3: anche «area» sale dal basso come un sipario (prima si apriva da una finestra verticale al centro)
-    var q2 = cap[2].el.querySelector('[data-quadro]'), d2 = $('.quadro_dentro', q2);
-    tl.set(cap[2].el, { autoAlpha: 1 }, 5.3)
-      .fromTo(q2, { yPercent: 100 }, { yPercent: 0, duration: 1, ease: 'power3.inOut' }, 5.3)
-      .fromTo(d2, { yPercent: -55, scale: 1.12 }, { yPercent: 0, scale: 1, duration: 1, ease: 'power3.inOut' }, 5.3)
-      .to(cap[1].ombra, { opacity: .82, duration: 1, ease: 'power2.in' }, 5.3)
-      .to(d1, { scale: 1.06, duration: 1.2, ease: 'power1.in' }, 5.3);
-    esceTesto(cap[1], 5.3);
-    entraTesto(cap[2], 6.15);
-    tl.addLabel('c2', 6.85);
+    /* poi gli altri tre capitoli, uno alla volta */
+    for (var ci = 1; ci < cap.length; ci++) {
+      sale(cap[ci], SALE[ci], cap[ci - 1].d, cap[ci - 1].ombra);
+      esceTesto(cap[ci - 1], SALE[ci]);
+      entraTesto(cap[ci], SALE[ci] + .65);
+      if (ci === 1) tl.to(cap[1].d, { xPercent: -2, scale: 1.05, duration: .7, ease: 'none' }, SALE[1] + 1);   // commercio e industria: la camera scorre di lato (giro 3: un po' ingrandita)
+      if (ci < TAPPA.length) tl.addLabel('c' + ci, TAPPA[ci]);
+    }
+    tl.to({}, { duration: .55 }, SALE[3] + 1.4); // una pausa prima di lasciare la scena
 
-    /* 7.2 - 8.2: «energia» entra di lato, come un carrello */
-    var q3 = cap[3].el.querySelector('[data-quadro]'), d3 = $('.quadro_dentro', q3);
-    tl.set(cap[3].el, { autoAlpha: 1 }, 7.2)
-      .fromTo(q3, { yPercent: 100 }, { yPercent: 0, duration: 1, ease: 'power3.inOut' }, 7.2)   // giro 3: dal basso, non più di lato
-      .fromTo(d3, { yPercent: -55, scale: 1.1 }, { yPercent: 0, scale: 1, duration: 1, ease: 'power3.inOut' }, 7.2)
-      .to(cap[2].ombra, { opacity: .7, duration: 1, ease: 'power2.in' }, 7.2)
-      .to(d2, { scale: 1.08, duration: 1, ease: 'power2.in' }, 7.2);
-    esceTesto(cap[2], 7.2);
-    entraTesto(cap[3], 7.85);
-    tl.addLabel('c3', 8.55);
-    tl.to({}, { duration: .55 }, 8.6); // una pausa prima di lasciare la scena
-
-    // tempi di ogni capitolo (per l'indice e per i video)
-    // la tappa «Di cosa hai bisogno?» è più corta di un terzo: tutto quello che viene dopo si anticipa
-    var ANTICIPO = .25;
-    tl.shiftChildren(-ANTICIPO, true, 1.69);
     // 22/11 (Carlo: «se non scorri rimane così… deve aprirsi tutto in maniera automatica»): tappe del film per lo scatto automatico
     tl.addLabel('inizio', 0); tl.addLabel('fine', tl.duration());
-    // giro 6: il capitolo Energia coincide con la fine del film (prima, tra c3 e la fine, un colpo di scorrimento non cambiava niente)
+    // giro 6: l'ultimo capitolo coincide con la fine del film (prima, tra c3 e la fine, un colpo di scorrimento non cambiava niente)
     tl.addLabel('c3', tl.duration());
-    var tratti = [[1.45, 3.35], [3.35, 5.05], [5.05, 6.95], [6.95, 8.9]];
-    var visibili = [[0, .6], [1.45, 4.45],   // giro 3: il video d'apertura si ferma quando nasce la finestra
-      [3.35, 6.35], [5.05, 8.05], [6.95, 99]]; // apertura + 4 capitoli
+    // tempi di ogni capitolo (per l'indice e per i video): ogni capitolo dura da quando sale a quando sale il prossimo
+    var fineFilm = tl.duration();
+    var tratti = SALE.map(function (t, i) { return [t, i < SALE.length - 1 ? SALE[i + 1] : fineFilm]; });
+    var visibili = [[0, SALE[0] + 1.1]].concat(SALE.map(function (t, i) { return [t, i < SALE.length - 1 ? SALE[i + 1] + 1.1 : 99]; }));   // apertura + 4 capitoli: ciascuno finché il prossimo non lo copre del tutto
     var videoFilm = [videoApertura].concat(cap.map(function (c) { return c.video; }));
-    var filmInVista = true, attivoOra = -2, introAttiva = null;
+    var filmInVista = true, attivoOra = -2;
     var lineaX = lineeIndice.map(function (l) { return gsap.quickSetter(l, 'scaleX'); });
 
     function aggiornaFilm() {
@@ -619,8 +563,6 @@
         if (t >= visibili[i][0] - 1.4) carica(v);
         gira(v, dentro);
       });
-      // giro 3: nella finestra resta un'immagine sola, ferma sul primo render del montaggio (Redona Centro)
-      if (t > visibili[0][1] && videoApertura.paused && videoApertura.readyState >= 1 && Math.abs(videoApertura.currentTime - 1.5) > .05) videoApertura.currentTime = 1.5;
       // indice dei capitoli
       var attivo = -1;
       tratti.forEach(function (tr, i) {
@@ -637,9 +579,6 @@
         // solo i link del capitolo davanti si possono cliccare
         cap.forEach(function (c, i) { c.el.style.pointerEvents = i === attivo ? 'auto' : 'none'; });
       }
-      // «Di cosa hai bisogno?» si può toccare solo quando c'è davvero (21/11: prima, invisibile, rubava i tocchi ai pulsanti dell'apertura)
-      var introSu = attivo === -1 && t >= .6;
-      if (introSu !== introAttiva) { introAttiva = introSu; intro.style.pointerEvents = introSu ? 'auto' : 'none'; intro.inert = !introSu; }
     }
 
     var stFilm = null;   // 22/11 (revisione giro 6, P0): esiste prima di chi la legge
@@ -649,7 +588,7 @@
       var dopo = s.scroll() > stFilm.end + window.innerHeight * .5;
       var su = dopo && s.direction === 1 && menu.hidden;
       testata.classList.toggle('testata--nascosta', su);
-      H.classList.toggle('testata-su', su); // la barra dei settori e la finestra salgono al posto della testata
+      H.classList.toggle('testata-su', su); // la finestra sale al posto della testata
       testata.classList.toggle('testata--piena', s.scroll() > stFilm.end + window.innerHeight * .9);
     } });
     stFilm = ScrollTrigger.create({
@@ -664,18 +603,10 @@
       // 22/11: basta un tocco di scorrimento e il capitolo si completa da solo fino alla tappa successiva (o precedente)
       snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .7, max: 1.6 }, delay: .06, ease: 'power1.inOut', inertia: false }),
       onUpdate: aggiornaFilm,
-      onRefreshInit: function () { /* torna alla misura vera prima di rimisurare */ },
-      onRefresh: function () { misuraFinestre(); aggiornaFilm(); }
+      onRefresh: function () { aggiornaFilm(); }
     });
     zonaScatto(stFilm);
     new IntersectionObserver(function (v) { filmInVista = v[0].isIntersecting; aggiornaFilm(); }, { threshold: 0 }).observe(film);
-
-    // «Di cosa hai bisogno?»: passando sopra una scelta, nella finestra compare il suo capitolo
-    var anteprima = $('.intro_anteprima'), imgAnteprima = $('img', anteprima);
-    $$('.intro_scelte a').forEach(function (a) {
-      a.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'mouse') return; imgAnteprima.src = a.getAttribute('data-anteprima'); anteprima.classList.add('su'); });
-      a.addEventListener('pointerleave', function () { anteprima.classList.remove('su'); });
-    });
 
     // i link ai capitoli portano al punto giusto del film
     function vaiA(label) {
@@ -693,7 +624,6 @@
     $$('a[href^="#"]:not([data-capitolo])').forEach(function (a) {
       a.addEventListener('click', function (e) {
         var id = a.getAttribute('href');
-        if (id === '#bisogni') { e.preventDefault(); vaiA('bisogni'); if (e.detail === 0) fuocoDopo(primoLink(intro, 1), posizioneTappa(stFilm, 'bisogni')); return; }
         if (id === '#inizio') { e.preventDefault(); lenis.scrollTo(0, { duration: 1.6 }); return; }
         var el = id.length > 1 && document.querySelector(id);
         if (el && id !== '#contenuto') { e.preventDefault(); lenis.scrollTo(el, { duration: 1.6 }); }
@@ -711,76 +641,8 @@
       .to(azioni, { autoAlpha: 1, duration: .8, ease: 'power2.out', onUpdate: function () { if (this.progress() > .45 && azioni.style.pointerEvents) azioni.style.pointerEvents = ''; } }, 1.35)
       .to([testoSotto, $('.apertura_scorri span')], { opacity: 1, duration: .8, ease: 'power2.out' }, 1.6);
 
-    /* =====================================================
-       Dal disegno all'edificio (da C): tre tavole, una sola scena fissata.
-       Il disegno si traccia da sinistra, poi il colore sale dal basso come un cantiere.
-       Si muovono solo trasformazioni: il contenitore scorre e il contenuto fa il movimento opposto.
-       ===================================================== */
-    var scenaC = $('.costruzioni_scena');
-    var tavole = $$('.tavola', scenaC).map(function (t) {
-      var fig = $('.tavola_figura', t);
-      var traccia = document.createElement('span'); traccia.className = 'tavola_traccia'; traccia.setAttribute('aria-hidden', 'true'); fig.appendChild(traccia);
-      return {
-        el: t, fig: fig, traccia: traccia,
-        dis: $('.tavola_disegno', t), disImg: $('.tavola_disegno img', t),
-        col: $('.tavola_colore', t), colDentro: $('.tavola_colore-dentro', t), colImg: $('.tavola_colore img', t),
-        quota: $('.tavola_quota', t), cart: $('.cartiglio', t)
-      };
-    });
-    var capoC = $('.costruzioni_capo'), numeroC = $('.costruzioni_n');
-    var righeCapoC = righe($('.costruzioni_titolo'));
-    // (giro 3) un solo movimento: il disegno entra dal basso con il suo fondo (niente schermo vuoto tra le tavole),
-    // poi il colore sale alla stessa misura del disegno (combaciano sulla linea); l'avvicinamento solo a colore finito
-    tavole.forEach(function (t, i) {
-      gsap.set(t.el, { autoAlpha: i === 0 ? 1 : 0 });
-      gsap.set(t.dis, { yPercent: i === 0 ? 0 : 100 }); gsap.set(t.disImg, { yPercent: i === 0 ? 0 : -100 });
-      gsap.set(t.col, { yPercent: 100 }); gsap.set(t.colDentro, { yPercent: -100 });
-      gsap.set(t.quota, { yPercent: 100, autoAlpha: 0 }); gsap.set(t.traccia, { y: 0, autoAlpha: 0 });
-      gsap.set(t.cart, { autoAlpha: 0, y: 24 });
-    });
-    gsap.set(righeCapoC, { yPercent: 105 });
-    var tlC = gsap.timeline({ defaults: { ease: 'none' } });
-    var PASSO = 1.55;
-    tavole.forEach(function (t, i) {
-      var k = i * PASSO;
-      if (i > 0) {
-        var prima = tavole[i - 1];
-        tlC.to(prima.cart, { autoAlpha: 0, y: -20, duration: .25, ease: 'power2.in' }, k - .05)
-          .set(t.el, { autoAlpha: 1 }, k)
-          .to(t.dis, { yPercent: 0, duration: .6, ease: 'power2.inOut' }, k)
-          .to(t.disImg, { yPercent: 0, duration: .6, ease: 'power2.inOut' }, k)
-          .fromTo(t.traccia, { y: 0, autoAlpha: 1 }, { y: function () { return -t.fig.clientHeight; }, duration: .6, ease: 'power2.inOut' }, k)
-          .set(t.traccia, { autoAlpha: 0 }, k + .6)
-          .set(prima.el, { autoAlpha: 0 }, k + .6);
-      }
-      // il nome del progetto si vede già sul disegno
-      tlC.to(t.cart, { autoAlpha: 1, y: 0, duration: .3, ease: 'power2.out' }, k + (i ? .3 : .15))
-        .set(t.quota, { autoAlpha: 1 }, k + .6)
-        .to(t.col, { yPercent: 0, duration: .8, ease: 'power3.inOut' }, k + .6)
-        .to(t.colDentro, { yPercent: 0, duration: .8, ease: 'power3.inOut' }, k + .6)
-        .to(t.quota, { yPercent: 0, duration: .8, ease: 'power3.inOut' }, k + .6)
-        .set(t.quota, { autoAlpha: 0 }, k + 1.4)
-        .fromTo(t.colImg, { scale: 1 }, { scale: 1.04, duration: .5, ease: 'none' }, k + 1.4);
-    });
-    gsap.to(righeCapoC, { yPercent: 0, duration: 1.1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: scenaC, start: 'top 70%', once: true } });
-    tlC.to(capoC, { autoAlpha: 0, y: -24, duration: .25, ease: 'power2.in' }, .45)
-      .to({}, { duration: .35 }, tavole.length * PASSO - .1);
-    var contaOra = 1;
-    tlC.addLabel('tavole-inizio', 0);
-    tavole.forEach(function (t, i) { tlC.addLabel('tavola-' + i, i === tavole.length - 1 ? tlC.duration() : Math.min(tlC.duration(), i * PASSO + 1.45)); });   // giro 6: l'ultima tavola coincide con la fine (niente colpo a vuoto)
-    tlC.addLabel('tavole-fine', tlC.duration());
-    var stC = zonaScatto(ScrollTrigger.create({
-      trigger: scenaC, start: 'top top',
-      end: function () { return '+=' + Math.round(tlC.duration() * window.innerHeight * .37); },
-      pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlC, invalidateOnRefresh: true,
-      // 22/11: ogni tavola, iniziata, si completa da sola (disegno -> colore). Tappe con direzione: con un elenco di punti
-      // la rotella del computer (Lenis) tornava al punto più vicino, cioè indietro, e la pagina restava bloccata
-      snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .6, max: 1.4 }, delay: .06, ease: 'power1.inOut', inertia: false }),
-      onUpdate: function () {
-        var n = Math.min(tavole.length, Math.floor((tlC.time() + .05) / PASSO) + 1);
-        if (n !== contaOra) { contaOra = n; numeroC.textContent = n; }
-      }
-    }));
+    /* Giro 8 (riordino): tolte dalla home le tre tavole «Dal disegno all'edificio» (scena fissata con contatore 1/3).
+       Al loro posto il «Prima e dopo» di Rivolta d'Adda, che si muove da solo quando entra (js/primadopo.js). */
 
     /* =====================================================
        22/11: tastiera (revisione giro 4, n. 9). I capitoli del film e le tavole restano nascosti finché non si scorre
@@ -788,21 +650,10 @@
        ancora nascosta, la pagina scorre fino alla sua tappa e, quando il link si vede, il fuoco ci va sopra.
        In tutti gli altri casi il Tab resta quello normale del browser.
        ===================================================== */
-    var stTempoOra = null;   // giro 7: la linea del tempo fissata (solo schermi larghi), vista anche fuori dal suo blocco
     var sceneTastiera = [
       { el: azioni, st: stFilm, tappa: 'inizio' },
-      { el: intro, st: stFilm, tappa: 'bisogni' }
-    ].concat(cap.map(function (c, i) { return { el: c.el, st: stFilm, tappa: 'c' + i }; }))
-      .concat([{ el: indice, st: stFilm, tappa: 'c3' }])
-      .concat(tavole.map(function (t, i) { return { el: t.el, st: stC, tappa: 'tavola-' + i }; }))
-      .concat([{ el: $('.tempo_lista'), pos: function (el) {   // giro 7: la tappa della tessera, con la formula dello scatto
-        var st = stTempoOra, lt = $('.tempo_lista'), t = el.closest('.tappa');
-        if (!st || !t) return null;
-        var d = Math.max(0, lt.scrollWidth - window.innerWidth);
-        if (!d) return st.start;
-        var x = Math.min(d, Math.max(0, t.offsetLeft + t.offsetWidth / 2 - window.innerWidth / 2));
-        return st.start + x / d * (st.end - st.start);
-      } }]);
+      { el: indice, st: stFilm, tappa: 'c0' }   // giro 8: le linguette stanno prima dei capitoli
+    ].concat(cap.map(function (c, i) { return { el: c.el, st: stFilm, tappa: 'c' + i }; }));
     var SEL_FUOCO = 'a[href], button:not([disabled]), input:not([type="hidden"]):not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
     function posizioneTappa(st, tappa) {   // stessa formula di vaiA e delle tappe dello scatto: si arriva proprio sulla tappa
       var a = st.animation; return st.start + (a.labels[tappa] / a.duration()) * (st.end - st.start);
@@ -854,7 +705,6 @@
     }, true);
 
     /* ---- Indice: la finestra sui progetti cambia con la tendina e il video parte ---- */
-    var mm = gsap.matchMedia();
     videoAmmessi = true; scorriA = function (y) { lenis.scrollTo(y, { duration: 1.2 }); };
     ScrollTrigger.addEventListener('refresh', misuraCorpo);
     videoGiusto();
@@ -863,6 +713,7 @@
     // i pulsanti dei settori si accendono da soli mentre si scorre (solo l'aspetto, non il filtro)
     gruppi.forEach(function (g) {
       var tasto = $('.filtro[data-filtro="' + g.getAttribute('data-settore') + '"]');
+      if (!tasto) return;   // giro 8: nella home non ci sono più i filtri
       ScrollTrigger.create({ trigger: g, start: 'top 55%', end: 'bottom 55%', onToggle: function (s) {
         tasto.classList.toggle('in-vista', s.isActive);
         if (s.isActive && telefono.matches) centraTasto(tasto);
@@ -929,7 +780,7 @@
       .fromTo(['.storia_foto', '.storia_video'], { scale: 1.08, svgOrigin: centro }, { scale: 1, duration: 1.1 }, 0)
       .to({}, { duration: .15 }, 1.1);
     tlStoria.addLabel('storia-chiusa', 0).addLabel('storia-aperta', tlStoria.duration());
-    zonaScatto(ScrollTrigger.create({
+    var stStoria = zonaScatto(ScrollTrigger.create({
       trigger: scenaStoria, start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * .9); },
       pin: true, anticipatePin: LEGGERO ? 1 : 0, scrub: LEGGERO >= 3 ? .5 : true, animation: tlStoria, snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .6, max: 1.3 }, delay: .06, ease: 'power1.inOut', inertia: false }) // 22/11: il 1979 si apre da solo
     }));
@@ -940,59 +791,10 @@
       videoStoria.addEventListener('playing', function () { didascaliaStoria.textContent = didascaliaStoria.getAttribute('data-dicitura-video'); }, { once: true });
     }
 
-    /* =====================================================
-       Linea del tempo (da C), solo sul computer: fissata, scorre di lato;
-       ogni tessera passa dal bianco e nero al colore, l'anno gigante dietro scorre più lento.
-       Sul telefono si sfoglia col dito (niente pin).
-       ===================================================== */
-    var lista = $('.tempo_lista'), annoEl = $('.tempo_anno-corrente span');
-    var tappe = $$('.tappa', lista);
-    mm.add('(min-width: 761px)', function () {
-      var barraTempo = gsap.quickSetter($('.tempo_avanzamento i'), 'scaleX');
-      function contaAnno(a) {   // giro 7: l'anno scorre come un contachilometri invece di saltare
-        var da = parseInt(annoEl.textContent, 10), b = parseInt(a, 10);
-        if (annoTw) annoTw.kill();
-        if (isNaN(da) || isNaN(b) || Math.abs(b - da) > 40 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { annoEl.textContent = a; return; }
-        var o = { v: da };
-        annoTw = gsap.to(o, { v: b, duration: Math.min(.8, .15 + Math.abs(b - da) * .06), ease: 'power2.out', onUpdate: function () { annoEl.textContent = Math.round(o.v); } });
-      }
-      var annoMeta = null, annoTw = null;
-
-      var distanza = function () { return Math.max(0, lista.scrollWidth - window.innerWidth); };
-      var scorriTempo = gsap.to(lista, {
-        x: function () { return -distanza(); }, ease: 'none',
-        scrollTrigger: {
-          trigger: '.tempo_fissa', pin: true, start: 'top top', end: function () { return '+=' + Math.round(distanza() * .25); },
-          scrub: true, invalidateOnRefresh: true,
-          // giro 6: sul computer (Lenis) lo snap «al punto più vicino» faceva risalire la pagina di ~48 px a ogni gesto: lì lo scatto lo fa Lenis, con direzione
-          snap: snapNativo({ snapTo: function (v, self) { var d = distanza(); if (!d) return v; var px = v * d, dir = self && self.direction, best = null, bd = 1e9; tappe.forEach(function (t) { var x = Math.min(d, Math.max(0, t.offsetLeft + t.offsetWidth / 2 - window.innerWidth / 2)); if ((dir > 0 && x < px - 2) || (dir < 0 && x > px + 2)) return; if (Math.abs(x - px) < bd) { bd = Math.abs(x - px); best = x; } }); return best == null ? v : best / d; },   /* giro 7: nel verso del gesto */ duration: { min: .25, max: .7 }, delay: .12, ease: 'power2.inOut', inertia: false }),
-          onUpdate: function (s) {
-            barraTempo(s.progress);
-            var x = -gsap.getProperty(lista, 'x') + window.innerWidth * .5, scelta = tappe[0];
-            for (var k = 0; k < tappe.length; k++) { if (tappe[k].offsetLeft <= x) scelta = tappe[k]; else break; }
-            var a = scelta.dataset.anno; if (annoMeta !== a) { annoMeta = a; contaAnno(a); }
-          }
-        }
-      });
-      var stTempo = scorriTempo.scrollTrigger;
-      stTempoOra = stTempo;
-      stTempo._tappe = function () {   // una tappa per tessera (al centro dello schermo), più inizio e fine
-        var d = distanza(), out = [stTempo.start, stTempo.end];
-        if (d) tappe.forEach(function (t) { var x = Math.min(d, Math.max(0, t.offsetLeft + t.offsetWidth / 2 - window.innerWidth / 2)); out.push(stTempo.start + x / d * (stTempo.end - stTempo.start)); });
-        return out.sort(function (a, b) { return a - b; });
-      };
-      zonaScatto(stTempo);
-      gsap.fromTo('.tempo_anno-corrente', { xPercent: 4 }, { xPercent: -12, ease: 'none',
-        scrollTrigger: { trigger: '.tempo_fissa', start: 'top top', end: function () { return '+=' + Math.round(distanza() * .25); }, scrub: true } });
-      $$('.tappa_col', lista).forEach(function (img) {
-        gsap.to(img, { opacity: 1, ease: 'none',
-          scrollTrigger: { trigger: img.parentNode, containerAnimation: scorriTempo, start: 'left 80%', end: 'center 52%', scrub: true } });
-      });
-      return function () { stTempoOra = null; var i = zoneScatto.indexOf(stTempo); if (i !== -1) zoneScatto.splice(i, 1); };   // finestra stretta: la scena sparisce
-    });
+    /* Giro 8 (riordino): la linea del tempo non è più nella home (sta nella pagina Chi siamo, dove c'era già). */
 
     /* ---- Passaggi «a foglio»: la sezione nuova sale sopra la vecchia e il suo angolo si raddrizza ---- */
-    (LEGGERO ? [] : $$('.costruzioni, .indice, .storia, .contatto')).forEach(function (s) {
+    (LEGGERO ? [] : $$('.pd, .indice, .storia, .contatto')).forEach(function (s) {
       gsap.fromTo(s, { borderTopLeftRadius: 28, borderTopRightRadius: 28 }, { borderTopLeftRadius: 0, borderTopRightRadius: 0, ease: 'none',
         scrollTrigger: { trigger: s, start: 'top bottom', end: 'top top', scrub: true } });
     });
@@ -1000,14 +802,14 @@
     /* ---- 22/11: anche il passaggio da una sezione all'altra si completa da solo (Carlo: «se non scorri rimane così»):
        mentre la sezione nuova sale sopra la vecchia, un tocco di scorrimento la porta fino in cima (o la rimanda giù tornando indietro).
        Separato dagli angoli qui sopra, che sul telefono non ci sono (leggero.mjs). ---- */
-    ['.costruzioni', '.indice', '.storia', '.contatto'].forEach(function (sel) {
+    ['.pd', '.indice', '.storia', '.contatto'].forEach(function (sel) {
       var sezione = $(sel); if (!sezione) return;
       // una linea del tempo vuota con due tappe, solo per avere lo scatto «con direzione» (vedi le tavole)
       var tappe = gsap.timeline({ paused: true }).addLabel('sotto', 0).to({}, { duration: 1 }).addLabel('sopra', 1);
       // giro 6: dopo una scena fissata il passaggio comincia proprio dove la scena finisce (prima si sovrapponevano di 28 px e la pagina si fermava a metà)
-      var primaScena = sel === '.costruzioni' ? stFilm : sel === '.indice' ? stC : null;
-      var dopoTempo = sel === '.contatto';
-      zonaScatto(ScrollTrigger.create({ trigger: sezione, start: primaScena ? function () { return primaScena.end; } : dopoTempo ? function () { return stTempoOra ? stTempoOra.end : 'top bottom'; } : 'top bottom', end: 'top top', animation: tappe, scrub: true,
+      // giro 8: il Prima e dopo comincia dove finisce il film, i contatti dove finisce il 1979
+      var primaScena = sel === '.pd' ? stFilm : sel === '.contatto' ? stStoria : null;
+      zonaScatto(ScrollTrigger.create({ trigger: sezione, start: primaScena ? function () { return primaScena.end; } : 'top bottom', end: 'top top', animation: tappe, scrub: true,
         snap: snapNativo({ snapTo: 'labelsDirectional', duration: { min: .5, max: 1.1 }, delay: .06, ease: 'power1.inOut', inertia: false }) }));
     });
 
@@ -1037,45 +839,19 @@
       scrollTrigger: { trigger: '.finale', start: 'top bottom', end: 'bottom top', scrub: true } });
     new IntersectionObserver(function (v) { if (v[0].isIntersecting) carica(videoFinale); gira(videoFinale, v[0].isIntersecting); }, { rootMargin: '300px 0px' }).observe($('.finale'));
 
-    /* ---- Giro 3: «dove sono». Cinque parti della pagina; il segnaposto sta nella fascia della testata
-       (resta anche quando la testata si nasconde) e un filo in cima dice quanto manca ---- */
-    var parti = [
-      { el: film, nome: 'Cosa facciamo', corto: 'Settori' },   // 22/11: sito istituzionale, niente «bisogni»
-      { el: $('.costruzioni'), nome: "Dal disegno all'edificio", corto: 'Dal disegno' },
-      { el: $('.indice'), nome: 'I progetti', corto: 'Progetti' },
-      { el: $('.storia'), nome: 'Chi siamo, dal 1979', corto: 'Chi siamo' },
-      { el: $('.contatto'), nome: 'Contatti', corto: 'Contatti' }
-    ].filter(function (p) { return p.el; });
-    var segno = document.createElement('div');
-    segno.className = 'segnaposto'; segno.setAttribute('aria-hidden', 'true');
-    segno.innerHTML = '<span class="segnaposto_n"></span><span class="segnaposto_nome"></span><span class="segnaposto_corto"></span>';
+    /* ---- Giro 3: il filo azzurro in cima dice quanto manca alla fine della pagina.
+       Giro 8 (riordino): tolta la pastiglia «1 / 5 Cosa facciamo» (con una home corta non serve più). ---- */
     var filo = document.createElement('div'); filo.className = 'filo-pagina'; filo.setAttribute('aria-hidden', 'true'); filo.innerHTML = '<i></i>';
-    document.body.appendChild(segno); document.body.appendChild(filo);
-    var filoX = gsap.quickSetter($('i', filo), 'scaleX'), parteOra = -1, inizioParti = [], segnoSu = null, filoSu = null;
-    // dove comincia ogni parte: si misura solo quando ScrollTrigger rimisura la pagina, non a ogni fotogramma
-    function misuraParti() {
-      inizioParti = parti.map(function (p) { var el = p.el.parentNode && p.el.parentNode.classList.contains('pin-spacer') ? p.el.parentNode : p.el; return el.getBoundingClientRect().top + window.scrollY; });
-    }
-    function aggiornaSegno(prog) {
+    document.body.appendChild(filo);
+    var filoX = gsap.quickSetter($('i', filo), 'scaleX'), filoSu = null;
+    function aggiornaFilo(prog) {
       filoX(prog);
-      var y = window.scrollY, meta = y + window.innerHeight * .5, k = 0;
-      for (var j = 0; j < inizioParti.length; j++) { if (inizioParti[j] <= meta) k = j; }
-      var su = y > window.innerHeight * .6;   // nella prima schermata no: c'è il nome Birolini
-      // nei progetti, quando la testata si nasconde, in alto salgono i filtri: lì basta il contatore «09 / 42»
-      var s1 = su && !(parti[k].el.classList.contains('indice') && H.classList.contains('testata-su'));
-      if (s1 !== segnoSu) { segnoSu = s1; segno.classList.toggle('su', s1); }
+      var su = window.scrollY > window.innerHeight * .6;   // nella prima schermata no: c'è il nome Birolini
       if (su !== filoSu) { filoSu = su; filo.classList.toggle('su', su); }
-      if (k !== parteOra) {
-        parteOra = k;
-        $('.segnaposto_n', segno).textContent = (k + 1) + ' / ' + parti.length;
-        $('.segnaposto_nome', segno).textContent = parti[k].nome;
-        $('.segnaposto_corto', segno).textContent = parti[k].corto;
-      }
     }
-    ScrollTrigger.create({ start: 0, end: 'max', onUpdate: function (s) { aggiornaSegno(s.progress); }, onRefresh: function (s) { misuraParti(); aggiornaSegno(s.progress); } });
+    ScrollTrigger.create({ start: 0, end: 'max', onUpdate: function (s) { aggiornaFilo(s.progress); }, onRefresh: function (s) { aggiornaFilo(s.progress); } });
 
     /* ---- Misure giuste dopo il caricamento di caratteri e immagini ---- */
-    misuraFinestre();
     /* 22/11 sera: il ricalcolo di tutte le scene (caratteri pronti, pagina caricata) bloccava la pagina mentre il nome
        saliva: ora aspetta la fine dell'apertura, oppure il primo gesto (rotella, dito, tasto), se arriva prima */
     var introFinita = false, daRinfrescare = false, altezzaAvvio = document.documentElement.scrollHeight;

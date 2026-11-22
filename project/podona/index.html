@@ -20,20 +20,19 @@
 <link rel="preload" as="image" href="../../img/ridotte/media--podona-avvicinamento-poster-1320.jpg" media="(max-width: 760px)" fetchpriority="high">
 <link rel="preload" as="image" href="../../media/podona-avvicinamento-poster.jpg" media="(min-width: 761px)" fetchpriority="high">
 <link rel="preload" href="../../fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../css/caratteri.css?v=202611222011">
-<link rel="stylesheet" href="../../css/passaggio.css?v=202611222011">
+<link rel="stylesheet" href="../../css/caratteri.css?v=202611222141">
+<link rel="stylesheet" href="../../css/passaggio.css?v=202611222141">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
 <script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
 /* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
 if (/settore=/.test(location.hash)) document.documentElement.classList.add("con-filtro");   /* archivio già filtrato: niente prima foto fissa (vedi .fp_prima) */
 document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("video[poster]").forEach(function (v) { var u = "url(" + JSON.stringify(v.getAttribute("poster")) + ")"; v.style.backgroundImage = u; v.parentNode.style.backgroundImage = u; v.parentNode.classList.add("sotto-video"); }); });   /* poster anche come sfondo del video: niente vuoto quando parte */
 window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
-<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611222011">
-<link rel="stylesheet" href="../../css/comune.css?v=202611222011">
-<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611222011">
-<link rel="stylesheet" href="../../css/finestra.css?v=202611222011">
-<link rel="stylesheet" href="../../css/pagine.css?v=202611222011">
-<link rel="stylesheet" href="../../css/nuovo.css?v=202611222011">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611222141">
+<link rel="stylesheet" href="../../css/comune.css?v=202611222141">
+<link rel="stylesheet" href="../../js/vendor/leaflet.css?v=202611222141">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611222141">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611222141">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
@@ -58,21 +57,24 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   <nav class="testata_voci" aria-label="Principale">
     <a class="testata_link" href="../../work/index.html" aria-current="page">Progetti</a>
     <a class="testata_link" href="../../about/index.html">Chi siamo</a>
-    <a class="testata_link" href="#contatto">Contatti</a>
+    <a class="testata_link" href="../../contact/index.html">Contatti</a>
     <button class="testata_menu" type="button" aria-expanded="false" aria-controls="menu"><span class="testata_menu-testo">Menu</span><span class="testata_menu-righe" aria-hidden="true"></span></button>
   </nav>
 </header>
 <div class="menu" id="menu" hidden>
   <nav class="menu_voci" aria-label="Tutte le pagine">
-    <a href="../../index.html">Home</a>
-    <a href="../../work/index.html" aria-current="page">Progetti</a>
-    <a href="../../case/index.html">Case</a>
-    <a href="../../spazi/index.html">Commercio e industria</a>
-    <a href="../../aree/index.html">Aree</a>
-    <a href="../../energia/index.html">Energia</a>
-    <a href="../../about/index.html">Chi siamo</a>
-    <a href="../../news/index.html">News</a>
-    <a href="../../contact/index.html">Contatti</a>
+    <div class="menu_gruppo" role="group" aria-labelledby="menu-fare"><p class="menu_titolino" id="menu-fare">Cosa facciamo</p>
+      <a href="../../case/index.html">Case</a>
+      <a href="../../spazi/index.html">Commercio e industria</a>
+      <a href="../../energia/index.html">Energia</a>
+      <a href="../../aree/index.html">Aree</a>
+    </div>
+    <div class="menu_gruppo" role="group" aria-labelledby="menu-societa"><p class="menu_titolino" id="menu-societa">La società</p>
+      <a href="../../about/index.html">Chi siamo</a>
+      <a href="../../work/index.html" aria-current="page">Progetti</a>
+      <a href="../../news/index.html">News</a>
+      <a href="../../contact/index.html">Contatti</a>
+    </div>
   </nav>
   <p class="menu_recapiti"><a href="tel:+39035347060">035 347060</a><a href="mailto:info@birolini.it">info@birolini.it</a></p>
 </div>
@@ -91,8 +93,9 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     
     <div class="azioni" data-entra><a class="collegamento" href="#galleria">Tutte le 8 immagini</a></div>
   </div>
-  <p class="ciak" id="ciak-apertura" data-video="Orio al Serio (BG). Foto dal drone animata.">Orio al Serio (BG). Foto dal drone.</p>
+  <p class="ciak" id="ciak-apertura" data-video="Orio al Serio (BG) · Foto dal drone animata">Orio al Serio (BG) · Foto dal drone</p>
 </section>
+
 
 <!-- ============ LE IMMAGINI: tutte quelle vere, grandi, divise per tipo ============ -->
 <section class="galleria foglio" id="galleria" aria-labelledby="galleria-titolo">
@@ -102,41 +105,39 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   </div>
   
   <div class="galleria_gruppo" id="galleria-foto">
-    <h3 class="galleria_titolo t3">Il cantiere <span class="mono secondario">5 immagini</span></h3>
+    <h3 class="galleria_titolo t3">Il cantiere</h3>
     <div class="tavole tavole--coppia ">
         <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="0" aria-label="Apri a tutto schermo: Hotel da 254 camere, Orio al Serio (BG): foto 1 di 8">
             <span class="tavola-foto_quadro"><img src="../../img/progetti/podona/foto-04.jpg" alt="Hotel da 254 camere, Orio al Serio (BG): foto 1 di 8" width="800" height="450" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">01 / 08</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
         <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="1" aria-label="Apri a tutto schermo: Hotel da 254 camere, Orio al Serio (BG): foto 2 di 8">
             <span class="tavola-foto_quadro"><img src="../../img/progetti/podona/foto-05.jpg" alt="Hotel da 254 camere, Orio al Serio (BG): foto 2 di 8" width="800" height="450" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">02 / 08</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
-    <div class="tavole tavole--larga larga--destra">
+    <div class="tavole tavole--terna ">
         <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="2" aria-label="Apri a tutto schermo: Hotel da 254 camere, Orio al Serio (BG): foto 3 di 8">
             <span class="tavola-foto_quadro"><img src="../../img/progetti/podona/foto-06.jpg" alt="Hotel da 254 camere, Orio al Serio (BG): foto 3 di 8" width="800" height="450" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">03 / 08</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--coppia coppia--inversa">
         <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="3" aria-label="Apri a tutto schermo: Hotel da 254 camere, Orio al Serio (BG): foto 4 di 8">
             <span class="tavola-foto_quadro"><img src="../../img/progetti/podona/foto-07.jpg" alt="Hotel da 254 camere, Orio al Serio (BG): foto 4 di 8" width="800" height="450" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">04 / 08</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
         <figure class="tavola-foto" style="--rapporto:1080/608;--massimo:1080px">
           <button class="tavola-foto_bottone" type="button" data-visore="4" aria-label="Apri a tutto schermo: Hotel da 254 camere, Orio al Serio (BG): immagine 5 di 8">
             <span class="tavola-foto_quadro"><img src="../../img/progetti/podona/copertina.jpg" alt="Hotel da 254 camere, Orio al Serio (BG): immagine 5 di 8" width="1080" height="608" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">05 / 08</span></figcaption>
+          
         </figure>
       </div>
   </div>
@@ -166,26 +167,24 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <h2 class="t3" id="diario-titolo">Dal cantiere</h2>
     <div><p class="mono diario_data">18 novembre 2026</p><p class="grande">Foto dal drone del cantiere dell'hotel.</p></div>
   </div>
-  <div class="tavole tavole--coppia ">
+  <div class="tavole tavole--terna ">
         <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="5" aria-label="Apri a tutto schermo: Hotel da 254 camere, Orio al Serio (BG): foto del cantiere del 18/11/2026, 6 di 8">
             <span class="tavola-foto_quadro"><img src="../../img/pagine/podona-04.jpg" alt="Hotel da 254 camere, Orio al Serio (BG): foto del cantiere del 18/11/2026, 6 di 8" width="800" height="450" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">06 / 08</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
         <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="6" aria-label="Apri a tutto schermo: Hotel da 254 camere, Orio al Serio (BG): foto del cantiere del 18/11/2026, 7 di 8">
             <span class="tavola-foto_quadro"><img src="../../img/progetti/podona/foto-01.jpg" alt="Hotel da 254 camere, Orio al Serio (BG): foto del cantiere del 18/11/2026, 7 di 8" width="800" height="450" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">07 / 08</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
-      </div>
-    <div class="tavole tavole--larga larga--destra">
         <figure class="tavola-foto" style="--rapporto:800/450;--massimo:800px">
           <button class="tavola-foto_bottone" type="button" data-visore="7" aria-label="Apri a tutto schermo: Hotel da 254 camere, Orio al Serio (BG): foto del cantiere del 18/11/2026, 8 di 8">
             <span class="tavola-foto_quadro"><img src="../../img/progetti/podona/foto-02.jpg" alt="Hotel da 254 camere, Orio al Serio (BG): foto del cantiere del 18/11/2026, 8 di 8" width="800" height="450" loading="lazy" decoding="async"></span>
           </button>
-          <figcaption class="tavola-foto_dida"><span class="mono">08 / 08</span><span class="tavola-foto_tipo mono">Foto</span></figcaption>
+          <figcaption class="tavola-foto_dida"><span class="tavola-foto_tipo mono">Foto</span></figcaption>
         </figure>
       </div>
 </section>
@@ -205,67 +204,33 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
 
 
 
-<!-- ============ ALTRI PROGETTI: una piccola finestra ============ -->
-
-<section class="indice indice--piccolo foglio" id="altri" aria-label="Altri progetti commerciali">
-  <h2 class="t3">Altri progetti commerciali</h2>
-  
-  <div class="indice_corpo">
-    <figure class="fp">
-      <div class="fp_media">
-        <span class="fp_conta contatore" aria-hidden="true"><span class="fp_n">01</span><i>/</i><span class="fp_tot">05</span></span>
-        <div class="fp_strato"><img alt="" decoding="async"></div>
-        <div class="fp_strato"><img alt="" decoding="async"></div>
-        <video class="fp_video" muted playsinline loop preload="none" aria-hidden="true"></video>
-        <div class="fp_velo" aria-hidden="true"></div>
-      </div>
-      <figcaption class="fp_dati"><a class="fp_nome" href="#"></a><span class="fp_meta"></span><span class="fp_tipo"></span></figcaption>
-    </figure>
-    <div class="indice_liste" id="altri-elenco">
-      <section class="gruppo" data-settore="Commerciale" aria-label="Commerciale">
-        <h3 class="gruppo_titolo">Commerciale <span>5</span></h3>
-        <ol class="gruppo_elenco">
-          <li class="voce" data-settore="Commerciale" data-slug="calcio-bg---commerciale" data-cerca="commerciale a calcio calcio bg 2025 commerciale">
-            <a href="../../project/calcio-bg---commerciale/index.html" data-img="../../img/progetti/calcio-bg---commerciale/copertina.jpg" data-img-tel="../../img/progetti/calcio-bg---commerciale/copertina.jpg"
-               data-nome="Commerciale a Calcio" data-meta="Calcio (BG), 2025, commerciale, in corso" data-tipo="Render">
-              <span class="voce_nome">Commerciale a Calcio</span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-slug="rivolta-dadda-cr---commerciale-comest" data-cerca="commerciale comest e comovest rivolta d'adda cr 2025 commerciale">
-            <a href="../../project/rivolta-dadda-cr---commerciale-comest/index.html" data-img="../../img/progetti/rivolta-dadda-cr---commerciale-comest/copertina.webp" data-img-tel="../../img/progetti/rivolta-dadda-cr---commerciale-comest/copertina.webp"
-               data-nome="Commerciale Comest e Comovest" data-meta="Rivolta d'Adda (CR), 2025, commerciale, in corso" data-tipo="">
-              <span class="voce_nome">Commerciale Comest e Comovest</span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-slug="teide" data-cerca="commerciale a porto torres porto torres ss 2025 commerciale">
-            <a href="../../project/teide/index.html" data-img="../../img/progetti/teide/copertina.jpg" data-img-tel="../../img/progetti/teide/copertina-telefono.jpg"
-               data-nome="Commerciale a Porto Torres" data-meta="Porto Torres (SS), 2025, commerciale, in corso" data-tipo="Render">
-              <span class="voce_nome">Commerciale a Porto Torres</span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-slug="bonate-sopra-bg-commerciale" data-cerca="commerciale a bonate sopra bonate sopra bg 2026 commerciale">
-            <a href="../../project/bonate-sopra-bg-commerciale/index.html" data-img="../../img/progetti/bonate-sopra-bg-commerciale/copertina-telefono.jpg" data-img-tel="../../img/progetti/bonate-sopra-bg-commerciale/copertina-telefono.jpg" data-piccola
-               data-nome="Commerciale a Bonate Sopra" data-meta="Bonate Sopra (BG), 2026, commerciale, in corso" data-tipo="Render">
-              <span class="voce_nome">Commerciale a Bonate Sopra</span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2026</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-slug="parco-commerciale-curno-briantea" data-cerca="parco commerciale biraldi curno bg 2018 commerciale">
-            <a href="../../project/parco-commerciale-curno-briantea/index.html" data-img="../../img/progetti/parco-commerciale-curno-briantea/copertina.jpg" data-img-tel="../../img/progetti/parco-commerciale-curno-briantea/copertina.jpg"
-               data-nome="Parco commerciale Biraldi" data-meta="Curno (BG), 2018, commerciale" data-tipo="Render">
-              <span class="voce_nome">Parco commerciale Biraldi</span>
-              <span class="voce_anno">2018</span>
-            </a>
-          </li>
-        </ol>
-      </section>
-      <p class="indice_nessuno" hidden>Nessun risultato con questa ricerca. Prova con il nome del comune.</p>
-      <p class="indice_fine"><a href="../../work/index.html#settore=Commerciale"><span>Tutti i progetti commerciali nell'archivio</span><span class="freccia" aria-hidden="true">→</span></a></p>
-    </div>
-  </div>
+<!-- ============ ALTRI PROGETTI: tre riquadri (giro 8; prima una piccola finestra che ripeteva l'elenco) ============ -->
+<section class="altri foglio" id="altri" aria-labelledby="altri-titolo">
+  <h2 class="t3" id="altri-titolo">Altri progetti commerciali</h2>
+  <ul class="altri_griglia">
+    <li class="altro">
+      <a href="../../project/calcio-bg---commerciale/index.html">
+        <span class="altro_media"><img src="../../img/progetti/calcio-bg---commerciale/copertina.jpg" alt="" width="1080" height="608" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
+        <span class="altro_nome">Commerciale a Calcio</span>
+        <span class="altro_dati">Calcio (BG), 2025, in corso · Render</span>
+      </a>
+    </li>
+    <li class="altro">
+      <a href="../../project/rivolta-dadda-cr---commerciale-comest/index.html">
+        <span class="altro_media"><img src="../../img/progetti/rivolta-dadda-cr---commerciale-comest/copertina.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
+        <span class="altro_nome">Commerciale Comest e Comovest</span>
+        <span class="altro_dati">Rivolta d'Adda (CR), 2025, in corso</span>
+      </a>
+    </li>
+    <li class="altro">
+      <a href="../../project/teide/index.html">
+        <span class="altro_media"><img src="../../img/progetti/teide/copertina.jpg" alt="" width="1080" height="608" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
+        <span class="altro_nome">Commerciale a Porto Torres</span>
+        <span class="altro_dati">Porto Torres (SS), 2025, in corso · Render</span>
+      </a>
+    </li>
+  </ul>
+  <p class="indice_fine"><a href="../../work/index.html#settore=Commerciale"><span>Tutti i progetti commerciali nell'archivio</span><span class="freccia" aria-hidden="true">→</span></a></p>
 </section>
 
 
@@ -292,7 +257,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <!-- [DA COMPLETARE: altri dati societari obbligatori, come REA e capitale sociale] -->
     <p class="piede_recapiti"><a href="tel:+39035347060">035 347060</a> <a href="mailto:info@birolini.it">info@birolini.it</a></p>
   </div>
-  <nav class="piede_voci" aria-label="Il sito"><a href="../../index.html">Home</a><a href="../../work/index.html">Progetti</a><a href="../../case/index.html">Case</a><a href="../../spazi/index.html">Commercio e industria</a><a href="../../aree/index.html">Aree</a><a href="../../energia/index.html">Energia</a><a href="../../about/index.html">Chi siamo</a><a href="../../news/index.html">News</a><a href="../../contact/index.html">Contatti</a></nav>
+  <nav class="piede_voci" aria-label="Il sito"><a href="../../index.html">Home</a><a href="../../case/index.html">Case</a><a href="../../spazi/index.html">Commercio e industria</a><a href="../../energia/index.html">Energia</a><a href="../../aree/index.html">Aree</a><a href="../../about/index.html">Chi siamo</a><a href="../../work/index.html">Progetti</a><a href="../../news/index.html">News</a><a href="../../contact/index.html">Contatti</a></nav>
   <nav class="piede_voci piede_voci--piccole" aria-label="Note e social"><a href="../../privacy-policy/index.html">Privacy</a><a href="../../cookie-policy/index.html">Cookie Policy</a><a href="../../note-legali/index.html">Note legali</a><a href="https://www.linkedin.com/company/birolini-s-p-a/">LinkedIn</a><a href="https://www.instagram.com/birolini.s.p.a/">Instagram</a></nav>
   <p class="piede_fondo">Le immagini sono render e foto dei progetti Birolini. I video sono render e foto (anche dal drone) animati, con il solo movimento di camera.</p>
   <div class="piede_logo" aria-hidden="true"><svg viewBox="0 0 153.81 29.78" focusable="false"><path d="M14.24,21.64c2.05-.44,4.09-1.04,6.07-1.85l1.59-5.49c-1.42,1.13-3.03,2.18-4.85,3.08l-2.81,4.27Z"/><path d="M8,20.06l-2.53,2.57c2.32-.06,4.78-.27,7.28-.71l2.45-3.73c-2.13.86-4.52,1.51-7.2,1.87Z"/><path d="M18.64,25.55l1.41-4.9c-1.87.69-3.97,1.28-6.31,1.72l-2.47,3.75c2.73-.05,5.17-.26,7.36-.58Z"/><path d="M22.11,18.98c3.51-1.72,6.71-4.2,9.18-7.7l.18-11.28s-1.67,6.7-7.47,12.42l-1.89,6.56Z"/><path d="M31.25,13.85c-1.62,1.57-4.69,4.08-9.43,6.1l-1.54,5.32c5.17-.94,8.7-2.48,10.84-3.68l.12-7.75Z"/><path d="M19.97,26.38l-.98,3.39c4.45-.07,8.71-.58,12.03-1.83l.08-4.88c-3.39,1.74-7.23,2.76-11.13,3.31Z"/><path d="M2.43,25.72c2.71.28,5.22.41,7.55.42l2.31-3.51c-2.24.34-4.69.54-7.34.54l-2.51,2.55Z"/><path d="M7.93,29.23l1.55-2.36c-2.75-.09-5.33-.33-7.59-.61l-1.89,1.93c2.29.37,5.02.75,7.93,1.05Z"/><path d="M18.35,26.59c-2.56.27-5.12.36-7.57.32l-1.61,2.45c2.68.25,5.49.41,8.26.43l.92-3.2Z"/><path d="M69.85,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M78.13,11.4c.28,0,.43.15.46.4l.18,1.35h.15c1.32-1.29,2.98-1.99,4.94-1.99,3.25,0,5.71,1.96,6.57,4.97.06.21,0,.34-.18.4l-1.96.71c-.15.06-.31-.03-.37-.18-.74-1.9-1.87-3.28-4.14-3.28-1.99,0-3.59.98-4.85,2.58v11.35c0,.28-.15.43-.43.43h-1.93c-.21,0-.43-.15-.43-.43v-15.87c0-.28.18-.43.43-.43h1.56Z"/><path d="M101.26,11.16c4.85,0,8.62,3.65,8.62,8.62s-3.77,8.59-8.62,8.59-8.62-3.62-8.62-8.59,3.77-8.62,8.62-8.62ZM95.46,19.78c0,3.44,2.36,5.98,5.8,5.98s5.8-2.55,5.8-5.98-2.36-6.02-5.8-6.02-5.8,2.55-5.8,6.02Z"/><path d="M116.2,6.25c.28,0,.43.18.43.43v21.02c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43V6.67c0-.25.15-.43.43-.43h1.93Z"/><path d="M124.96,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M131.1,11.83c0-.25.15-.43.43-.43h1.57c.28,0,.43.15.46.43l.18,1.32h.15c1.47-1.38,3.07-1.99,5.03-1.99,4.33,0,7.27,2.52,7.27,7.52v9.02c0,.28-.15.43-.43.43h-1.96c-.21,0-.4-.15-.4-.43v-8.9c0-3.22-1.57-5.03-4.54-5.03-2.15,0-3.71.95-4.97,2.58v11.35c0,.28-.15.43-.43.43h-1.93c-.28,0-.43-.12-.43-.43v-15.87Z"/><path d="M153.38,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M59.15,15.14v-.17c1.28-.81,2.22-2.69,2.22-4.22,0-3.2-2.48-5.85-6.61-5.85h-11.82c-.3,0-.51.21-.51.51v8.56h-3.39c-.12,0-.22.1-.22.22v2.14c0,.12.1.22.22.22h3.39v11.06c0,.3.26.55.55.55h12.5c4.35,0,7.55-3.24,7.55-7.17,0-2.43-1.41-5.04-3.88-5.85ZM45.24,7.46h9.56c2.35,0,3.76,1.28,3.76,3.29s-1.66,3.2-3.54,3.2h-9.77v-6.49ZM55.35,25.55h-10.11v-9h10.11c2.99,0,4.86,1.71,4.86,4.44s-2.01,4.57-4.86,4.57Z"/></svg></div>
@@ -305,16 +270,15 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   <button class="visore_freccia visore_freccia--prima" type="button" aria-label="Immagine precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
   <button class="visore_freccia visore_freccia--dopo" type="button" aria-label="Immagine successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 </div>
-<script src="../../js/vendor/gsap.min.js?v=202611222011"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js?v=202611222011"></script>
-<script src="../../js/vendor/SplitText.min.js?v=202611222011"></script>
-<script src="../../js/vendor/Flip.min.js?v=202611222011"></script>
-<script src="../../js/vendor/lenis.min.js?v=202611222011"></script>
-<script src="../../js/vendor/leaflet.js?v=202611222011"></script>
-<script src="../../js/comune.js?v=202611222011"></script>
-<script src="../../js/finestra.js?v=202611222011"></script>
-<script src="../../js/mappa-notte.js?v=202611222011"></script>
-<script src="../../js/pagine.js?v=202611222011"></script>
-<script src="../../js/nuovo.js?v=202611222011"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611222141"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611222141"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611222141"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611222141"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611222141"></script>
+<script src="../../js/vendor/leaflet.js?v=202611222141"></script>
+<script src="../../js/comune.js?v=202611222141"></script>
+<script src="../../js/mappa-notte.js?v=202611222141"></script>
+<script src="../../js/pagine.js?v=202611222141"></script>
+<script src="../../js/nuovo.js?v=202611222141"></script>
 </body>
 </html>

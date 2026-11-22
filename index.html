@@ -20,16 +20,16 @@
 <link rel="preload" href="fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="media/apertura-hero-poster-telefono.jpg" media="(max-width: 760px) and (orientation: portrait)" fetchpriority="high">
 <link rel="preload" as="image" href="media/apertura-hero-poster.jpg" media="not all and (max-width: 760px) and (orientation: portrait)" fetchpriority="high">
-<link rel="stylesheet" href="css/caratteri.css?v=202611222011">
-<link rel="stylesheet" href="css/passaggio.css?v=202611222011">
+<link rel="stylesheet" href="css/caratteri.css?v=202611222141">
+<link rel="stylesheet" href="css/passaggio.css?v=202611222141">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
 <script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
 /* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
 if (/settore=/.test(location.hash)) document.documentElement.classList.add("con-filtro");   /* archivio già filtrato: niente prima foto fissa (vedi .fp_prima) */
 document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("video[poster]").forEach(function (v) { var u = "url(" + JSON.stringify(v.getAttribute("poster")) + ")"; v.style.backgroundImage = u; v.parentNode.style.backgroundImage = u; v.parentNode.classList.add("sotto-video"); }); });   /* poster anche come sfondo del video: niente vuoto quando parte */
 window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
-<link rel="stylesheet" href="js/vendor/lenis.css?v=202611222011">
-<link rel="stylesheet" href="css/home.css?v=202611222011">
+<link rel="stylesheet" href="js/vendor/lenis.css?v=202611222141">
+<link rel="stylesheet" href="css/home.css?v=202611222141">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) {
@@ -66,9 +66,9 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
 <!--/GEN:logo-testata-->
   </a>
   <nav class="testata_voci" aria-label="Principale">
-    <a class="testata_link" href="#progetti">Progetti</a>
-    <a class="testata_link" href="#storia">Chi siamo</a>
-    <a class="testata_link testata_link--contatti" href="#contatto">Contatti</a>
+    <a class="testata_link" href="work/index.html">Progetti</a>
+    <a class="testata_link" href="about/index.html">Chi siamo</a>
+    <a class="testata_link testata_link--contatti" href="contact/index.html">Contatti</a>
     <button class="testata_menu" type="button" aria-expanded="false" aria-controls="menu">
       <span class="testata_menu-testo">Menu</span>
       <span class="testata_menu-righe" aria-hidden="true"></span>
@@ -77,22 +77,30 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
 </header>
 
 <div class="menu" id="menu" hidden>
+<!--GEN:menu-->
   <nav class="menu_voci" aria-label="Tutte le pagine">
-    <a href="work/index.html">Progetti</a>
-    <a href="case/index.html">Case</a>
-    <a href="spazi/index.html">Commercio e industria</a>
-    <a href="aree/index.html">Aree</a>
-    <a href="energia/index.html">Energia</a>
-    <a href="about/index.html">Chi siamo</a>
-    <a href="news/index.html">News</a>
-    <a href="contact/index.html">Contatti</a>
+    <div class="menu_gruppo" role="group" aria-labelledby="menu-fare"><p class="menu_titolino" id="menu-fare">Cosa facciamo</p>
+      <a href="case/index.html">Case</a>
+      <a href="spazi/index.html">Commercio e industria</a>
+      <a href="energia/index.html">Energia</a>
+      <a href="aree/index.html">Aree</a>
+    </div>
+    <div class="menu_gruppo" role="group" aria-labelledby="menu-societa"><p class="menu_titolino" id="menu-societa">La società</p>
+      <a href="about/index.html">Chi siamo</a>
+      <a href="work/index.html">Progetti</a>
+      <a href="news/index.html">News</a>
+      <a href="contact/index.html">Contatti</a>
+    </div>
   </nav>
+<!--/GEN:menu-->
   <p class="menu_recapiti"><a href="tel:+39035347060">035 347060</a><a href="mailto:info@birolini.it">info@birolini.it</a></p>
 </div>
 
 <main id="contenuto">
 
-<!-- ============ IL FILM: apertura + i quattro bisogni (una sola scena fissata) ============ -->
+<!-- ============ IL FILM: apertura + i capitoli (una sola scena fissata) ============
+     Giro 8 (riordino, 22/11): via la schermata-elenco «Cosa facciamo» (ripeteva i capitoli). Ordine: le tre cose che costruiamo
+     (Case, Commercio e industria, Energia), poi Aree, che è come ci si arriva e che continua nel «Prima e dopo» qui sotto. -->
 <div class="film" id="inizio">
 
   <!-- Apertura -->
@@ -106,6 +114,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
           data-poster-tel="media/apertura-hero-poster-telefono.jpg"></video><script>(function (v) { v.poster = window.matchMedia("(max-width: 760px) and (orientation: portrait)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); })(document.currentScript.previousElementSibling)</script>
       </div>
       <div class="velo velo--apertura"></div>
+      <div class="ombra"></div>
     </div>
 
     <div class="apertura_testo">
@@ -123,36 +132,25 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
 <!--/GEN:logo-nome-->
       <h1 class="apertura_frase" id="apertura-titolo" data-righe>Trasformiamo aree in case, spazi commerciali, capannoni e campi fotovoltaici.</h1>
       <div class="apertura_azioni">
-        <a class="bottone" href="#bisogni">Cosa facciamo</a>
-        <a class="collegamento" href="#progetti" data-filtro-vai="tutti">Tutti i 42 progetti</a>
+        <a class="bottone" href="#casa" data-capitolo="0">Cosa facciamo</a>
+        <a class="collegamento" href="work/index.html"><span>Tutti i <span data-conta="tutti">42</span> progetti</span></a>
       </div>
     </div>
 
-    <p class="sottotitolo apertura_sottotitolo"><span data-sottotitoli>Render animato. Redona Centro, Bergamo.</span></p>
+    <p class="sottotitolo apertura_sottotitolo"><span data-sottotitoli>Redona Centro, Bergamo · Render animato</span></p>
     <p class="apertura_scorri" aria-hidden="true"><span></span></p>
   </section>
 
-  <!-- Dove la finestra si ferma: invisibile, serve solo a misurare -->
-  <div class="finestra" aria-hidden="true"></div>
-  <div class="finestra finestra--centro" aria-hidden="true"></div>
+  <!-- Le linguette dei capitoli, con il titolo accanto (prima dei capitoli: così anche il tasto Tab le trova per prime) -->
+  <nav class="capindice" aria-labelledby="capindice-titolo">
+    <p class="capindice_titolo" id="capindice-titolo">Cosa facciamo</p>
+    <a href="#casa" data-capitolo="0"><span class="capindice_linea"><i></i></span>Case</a>
+    <a href="#spazi" data-capitolo="1"><span class="capindice_linea"><i></i></span>Commercio e industria</a>
+    <a href="#energia" data-capitolo="2"><span class="capindice_linea"><i></i></span>Energia</a>
+    <a href="#area" data-capitolo="3"><span class="capindice_linea"><i></i></span>Aree</a>
+  </nav>
 
-  <!-- Introduzione ai bisogni (accanto alla finestra) -->
-  <section class="strato intro" id="bisogni" aria-labelledby="bisogni-titolo">
-    <div class="intro_testo">
-      <p class="intro_chi" data-entra>Dal 1979 cerchiamo l'area, otteniamo i permessi e costruiamo. Dal 2010 realizziamo anche impianti fotovoltaici. Soprattutto a Bergamo e in Lombardia.</p>
-      <h2 class="intro_titolo" id="bisogni-titolo" data-righe>Cosa facciamo</h2>
-      <ul class="intro_scelte" data-entra>
-        <li><a href="#casa" data-capitolo="0" data-anteprima="media/viaduse-giardino-poster.jpg">Case</a></li>
-        <li><a href="#spazi" data-capitolo="1" data-anteprima="media/attivita-calcio-poster.jpg">Commercio e industria</a></li>
-        <li><a href="#area" data-capitolo="2" data-anteprima="media/area-calcio-drone-poster.jpg">Sviluppo di aree</a></li>
-        <li><a href="#energia" data-capitolo="3" data-anteprima="media/energia-torre-boldone-poster.jpg">Campi fotovoltaici</a></li>
-      </ul>
-    </div>
-    <p class="intro_didascalia" data-entra>Render. Redona Centro, Bergamo.</p>
-    <div class="intro_anteprima" aria-hidden="true"><img alt="" decoding="async"></div>
-  </section>
-
-  <!-- I quattro capitoli -->
+  <!-- I quattro capitoli: un titolo, una frase, un pulsante verso la sua pagina -->
   <article class="strato capitolo" id="casa" aria-labelledby="casa-titolo">
     <div class="quadro" data-quadro>
       <div class="quadro_dentro">
@@ -164,16 +162,11 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <div class="ombra"></div>
     </div>
     <div class="capitolo_testo">
-      <h3 class="capitolo_titolo" id="casa-titolo" data-righe>Case</h3>
+      <h2 class="capitolo_titolo" id="casa-titolo" data-righe>Case</h2>
       <p class="capitolo_frase" data-entra>Residenze a Bergamo e in provincia, dal 2000 a oggi.</p>
       <a class="bottone" href="case/index.html" data-entra>Vedi le residenze</a>
-      <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Residenziale">Tutte le <span data-conta="Residenziale">14</span> case</a></p>
     </div>
-    <ul class="capitolo_righe" data-entra>
-      <li><a href="project/gorle-bg---residenza-viaduse/index.html"><span>Residenza Viaduse, Gorle</span><span class="freccia" aria-hidden="true">→</span></a></li>
-      <li><a href="project/cologno-al-serio---residenziale/index.html"><span>Cortile Breda, Cologno al Serio</span><span class="freccia" aria-hidden="true">→</span></a></li>
-    </ul>
-    <p class="sottotitolo"><a href="project/gorle-bg---residenza-viaduse/index.html">Residenza Viaduse, Gorle (BG)</a>. Render animato.</p>
+    <p class="sottotitolo"><a href="project/gorle-bg---residenza-viaduse/index.html">Residenza Viaduse, Gorle (BG)</a> · Render animato</p>
   </article>
 
   <article class="strato capitolo capitolo--chiaro" id="spazi" aria-labelledby="spazi-titolo">
@@ -186,39 +179,11 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <div class="ombra"></div>
     </div>
     <div class="capitolo_testo">
-      <h3 class="capitolo_titolo" id="spazi-titolo" data-righe>Commercio e industria</h3>
+      <h2 class="capitolo_titolo" id="spazi-titolo" data-righe>Commercio e industria</h2>
       <p class="capitolo_frase" data-entra>Parchi commerciali, uffici, capannoni e poli logistici, dal 1980 a oggi.</p>
       <a class="bottone" href="spazi/index.html" data-entra>Vedi i progetti</a>
-      <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Commerciale">Commerciale <span data-conta="Commerciale">11</span></a><a href="#progetti" data-filtro-vai="Industriale">Industria e logistica <span data-conta="Industriale">12</span></a></p>
     </div>
-    <ul class="capitolo_righe" data-entra>
-      <li><a href="project/leffe-residenza-antiche-ciodere/index.html"><span>Leffe Centro, Leffe</span><span class="freccia" aria-hidden="true">→</span></a></li>
-      <li><a href="project/bonate-sopra-bg-commerciale/index.html"><span>Commerciale a Bonate Sopra</span><span class="freccia" aria-hidden="true">→</span></a></li>
-    </ul>
-    <p class="sottotitolo"><a href="project/calcio-logistica/index.html">Polo logistico a Calcio (BG)</a>. Render animato.</p>
-  </article>
-
-  <article class="strato capitolo" id="area" aria-labelledby="area-titolo">
-    <div class="quadro" data-quadro>
-      <div class="quadro_dentro">
-        <!-- POSTO PER CLIP NUOVA: per sostituire questa clip basta cambiare poster e data-src (1280x720, muta, in loop, 5-10 s) -->
-        <video class="quadro_video" muted playsinline loop preload="none" poster="media/area-calcio-drone-poster.jpg" data-posto-clip="area-calcio-drone" data-src="media/area-calcio-drone.mp4" data-src-grande="media/area-calcio-drone-1920.mp4"></video>
-      </div>
-      <div class="capitolo_linee" aria-hidden="true"><img src="media/linee/area-calcio-drone.webp" alt="" width="960" height="540" loading="lazy" decoding="async"></div>
-      <div class="velo"></div>
-      <div class="ombra"></div>
-    </div>
-    <div class="capitolo_testo">
-      <h3 class="capitolo_titolo" id="area-titolo" data-righe>Sviluppo di aree</h3>
-      <p class="capitolo_frase" data-entra>Cerchiamo e valutiamo l'area, otteniamo i permessi e costruiamo: dal terreno all'edificio finito.</p>
-      <a class="bottone" href="aree/index.html" data-entra>Come lavoriamo</a>
-      <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="tutti">Tutti i progetti, dal 1980 a oggi <span data-conta="tutti">42</span></a></p>
-    </div>
-    <ul class="capitolo_righe" data-entra>
-      <li><a href="project/riadda-logistica/index.html"><span>Polo logistico, Rivolta d'Adda</span><span class="freccia" aria-hidden="true">→</span></a></li>
-      <li><a href="project/curen/index.html"><span>Industriale a Curno</span><span class="freccia" aria-hidden="true">→</span></a></li>
-    </ul>
-    <p class="sottotitolo"><a href="project/calcio-logistica/index.html">L'area del polo logistico di Calcio (BG)</a>. Foto dal drone animata.</p>
+    <p class="sottotitolo"><a href="project/calcio-logistica/index.html">Polo logistico a Calcio (BG)</a> · Render animato</p>
   </article>
 
   <article class="strato capitolo" id="energia" aria-labelledby="energia-titolo">
@@ -232,120 +197,72 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <div class="ombra"></div>
     </div>
     <div class="capitolo_testo">
-      <h3 class="capitolo_titolo" id="energia-titolo" data-righe>I nostri campi fotovoltaici</h3>
+      <h2 class="capitolo_titolo" id="energia-titolo" data-righe>I nostri campi fotovoltaici</h2>
       <p class="capitolo_frase" data-entra>Li costruiamo dal 2010. Quello di Torre Boldone è alla base della comunità energetica Imotorre.</p>
       <a class="bottone" href="energia/index.html" data-entra>Vedi gli impianti</a>
-      <p class="capitolo_tutti" data-entra><a href="#progetti" data-filtro-vai="Energetico">Tutti i <span data-conta="Energetico">5</span> impianti</a></p>
     </div>
-    <ul class="capitolo_righe" data-entra>
-      <li><a href="project/bergamo-bg---portec-s-r-l/index.html"><span>Campo zona aeroporto, Bergamo</span><span class="freccia" aria-hidden="true">→</span></a></li>
-      <li><a href="project/campo-fotovoltaico-3-165-mwp---torre-boldone-bg/index.html"><span>Comunità energetica Imotorre, Torre Boldone</span><span class="freccia" aria-hidden="true">→</span></a></li>
-    </ul>
-    <p class="sottotitolo"><a href="project/campo-fotovoltaico-3-165-mwp---torre-boldone-bg/index.html">Campo fotovoltaico di Torre Boldone (BG)</a>. Foto dal drone animata.</p>
+    <p class="sottotitolo"><a href="project/campo-fotovoltaico-3-165-mwp---torre-boldone-bg/index.html">Campo fotovoltaico di Torre Boldone (BG)</a> · Foto dal drone animata</p>
   </article>
 
-  <!-- Indice dei capitoli: i quattro bisogni sullo stesso piano -->
-  <nav class="capindice" aria-label="I quattro settori">
-    <a href="#casa" data-capitolo="0"><span class="capindice_linea"><i></i></span>Case</a>
-    <a href="#spazi" data-capitolo="1"><span class="capindice_linea"><i></i></span>Commercio</a>
-    <a href="#area" data-capitolo="2"><span class="capindice_linea"><i></i></span>Aree</a>
-    <a href="#energia" data-capitolo="3"><span class="capindice_linea"><i></i></span>Energia</a>
-  </nav>
+  <article class="strato capitolo" id="area" aria-labelledby="area-titolo">
+    <div class="quadro" data-quadro>
+      <div class="quadro_dentro">
+        <!-- POSTO PER CLIP NUOVA: per sostituire questa clip basta cambiare poster e data-src (1280x720, muta, in loop, 5-10 s) -->
+        <video class="quadro_video" muted playsinline loop preload="none" poster="media/area-calcio-drone-poster.jpg" data-posto-clip="area-calcio-drone" data-src="media/area-calcio-drone.mp4" data-src-grande="media/area-calcio-drone-1920.mp4"></video>
+      </div>
+      <div class="capitolo_linee" aria-hidden="true"><img src="media/linee/area-calcio-drone.webp" alt="" width="960" height="540" loading="lazy" decoding="async"></div>
+      <div class="velo"></div>
+      <div class="ombra"></div>
+    </div>
+    <div class="capitolo_testo">
+      <h2 class="capitolo_titolo" id="area-titolo" data-righe>Sviluppo di aree</h2>
+      <p class="capitolo_frase" data-entra>Cerchiamo e valutiamo l'area, otteniamo i permessi e costruiamo: dal terreno all'edificio finito.</p>
+      <a class="bottone" href="aree/index.html" data-entra>Come lavoriamo</a>
+    </div>
+    <p class="sottotitolo"><a href="project/calcio-logistica/index.html">L'area del polo logistico di Calcio (BG)</a> · Foto dal drone animata</p>
+  </article>
 </div>
 
-<!-- ============ DAL DISEGNO ALL'EDIFICIO (da C): tre progetti si costruiscono scorrendo ============
-     data-carta="notte" (linee bianche sul blu notte) oppure data-carta="azzurro" (linee bianche sull'azzurro Birolini) -->
-<section class="costruzioni" id="costruzioni" data-carta="notte" aria-labelledby="costruzioni-titolo">
-  <div class="costruzioni_scena">
-    <div class="costruzioni_capo">
-      <h2 class="costruzioni_titolo" id="costruzioni-titolo" data-righe>Dal disegno all'edificio</h2>
-    </div>
-<!--GEN:tavole-->
-    <div class="tavola" data-tavola="0">
-      <figure class="tavola_figura" style="--pos:50% 55%;--r:1.6">
-        <div class="tavola_disegno"><img src="media/linee/gorle-bg---residenza-viaduse--foto-03.webp" alt="" width="1600" height="1000" decoding="async"></div>
-        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/gorle-bg---residenza-viaduse--foto-03-1080.jpg" srcset="img/grandi/gorle-bg---residenza-viaduse--foto-03-1080.jpg 1080w, img/grandi/gorle-bg---residenza-viaduse--foto-03.jpg 1920w" sizes="(max-width: 760px) 340px, 100vw" alt="Render della Residenza Viaduse a Gorle" width="1920" height="1200" decoding="async"></div></div>
-        <span class="tavola_quota" aria-hidden="true"></span>
-      </figure>
-      <aside class="cartiglio" aria-label="Dati del progetto">
-        <p class="cartiglio_nome"><a href="project/gorle-bg---residenza-viaduse/index.html">Residenza Viaduse</a></p>
-        <dl>
-          <div class="cartiglio_riga"><dt>Luogo</dt><dd>Gorle (BG)</dd></div>
-          <div class="cartiglio_riga"><dt>Anno</dt><dd>2026</dd></div>
-          <div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div>
-          <div class="cartiglio_riga"><dt>Dimensione</dt><dd>15 appartamenti</dd></div>
-          <div class="cartiglio_riga"><dt>Stato</dt><dd>In corso</dd></div>
-          <div class="cartiglio_riga"><dt>Immagine</dt><dd>Render. Il disegno è ricavato dall'immagine.</dd></div>
-        </dl>
-      </aside>
-    </div>
-    <div class="tavola" data-tavola="1">
-      <figure class="tavola_figura" style="--pos:50% 50%;--r:1.7778">
-        <div class="tavola_disegno"><img src="media/linee/riadda-logistica--render-edificio-v2.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></div>
-        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/riadda-logistica--render-edificio-1080.jpg" srcset="img/grandi/riadda-logistica--render-edificio-1080.jpg 1080w, img/grandi/riadda-logistica--render-edificio.jpg 1920w" sizes="(max-width: 760px) 340px, 100vw" alt="Render dell'edificio logistico di Rivolta d'Adda visto dall'alto" width="1920" height="1080" loading="lazy" decoding="async"></div></div>
-        <span class="tavola_quota" aria-hidden="true"></span>
-      </figure>
-      <aside class="cartiglio" aria-label="Dati del progetto">
-        <p class="cartiglio_nome"><a href="project/riadda-logistica/index.html">Polo logistico a Rivolta d'Adda</a></p>
-        <dl>
-          <div class="cartiglio_riga"><dt>Luogo</dt><dd>Rivolta d'Adda (CR)</dd></div>
-          <div class="cartiglio_riga"><dt>Anno</dt><dd>2025</dd></div>
-          <div class="cartiglio_riga"><dt>Settore</dt><dd>Industriale</dd></div>
-          <div class="cartiglio_riga"><dt>Dimensione</dt><dd>slp 60.000 mq, area 110.000 mq</dd></div>
-          <div class="cartiglio_riga"><dt>Stato</dt><dd>In corso, in sviluppo</dd></div>
-          <div class="cartiglio_riga"><dt>Immagine</dt><dd>Render. Il disegno è ricavato dall'immagine.</dd></div>
-        </dl>
-      </aside>
-    </div>
-    <div class="tavola" data-tavola="2">
-      <figure class="tavola_figura" style="--pos:50% 40%;--r:1.5">
-        <div class="tavola_disegno"><img src="media/linee/redona-centro-lotti-a1-a2-a3--foto-01.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async"></div>
-        <div class="tavola_colore"><div class="tavola_colore-dentro"><img src="img/grandi/redona-centro-lotti-a1-a2-a3--foto-01-1080.jpg" srcset="img/grandi/redona-centro-lotti-a1-a2-a3--foto-01-1080.jpg 1080w, img/grandi/redona-centro-lotti-a1-a2-a3--foto-01.jpg 1920w" sizes="(max-width: 760px) 340px, 100vw" alt="La facciata di un edificio di Redona Centro, lotti A1-A2-A3, con i pannelli bianchi sui balconi" width="1920" height="1280" loading="lazy" decoding="async"></div></div>
-        <span class="tavola_quota" aria-hidden="true"></span>
-      </figure>
-      <aside class="cartiglio" aria-label="Dati del progetto">
-        <p class="cartiglio_nome"><a href="project/redona-centro-lotti-a1-a2-a3/index.html">Redona Centro, lotti A1-A2-A3</a></p>
-        <dl>
-          <div class="cartiglio_riga"><dt>Luogo</dt><dd>Bergamo (BG)</dd></div>
-          <div class="cartiglio_riga"><dt>Anno</dt><dd>2019</dd></div>
-          <div class="cartiglio_riga"><dt>Settore</dt><dd>Residenziale</dd></div>
-          <div class="cartiglio_riga"><dt>Dimensione</dt><dd>A1-A2: 32 appartamenti e 7 negozi</dd></div>
-          <div class="cartiglio_riga"><dt>Stato</dt><dd>Realizzato</dd></div>
-          <div class="cartiglio_riga"><dt>Immagine</dt><dd>Foto. Il disegno è ricavato dall'immagine.</dd></div>
-        </dl>
-      </aside>
-    </div>
-<!--/GEN:tavole-->
-    <div class="costruzioni_conta contatore" aria-hidden="true"><span class="costruzioni_n">1</span><i>/</i>3</div>
+<!-- ============ PRIMA E DOPO: Rivolta d'Adda (giro 8, al posto delle tre tavole «Dal disegno all'edificio»).
+     Continua il capitolo Aree: com'era l'area vista dal drone e come sarà. Lo scrive il generatore (primaDopo in genera-nuovo.mjs). ============ -->
+<!--GEN:primadopo-->
+
+<section class="pd " id="prima-dopo" aria-labelledby="pd-titolo">
+  <div class="pd_testa">
+    <h2 class="t3" id="pd-titolo">Prima e dopo</h2>
+    <p class="secondario">Un'area vera: com'era vista dal drone e come sarà nel progetto. Trascina la linea per confrontarle.</p>
   </div>
+  <article class="pd_coppia" aria-labelledby="pd-rivolta">
+    <div class="pd_quadro" style="--pos:50%">
+      <img class="pd_img" src="media/pd-rivolta-prima-1600.jpg" srcset="media/pd-rivolta-prima-900.jpg 900w, media/pd-rivolta-prima-1600.jpg 1600w" sizes="(max-width: 760px) 100vw, 66vw" alt="L'area di Rivolta d'Adda vista dal drone il 05/11/2026, a lavori iniziati" width="1600" height="900" loading="lazy" decoding="async">
+      <div class="pd_dopo"><img class="pd_img" src="media/pd-rivolta-dopo-1600.jpg" srcset="media/pd-rivolta-dopo-900.jpg 900w, media/pd-rivolta-dopo-1600.jpg 1600w" sizes="(max-width: 760px) 100vw, 66vw" alt="Render del polo logistico di Rivolta d'Adda visto dall'alto" width="1600" height="900" loading="lazy" decoding="async"></div>
+      <span class="pd_linea" aria-hidden="true"><span class="pd_maniglia"></span></span>
+      <span class="pd_et pd_et--prima mono" aria-hidden="true">Prima</span>
+      <span class="pd_et pd_et--dopo mono" aria-hidden="true">Dopo</span>
+      <input class="pd_cursore" type="range" min="0" max="100" value="50" aria-label="Confronto prima e dopo, Rivolta d'Adda (CR): a sinistra la foto di prima, a destra il render">
+    </div>
+    <div class="pd_testo">
+      <h3 class="t4" id="pd-rivolta">Rivolta d'Adda (CR)</h3>
+      <p>Un'area di 110.000 mq che diventa un polo logistico, con 60.000 mq di superficie lorda di pavimento.</p>
+      <p class="pd_fonte mono"><span>Prima ·</span> Foto dal drone del 05/11/2026, a lavori iniziati.<br><span>Dopo ·</span> Render del progetto.</p>
+      <a class="collegamento" href="project/riadda-logistica/index.html">Apri la scheda</a>
+    </div>
+  </article>
 </section>
+<script src="js/primadopo.js?v=202611222141" defer></script>
+<!--/GEN:primadopo-->
 
-<!-- ============ INDICE DEI 42 PROGETTI (da B, rifatto sulla notte) ============ -->
-<section class="indice" id="progetti" aria-labelledby="indice-titolo">
+<!-- ============ PROGETTI: sei progetti scelti e il pulsante verso l'archivio intero (giro 8: l'archivio sta solo nella pagina Progetti) ============ -->
+<section class="indice indice--home" id="progetti" aria-labelledby="indice-titolo">
   <div class="indice_testa">
-    <h2 class="indice_titolo" id="indice-titolo"><span class="indice_42" aria-hidden="true">42</span><span data-righe>I nostri progetti</span><span class="sr"> (42 progetti pubblicati, in 4 settori)</span></h2>
-  </div>
-
-  <!-- la barra dei settori resta in alto mentre si scorre l'elenco -->
-  <div class="indice_barra">
-    <div class="filtri" role="group" aria-label="Filtra per settore">
-<!--GEN:filtri-->
-      <button type="button" class="filtro" data-filtro="tutti" aria-pressed="true">Tutti <span>42</span></button>
-      <button type="button" class="filtro" data-filtro="Residenziale" aria-pressed="false">Case <span>14</span></button>
-      <button type="button" class="filtro" data-filtro="Commerciale" aria-pressed="false">Commerciale <span>11</span></button>
-      <button type="button" class="filtro" data-filtro="Industriale" aria-pressed="false">Industria e logistica <span>12</span></button>
-      <button type="button" class="filtro" data-filtro="Energetico" aria-pressed="false">Energia <span>5</span></button>
-<!--/GEN:filtri-->
-    </div>
-    <button class="cerca_lente" type="button" aria-label="Cerca un progetto" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></button>
-    <label class="cerca"><span class="sr">Cerca un progetto per nome, comune o anno</span><input type="search" class="cerca_campo" placeholder="Cerca" autocomplete="off" aria-controls="elenco-progetti"></label>
+    <h2 class="indice_titolo" id="indice-titolo"><span class="indice_42" aria-hidden="true">42</span><span data-righe>I nostri progetti</span><span class="sr"> (42 progetti pubblicati: qui sei, in corso e recenti)</span></h2>
+    <p class="indice_guida">Sei progetti in corso e recenti.</p>
   </div>
 
   <div class="indice_corpo">
     <!-- LA FINESTRA SUI PROGETTI: una sola immagine grande alla volta (un solo video, che cambia sorgente) -->
     <figure class="fp">
       <div class="fp_media">
-        <span class="fp_conta contatore" aria-hidden="true"><span class="fp_n">01</span><i>/</i><span class="fp_tot">42</span></span>
         <div class="fp_strato fp_strato--a"><img alt="" decoding="async"></div>
         <div class="fp_strato fp_strato--b"><img alt="" decoding="async"></div>
         <video class="fp_video" muted playsinline loop preload="none" aria-hidden="true"></video>
@@ -360,124 +277,14 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
 
     <div class="indice_liste" id="elenco-progetti">
 <!--GEN:indice-->
-      <section class="gruppo" data-settore="Residenziale" aria-label="Case">
-        <h3 class="gruppo_titolo">Case <span>14</span></h3>
+      <p class="indice_legenda"><i class="voce_incorso" aria-hidden="true"></i>in corso</p>
+      <section class="gruppo" data-settore="scelti" aria-label="Sei progetti in corso e recenti">
         <ol class="gruppo_elenco">
           <li class="voce" data-settore="Residenziale" data-cerca="residenza viaduse gorle bg 2026">
             <a href="project/gorle-bg---residenza-viaduse/index.html" data-img="media/viaduse-giardino-poster.jpg" data-img-tel="img/ridotte/media--viaduse-giardino-poster-1320.jpg" data-clip="media/viaduse-giardino.mp4" data-clip-grande="media/viaduse-giardino-1920.mp4"
                data-nome="Residenza Viaduse" data-n="" data-meta="Gorle (BG), 2026, residenziale, in corso" data-tipo="Render animato">
               <span class="voce_nome">Residenza Viaduse<span class="voce_luogo">Gorle (BG)</span></span>
               <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2026</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="cortile breda cologno al serio bg 2024">
-            <a href="project/cologno-al-serio---residenziale/index.html" data-img="media/finestra-cortile-breda-poster.jpg" data-img-tel="img/ridotte/media--finestra-cortile-breda-poster-1320.jpg" data-clip="media/finestra-cortile-breda.mp4" data-clip-grande="media/finestra-cortile-breda-1920.mp4"
-               data-nome="Cortile Breda" data-n="" data-meta="Cologno al Serio (BG), 2024, residenziale" data-tipo="Foto animata">
-              <span class="voce_nome">Cortile Breda<span class="voce_luogo">Cologno al Serio (BG)</span></span>
-              <span class="voce_anno">2024</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="redona centro, lotti c1-c2 bergamo bg 2024">
-            <a href="project/redona-centro-lotti-c1-c2/index.html" data-img="img/progetti/redona-centro-lotti-c1-c2/copertina.jpg" data-img-tel="img/progetti/redona-centro-lotti-c1-c2/copertina-telefono.jpg" data-pos="50% 22%"
-               data-nome="Redona Centro, lotti C1-C2" data-n="" data-meta="Bergamo (BG), 2024, residenziale, in corso" data-tipo="Foto">
-              <span class="voce_nome">Redona Centro, lotti C1-C2<span class="voce_luogo">Bergamo (BG)</span></span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2024</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="residenze a brembate di sopra brembate di sopra bg 2023">
-            <a href="project/bdscentro/index.html" data-img="media/casa-brembate-poster.jpg" data-img-tel="img/ridotte/media--casa-brembate-poster-1320.jpg" data-clip="media/casa-brembate.mp4" data-clip-grande="media/casa-brembate-1920.mp4"
-               data-nome="Residenze a Brembate di Sopra" data-n="" data-meta="Brembate di Sopra (BG), 2023, residenziale" data-tipo="Render animato">
-              <span class="voce_nome">Residenze a Brembate di Sopra<span class="voce_luogo">Brembate di Sopra (BG)</span></span>
-              <span class="voce_anno">2023</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="residenza antiche ciodere leffe bg 2020">
-            <a href="project/leffe-residenza-antiche-ciodere/index.html" data-img="media/finestra-leffe-poster.jpg" data-img-tel="img/ridotte/media--finestra-leffe-poster-1320.jpg" data-clip="media/finestra-leffe.mp4" data-clip-grande="media/finestra-leffe-1920.mp4"
-               data-nome="Residenza Antiche Ciodere" data-n="" data-meta="Leffe (BG), 2020, residenziale" data-tipo="Foto animata">
-              <span class="voce_nome">Residenza Antiche Ciodere<span class="voce_luogo">Leffe (BG)</span></span>
-              <span class="voce_anno">2020</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="redona centro, lotti b1-b2 bergamo bg 2020">
-            <a href="project/redona-centro-lotti-b1-b2/index.html" data-img="media/redona-notte-poster.jpg" data-img-tel="img/ridotte/media--redona-notte-poster-1320.jpg" data-clip="media/redona-notte.mp4" data-clip-grande="media/redona-notte-1920.mp4"
-               data-nome="Redona Centro, lotti B1-B2" data-n="" data-meta="Bergamo (BG), 2020, residenziale" data-tipo="Render animato">
-              <span class="voce_nome">Redona Centro, lotti B1-B2<span class="voce_luogo">Bergamo (BG)</span></span>
-              <span class="voce_anno">2020</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="redona centro, lotti a1-a2-a3 bergamo bg 2019">
-            <a href="project/redona-centro-lotti-a1-a2-a3/index.html" data-img="media/finestra-redona-a1-a3-poster.jpg" data-img-tel="img/ridotte/media--finestra-redona-a1-a3-poster-1320.jpg" data-clip="media/finestra-redona-a1-a3.mp4" data-clip-grande="media/finestra-redona-a1-a3-1920.mp4"
-               data-nome="Redona Centro, lotti A1-A2-A3" data-n="" data-meta="Bergamo (BG), 2019, residenziale" data-tipo="Foto animata">
-              <span class="voce_nome">Redona Centro, lotti A1-A2-A3<span class="voce_luogo">Bergamo (BG)</span></span>
-              <span class="voce_anno">2019</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="residenza pascoli torre boldone bg 2010">
-            <a href="project/torre-boldone-bg-residenza-pascoli/index.html" data-img="img/progetti/torre-boldone-bg-residenza-pascoli/copertina.jpg" data-img-tel="img/progetti/torre-boldone-bg-residenza-pascoli/copertina-telefono.jpg" data-piccola
-               data-nome="Residenza Pascoli" data-n="" data-meta="Torre Boldone (BG), 2010, residenziale" data-tipo="Render">
-              <span class="voce_nome">Residenza Pascoli<span class="voce_luogo">Torre Boldone (BG)</span></span>
-              <span class="voce_anno">2010</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="residenze a bracca bracca bg 2009">
-            <a href="project/bracca-bergamo/index.html" data-img="img/progetti/bracca-bergamo/copertina.jpg" data-img-tel="img/progetti/bracca-bergamo/copertina.jpg"
-               data-nome="Residenze a Bracca" data-n="" data-meta="Bracca (BG), 2009, residenziale" data-tipo="">
-              <span class="voce_nome">Residenze a Bracca<span class="voce_luogo">Bracca (BG)</span></span>
-              <span class="voce_anno">2009</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="brignano 3 brignano gera d'adda bg 2007">
-            <a href="project/brignano-gera-dadda-via-ponchielli-brignano-3/index.html" data-img="img/progetti/brignano-gera-dadda-via-ponchielli-brignano-3/copertina.webp" data-img-tel="img/progetti/brignano-gera-dadda-via-ponchielli-brignano-3/copertina.webp"
-               data-nome="Brignano 3" data-n="" data-meta="Brignano Gera d'Adda (BG), 2007, residenziale" data-tipo="">
-              <span class="voce_nome">Brignano 3<span class="voce_luogo">Brignano Gera d'Adda (BG)</span></span>
-              <span class="voce_anno">2007</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="palazzina in via cifrondi bergamo bg 2006">
-            <a href="project/bergamo-via-cifrondi-palazzina-residenziale-con-banca-al-pt/index.html" data-img="img/progetti/bergamo-via-cifrondi-palazzina-residenziale-con-banca-al-pt/copertina.webp" data-img-tel="img/progetti/bergamo-via-cifrondi-palazzina-residenziale-con-banca-al-pt/copertina.webp"
-               data-nome="Palazzina in via Cifrondi" data-n="" data-meta="Bergamo (BG), 2006, residenziale" data-tipo="">
-              <span class="voce_nome">Palazzina in via Cifrondi<span class="voce_luogo">Bergamo (BG)</span></span>
-              <span class="voce_anno">2006</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="residenza il parco nembro bg 2006">
-            <a href="project/nembro-residenza-il-parco/index.html" data-img="img/progetti/nembro-residenza-il-parco/copertina.jpg" data-img-tel="img/progetti/nembro-residenza-il-parco/copertina.jpg"
-               data-nome="Residenza Il Parco" data-n="" data-meta="Nembro (BG), 2006, residenziale" data-tipo="">
-              <span class="voce_nome">Residenza Il Parco<span class="voce_luogo">Nembro (BG)</span></span>
-              <span class="voce_anno">2006</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="brignano 2 brignano gera d'adda bg 2004">
-            <a href="project/brignano-gera-dadda-via-locatelli-brignano-2/index.html" data-img="img/progetti/brignano-gera-dadda-via-locatelli-brignano-2/copertina.jpg" data-img-tel="img/progetti/brignano-gera-dadda-via-locatelli-brignano-2/copertina.jpg"
-               data-nome="Brignano 2" data-n="" data-meta="Brignano Gera d'Adda (BG), 2004, residenziale" data-tipo="">
-              <span class="voce_nome">Brignano 2<span class="voce_luogo">Brignano Gera d'Adda (BG)</span></span>
-              <span class="voce_anno">2004</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Residenziale" data-cerca="brignano 1 brignano gera d'adda bg 2000">
-            <a href="project/brignano-gera-dadda-via-locatelli-brignano-1/index.html" data-img="img/progetti/brignano-gera-dadda-via-locatelli-brignano-1/copertina.webp" data-img-tel="img/progetti/brignano-gera-dadda-via-locatelli-brignano-1/copertina.webp"
-               data-nome="Brignano 1" data-n="" data-meta="Brignano Gera d'Adda (BG), 2000, residenziale" data-tipo="">
-              <span class="voce_nome">Brignano 1<span class="voce_luogo">Brignano Gera d'Adda (BG)</span></span>
-              <span class="voce_anno">2000</span>
-            </a>
-          </li>
-        </ol>
-      </section>
-      <section class="gruppo" data-settore="Commerciale" aria-label="Commerciale">
-        <h3 class="gruppo_titolo">Commerciale <span>11</span></h3>
-        <ol class="gruppo_elenco">
-          <li class="voce" data-settore="Commerciale" data-cerca="commerciale a bonate sopra bonate sopra bg 2026">
-            <a href="project/bonate-sopra-bg-commerciale/index.html" data-img="img/progetti/bonate-sopra-bg-commerciale/copertina-telefono.jpg" data-img-tel="img/progetti/bonate-sopra-bg-commerciale/copertina-telefono.jpg" data-piccola
-               data-nome="Commerciale a Bonate Sopra" data-n="" data-meta="Bonate Sopra (BG), 2026, commerciale, in corso" data-tipo="Render">
-              <span class="voce_nome">Commerciale a Bonate Sopra<span class="voce_luogo">Bonate Sopra (BG)</span></span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2026</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="commerciale a calcio calcio bg 2025">
-            <a href="project/calcio-bg---commerciale/index.html" data-img="img/progetti/calcio-bg---commerciale/copertina.jpg" data-img-tel="img/progetti/calcio-bg---commerciale/copertina.jpg"
-               data-nome="Commerciale a Calcio" data-n="" data-meta="Calcio (BG), 2025, commerciale, in corso" data-tipo="Render">
-              <span class="voce_nome">Commerciale a Calcio<span class="voce_luogo">Calcio (BG)</span></span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
             </a>
           </li>
           <li class="voce" data-settore="Commerciale" data-cerca="hotel da 254 camere orio al serio bg 2025">
@@ -487,71 +294,10 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
               <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
             </a>
           </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="commerciale comest e comovest rivolta d'adda cr 2025">
-            <a href="project/rivolta-dadda-cr---commerciale-comest/index.html" data-img="img/progetti/rivolta-dadda-cr---commerciale-comest/copertina.webp" data-img-tel="img/progetti/rivolta-dadda-cr---commerciale-comest/copertina.webp"
-               data-nome="Commerciale Comest e Comovest" data-n="" data-meta="Rivolta d'Adda (CR), 2025, commerciale, in corso" data-tipo="">
-              <span class="voce_nome">Commerciale Comest e Comovest<span class="voce_luogo">Rivolta d'Adda (CR)</span></span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="commerciale a porto torres porto torres ss 2025">
-            <a href="project/teide/index.html" data-img="img/progetti/teide/copertina.jpg" data-img-tel="img/progetti/teide/copertina-telefono.jpg"
-               data-nome="Commerciale a Porto Torres" data-n="" data-meta="Porto Torres (SS), 2025, commerciale, in corso" data-tipo="Render">
-              <span class="voce_nome">Commerciale a Porto Torres<span class="voce_luogo">Porto Torres (SS)</span></span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="parco commerciale biraldi curno bg 2018">
-            <a href="project/parco-commerciale-curno-briantea/index.html" data-img="img/progetti/parco-commerciale-curno-briantea/copertina.jpg" data-img-tel="img/progetti/parco-commerciale-curno-briantea/copertina.jpg"
-               data-nome="Parco commerciale Biraldi" data-n="" data-meta="Curno (BG), 2018, commerciale" data-tipo="Render">
-              <span class="voce_nome">Parco commerciale Biraldi<span class="voce_luogo">Curno (BG)</span></span>
-              <span class="voce_anno">2018</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="parco commerciale trezzo 3 trezzo sull'adda mi 2016">
-            <a href="project/parco-commerciale-trezzo-3/index.html" data-img="img/progetti/parco-commerciale-trezzo-3/copertina.webp" data-img-tel="img/progetti/parco-commerciale-trezzo-3/copertina.webp"
-               data-nome="Parco commerciale Trezzo 3" data-n="" data-meta="Trezzo sull'Adda (MI), 2016, commerciale" data-tipo="">
-              <span class="voce_nome">Parco commerciale Trezzo 3<span class="voce_luogo">Trezzo sull'Adda (MI)</span></span>
-              <span class="voce_anno">2016</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="parco commerciale trezzo 1-2 trezzo sull'adda mi 2015">
-            <a href="project/parco-commerciale-trezzo-1-2/index.html" data-img="img/progetti/parco-commerciale-trezzo-1-2/copertina.jpg" data-img-tel="img/progetti/parco-commerciale-trezzo-1-2/copertina.jpg"
-               data-nome="Parco commerciale Trezzo 1-2" data-n="" data-meta="Trezzo sull'Adda (MI), 2015, commerciale" data-tipo="">
-              <span class="voce_nome">Parco commerciale Trezzo 1-2<span class="voce_luogo">Trezzo sull'Adda (MI)</span></span>
-              <span class="voce_anno">2015</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="supermercato e unita terziaria bernareggio mb 2013">
-            <a href="project/bernareggio-mb---supermercato-e-unita-terziaria/index.html" data-img="img/progetti/bernareggio-mb---supermercato-e-unita-terziaria/copertina.jpg" data-img-tel="img/progetti/bernareggio-mb---supermercato-e-unita-terziaria/copertina.jpg"
-               data-nome="Supermercato e unità terziaria" data-n="" data-meta="Bernareggio (MB), 2013, commerciale" data-tipo="">
-              <span class="voce_nome">Supermercato e unità terziaria<span class="voce_luogo">Bernareggio (MB)</span></span>
-              <span class="voce_anno">2013</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="sede comunale con auditorium bernareggio mb 2013">
-            <a href="project/bernareggio-mb-nuova-sede-comunale-con-auditorium/index.html" data-img="media/finestra-bernareggio-poster.jpg" data-img-tel="img/ridotte/media--finestra-bernareggio-poster-1320.jpg" data-clip="media/finestra-bernareggio.mp4" data-clip-grande="media/finestra-bernareggio-1920.mp4"
-               data-nome="Sede comunale con auditorium" data-n="" data-meta="Bernareggio (MB), 2013, commerciale" data-tipo="Foto animata">
-              <span class="voce_nome">Sede comunale con auditorium<span class="voce_luogo">Bernareggio (MB)</span></span>
-              <span class="voce_anno">2013</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Commerciale" data-cerca="centro direzionale caleido bernareggio mb 2012">
-            <a href="project/centro-caleido-bernareggio-mb/index.html" data-img="media/originali/centro-caleido-bernareggio-mb.webp" data-img-tel="media/originali/centro-caleido-bernareggio-mb.webp"
-               data-nome="Centro direzionale Caleido" data-n="" data-meta="Bernareggio (MB), 2012, commerciale" data-tipo="">
-              <span class="voce_nome">Centro direzionale Caleido<span class="voce_luogo">Bernareggio (MB)</span></span>
-              <span class="voce_anno">2012</span>
-            </a>
-          </li>
-        </ol>
-      </section>
-      <section class="gruppo" data-settore="Industriale" aria-label="Industria e logistica">
-        <h3 class="gruppo_titolo">Industria e logistica <span>12</span></h3>
-        <ol class="gruppo_elenco">
-          <li class="voce" data-settore="Industriale" data-cerca="polo logistico a calcio calcio bg 2025">
-            <a href="project/calcio-logistica/index.html" data-img="media/attivita-calcio-poster.jpg" data-img-tel="img/ridotte/media--attivita-calcio-poster-1320.jpg" data-clip="media/attivita-calcio.mp4" data-clip-grande="media/attivita-calcio-1920.mp4"
-               data-nome="Polo logistico a Calcio" data-n="" data-meta="Calcio (BG), 2025, industria e logistica, in corso" data-tipo="Render animato">
-              <span class="voce_nome">Polo logistico a Calcio<span class="voce_luogo">Calcio (BG)</span></span>
+          <li class="voce" data-settore="Energetico" data-cerca="campo fotovoltaico zona aeroporto bergamo bg 2025">
+            <a href="project/bergamo-bg---portec-s-r-l/index.html" data-img="media/energia-portec-poster.jpg" data-img-tel="img/ridotte/media--energia-portec-poster-1320.jpg" data-clip="media/energia-portec.mp4" data-clip-grande="media/energia-portec-1920.mp4"
+               data-nome="Campo fotovoltaico zona aeroporto" data-n="" data-meta="Bergamo (BG), 2025, energia, in corso" data-tipo="Foto dal drone animata">
+              <span class="voce_nome">Campo fotovoltaico zona aeroporto<span class="voce_luogo">Bergamo (BG)</span></span>
               <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
             </a>
           </li>
@@ -562,126 +308,29 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
               <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
             </a>
           </li>
-          <li class="voce" data-settore="Industriale" data-cerca="polo logistico a rivolta d'adda rivolta d'adda cr 2025">
-            <a href="project/riadda-logistica/index.html" data-img="media/ridadda-render-alto-poster.jpg" data-img-tel="img/ridotte/media--ridadda-render-alto-poster-1320.jpg" data-clip="media/ridadda-render-alto.mp4" data-clip-grande="media/ridadda-render-alto-1920.mp4"
-               data-nome="Polo logistico a Rivolta d'Adda" data-n="" data-meta="Rivolta d'Adda (CR), 2025, industria e logistica, in corso" data-tipo="Render animato">
-              <span class="voce_nome">Polo logistico a Rivolta d'Adda<span class="voce_luogo">Rivolta d'Adda (CR)</span></span>
+          <li class="voce" data-settore="Industriale" data-cerca="polo logistico a calcio calcio bg 2025">
+            <a href="project/calcio-logistica/index.html" data-img="media/attivita-calcio-poster.jpg" data-img-tel="img/ridotte/media--attivita-calcio-poster-1320.jpg" data-clip="media/attivita-calcio.mp4" data-clip-grande="media/attivita-calcio-1920.mp4"
+               data-nome="Polo logistico a Calcio" data-n="" data-meta="Calcio (BG), 2025, industria e logistica, in corso" data-tipo="Render animato">
+              <span class="voce_nome">Polo logistico a Calcio<span class="voce_luogo">Calcio (BG)</span></span>
               <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
             </a>
           </li>
-          <li class="voce" data-settore="Industriale" data-cerca="capannoni in viale delle industrie bernareggio mb 2014">
-            <a href="project/bernareggio-viale-delle-industrie/index.html" data-img="img/progetti/bernareggio-viale-delle-industrie/copertina.jpg" data-img-tel="img/progetti/bernareggio-viale-delle-industrie/copertina.jpg"
-               data-nome="Capannoni in viale delle Industrie" data-n="" data-meta="Bernareggio (MB), 2014, industria e logistica" data-tipo="">
-              <span class="voce_nome">Capannoni in viale delle Industrie<span class="voce_luogo">Bernareggio (MB)</span></span>
-              <span class="voce_anno">2014</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Industriale" data-cerca="capannone in via del commercio bernareggio mb 2012">
-            <a href="project/capannone-industriale---bernareggio-mb-via-del-commercio/index.html" data-img="img/progetti/capannone-industriale---bernareggio-mb-via-del-commercio/copertina.webp" data-img-tel="img/progetti/capannone-industriale---bernareggio-mb-via-del-commercio/copertina.webp"
-               data-nome="Capannone in via del Commercio" data-n="" data-meta="Bernareggio (MB), 2012, industria e logistica" data-tipo="">
-              <span class="voce_nome">Capannone in via del Commercio<span class="voce_luogo">Bernareggio (MB)</span></span>
-              <span class="voce_anno">2012</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Industriale" data-cerca="parco industriale nembro 2 nembro bg 2008">
-            <a href="project/parco-industriale-nembro-2/index.html" data-img="img/progetti/parco-industriale-nembro-2/copertina.webp" data-img-tel="img/progetti/parco-industriale-nembro-2/copertina.webp"
-               data-nome="Parco industriale Nembro 2" data-n="" data-meta="Nembro (BG), 2008, industria e logistica" data-tipo="">
-              <span class="voce_nome">Parco industriale Nembro 2<span class="voce_luogo">Nembro (BG)</span></span>
-              <span class="voce_anno">2008</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Industriale" data-cerca="capannoni e palazzina uffici bernareggio mb 2006">
-            <a href="project/bernareggio-via-delle-industrie-capannoni-e-palazzina-uffici/index.html" data-img="img/progetti/bernareggio-via-delle-industrie-capannoni-e-palazzina-uffici/copertina.webp" data-img-tel="img/progetti/bernareggio-via-delle-industrie-capannoni-e-palazzina-uffici/copertina.webp"
-               data-nome="Capannoni e palazzina uffici" data-n="" data-meta="Bernareggio (MB), 2006, industria e logistica" data-tipo="">
-              <span class="voce_nome">Capannoni e palazzina uffici<span class="voce_luogo">Bernareggio (MB)</span></span>
-              <span class="voce_anno">2006</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Industriale" data-cerca="capannone in via marconi ranica bg 2003">
-            <a href="project/ranica-via-marconi-capannone-industriale-e-terziario/index.html" data-img="img/progetti/ranica-via-marconi-capannone-industriale-e-terziario/copertina.jpg" data-img-tel="img/progetti/ranica-via-marconi-capannone-industriale-e-terziario/copertina-telefono.jpg"
-               data-nome="Capannone in via Marconi" data-n="" data-meta="Ranica (BG), 2003, industria e logistica" data-tipo="">
-              <span class="voce_nome">Capannone in via Marconi<span class="voce_luogo">Ranica (BG)</span></span>
-              <span class="voce_anno">2003</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Industriale" data-cerca="capannone industriale a ciserano ciserano bg 2002">
-            <a href="project/capannone-industriale-in-ciserano-bg/index.html" data-img="img/progetti/capannone-industriale-in-ciserano-bg/copertina.webp" data-img-tel="img/progetti/capannone-industriale-in-ciserano-bg/copertina.webp"
-               data-nome="Capannone industriale a Ciserano" data-n="" data-meta="Ciserano (BG), 2002, industria e logistica" data-tipo="">
-              <span class="voce_nome">Capannone industriale a Ciserano<span class="voce_luogo">Ciserano (BG)</span></span>
-              <span class="voce_anno">2002</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Industriale" data-cerca="parco industriale nembro 1 nembro bg 2000">
-            <a href="project/parco-industriale-nembro-1/index.html" data-img="img/progetti/parco-industriale-nembro-1/copertina.jpg" data-img-tel="img/progetti/parco-industriale-nembro-1/copertina.jpg"
-               data-nome="Parco industriale Nembro 1" data-n="" data-meta="Nembro (BG), 2000, industria e logistica" data-tipo="">
-              <span class="voce_nome">Parco industriale Nembro 1<span class="voce_luogo">Nembro (BG)</span></span>
-              <span class="voce_anno">2000</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Industriale" data-cerca="capannoni in via garibaldi pedrengo bg 1995">
-            <a href="project/capannoni-industriali-in-pedrengo-via-garibaldi/index.html" data-img="img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/copertina.webp" data-img-tel="img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/copertina.webp"
-               data-nome="Capannoni in via Garibaldi" data-n="" data-meta="Pedrengo (BG), 1995, industria e logistica" data-tipo="">
-              <span class="voce_nome">Capannoni in via Garibaldi<span class="voce_luogo">Pedrengo (BG)</span></span>
-              <span class="voce_anno">1995</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Industriale" data-cerca="zona industriale di pedrengo pedrengo bg 1980">
-            <a href="project/zona-industriale-in-pedrengo/index.html" data-img="media/pedrengo-1979-poster.jpg" data-img-tel="img/ridotte/media--pedrengo-1979-poster-1320.jpg" data-clip="media/pedrengo-1979.mp4" data-clip-grande="media/pedrengo-1979-1920.mp4"
-               data-nome="Zona industriale di Pedrengo" data-n="" data-meta="Pedrengo (BG), 1980, industria e logistica" data-tipo="Foto animata">
-              <span class="voce_nome">Zona industriale di Pedrengo<span class="voce_luogo">Pedrengo (BG)</span></span>
-              <span class="voce_anno">1980</span>
-            </a>
-          </li>
-        </ol>
-      </section>
-      <section class="gruppo" data-settore="Energetico" aria-label="Energia">
-        <h3 class="gruppo_titolo">Energia <span>5</span></h3>
-        <ol class="gruppo_elenco">
-          <li class="voce" data-settore="Energetico" data-cerca="campo fotovoltaico zona aeroporto bergamo bg 2025">
-            <a href="project/bergamo-bg---portec-s-r-l/index.html" data-img="media/energia-portec-poster.jpg" data-img-tel="img/ridotte/media--energia-portec-poster-1320.jpg" data-clip="media/energia-portec.mp4" data-clip-grande="media/energia-portec-1920.mp4"
-               data-nome="Campo fotovoltaico zona aeroporto" data-n="" data-meta="Bergamo (BG), 2025, energia, in corso" data-tipo="Foto dal drone animata">
-              <span class="voce_nome">Campo fotovoltaico zona aeroporto<span class="voce_luogo">Bergamo (BG)</span></span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Energetico" data-cerca="campo fotovoltaico a covo covo bg 2025">
-            <a href="project/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/index.html" data-img="img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/copertina.webp" data-img-tel="img/progetti/covo-bg---progetto-per-la-realizzazione-di-un-nuovo-campo-fotovoltaico-a-terra/copertina-telefono.jpg"
-               data-nome="Campo fotovoltaico a Covo" data-n="" data-meta="Covo (BG), 2025, energia, in corso" data-tipo="Fotoinserimento">
-              <span class="voce_nome">Campo fotovoltaico a Covo<span class="voce_luogo">Covo (BG)</span></span>
-              <span class="voce_anno"><em class="voce_incorso" title="In corso"></em>2025</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Energetico" data-cerca="campo fotovoltaico di torre boldone torre boldone bg 2024">
-            <a href="project/campo-fotovoltaico-3-165-mwp---torre-boldone-bg/index.html" data-img="media/energia-torre-boldone-poster.jpg" data-img-tel="img/ridotte/media--energia-torre-boldone-poster-1320.jpg" data-clip="media/energia-torre-boldone.mp4" data-clip-grande="media/energia-torre-boldone-1920.mp4"
-               data-nome="Campo fotovoltaico di Torre Boldone" data-n="" data-meta="Torre Boldone (BG), 2024, energia" data-tipo="Foto dal drone animata">
-              <span class="voce_nome">Campo fotovoltaico di Torre Boldone<span class="voce_luogo">Torre Boldone (BG)</span></span>
+          <li class="voce" data-settore="Residenziale" data-cerca="cortile breda cologno al serio bg 2024">
+            <a href="project/cologno-al-serio---residenziale/index.html" data-img="media/finestra-cortile-breda-poster.jpg" data-img-tel="img/ridotte/media--finestra-cortile-breda-poster-1320.jpg" data-clip="media/finestra-cortile-breda.mp4" data-clip-grande="media/finestra-cortile-breda-1920.mp4"
+               data-nome="Cortile Breda" data-n="" data-meta="Cologno al Serio (BG), 2024, residenziale" data-tipo="Foto animata">
+              <span class="voce_nome">Cortile Breda<span class="voce_luogo">Cologno al Serio (BG)</span></span>
               <span class="voce_anno">2024</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Energetico" data-cerca="campo fotovoltaico ad agristeu agristeu romania 2013">
-            <a href="project/campo-fotovoltaico-1mwp-in-agristeu-trirgu-mures-romania/index.html" data-img="img/progetti/campo-fotovoltaico-1mwp-in-agristeu-trirgu-mures-romania/copertina.webp" data-img-tel="img/progetti/campo-fotovoltaico-1mwp-in-agristeu-trirgu-mures-romania/copertina-telefono.jpg"
-               data-nome="Campo fotovoltaico ad Agristeu" data-n="" data-meta="Agristeu (Romania), 2013, energia" data-tipo="">
-              <span class="voce_nome">Campo fotovoltaico ad Agristeu<span class="voce_luogo">Agristeu (Romania)</span></span>
-              <span class="voce_anno">2013</span>
-            </a>
-          </li>
-          <li class="voce" data-settore="Energetico" data-cerca="campo fotovoltaico a magliano alpi magliano alpi cn 2010">
-            <a href="project/campo-fotovoltaico-1-mwp-magliano-alpi-cuneo-italia/index.html" data-img="img/progetti/campo-fotovoltaico-1-mwp-magliano-alpi-cuneo-italia/copertina.webp" data-img-tel="img/progetti/campo-fotovoltaico-1-mwp-magliano-alpi-cuneo-italia/copertina.webp"
-               data-nome="Campo fotovoltaico a Magliano Alpi" data-n="" data-meta="Magliano Alpi (CN), 2010, energia" data-tipo="">
-              <span class="voce_nome">Campo fotovoltaico a Magliano Alpi<span class="voce_luogo">Magliano Alpi (CN)</span></span>
-              <span class="voce_anno">2010</span>
             </a>
           </li>
         </ol>
       </section>
 <!--/GEN:indice-->
-      <p class="indice_nessuno" hidden>Nessun progetto con questa ricerca. Prova con il nome del comune.</p>
-      <p class="indice_mappa"><a href="work/index.html"><span>Apri la pagina dei progetti, con la mappa</span><span class="freccia" aria-hidden="true">→</span></a></p>
     </div>
   </div>
+  <p class="indice_mappa indice_tutti-progetti"><a href="work/index.html"><span>Tutti i <span data-conta="tutti">42</span> progetti</span><span class="freccia" aria-hidden="true">→</span></a></p>
 </section>
 
-<!-- ============ DAL 1979: chi siamo + linea del tempo (da C) ============ -->
+<!-- ============ DAL 1979: chi siamo (giro 8: la linea del tempo sta solo nella pagina Chi siamo) ============ -->
 <section class="storia" id="storia" aria-labelledby="storia-titolo">
   <div class="storia_scena">
     <svg class="storia_svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
@@ -704,175 +353,9 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
       <h2 class="storia_titolo" id="storia-titolo">Chi siamo</h2>
       <p class="storia_grande">Birolini nasce dall'iniziativa di Vittorio Birolini. Dal 1979 sviluppa aree e costruisce edifici residenziali, commerciali e industriali.</p>
       <p>Dal 2010 realizza anche impianti fotovoltaici, a tetto e a terra, in Italia e all'estero.</p>
-      <a class="collegamento" href="about/index.html">Leggi la nostra storia</a>
+      <a class="bottone" href="about/index.html">La nostra storia</a>
     </div>
-    <p class="sottotitolo storia_didascalia" data-dicitura-video="Foto animata. Zona industriale di Pedrengo (BG), progetto del 1980.">Foto. Zona industriale di Pedrengo (BG), progetto del 1980.</p>
-  </div>
-  <div class="tempo" aria-labelledby="tempo-titolo">
-    <div class="tempo_fissa">
-      <div class="tempo_testa">
-        <h3 class="tempo_titolo" id="tempo-titolo">Dal 1979 a oggi</h3>
-        <p class="tempo_anno-corrente" aria-hidden="true"><span>1979</span></p>
-      </div>
-      <div class="tempo_binario">
-        <ol class="tempo_lista">
-<!--GEN:tempo-->
-<li class="tappa tappa--inizio" data-anno="1979">
-          <span class="tappa_anno">1979</span>
-          <p class="tappa_frase">Birolini nasce dall'iniziativa di Vittorio Birolini.</p>
-        </li>
-        <li class="tappa" data-anno="1995">
-          <a href="project/capannoni-industriali-in-pedrengo-via-garibaldi/index.html">
-            <span class="tappa_anno">1995</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/copertina.webp" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/capannoni-industriali-in-pedrengo-via-garibaldi/copertina.webp" alt="Capannoni in via Garibaldi, Pedrengo (BG)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Capannoni in via Garibaldi</span>
-            <span class="tappa_dati">Pedrengo (BG), industria</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2000">
-          <a href="project/parco-industriale-nembro-1/index.html">
-            <span class="tappa_anno">2000</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/parco-industriale-nembro-1/copertina.jpg" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/parco-industriale-nembro-1/copertina.jpg" alt="Parco industriale Nembro 1, Nembro (BG)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Parco industriale Nembro 1</span>
-            <span class="tappa_dati">Nembro (BG), industria</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2002">
-          <a href="project/capannone-industriale-in-ciserano-bg/index.html">
-            <span class="tappa_anno">2002</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/capannone-industriale-in-ciserano-bg/copertina.webp" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/capannone-industriale-in-ciserano-bg/copertina.webp" alt="Capannone industriale a Ciserano, Ciserano (BG)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Capannone industriale a Ciserano</span>
-            <span class="tappa_dati">Ciserano (BG), industria</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2003">
-          <a href="project/ranica-via-marconi-capannone-industriale-e-terziario/index.html">
-            <span class="tappa_anno">2003</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/ranica-via-marconi-capannone-industriale-e-terziario/copertina.jpg" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/ranica-via-marconi-capannone-industriale-e-terziario/copertina.jpg" alt="Capannone in via Marconi, Ranica (BG)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Capannone in via Marconi</span>
-            <span class="tappa_dati">Ranica (BG), industria</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2006">
-          <a href="project/nembro-residenza-il-parco/index.html">
-            <span class="tappa_anno">2006</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/nembro-residenza-il-parco/copertina.jpg" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/nembro-residenza-il-parco/copertina.jpg" alt="Residenza Il Parco, Nembro (BG)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Residenza Il Parco</span>
-            <span class="tappa_dati">Nembro (BG), case</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2009">
-          <a href="project/bracca-bergamo/index.html">
-            <span class="tappa_anno">2009</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/bracca-bergamo/copertina.jpg" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/bracca-bergamo/copertina.jpg" alt="Residenze a Bracca, Bracca (BG)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Residenze a Bracca</span>
-            <span class="tappa_dati">Bracca (BG), case</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2010">
-          <a href="project/campo-fotovoltaico-1-mwp-magliano-alpi-cuneo-italia/index.html">
-            <span class="tappa_anno">2010</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/campo-fotovoltaico-1-mwp-magliano-alpi-cuneo-italia/copertina.webp" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/campo-fotovoltaico-1-mwp-magliano-alpi-cuneo-italia/copertina.webp" alt="Campo fotovoltaico a Magliano Alpi, Magliano Alpi (CN)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Campo fotovoltaico a Magliano Alpi</span>
-            <span class="tappa_dati">Magliano Alpi (CN), energia</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2012">
-          <a href="project/centro-caleido-bernareggio-mb/index.html">
-            <span class="tappa_anno">2012</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="media/originali/centro-caleido-bernareggio-mb.webp" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="media/originali/centro-caleido-bernareggio-mb.webp" alt="Centro direzionale Caleido, Bernareggio (MB)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Centro direzionale Caleido</span>
-            <span class="tappa_dati">Bernareggio (MB), commercio</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2015">
-          <a href="project/parco-commerciale-trezzo-1-2/index.html">
-            <span class="tappa_anno">2015</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/parco-commerciale-trezzo-1-2/copertina.jpg" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/parco-commerciale-trezzo-1-2/copertina.jpg" alt="Parco commerciale Trezzo 1-2, Trezzo sull'Adda (MI)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Parco commerciale Trezzo 1-2</span>
-            <span class="tappa_dati">Trezzo sull'Adda (MI), commercio</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2018">
-          <a href="project/parco-commerciale-curno-briantea/index.html">
-            <span class="tappa_anno">2018</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/parco-commerciale-curno-briantea/copertina.jpg" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/parco-commerciale-curno-briantea/copertina.jpg" alt="Parco commerciale Biraldi, Curno (BG)" loading="lazy" decoding="async">
-              <span class="tappa_tipo">Render</span>
-            </span>
-            <span class="tappa_nome">Parco commerciale Biraldi</span>
-            <span class="tappa_dati">Curno (BG), commercio</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2020">
-          <a href="project/leffe-residenza-antiche-ciodere/index.html">
-            <span class="tappa_anno">2020</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/leffe-residenza-antiche-ciodere/copertina.jpg" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/leffe-residenza-antiche-ciodere/copertina.jpg" alt="Residenza Antiche Ciodere, Leffe (BG)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Residenza Antiche Ciodere</span>
-            <span class="tappa_dati">Leffe (BG), case</span>
-          </a>
-        </li>
-        <li class="tappa" data-anno="2025">
-          <a href="project/rivolta-dadda-cr---commerciale-comest/index.html">
-            <span class="tappa_anno">2025</span>
-            <span class="tappa_media">
-              <img class="tappa_bn" src="img/progetti/rivolta-dadda-cr---commerciale-comest/copertina.webp" alt="" loading="lazy" decoding="async">
-              <img class="tappa_col" src="img/progetti/rivolta-dadda-cr---commerciale-comest/copertina.webp" alt="Commerciale Comest e Comovest, Rivolta d'Adda (CR)" loading="lazy" decoding="async">
-              
-            </span>
-            <span class="tappa_nome">Commerciale Comest e Comovest</span>
-            <span class="tappa_dati">Rivolta d'Adda (CR), commercio</span>
-          </a>
-        </li>
-        <li class="tappa tappa--fine" data-anno="2026">
-          <a href="#progetti" class="tappa_tutti"><span>Tutti i 42 progetti</span><span class="freccia" aria-hidden="true">→</span></a>
-        </li>
-<!--/GEN:tempo-->
-        </ol>
-      </div>
-      <div class="tempo_avanzamento" aria-hidden="true"><i></i></div>
-    </div>
+    <p class="sottotitolo storia_didascalia" data-dicitura-video="Zona industriale di Pedrengo (BG), progetto del 1980 · Foto animata">Zona industriale di Pedrengo (BG), progetto del 1980 · Foto</p>
   </div>
 </section>
 
@@ -885,7 +368,7 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     </div>
     <div class="finale_velo" aria-hidden="true"></div>
     <h2 class="finale_titolo" id="contatto-titolo">Contatti</h2>
-    <p class="sottotitolo"><a href="project/redona-centro-lotti-b1-b2/index.html">Redona Centro, lotti B1-B2, Bergamo</a>. Render animato.</p>
+    <p class="sottotitolo"><a href="project/redona-centro-lotti-b1-b2/index.html">Redona Centro, lotti B1-B2, Bergamo</a> · Render animato</p>
   </div>
   <div class="contatto_griglia">
     <div class="contatto_testo">
@@ -911,12 +394,12 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
     <p class="piede_recapiti"><a href="tel:+39035347060">035 347060</a> <a href="mailto:info@birolini.it">info@birolini.it</a></p>
   </div>
   <nav class="piede_voci" aria-label="Il sito">
-    <a href="work/index.html">Progetti</a><a href="case/index.html">Case</a><a href="spazi/index.html">Commercio e industria</a><a href="aree/index.html">Aree</a><a href="energia/index.html">Energia</a><a href="about/index.html">Chi siamo</a><a href="news/index.html">News</a><a href="contact/index.html">Contatti</a>
+    <a href="case/index.html">Case</a><a href="spazi/index.html">Commercio e industria</a><a href="energia/index.html">Energia</a><a href="aree/index.html">Aree</a><a href="about/index.html">Chi siamo</a><a href="work/index.html">Progetti</a><a href="news/index.html">News</a><a href="contact/index.html">Contatti</a>
   </nav>
   <nav class="piede_voci piede_voci--piccole" aria-label="Note e social">
     <a href="privacy-policy/index.html">Privacy</a><a href="cookie-policy/index.html">Cookie Policy</a><a href="note-legali/index.html">Note legali</a><a href="https://www.linkedin.com/company/birolini-s-p-a/">LinkedIn</a><a href="https://www.instagram.com/birolini.s.p.a/">Instagram</a>
   </nav>
-  <p class="piede_fondo">Le immagini sono render e foto dei progetti Birolini. I video sono render e foto dal drone animati, con il solo movimento di camera. I disegni a linee sono ricavati dalle stesse immagini con un filtro.</p>
+  <p class="piede_fondo">Le immagini sono render e foto dei progetti Birolini. I video sono render e foto dal drone animati, con il solo movimento di camera. Il disegno a linee sull'area di Calcio è ricavato dalla stessa foto con un filtro.</p>
   <div class="piede_logo" aria-hidden="true">
 <!--GEN:logo-piede-->
     <svg viewBox="0 0 153.81 29.78" focusable="false"><path d="M14.24,21.64c2.05-.44,4.09-1.04,6.07-1.85l1.59-5.49c-1.42,1.13-3.03,2.18-4.85,3.08l-2.81,4.27Z"/><path d="M8,20.06l-2.53,2.57c2.32-.06,4.78-.27,7.28-.71l2.45-3.73c-2.13.86-4.52,1.51-7.2,1.87Z"/><path d="M18.64,25.55l1.41-4.9c-1.87.69-3.97,1.28-6.31,1.72l-2.47,3.75c2.73-.05,5.17-.26,7.36-.58Z"/><path d="M22.11,18.98c3.51-1.72,6.71-4.2,9.18-7.7l.18-11.28s-1.67,6.7-7.47,12.42l-1.89,6.56Z"/><path d="M31.25,13.85c-1.62,1.57-4.69,4.08-9.43,6.1l-1.54,5.32c5.17-.94,8.7-2.48,10.84-3.68l.12-7.75Z"/><path d="M19.97,26.38l-.98,3.39c4.45-.07,8.71-.58,12.03-1.83l.08-4.88c-3.39,1.74-7.23,2.76-11.13,3.31Z"/><path d="M2.43,25.72c2.71.28,5.22.41,7.55.42l2.31-3.51c-2.24.34-4.69.54-7.34.54l-2.51,2.55Z"/><path d="M7.93,29.23l1.55-2.36c-2.75-.09-5.33-.33-7.59-.61l-1.89,1.93c2.29.37,5.02.75,7.93,1.05Z"/><path d="M18.35,26.59c-2.56.27-5.12.36-7.57.32l-1.61,2.45c2.68.25,5.49.41,8.26.43l.92-3.2Z"/><path d="M69.85,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M78.13,11.4c.28,0,.43.15.46.4l.18,1.35h.15c1.32-1.29,2.98-1.99,4.94-1.99,3.25,0,5.71,1.96,6.57,4.97.06.21,0,.34-.18.4l-1.96.71c-.15.06-.31-.03-.37-.18-.74-1.9-1.87-3.28-4.14-3.28-1.99,0-3.59.98-4.85,2.58v11.35c0,.28-.15.43-.43.43h-1.93c-.21,0-.43-.15-.43-.43v-15.87c0-.28.18-.43.43-.43h1.56Z"/><path d="M101.26,11.16c4.85,0,8.62,3.65,8.62,8.62s-3.77,8.59-8.62,8.59-8.62-3.62-8.62-8.59,3.77-8.62,8.62-8.62ZM95.46,19.78c0,3.44,2.36,5.98,5.8,5.98s5.8-2.55,5.8-5.98-2.36-6.02-5.8-6.02-5.8,2.55-5.8,6.02Z"/><path d="M116.2,6.25c.28,0,.43.18.43.43v21.02c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43V6.67c0-.25.15-.43.43-.43h1.93Z"/><path d="M124.96,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M131.1,11.83c0-.25.15-.43.43-.43h1.57c.28,0,.43.15.46.43l.18,1.32h.15c1.47-1.38,3.07-1.99,5.03-1.99,4.33,0,7.27,2.52,7.27,7.52v9.02c0,.28-.15.43-.43.43h-1.96c-.21,0-.4-.15-.4-.43v-8.9c0-3.22-1.57-5.03-4.54-5.03-2.15,0-3.71.95-4.97,2.58v11.35c0,.28-.15.43-.43.43h-1.93c-.28,0-.43-.12-.43-.43v-15.87Z"/><path d="M153.38,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M59.15,15.14v-.17c1.28-.81,2.22-2.69,2.22-4.22,0-3.2-2.48-5.85-6.61-5.85h-11.82c-.3,0-.51.21-.51.51v8.56h-3.39c-.12,0-.22.1-.22.22v2.14c0,.12.1.22.22.22h3.39v11.06c0,.3.26.55.55.55h12.5c4.35,0,7.55-3.24,7.55-7.17,0-2.43-1.41-5.04-3.88-5.85ZM45.24,7.46h9.56c2.35,0,3.76,1.28,3.76,3.29s-1.66,3.2-3.54,3.2h-9.77v-6.49ZM55.35,25.55h-10.11v-9h10.11c2.99,0,4.86,1.71,4.86,4.44s-2.01,4.57-4.86,4.57Z"/></svg>
@@ -924,11 +407,11 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   </div>
 </footer>
 
-<script src="js/vendor/gsap.min.js?v=202611222011"></script>
-<script src="js/vendor/ScrollTrigger.min.js?v=202611222011"></script>
-<script src="js/vendor/SplitText.min.js?v=202611222011"></script>
-<script src="js/vendor/Flip.min.js?v=202611222011"></script>
-<script src="js/vendor/lenis.min.js?v=202611222011"></script>
+<script src="js/vendor/gsap.min.js?v=202611222141"></script>
+<script src="js/vendor/ScrollTrigger.min.js?v=202611222141"></script>
+<script src="js/vendor/SplitText.min.js?v=202611222141"></script>
+<script src="js/vendor/Flip.min.js?v=202611222141"></script>
+<script src="js/vendor/lenis.min.js?v=202611222141"></script>
 <script>
 /* Riduci movimento (sito nuovo): da fermo si vede il fotogramma, quindi «Render» o «Foto», non «animato» */
 (function () {
@@ -940,6 +423,6 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   document.querySelectorAll('[data-tipo]').forEach(function (a) { a.setAttribute('data-tipo', via(a.getAttribute('data-tipo'))); });
 })();
 </script>
-<script src="js/home.js?v=202611222011"></script>
+<script src="js/home.js?v=202611222141"></script>
 </body>
 </html>

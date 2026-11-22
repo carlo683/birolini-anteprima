@@ -39,7 +39,7 @@
 .galleria_gruppo + .galleria_gruppo { margin-top: var(--spazio-8); }
 .galleria_titolo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; padding-bottom: 18px; margin-bottom: var(--spazio-5); border-bottom: 1px solid rgba(244, 246, 249, .45); }
 .tavole { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
-.tavole + .tavole { margin-top: clamp(40px, 7vw, 120px); }
+.tavole + .tavole { margin-top: clamp(16px, 2vw, 32px); }   /* giro 8: griglia regolare, stesso spazio in orizzontale e in verticale */
 .tavola-foto { position: relative; margin: 0; }
 .tavola-foto_bottone { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: left; }
 .tavola-foto_quadro { position: relative; display: block; overflow: hidden; aspect-ratio: var(--rapporto); background: var(--notte-alta); }
@@ -49,20 +49,15 @@
 .tavola-foto_tipo::before { content: ""; display: inline-block; vertical-align: middle; width: 6px; height: 6px; margin: -2px 9px 0 0; border-radius: 50%; background: var(--azzurro); }
 .tavola-foto_bottone:focus-visible { outline-offset: 6px; }
 .tavola-foto_bottone:hover .tavola-foto_quadro::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px var(--azzurro); }
-/* a tutta larghezza (solo immagini da 1600 px in su), al bordo della pagina */
-.tavole--piena .tavola-foto { grid-column: 1 / -1; margin: 0 calc(-1 * var(--margine)); }
-.tavole--piena .tavola-foto_dida { padding-inline: var(--margine); }
-.tavole--piena .tavola-foto_quadro { aspect-ratio: auto; height: min(92vh, calc(100vw * 10 / 16)); }
-/* a coppia sfalsata: 7 + 5 colonne, la seconda più in basso */
-.tavole--coppia .tavola-foto:first-child { grid-column: 1 / span 7; }
-.tavole--coppia .tavola-foto:last-child { grid-column: 9 / span 4; margin-top: clamp(60px, 14vw, 240px); }
-.tavole--coppia.coppia--inversa .tavola-foto:first-child { grid-column: 1 / span 5; margin-top: clamp(60px, 14vw, 240px); }
-.tavole--coppia.coppia--inversa .tavola-foto:last-child { grid-column: 6 / span 7; margin-top: 0; }
-.tavole--coppia.coppia--grandi .tavola-foto:first-child { grid-column: 1 / span 6; }
-.tavole--coppia.coppia--grandi .tavola-foto:last-child { grid-column: 7 / span 6; margin-top: clamp(40px, 8vw, 140px); }
-/* larga: 10 colonne, a sinistra o a destra; mai più grande della sua misura vera */
-.tavole--larga .tavola-foto { grid-column: 1 / span 10; max-width: var(--massimo); }
-.tavole--larga.larga--destra .tavola-foto { grid-column: 3 / span 10; justify-self: end; width: 100%; }
+/* giro 8 (riordino): griglia regolare, senza vuoti. Una grande (solo immagini da 1600 px in su) a tutta la larghezza
+   del testo, poi due affiancate della stessa misura (o tre, se alla fine ne avanza una). Prima: misure e posizioni sempre diverse. */
+.tavole--piena .tavola-foto { grid-column: 1 / -1; }
+.tavole--piena .tavola-foto_quadro { aspect-ratio: 16 / 9; max-height: 92vh; }
+.tavole--coppia .tavola-foto { grid-column: span 6; }
+.tavole--terna .tavola-foto { grid-column: span 4; }
+.tavole--coppia .tavola-foto_quadro, .tavole--terna .tavola-foto_quadro { aspect-ratio: 3 / 2; }
+/* una sola immagine piccola in tutta la galleria: mai più grande della sua misura vera */
+.tavole--sola .tavola-foto { grid-column: 1 / span 8; max-width: var(--massimo); }
 
 /* ---------- Visore a tutto schermo ---------- */
 .visore { position: fixed; inset: 0; z-index: 95; background: rgb(var(--velo-notte)); touch-action: none;   /* giro 6: pieno (a .98 sotto si leggevano i titoli) */ overscroll-behavior: contain; }
