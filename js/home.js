@@ -395,11 +395,29 @@
     });
 
     /* ---- Righe di testo con la maschera ---- */
-    function righe(el) {
+    var divisi = [];
+    function righe(el, avantiIndietro) {
       if (!el) return [];
       var s = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'riga' });
+      if (!avantiIndietro) divisi.push(s);
       return s.lines;
     }
+    /* 22/11 sera: le righe si tagliano una volta sola, alla larghezza dell'apertura. Se poi la finestra si allarga
+       o si stringe, una frase già comparsa resterebbe a una parola per riga: torna testo normale e si ridispone. */
+    var largoRighe = window.innerWidth, attesaRighe = 0;
+    window.addEventListener('resize', function () {
+      clearTimeout(attesaRighe);
+      attesaRighe = setTimeout(function () {
+        if (Math.abs(window.innerWidth - largoRighe) < 30) return;
+        largoRighe = window.innerWidth;
+        divisi = divisi.filter(function (s) {
+          var tutteFuori = s.lines.every(function (r) { return Math.abs(gsap.getProperty(r, 'yPercent')) < 1; });
+          if (tutteFuori) { s.revert(); return false; }
+          return true;
+        });
+        ScrollTrigger.refresh();
+      }, 250);
+    });
 
     /* =====================================================
        Scatto automatico (22/11, Carlo: «se non scorri rimane così… deve aprirsi tutto in maniera automatica»).
@@ -476,12 +494,12 @@
     }
 
     // elementi da rivelare
-    var righeIntroTitolo = righe($('.intro_titolo'));
+    var righeIntroTitolo = righe($('.intro_titolo'), true);
     var entraIntro = $$('[data-entra]', intro);
     var cap = capitoli.map(function (c) {
       return {
         el: c,
-        titolo: righe($('.capitolo_titolo', c)),
+        titolo: righe($('.capitolo_titolo', c), true),
         entra: $$('[data-entra]', c),
         sotto: $('.sottotitolo', c),
         ombra: $('.ombra', c),

@@ -18,19 +18,19 @@
 <meta name="theme-color" content="#0c1628">
 <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../../fonts/archivo-normal-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../css/caratteri.css?v=202611221234">
-<link rel="stylesheet" href="../../css/passaggio.css?v=202611221234">
+<link rel="stylesheet" href="../../css/caratteri.css?v=202611221915">
+<link rel="stylesheet" href="../../css/passaggio.css?v=202611221915">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"mailto:\"], [href^=\"tel:\"], [download]"}}]},"eagerness":"moderate"}]}</script>
 <script>(function () { function f(e) { if (e.target.tagName === "IMG") e.target.classList.add("caricata"); } document.addEventListener("load", f, true); document.addEventListener("error", f, true); })();
 /* fotogramma delle clip: copia leggera sul telefono, originale sul computer (21/11/2026) */
 if (/settore=/.test(location.hash)) document.documentElement.classList.add("con-filtro");   /* archivio già filtrato: niente prima foto fissa (vedi .fp_prima) */
 document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("video[poster]").forEach(function (v) { var u = "url(" + JSON.stringify(v.getAttribute("poster")) + ")"; v.style.backgroundImage = u; v.parentNode.style.backgroundImage = u; v.parentNode.classList.add("sotto-video"); }); });   /* poster anche come sfondo del video: niente vuoto quando parte */
 window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 760px)").matches ? v.getAttribute("data-poster-tel") : v.getAttribute("data-poster"); };</script>
-<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611221234">
-<link rel="stylesheet" href="../../css/comune.css?v=202611221234">
-<link rel="stylesheet" href="../../css/finestra.css?v=202611221234">
-<link rel="stylesheet" href="../../css/pagine.css?v=202611221234">
-<link rel="stylesheet" href="../../css/nuovo.css?v=202611221234">
+<link rel="stylesheet" href="../../js/vendor/lenis.css?v=202611221915">
+<link rel="stylesheet" href="../../css/comune.css?v=202611221915">
+<link rel="stylesheet" href="../../css/finestra.css?v=202611221915">
+<link rel="stylesheet" href="../../css/pagine.css?v=202611221915">
+<link rel="stylesheet" href="../../css/nuovo.css?v=202611221915">
 <script>
 /* "moto" = movimento acceso. Si spegne da solo con "riduci movimento", senza JS o se le librerie mancano. */
 (function (h) { h.classList.remove('no-js'); var f = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; h.classList.add(!f && !/[?&]fermo\b/.test(location.search) ? 'moto' : 'fermo'); })(document.documentElement);
@@ -186,14 +186,14 @@ window.sceltaPoster = function (v) { v.poster = window.matchMedia("(max-width: 7
   <p class="piede_fondo">Le immagini sono render e foto dei progetti Birolini. I video sono render e foto (anche dal drone) animati, con il solo movimento di camera.</p>
   <div class="piede_logo" aria-hidden="true"><svg viewBox="0 0 153.81 29.78" focusable="false"><path d="M14.24,21.64c2.05-.44,4.09-1.04,6.07-1.85l1.59-5.49c-1.42,1.13-3.03,2.18-4.85,3.08l-2.81,4.27Z"/><path d="M8,20.06l-2.53,2.57c2.32-.06,4.78-.27,7.28-.71l2.45-3.73c-2.13.86-4.52,1.51-7.2,1.87Z"/><path d="M18.64,25.55l1.41-4.9c-1.87.69-3.97,1.28-6.31,1.72l-2.47,3.75c2.73-.05,5.17-.26,7.36-.58Z"/><path d="M22.11,18.98c3.51-1.72,6.71-4.2,9.18-7.7l.18-11.28s-1.67,6.7-7.47,12.42l-1.89,6.56Z"/><path d="M31.25,13.85c-1.62,1.57-4.69,4.08-9.43,6.1l-1.54,5.32c5.17-.94,8.7-2.48,10.84-3.68l.12-7.75Z"/><path d="M19.97,26.38l-.98,3.39c4.45-.07,8.71-.58,12.03-1.83l.08-4.88c-3.39,1.74-7.23,2.76-11.13,3.31Z"/><path d="M2.43,25.72c2.71.28,5.22.41,7.55.42l2.31-3.51c-2.24.34-4.69.54-7.34.54l-2.51,2.55Z"/><path d="M7.93,29.23l1.55-2.36c-2.75-.09-5.33-.33-7.59-.61l-1.89,1.93c2.29.37,5.02.75,7.93,1.05Z"/><path d="M18.35,26.59c-2.56.27-5.12.36-7.57.32l-1.61,2.45c2.68.25,5.49.41,8.26.43l.92-3.2Z"/><path d="M69.85,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M78.13,11.4c.28,0,.43.15.46.4l.18,1.35h.15c1.32-1.29,2.98-1.99,4.94-1.99,3.25,0,5.71,1.96,6.57,4.97.06.21,0,.34-.18.4l-1.96.71c-.15.06-.31-.03-.37-.18-.74-1.9-1.87-3.28-4.14-3.28-1.99,0-3.59.98-4.85,2.58v11.35c0,.28-.15.43-.43.43h-1.93c-.21,0-.43-.15-.43-.43v-15.87c0-.28.18-.43.43-.43h1.56Z"/><path d="M101.26,11.16c4.85,0,8.62,3.65,8.62,8.62s-3.77,8.59-8.62,8.59-8.62-3.62-8.62-8.59,3.77-8.62,8.62-8.62ZM95.46,19.78c0,3.44,2.36,5.98,5.8,5.98s5.8-2.55,5.8-5.98-2.36-6.02-5.8-6.02-5.8,2.55-5.8,6.02Z"/><path d="M116.2,6.25c.28,0,.43.18.43.43v21.02c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43V6.67c0-.25.15-.43.43-.43h1.93Z"/><path d="M124.96,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M131.1,11.83c0-.25.15-.43.43-.43h1.57c.28,0,.43.15.46.43l.18,1.32h.15c1.47-1.38,3.07-1.99,5.03-1.99,4.33,0,7.27,2.52,7.27,7.52v9.02c0,.28-.15.43-.43.43h-1.96c-.21,0-.4-.15-.4-.43v-8.9c0-3.22-1.57-5.03-4.54-5.03-2.15,0-3.71.95-4.97,2.58v11.35c0,.28-.15.43-.43.43h-1.93c-.28,0-.43-.12-.43-.43v-15.87Z"/><path d="M153.38,11.4c.28,0,.43.18.43.43v15.87c0,.28-.15.43-.43.43h-1.93c-.25,0-.43-.15-.43-.43v-15.87c0-.25.15-.43.43-.43h1.93Z"/><path d="M59.15,15.14v-.17c1.28-.81,2.22-2.69,2.22-4.22,0-3.2-2.48-5.85-6.61-5.85h-11.82c-.3,0-.51.21-.51.51v8.56h-3.39c-.12,0-.22.1-.22.22v2.14c0,.12.1.22.22.22h3.39v11.06c0,.3.26.55.55.55h12.5c4.35,0,7.55-3.24,7.55-7.17,0-2.43-1.41-5.04-3.88-5.85ZM45.24,7.46h9.56c2.35,0,3.76,1.28,3.76,3.29s-1.66,3.2-3.54,3.2h-9.77v-6.49ZM55.35,25.55h-10.11v-9h10.11c2.99,0,4.86,1.71,4.86,4.44s-2.01,4.57-4.86,4.57Z"/></svg></div>
 </footer>
-<script src="../../js/vendor/gsap.min.js?v=202611221234"></script>
-<script src="../../js/vendor/ScrollTrigger.min.js?v=202611221234"></script>
-<script src="../../js/vendor/SplitText.min.js?v=202611221234"></script>
-<script src="../../js/vendor/Flip.min.js?v=202611221234"></script>
-<script src="../../js/vendor/lenis.min.js?v=202611221234"></script>
-<script src="../../js/comune.js?v=202611221234"></script>
-<script src="../../js/finestra.js?v=202611221234"></script>
-<script src="../../js/pagine.js?v=202611221234"></script>
-<script src="../../js/nuovo.js?v=202611221234"></script>
+<script src="../../js/vendor/gsap.min.js?v=202611221915"></script>
+<script src="../../js/vendor/ScrollTrigger.min.js?v=202611221915"></script>
+<script src="../../js/vendor/SplitText.min.js?v=202611221915"></script>
+<script src="../../js/vendor/Flip.min.js?v=202611221915"></script>
+<script src="../../js/vendor/lenis.min.js?v=202611221915"></script>
+<script src="../../js/comune.js?v=202611221915"></script>
+<script src="../../js/finestra.js?v=202611221915"></script>
+<script src="../../js/pagine.js?v=202611221915"></script>
+<script src="../../js/nuovo.js?v=202611221915"></script>
 </body>
 </html>
